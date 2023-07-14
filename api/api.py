@@ -1,7 +1,7 @@
 import openai
 import os
 
-openai.api_key = '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'
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 model = "gpt-3.5-turbo-0613"
 prompt = 'You are a world class competitive programmer. You repond only python or cpp code. No text or explanations. Just code.'
 
@@ -16,7 +16,7 @@ for subdir, dirs, files in os.walk(rootdir):
         prompt += ''.join(lines)
         print(prompt)
         response = openai.Completion.create(
-            engine="gpt-3.5-turbo",
+            engine=model,
             prompt=prompt,
             temperature=0.7,
             max_tokens=1000,
