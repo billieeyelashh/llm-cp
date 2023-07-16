@@ -1,0 +1,82 @@
+To solve this problem, we can use a simple recursive approach. We will start by creating a function `isIsomorphic` that takes two trees as input and returns a boolean value indicating whether they are isomorphic or not.
+
+The function `isIsomorphic` can be implemented as follows:
+
+```cpp
+bool isIsomorphic(vector<vector<int>>& tree1, int root1, vector<vector<int>>& tree2, int root2) {
+    // Base case: if both roots are -1, it means we have reached the end of the tree
+    if (root1 == -1 && root2 == -1)
+        return true;
+
+    // If one root is -1 and the other is not, they are not isomorphic
+    if ((root1 == -1 && root2 != -1) || (root1 != -1 && root2 == -1))
+        return false;
+
+    // If the number of children is different, they are not isomorphic
+    if (tree1[root1].size() != tree2[root2].size())
+        return false;
+
+    // Check if the children of the roots are isomorphic
+    for (int i = 0; i < tree1[root1].size(); i++) {
+        int child1 = tree1[root1][i];
+        int child2 = tree2[root2][i];
+
+        // Recursively check if the children are isomorphic
+        if (!isIsomorphic(tree1, child1, tree2, child2))
+            return false;
+    }
+
+    // If all the checks passed, the trees are isomorphic
+    return true;
+}
+```
+
+Now, we can read the input and use the `isIsomorphic` function to determine if the trees are isomorphic or not:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        // Create vectors to store the trees
+        vector<vector<int>> tree1(n);
+        vector<vector<int>> tree2(n);
+
+        // Read the edges of the first tree
+        for (int i = 0; i < n - 1; i++) {
+            int u, v;
+            cin >> u >> v;
+            tree1[u - 1].push_back(v - 1);
+            tree1[v - 1].push_back(u - 1);
+        }
+
+        // Read the edges of the second tree
+        for (int i = 0; i < n - 1; i++) {
+            int u, v;
+            cin >> u >> v;
+            tree2[u - 1].push_back(v - 1);
+            tree2[v - 1].push_back(u - 1);
+        }
+
+        // Check if the trees are isomorphic
+        if (isIsomorphic(tree1, 0, tree2, 0))
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+    }
+
+    return 0;
+}
+```
+
+This code reads the number of tests `t`, and for each test, it reads the number of nodes `n`, the edges of the first tree, and the edges of the second tree. Then, it calls the `isIsomorphic` function to check if the trees are isomorphic and prints the result accordingly.
+
+The time complexity of this solution is O(n), where n is the number of nodes in each tree.

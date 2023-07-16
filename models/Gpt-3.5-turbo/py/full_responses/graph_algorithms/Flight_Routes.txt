@@ -1,0 +1,62 @@
+To find the $k$ shortest flight routes, we can use Dijkstra's algorithm with some modifications. The algorithm will find the shortest path from Syrjälä to all other cities, but instead of stopping at Metsälä, we will continue exploring paths until we have found $k$ distinct routes.
+
+Here is the Python solution:
+
+```python
+import heapq
+
+def dijkstra(start, graph):
+    n = len(graph)
+    distance = [float('inf')] * n
+    distance[start] = 0
+    heap = [(0, start)]
+    routes = [[] for _ in range(n)]
+
+    while heap:
+        dist, node = heapq.heappop(heap)
+        
+        if dist > distance[node]:
+            continue
+        
+        for neighbor, cost in graph[node]:
+            new_dist = dist + cost
+            if new_dist < distance[neighbor]:
+                distance[neighbor] = new_dist
+                heapq.heappush(heap, (new_dist, neighbor))
+                routes[neighbor] = [node]
+            elif new_dist == distance[neighbor]:
+                routes[neighbor].append(node)
+    
+    return routes
+
+def find_k_shortest_routes(n, m, k, flights):
+    graph = [[] for _ in range(n)]
+    
+    for a, b, c in flights:
+        graph[a-1].append((b-1, c))
+    
+    routes = dijkstra(0, graph)
+    prices = []
+    
+    def dfs(node, path):
+        if node == n-1:
+            prices.append(sum(path))
+            if len(prices) == k:
+                return
+        
+        for prev_node in routes[node]:
+            dfs(prev_node, path + [graph[prev_node][-1][1]])
+            if len(prices) == k:
+                return
+    
+    dfs(n-1, [])
+    prices.sort()
+    
+    return prices[:k]
+```
+
+The function `dijkstra` implements Dijkstra's algorithm to find the shortest path from the start node to all other nodes in the graph. It returns a list of routes, where `routes[i]` contains the previous node(s) in the shortest path to node `i`.
+
+The function `find_k_shortest_routes` constructs the graph from the input flights and calls `dijkstra` to find the routes. It then uses a depth-first search (`dfs`) to generate all possible routes from Metsälä back to Syrjälä, keeping track of the prices. The prices are sorted, and the first `k` prices are returned as the result.
+
+The time complexity of this solution is O((n + m) log n), where n is the number of cities and m is the number of flights. This is because we perform a modified Dijkstra's algorithm, which has a time complexity of O((n + m) log n), and then we perform a depth-first search, which has a time complexity of O(k).

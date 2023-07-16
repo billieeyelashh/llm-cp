@@ -1,0 +1,42 @@
+To solve this problem, we can use two variables to keep track of the robot's current position: `x` and `y`. We initialize both variables to 0 since the robot starts at point $(0,0)$.
+
+We also need a variable to keep track of the total distance moved by the robot. Let's call this variable `distance` and initialize it to 0.
+
+We will iterate through each command and update the position and distance accordingly. For each command, we check the direction and update `x` or `y` accordingly.
+
+If the new position is already visited (meaning the robot has returned to a previously visited point), we break out of the loop since the robot will stop moving.
+
+Finally, we print the value of `distance`, which represents the total distance moved by the robot.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+x = y = 0
+visited = set()
+distance = 0
+
+for _ in range(n):
+    d, dist = input().split()
+    dist = int(dist)
+
+    if d == 'U':
+        y += dist
+    elif d == 'D':
+        y -= dist
+    elif d == 'L':
+        x -= dist
+    elif d == 'R':
+        x += dist
+
+    distance += dist
+
+    if (x, y) in visited:
+        break
+
+    visited.add((x, y))
+
+print(distance)
+```
+
+This code has a time complexity of $O(n)$ since we iterate through each command once, and a space complexity of $O(n)$ since we store the visited points in a set.

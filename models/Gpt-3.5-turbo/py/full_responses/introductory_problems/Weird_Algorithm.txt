@@ -1,0 +1,25 @@
+To solve this problem, we can simply simulate the execution of the algorithm until $n$ becomes 1. We can use a while loop to repeatedly apply the algorithm and print the value of $n$ at each step.
+
+Here is the Python solution:
+
+```python
+n = int(input())
+print(n, end=' ')  # Print the initial value of n
+
+while n != 1:
+    if n % 2 == 0:  # If n is even
+        n = n // 2
+    else:  # If n is odd
+        n = (n * 3) + 1
+    print(n, end=' ')  # Print the updated value of n
+```
+
+Explanation:
+- We first read the input integer $n$ using `input()` and convert it to an integer using `int()`.
+- We print the initial value of $n$ using `print(n, end=' ')`.
+- We then enter a while loop that continues until $n$ becomes 1.
+- Inside the loop, we check if $n$ is even by checking if `n % 2 == 0`.
+- If $n$ is even, we divide it by 2 using `n = n // 2`.
+- If $n$ is odd, we multiply it by 3 and add 1 using `n = (n * 3) + 1`.
+- We then print the updated value of $n$ using `print(n, end=' ')`.
+- The loop continues until $n$ becomes 1, at which point the loop terminates and the program ends.

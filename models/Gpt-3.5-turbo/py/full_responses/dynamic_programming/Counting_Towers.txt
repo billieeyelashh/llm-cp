@@ -1,0 +1,38 @@
+To solve this problem, we can use dynamic programming. Let's define a function `countTowers(n)` that returns the number of towers of height `n`.
+
+We can observe that to build a tower of height `n`, we have two choices:
+1. We can place a block of width 2 vertically on top of a tower of height `n-1`.
+2. We can place two blocks of width 1 horizontally on top of a tower of height `n-2`.
+
+Therefore, the recurrence relation for `countTowers(n)` is:
+`countTowers(n) = countTowers(n-1) + countTowers(n-2)`
+
+To handle the base cases, we can define `countTowers(0) = 1` and `countTowers(1) = 1`.
+
+We can calculate the number of towers for each height from 0 to `n` using this recurrence relation and store the results in an array. Finally, we return `countTowers(n)`.
+
+Here is the Python code implementing the above approach:
+
+```python
+MOD = int(1e9) + 7
+
+def countTowers(n):
+    dp = [0] * (n + 1)
+    dp[0] = dp[1] = 1
+
+    for i in range(2, n + 1):
+        dp[i] = (dp[i-1] + dp[i-2]) % MOD
+
+    return dp[n]
+
+# Read the number of tests
+t = int(input())
+
+# Iterate over each test case
+for _ in range(t):
+    n = int(input())
+    result = countTowers(n)
+    print(result)
+```
+
+This solution has a time complexity of O(n) and a space complexity of O(n), where n is the maximum height of the tower in the test cases.

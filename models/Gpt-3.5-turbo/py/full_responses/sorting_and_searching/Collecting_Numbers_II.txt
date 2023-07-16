@@ -1,0 +1,61 @@
+To solve this problem optimally, we can use a data structure called Disjoint Set Union (DSU). DSU allows us to efficiently keep track of connected components in a graph and perform union and find operations.
+
+Here's the algorithm we can follow:
+
+1. Initialize a DSU data structure with the numbers from $1$ to $n$.
+2. Initialize a variable `rounds` to 0, which will keep track of the number of rounds.
+3. For each operation:
+   - Find the root of the first number using the find operation in the DSU.
+   - Find the root of the second number using the find operation in the DSU.
+   - If the roots are different, it means the numbers are in different connected components. We need to merge these components using the union operation in the DSU.
+   - If the roots are the same, it means the numbers are already in the same connected component. No action is needed.
+   - Increment `rounds` by 1.
+   - Print the current value of `rounds`.
+4. The output will be the sequence of `rounds` values printed after each operation.
+
+Here's the Python code for the solution:
+
+```python
+class DSU:
+    def __init__(self, n):
+        self.parent = list(range(n + 1))
+        self.size = [1] * (n + 1)
+
+    def find(self, x):
+        if x != self.parent[x]:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
+        if root_x != root_y:
+            if self.size[root_x] < self.size[root_y]:
+                root_x, root_y = root_y, root_x
+            self.parent[root_y] = root_x
+            self.size[root_x] += self.size[root_y]
+
+def solve(n, m, nums, swaps):
+    dsu = DSU(n)
+    rounds = 0
+    result = []
+    for a, b in swaps:
+        root_a = dsu.find(a)
+        root_b = dsu.find(b)
+        if root_a != root_b:
+            dsu.union(root_a, root_b)
+            rounds += 1
+        result.append(rounds)
+    return result
+
+# Read input
+n, m = map(int, input().split())
+nums = list(map(int, input().split()))
+swaps = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Solve and print output
+for rounds in solve(n, m, nums, swaps):
+    print(rounds)
+```
+
+This solution has a time complexity of $O(m \cdot \alpha(n))$, where $\alpha(n)$ is the inverse Ackermann function. The inverse Ackermann function grows very slowly, so this solution is practically linear in the number of operations.

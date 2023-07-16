@@ -1,0 +1,51 @@
+Solution:
+
+To solve this problem, we can use a dynamic programming approach. We will create a 2D array dp of size (n+1) * (x+1), where dp[i][j] represents the number of ways to create the sum j using the first i elements of the array.
+
+We initialize dp[i][0] = 1 for all i, as there is always one way to create a sum of 0 (by choosing no elements).
+
+Then, for each i from 1 to n, and each j from 1 to x, we can calculate dp[i][j] as follows:
+- If t[i-1] (the ith element in the array) is greater than j, we cannot include it in the sum, so dp[i][j] = dp[i-1][j].
+- Otherwise, we have two choices:
+    - Include t[i-1] in the sum: dp[i][j] = dp[i-1][j - t[i-1]] (we subtract t[i-1] from j as we have included it).
+    - Exclude t[i-1] from the sum: dp[i][j] = dp[i-1][j].
+    - So, dp[i][j] = dp[i-1][j - t[i-1]] + dp[i-1][j].
+
+Finally, the answer will be dp[n][x], which represents the number of ways to create the sum x using all n elements of the array.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> t(n);
+    for (int i = 0; i < n; i++) {
+        cin >> t[i];
+    }
+
+    vector<vector<long long>> dp(n + 1, vector<long long>(x + 1, 0));
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= x; j++) {
+            dp[i][j] = dp[i - 1][j];
+            if (j >= t[i - 1]) {
+                dp[i][j] += dp[i - 1][j - t[i - 1]];
+            }
+        }
+    }
+
+    cout << dp[n][x] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n * x) and the space complexity is also O(n * x).

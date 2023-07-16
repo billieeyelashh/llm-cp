@@ -1,0 +1,41 @@
+To generate all different strings that can be created using the characters of the given string, we can use the concept of permutations. 
+
+We can start by sorting the input string lexicographically to ensure that the output strings are in alphabetical order. Then, we can use the next_permutation function from the C++ STL to generate all possible permutations of the sorted string.
+
+Here is the code:
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+
+    // Sort the string lexicographically
+    sort(s.begin(), s.end());
+
+    vector<string> permutations;
+
+    // Generate all permutations using next_permutation
+    do {
+        permutations.push_back(s);
+    } while (next_permutation(s.begin(), s.end()));
+
+    // Print the number of strings
+    cout << permutations.size() << endl;
+
+    // Print the strings in alphabetical order
+    for (const string& perm : permutations) {
+        cout << perm << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * n!), where n is the length of the input string. The next_permutation function generates all n! permutations, and each permutation takes O(n) time to generate.

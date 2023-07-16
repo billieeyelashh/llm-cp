@@ -1,0 +1,39 @@
+To solve this problem optimally, we can follow these steps:
+
+1. Read the input values for $n$ and $q$.
+2. Create a vector of pairs to store the starting and ending times of each movie.
+3. Sort the vector of movie times in increasing order of ending times.
+
+   ```cpp
+   vector<pair<int, int>> movies(n);
+   for (int i = 0; i < n; ++i) {
+       int a, b;
+       cin >> a >> b;
+       movies[i] = {b, a};
+   }
+   sort(movies.begin(), movies.end());
+   ```
+
+4. For each query, read the arrival and leaving times.
+5. Use binary search to find the first movie whose starting time is after the arrival time and store its index.
+6. Initialize a variable `count` to keep track of the maximum number of movies.
+7. Iterate through the movies starting from the found index and check if the ending time is before or equal to the leaving time. If it is, increment `count` and update the leaving time to the ending time of the current movie.
+8. Print the value of `count` as the answer for the current query.
+
+   ```cpp
+   for (int i = 0; i < q; ++i) {
+       int arrival, leaving;
+       cin >> arrival >> leaving;
+       int idx = lower_bound(movies.begin(), movies.end(), make_pair(arrival, -1)) - movies.begin();
+       int count = 0;
+       for (int j = idx; j < n; ++j) {
+           if (movies[j].second <= leaving) {
+               ++count;
+               leaving = movies[j].first;
+           }
+       }
+       cout << count << endl;
+   }
+   ```
+
+This solution has a time complexity of $O(n \log n + q \log n)$ due to the sorting and binary search operations.

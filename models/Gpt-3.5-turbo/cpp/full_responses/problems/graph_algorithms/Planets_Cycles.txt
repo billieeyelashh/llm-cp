@@ -1,0 +1,61 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to traverse through the planets and count the number of teleportations.
+
+First, we need to create an adjacency list representation of the teleporters. We can use a vector of vectors for this purpose. Each index in the outer vector represents a planet, and the inner vector represents the destinations of the teleporters.
+
+Then, we can define a recursive function called dfs that takes the current planet as a parameter. In this function, we can keep track of the number of teleportations using a separate array called teleportations. Initially, all elements in the teleportations array are set to -1 to indicate that we haven't visited any planet yet.
+
+Inside the dfs function, we check if we have already visited the current planet by checking if teleportations[current] is not equal to -1. If it is not -1, it means we have already calculated the number of teleportations for this planet, so we can return.
+
+If the current planet has not been visited yet, we update teleportations[current] to 0 to indicate that we have visited it. Then, we recursively call the dfs function with the destination planet given by t[current]. We also increment teleportations[current] by 1 to account for the teleportation from the current planet to its destination.
+
+Finally, we can iterate through all the planets and call the dfs function for each unvisited planet. This ensures that we calculate the number of teleportations for all planets.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void dfs(int current, vector<int>& teleportations, const vector<vector<int>>& adj) {
+    if (teleportations[current] != -1) {
+        return;
+    }
+
+    teleportations[current] = 0;
+    dfs(adj[current], teleportations, adj);
+    teleportations[current] = teleportations[adj[current]] + 1;
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> t(n+1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> t[i];
+    }
+
+    vector<vector<int>> adj(n+1);
+    for (int i = 1; i <= n; ++i) {
+        adj[i].push_back(t[i]);
+    }
+
+    vector<int> teleportations(n+1, -1);
+    for (int i = 1; i <= n; ++i) {
+        if (teleportations[i] == -1) {
+            dfs(i, teleportations, adj);
+        }
+    }
+
+    for (int i = 1; i <= n; ++i) {
+        cout << teleportations[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n), where n is the number of planets. This is because we are traversing through each planet exactly once using the DFS algorithm.

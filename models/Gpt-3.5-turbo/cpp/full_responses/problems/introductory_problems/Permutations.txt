@@ -1,0 +1,42 @@
+To construct a beautiful permutation, we can follow the following approach:
+
+1. If $n = 1$, print "1" since it is already a beautiful permutation.
+
+2. If $n = 2$ or $n = 3$, there is no beautiful permutation possible. Print "NO SOLUTION".
+
+3. For $n > 3$, we can construct a beautiful permutation as follows:
+   - Print all even numbers from $2$ to $n$ in increasing order.
+   - Print all odd numbers from $1$ to $n$ in increasing order.
+
+This approach ensures that no adjacent elements have a difference of $1$, as all even numbers are followed by odd numbers.
+
+Here is the C++ code implementing this approach:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n == 1) {
+        cout << "1\n";
+    } else if (n == 2 || n == 3) {
+        cout << "NO SOLUTION\n";
+    } else {
+        for (int i = 2; i <= n; i += 2) {
+            cout << i << " ";
+        }
+        for (int i = 1; i <= n; i += 2) {
+            cout << i << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$ as we only need to iterate from $1$ to $n$.

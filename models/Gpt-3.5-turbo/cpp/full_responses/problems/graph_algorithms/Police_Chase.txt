@@ -1,0 +1,75 @@
+To solve this problem, we can use the concept of graph traversal. We will represent the city as an undirected graph with the crossings as nodes and the streets as edges.
+
+We can start by performing a breadth-first search (BFS) or depth-first search (DFS) starting from the bank crossing (node 1) and mark all the nodes that can be reached from the bank.
+
+Next, we can perform another BFS or DFS starting from the harbor crossing (node n) and mark all the nodes that can be reached from the harbor.
+
+After marking the reachable nodes from both the bank and the harbor, we can iterate through all the streets and check if both ends of the street are marked as reachable. If not, we can add that street to the list of streets that need to be closed.
+
+Finally, we print the number of streets that need to be closed and the list of streets that should be closed.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+void bfs(vector<vector<int>>& adj, vector<bool>& visited, int start) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+
+        for (int neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                q.push(neighbor);
+                visited[neighbor] = true;
+            }
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> adj(n + 1);
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    vector<bool> visited(n + 1, false);
+    bfs(adj, visited, 1); // Starting BFS from the bank crossing
+    vector<bool> reachableFromBank = visited;
+
+    visited.assign(n + 1, false);
+    bfs(adj, visited, n); // Starting BFS from the harbor crossing
+    vector<bool> reachableFromHarbor = visited;
+
+    vector<pair<int, int>> streetsToClose;
+    for (int i = 1; i <= n; i++) {
+        for (int neighbor : adj[i]) {
+            if (!reachableFromBank[i] && !reachableFromHarbor[neighbor]) {
+                streetsToClose.push_back({i, neighbor});
+            }
+        }
+    }
+
+    cout << streetsToClose.size() << endl;
+    for (auto street : streetsToClose) {
+        cout << street.first << " " << street.second << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m) and a space complexity of O(n), where n is the number of crossings and m is the number of streets.

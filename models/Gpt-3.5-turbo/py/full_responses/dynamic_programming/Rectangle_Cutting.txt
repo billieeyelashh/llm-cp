@@ -1,0 +1,45 @@
+Solution:
+
+To solve this problem optimally, we can use a dynamic programming approach. We will consider the rectangle as a grid of cells, where each cell represents a square. Our goal is to find the minimum number of moves needed to turn the entire rectangle into squares.
+
+Let's define a 2D array dp of size (a+1) x (b+1), where dp[i][j] represents the minimum number of moves needed to cut the rectangle of size i x j into squares.
+
+We can initialize dp[1][1] = 0, as a 1x1 rectangle is already a square.
+
+Next, we iterate over the rows and columns of the rectangle from 1 to a and 1 to b, respectively. For each cell dp[i][j], we consider two possible cases:
+
+1. If i and j are already equal, then the rectangle is already a square, and no further cuts are needed. Therefore, dp[i][j] = 0.
+
+2. If i is not equal to j, then we consider all possible ways to cut the rectangle into two smaller rectangles. We iterate over all possible values k from 1 to i/2 and calculate the minimum number of moves needed by considering the cuts at k and (i-k). The minimum number of moves in this case would be dp[k][j] + dp[i-k][j] + 1.
+
+Finally, the minimum number of moves needed to cut the entire rectangle into squares would be stored in dp[a][b].
+
+Here is the Python code implementing the above solution:
+
+```python
+a, b = map(int, input().split())
+
+# Initialize dp array
+dp = [[0] * (b+1) for _ in range(a+1)]
+
+# Base case
+dp[1][1] = 0
+
+# Iterate over rows and columns
+for i in range(1, a+1):
+    for j in range(1, b+1):
+        if i == j:
+            dp[i][j] = 0
+        else:
+            # Find minimum number of moves
+            dp[i][j] = float('inf')
+            for k in range(1, i//2 + 1):
+                dp[i][j] = min(dp[i][j], dp[k][j] + dp[i-k][j] + 1)
+            for k in range(1, j//2 + 1):
+                dp[i][j] = min(dp[i][j], dp[i][k] + dp[i][j-k] + 1)
+
+# Print the minimum number of moves
+print(dp[a][b])
+```
+
+The time complexity of this solution is O(a * b * min(a, b)), which is efficient enough to handle the given constraints.

@@ -1,0 +1,33 @@
+To solve this problem, we can use a hashmap to store the values we have encountered so far. We iterate through the array and for each element, we check if its complement (the difference between the target sum and the current element) is present in the hashmap. If it is, we have found a pair with the given sum.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+    
+    unordered_map<int, int> mp;
+    
+    for (int i = 1; i <= n; i++) {
+        int a;
+        cin >> a;
+        
+        if (mp.count(x - a)) {
+            cout << mp[x - a] << " " << i << endl;
+            return 0;
+        }
+        
+        mp[a] = i;
+    }
+    
+    cout << "IMPOSSIBLE" << endl;
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n) since we iterate through the array once, and the space complexity is also O(n) due to the hashmap.

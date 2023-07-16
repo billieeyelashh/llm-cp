@@ -1,0 +1,46 @@
+To solve this problem, we can use dynamic programming.
+
+First, we need to create a 2D table dp with size (n+1) x (k+1), initialized with all zeros. dp[i][j] will represent the number of ways to place j bishops on an i x i chessboard.
+
+We can fill in the table using the following recurrence relation:
+
+dp[i][j] = dp[i-1][j] + dp[i-1][j-1] * (i^2 - (i-1)^2)
+
+The first term on the right-hand side represents the case where we don't place a bishop in the ith row. The second term represents the case where we do place a bishop in the ith row, and we multiply it by the number of valid positions for the bishop in the ith row, which is (i^2 - (i-1)^2).
+
+Finally, the answer to the problem will be dp[n][k].
+
+Here's the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1000000007;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<vector<int>> dp(n+1, vector<int>(k+1, 0));
+
+    for (int i = 0; i <= n; i++) {
+        dp[i][0] = 1;
+    }
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= k; j++) {
+            dp[i][j] = dp[i-1][j] + (dp[i-1][j-1] * (i*i - (i-1)*(i-1))) % MOD;
+            dp[i][j] %= MOD;
+        }
+    }
+
+    cout << dp[n][k] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2 * k), which is efficient enough given the constraints.

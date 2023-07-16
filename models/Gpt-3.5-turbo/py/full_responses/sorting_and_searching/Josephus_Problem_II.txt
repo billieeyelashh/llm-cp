@@ -1,0 +1,49 @@
+To solve this problem, we can use a circular linked list data structure. We can represent each child as a node in the linked list, with their positions denoted by the node values.
+
+We will start by creating the linked list and initializing it with the values from 1 to n. Then, we will iterate through the linked list until there is only one node left.
+
+In each iteration, we will skip k-1 nodes and remove the k-th node from the list. To do this efficiently, we can keep track of the previous node and update its next pointer accordingly.
+
+Finally, we will print the removal order by traversing the remaining linked list nodes.
+
+Here is the Python code to solve the problem:
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+def solve(n, k):
+    # Create a circular linked list with values from 1 to n
+    head = Node(1)
+    curr = head
+    for i in range(2, n+1):
+        curr.next = Node(i)
+        curr = curr.next
+    curr.next = head
+
+    # Iterate until there is only one node left
+    while curr.next != curr:
+        # Skip k-1 nodes
+        for _ in range(k-1):
+            curr = curr.next
+        # Remove the k-th node
+        curr.next = curr.next.next
+
+    # Print the removal order
+    removal_order = []
+    while curr.next != curr:
+        removal_order.append(curr.next.value)
+        curr = curr.next
+    removal_order.append(curr.value)
+    print(' '.join(map(str, removal_order)))
+
+# Read input values
+n, k = map(int, input().split())
+
+# Solve the problem
+solve(n, k)
+```
+
+This solution has a time complexity of O(n) because we need to iterate through the linked list n times. The space complexity is O(n) as well because we need to store the linked list nodes.

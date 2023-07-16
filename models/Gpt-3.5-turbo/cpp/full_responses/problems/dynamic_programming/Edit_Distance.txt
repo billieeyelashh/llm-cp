@@ -1,0 +1,63 @@
+To solve this problem, we can use dynamic programming to calculate the edit distance between the two strings.
+
+Let's denote the two strings as string1 and string2, with lengths n and m respectively.
+
+We can define a 2D array dp[n+1][m+1], where dp[i][j] represents the edit distance between the first i characters of string1 and the first j characters of string2.
+
+The base cases would be when either i or j is 0. In these cases, the edit distance would be equal to the length of the non-empty string.
+
+For the general cases, we have three possible operations: adding a character, removing a character, or replacing a character.
+
+If the current characters are the same, we don't need to perform any operation, so dp[i][j] would be equal to dp[i-1][j-1].
+
+If the current characters are different, we have three options:
+- Add a character: dp[i][j] would be equal to dp[i][j-1] + 1, as we need to add a character to string1 to make it equal to string2[j].
+- Remove a character: dp[i][j] would be equal to dp[i-1][j] + 1, as we need to remove a character from string1 to make it equal to string2[j].
+- Replace a character: dp[i][j] would be equal to dp[i-1][j-1] + 1, as we need to replace string1[i] with string2[j].
+
+Finally, the edit distance between string1 and string2 would be equal to dp[n][m].
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    string string1, string2;
+    cin >> string1 >> string2;
+
+    int n = string1.length();
+    int m = string2.length();
+
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+
+    // Base cases
+    for (int i = 0; i <= n; i++) {
+        dp[i][0] = i;
+    }
+    for (int j = 0; j <= m; j++) {
+        dp[0][j] = j;
+    }
+
+    // Dynamic programming
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            if (string1[i - 1] == string2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = min(dp[i][j - 1], min(dp[i - 1][j], dp[i - 1][j - 1])) + 1;
+            }
+        }
+    }
+
+    cout << dp[n][m] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n * m), where n and m are the lengths of the input strings.

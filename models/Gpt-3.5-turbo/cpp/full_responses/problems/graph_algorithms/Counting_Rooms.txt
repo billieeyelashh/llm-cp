@@ -1,0 +1,69 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to explore each room in the map.
+
+First, we define a recursive function `dfs` that takes the current position `(x, y)` as input. 
+
+In the `dfs` function:
+- If the current position is out of bounds or already visited, we return.
+- Otherwise, we mark the current position as visited.
+- If the current position is a wall, we return.
+- Otherwise, we recursively call `dfs` on the adjacent floor squares (up, down, left, right) to explore the connected rooms.
+
+Next, we iterate over each square in the map and call `dfs` on each unvisited floor square. For each call to `dfs`, we increment a counter variable `rooms` by 1.
+
+Finally, we output the value of `rooms`, which represents the total number of rooms in the map.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<char>> map;
+vector<vector<bool>> visited;
+
+void dfs(int x, int y) {
+    if (x < 0 || x >= map.size() || y < 0 || y >= map[0].size() || visited[x][y])
+        return;
+
+    visited[x][y] = true;
+
+    if (map[x][y] == '#')
+        return;
+
+    dfs(x - 1, y);
+    dfs(x + 1, y);
+    dfs(x, y - 1);
+    dfs(x, y + 1);
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    map.resize(n, vector<char>(m));
+    visited.resize(n, vector<bool>(m, false));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> map[i][j];
+        }
+    }
+
+    int rooms = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (!visited[i][j] && map[i][j] == '.') {
+                dfs(i, j);
+                rooms++;
+            }
+        }
+    }
+
+    cout << rooms << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * m), as we visit each square in the map once.

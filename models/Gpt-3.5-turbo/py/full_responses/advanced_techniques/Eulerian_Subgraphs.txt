@@ -1,0 +1,60 @@
+To count the number of Eulerian subgraphs, we can use a dynamic programming approach. Let's define a function $f(v, d)$, where $v$ is the current node and $d$ is the degree of node $v$ in the current subgraph. The value of $f(v, d)$ represents the number of Eulerian subgraphs that can be formed starting from node $v$ with degree $d$.
+
+We can calculate $f(v, d)$ using the following recurrence relation:
+$$f(v, d) = \sum_{i=0}^{d} \binom{d}{i} f(u, i) \cdot f(v, d-i)$$
+where $u$ are the neighbors of $v$.
+
+The base case for this recurrence relation is $f(v, 0) = 1$ if $d$ is even, and $f(v, 0) = 0$ if $d$ is odd.
+
+To calculate the final result, we need to sum up $f(v, d)$ for all nodes $v$ with even degrees. The total number of Eulerian subgraphs is given by the summation of $f(v, d)$ modulo $10^9+7$.
+
+Here is the Python implementation:
+
+```python
+MOD = int(1e9) + 7
+
+def countEulerianSubgraphs(n, m, edges):
+    # Initialize the dp table
+    dp = [[0] * (n + 1) for _ in range(n + 1)]
+
+    # Calculate the degree of each node
+    degrees = [0] * (n + 1)
+    for a, b in edges:
+        degrees[a] += 1
+        degrees[b] += 1
+
+    # Calculate the dp table
+    for v in range(1, n + 1):
+        if degrees[v] % 2 == 0:
+            dp[v][0] = 1
+
+    for v in range(1, n + 1):
+        for d in range(1, n + 1):
+            for u in edges[v]:
+                for i in range(d + 1):
+                    dp[v][d] += dp[u][i] * dp[v][d - i] % MOD
+                    dp[v][d] %= MOD
+
+    # Calculate the final result
+    result = 0
+    for v in range(1, n + 1):
+        if degrees[v] % 2 == 0:
+            result += dp[v][degrees[v]]
+            result %= MOD
+
+    return result
+
+# Read the input
+n, m = map(int, input().split())
+edges = [[] for _ in range(n + 1)]
+for _ in range(m):
+    a, b = map(int, input().split())
+    edges[a].append(b)
+    edges[b].append(a)
+
+# Calculate and print the result
+result = countEulerianSubgraphs(n, m, edges)
+print(result)
+```
+
+The time complexity of this solution is $O(n^3)$, where $n$ is the number of nodes.

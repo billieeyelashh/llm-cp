@@ -1,0 +1,64 @@
+We can solve this problem efficiently using the concept of prefix sums. 
+
+First, we initialize an array called "prefix" of size n+1, where prefix[i] represents the sum of the first i elements of the given array.
+
+To process the queries, we iterate through each query and perform the following steps:
+
+For queries of type 1 (increase range):
+- We update prefix[a] by adding u to it.
+- We update prefix[b+1] by subtracting u from it.
+
+For queries of type 2 (get value at position):
+- We calculate the result as the sum of prefix[k] and the original value x[k].
+
+Finally, we iterate through the prefix array and update each element by adding the previous element to it. This step is necessary to obtain the actual values of the array after all the range updates.
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> x(n + 1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> x[i];
+    }
+
+    vector<long long> prefix(n + 1, 0);
+    for (int i = 1; i <= q; ++i) {
+        int type;
+        cin >> type;
+
+        if (type == 1) {
+            int a, b, u;
+            cin >> a >> b >> u;
+
+            prefix[a] += u;
+            if (b + 1 <= n) {
+                prefix[b + 1] -= u;
+            }
+        } else {
+            int k;
+            cin >> k;
+
+            long long result = prefix[1] + x[1];
+            for (int j = 2; j <= k; ++j) {
+                prefix[j] += prefix[j - 1];
+                result += prefix[j] + x[j];
+            }
+
+            cout << result << "\n";
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n+q) as we iterate through each query and array element once.

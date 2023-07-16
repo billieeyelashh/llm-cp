@@ -1,0 +1,47 @@
+To solve this problem, we can use dynamic programming. We'll create an array dp of size (x+1) to store the number of ways to produce each sum from 0 to x.
+
+Initialization:
+- Set dp[0] = 1, since there is one way to produce a sum of 0 (by not selecting any coin).
+
+Iterative Step:
+- For each coin c_i, iterate from c_i to x and update the dp values as follows:
+  - dp[j] += dp[j - c_i], where j >= c_i.
+
+Final Step:
+- The final answer will be dp[x].
+
+Here's the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> coins(n);
+    for (int i = 0; i < n; i++) {
+        cin >> coins[i];
+    }
+
+    vector<int> dp(x + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = coins[i]; j <= x; j++) {
+            dp[j] = (dp[j] + dp[j - coins[i]]) % MOD;
+        }
+    }
+
+    cout << dp[x] << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(nx) and a space complexity of O(x).

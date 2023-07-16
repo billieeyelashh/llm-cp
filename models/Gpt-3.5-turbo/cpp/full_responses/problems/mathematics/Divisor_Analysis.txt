@@ -1,0 +1,47 @@
+To solve this problem, we can make use of the formula for the number of divisors, sum of divisors, and product of divisors of a number given its prime factorization.
+
+Let's denote the prime factorization as $(p_1^{k_1}, p_2^{k_2}, ..., p_n^{k_n})$. The number of divisors is then given by $(k_1+1)(k_2+1)...(k_n+1)$. The sum of divisors is given by $(1+p_1+p_1^2+...+p_1^{k_1})(1+p_2+p_2^2+...+p_2^{k_2})...(1+p_n+p_n^2+...+p_n^{k_n})$. The product of divisors is given by $p_1^{k_1} \cdot p_2^{k_2} \cdot ... \cdot p_n^{k_n}$.
+
+To calculate the number, sum, and product of divisors, we can iterate over each prime factor and compute the necessary powers and sums.
+
+Here is the C++ code to solve this problem:
+
+```cpp
+#include <iostream>
+
+const int MOD = 1000000007;
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    long long int number = 1;
+    long long int sum = 1;
+    long long int product = 1;
+
+    for (int i = 0; i < n; i++) {
+        int x, k;
+        std::cin >> x >> k;
+
+        long long int term = 1;
+        long long int power = 1;
+
+        for (int j = 0; j < k; j++) {
+            power = (power * x) % MOD;
+            term = (term + power) % MOD;
+        }
+
+        number = (number * (k + 1)) % MOD;
+        sum = (sum * term) % MOD;
+        product = (product * power) % MOD;
+    }
+
+    std::cout << number << " " << sum << " " << product << std::endl;
+
+    return 0;
+}
+```
+
+This code takes the input, iterates over the prime factors, and calculates the necessary powers and sums using modular arithmetic to avoid overflow. Finally, it outputs the result modulo $10^9+7$ as required.
+
+The overall time complexity of this solution is $O(n \cdot k)$, where $n$ is the number of parts in the prime factorization and $k$ is the maximum value of the powers.

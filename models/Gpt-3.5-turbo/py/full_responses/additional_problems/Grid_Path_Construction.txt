@@ -1,0 +1,47 @@
+To approach this problem, we can observe that in order for a path to exist, the grid must have more than one row or more than one column. If the grid has only one row or one column, it is not possible to visit each square exactly once.
+
+If the grid has more than one row and more than one column, we can construct a path as follows:
+1. Start at square $a=(y_1,x_1)$.
+2. Move to the right until reaching the last column of the grid.
+3. Move down one row.
+4. Move left until reaching the first column of the grid.
+5. Repeat steps 3 and 4 until reaching the row of square $b=(y_2,x_2)$.
+6. Move to square $b=(y_2,x_2)$.
+
+This path guarantees that each square is visited exactly once, and it is always possible to construct this path if the grid has more than one row and more than one column.
+
+Here is the Python code that implements the solution:
+
+```python
+def construct_path(n, m, y1, x1, y2, x2):
+    # Check if the grid has more than one row or more than one column
+    if n == 1 or m == 1:
+        return 'NO'
+
+    # Construct the path
+    path = ''
+    if y1 < y2:
+        path += 'D' * (y2 - y1)
+    elif y1 > y2:
+        path += 'U' * (y1 - y2)
+    
+    if x1 < x2:
+        path += 'R' * (x2 - x1)
+    elif x1 > x2:
+        path += 'L' * (x1 - x2)
+    
+    return 'YES\n' + path
+
+# Read the number of tests
+t = int(input())
+
+# Process each test case
+for _ in range(t):
+    # Read the input for each test case
+    n, m, y1, x1, y2, x2 = map(int, input().split())
+
+    # Call the function to construct the path and print the result
+    print(construct_path(n, m, y1, x1, y2, x2))
+```
+
+This solution has a time complexity of O(1) since we are directly calculating the path based on the input parameters.

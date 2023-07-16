@@ -1,0 +1,46 @@
+To solve this problem, we can use a greedy approach. We will iterate through each row and column, choosing the squares with the maximum number of coins until we satisfy the given conditions. 
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+row_counts = list(map(int, input().split()))
+col_counts = list(map(int, input().split()))
+
+grid = []
+for _ in range(n):
+    row = list(map(int, input().split()))
+    grid.append(row)
+
+chosen = [['.'] * n for _ in range(n)]
+coins = 0
+
+for i in range(n):
+    for _ in range(row_counts[i]):
+        max_coins = -1
+        max_col = -1
+        for j in range(n):
+            if grid[i][j] > max_coins and col_counts[j] > 0:
+                max_coins = grid[i][j]
+                max_col = j
+        
+        if max_coins == -1:
+            print(-1)
+            exit()
+        
+        chosen[i][max_col] = 'X'
+        coins += max_coins
+        col_counts[max_col] -= 1
+
+print(coins)
+for row in chosen:
+    print(''.join(row))
+```
+
+The code takes input for the size of the grid, the row and column counts, and the grid itself. It then initializes an empty grid to keep track of the chosen squares and a variable to store the total number of coins collected.
+
+The code then iterates through each row and column, choosing the square with the maximum number of coins until the desired count is achieved. It checks if it is possible to satisfy the conditions, and if not, it prints -1 and exits.
+
+Finally, the code prints the total number of coins collected and the chosen squares.
+
+Note: This solution may not be the most optimal for large grids, but it will work for grids of size up to 50x50.

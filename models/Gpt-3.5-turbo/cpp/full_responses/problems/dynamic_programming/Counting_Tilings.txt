@@ -1,0 +1,55 @@
+To solve this problem, we can use dynamic programming.
+
+Let's define a 2D array `dp[n+1][m+1]`, where `dp[i][j]` represents the number of ways to fill an `i x j` grid.
+
+We can start by initializing the base cases:
+- If `n = 1`, then `dp[1][j] = 1` for all `1 <= j <= m`, because we can only use `1 x 2` tiles.
+- If `m = 1`, then `dp[i][1] = 1` for all `1 <= i <= n`, because we can only use `2 x 1` tiles.
+
+For the general case, we can calculate `dp[i][j]` as follows:
+- If we use a `1 x 2` tile vertically, then the remaining grid will be `i-1 x j`. We have `dp[i-1][j]` ways to fill it.
+- If we use a `2 x 1` tile horizontally, then the remaining grid will be `i x (j-2)`. We have `dp[i][j-2]` ways to fill it.
+
+Therefore, the recurrence relation is: `dp[i][j] = dp[i-1][j] + dp[i][j-2]`.
+
+Finally, the result will be `dp[n][m]`.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int countWays(int n, int m) {
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            if (i == 1) {
+                dp[i][j] = 1;
+            } else if (j == 1) {
+                dp[i][j] = 1;
+            } else {
+                dp[i][j] = (dp[i - 1][j] + dp[i][j - 2]) % MOD;
+            }
+        }
+    }
+
+    return dp[n][m];
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    cout << countWays(n, m) << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * m) and a space complexity of O(n * m).

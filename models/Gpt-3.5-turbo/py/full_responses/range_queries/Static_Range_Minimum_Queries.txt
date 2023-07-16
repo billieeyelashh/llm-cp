@@ -1,0 +1,58 @@
+To solve this problem optimally, we can use the concept of segment trees. A segment tree is a binary tree data structure that allows efficient querying and updating of intervals or ranges of an array.
+
+Here's the step-by-step solution using a segment tree in Python:
+
+1. Define a function `build_segment_tree` that takes the input array and constructs a segment tree. The segment tree will be represented as an array, where each node at index `i` represents the range `[left, right]` of the segment tree node.
+
+2. In the `build_segment_tree` function, if the range `[left, right]` has a single element, set the value of the segment tree node at index `i` as the element at index `left` in the input array.
+
+3. Otherwise, recursively construct the left and right subtrees of the segment tree. The left subtree will be represented by the node at index `2*i`, and the right subtree will be represented by the node at index `2*i + 1`. Set the value of the segment tree node at index `i` as the minimum of the values of its left and right subtrees.
+
+4. Define a function `query_segment_tree` that takes the segment tree, the current node index `i`, the range `[left, right]` of the query, and the range `[query_left, query_right]` of the current node. This function returns the minimum value in the query range `[query_left, query_right]`.
+
+5. In the `query_segment_tree` function, if the range `[left, right]` of the current node is completely outside the query range `[query_left, query_right]`, return a large value (e.g., `float('inf')`) to indicate that there is no overlap.
+
+6. If the range `[left, right]` of the current node is completely inside the query range `[query_left, query_right]`, return the value of the segment tree node at index `i`.
+
+7. Otherwise, recursively query the left and right subtrees of the segment tree and return the minimum of the two results.
+
+8. Finally, iterate through each query and call the `query_segment_tree` function with the segment tree, the root node index `1`, and the query range. Print the result of each query.
+
+Here's the Python code for the solution:
+
+```python
+def build_segment_tree(arr, tree, i, left, right):
+    if left == right:
+        tree[i] = arr[left]
+    else:
+        mid = (left + right) // 2
+        build_segment_tree(arr, tree, 2*i, left, mid)
+        build_segment_tree(arr, tree, 2*i + 1, mid + 1, right)
+        tree[i] = min(tree[2*i], tree[2*i + 1])
+
+def query_segment_tree(tree, i, left, right, query_left, query_right):
+    if right < query_left or left > query_right:
+        return float('inf')
+    elif left >= query_left and right <= query_right:
+        return tree[i]
+    else:
+        mid = (left + right) // 2
+        left_result = query_segment_tree(tree, 2*i, left, mid, query_left, query_right)
+        right_result = query_segment_tree(tree, 2*i + 1, mid + 1, right, query_left, query_right)
+        return min(left_result, right_result)
+
+n, q = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# Construct the segment tree
+tree = [0] * (4*n)
+build_segment_tree(arr, tree, 1, 0, n-1)
+
+# Process the queries
+for _ in range(q):
+    a, b = map(int, input().split())
+    result = query_segment_tree(tree, 1, 0, n-1, a-1, b-1)
+    print(result)
+```
+
+This solution has a time complexity of O(n log n) for constructing the segment tree and O(q log n) for processing the queries, where n is the number of values and q is the number of queries.

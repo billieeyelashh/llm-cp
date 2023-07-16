@@ -1,0 +1,102 @@
+To solve this problem, we can use a breadth-first search (BFS) algorithm to find the minimum number of moves required.
+
+First, we need to represent the state of the grid. We can use a 2D array to store the numbers, where the indices (i, j) represent the row and column of the grid, respectively.
+
+Next, we can define a struct called "State" to represent a state of the grid. The struct will have two members: the grid itself and an integer representing the number of moves taken to reach that state.
+
+Now, let's outline the steps of the BFS algorithm:
+
+1. Initialize a queue and a set to store visited states.
+2. Create an initial state by reading the input grid and setting the number of moves to 0.
+3. Enqueue the initial state into the queue.
+4. While the queue is not empty:
+   a. Dequeue a state from the front of the queue.
+   b. Check if the grid is in the desired state (1 2 3, 4 5 6, 7 8 9). If it is, return the number of moves taken to reach that state.
+   c. Generate all possible next states by swapping adjacent numbers in the grid.
+   d. For each next state, check if it has been visited before. If not, enqueue it into the queue and mark it as visited.
+5. If the queue becomes empty and no desired state is found, return -1 (indicating that it is impossible to reach the desired state).
+
+Here is the final C++ solution:
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <set>
+using namespace std;
+
+struct State {
+    int grid[3][3];
+    int moves;
+};
+
+int main() {
+    int grid[3][3];
+
+    // Read the input grid
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cin >> grid[i][j];
+        }
+    }
+
+    // Define the desired grid
+    int desiredGrid[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+    // Initialize the queue and visited set
+    queue<State> q;
+    set<State> visited;
+
+    // Create the initial state
+    State initialState;
+    memcpy(initialState.grid, grid, sizeof(grid)); // Copy the grid
+    initialState.moves = 0;
+
+    // Enqueue the initial state
+    q.push(initialState);
+    visited.insert(initialState);
+
+    // Perform BFS
+    while (!q.empty()) {
+        State currState = q.front();
+        q.pop();
+
+        // Check if the grid is in the desired state
+        if (memcmp(currState.grid, desiredGrid, sizeof(desiredGrid)) == 0) {
+            cout << currState.moves << endl;
+            return 0;
+        }
+
+        // Generate all possible next states
+        int dx[4] = {0, 0, 1, -1};
+        int dy[4] = {1, -1, 0, 0};
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 4; k++) {
+                    int ni = i + dx[k];
+                    int nj = j + dy[k];
+
+                    if (ni >= 0 && ni < 3 && nj >= 0 && nj < 3) {
+                        State nextState = currState;
+                        swap(nextState.grid[i][j], nextState.grid[ni][nj]);
+                        nextState.moves++;
+
+                        // Check if the next state has been visited before
+                        if (visited.find(nextState) == visited.end()) {
+                            q.push(nextState);
+                            visited.insert(nextState);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // If no desired state is found
+    cout << -1 << endl;
+
+    return 0;
+}
+```
+
+The solution uses a BFS algorithm to find the minimum number of moves required to reach the desired state. It uses a queue to store the states to be explored and a set to keep track of visited states. The algorithm terminates when the desired state is reached or when there are no more states to explore.

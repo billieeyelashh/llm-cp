@@ -1,0 +1,103 @@
+To solve this problem efficiently, we can use the concept of LCA (Lowest Common Ancestor) and precompute the distance between each node and its ancestor at different heights.
+
+Here's the step-by-step solution:
+
+1. Read the input values: n, q, and the tree edges.
+
+2. Build an adjacency list to represent the tree.
+
+3. Precompute the depth of each node and its ancestor at different heights using a depth-first search (DFS) traversal. This can be done by keeping track of the parent of each node during the DFS and storing the depth of each node.
+
+4. Precompute the ancestor of each node at different heights using dynamic programming. For each node, compute its 2^k-th ancestor by recursively finding the 2^(k-1)-th ancestor of its parent.
+
+5. Process each query separately. For each query (a, b), find their LCA using the precomputed ancestor information. Then, calculate the distance between a and b by summing their depths and subtracting twice the depth of their LCA.
+
+6. Print the distance for each query.
+
+Here's the C++ code implementing the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MAX_N = 2e5 + 5;
+const int MAX_LOG = 20;
+
+vector<int> adj[MAX_N];
+int depth[MAX_N];
+int parent[MAX_N][MAX_LOG];
+
+void dfs(int node, int par, int d) {
+    depth[node] = d;
+    parent[node][0] = par;
+
+    for (int i = 1; i < MAX_LOG; i++) {
+        if (parent[node][i - 1] != -1) {
+            parent[node][i] = parent[parent[node][i - 1]][i - 1];
+        }
+    }
+
+    for (int child : adj[node]) {
+        if (child != par) {
+            dfs(child, node, d + 1);
+        }
+    }
+}
+
+int lca(int a, int b) {
+    if (depth[a] < depth[b]) {
+        swap(a, b);
+    }
+
+    int diff = depth[a] - depth[b];
+
+    for (int i = MAX_LOG - 1; i >= 0; i--) {
+        if (diff & (1 << i)) {
+            a = parent[a][i];
+        }
+    }
+
+    if (a == b) {
+        return a;
+    }
+
+    for (int i = MAX_LOG - 1; i >= 0; i--) {
+        if (parent[a][i] != parent[b][i]) {
+            a = parent[a][i];
+            b = parent[b][i];
+        }
+    }
+
+    return parent[a][0];
+}
+
+int distance(int a, int b) {
+    int l = lca(a, b);
+    return depth[a] + depth[b] - 2 * depth[l];
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    for (int i = 1; i < n; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    dfs(1, -1, 0);
+
+    while (q--) {
+        int a, b;
+        cin >> a >> b;
+        cout << distance(a, b) << "\n";
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(nlogn) for precomputing the ancestor information and O(logn) for each query, resulting in an overall complexity of O(qlogn).

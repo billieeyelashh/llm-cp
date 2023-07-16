@@ -1,0 +1,41 @@
+To solve this problem, we can use the concept of permutations with repetitions. 
+
+First, we need to ensure that each integer between $1 \dots k$ appears at least once in the sequence. This can be done by simply multiplying $k!$ to the final answer.
+
+Next, we need to find the number of ways to arrange the remaining $(n-k)$ elements in the sequence. This can be done using the formula for permutations with repetitions, which is $(n-k)^{n-k}$.
+
+Finally, we multiply these two values together and take the result modulo $10^9+7$ to get the final answer.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+
+const int MOD = 1000000007;
+
+int main() {
+    int n, k;
+    std::cin >> n >> k;
+
+    // Calculate k!
+    long long factorial = 1;
+    for (int i = 1; i <= k; i++) {
+        factorial = (factorial * i) % MOD;
+    }
+
+    // Calculate (n - k)^(n - k)
+    long long repetitions = 1;
+    for (int i = 1; i <= n - k; i++) {
+        repetitions = (repetitions * (n - k)) % MOD;
+    }
+
+    // Multiply k! and (n - k)^(n - k)
+    long long result = (factorial * repetitions) % MOD;
+
+    std::cout << result << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(k + n - k) = O(n)$.

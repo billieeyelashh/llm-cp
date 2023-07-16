@@ -1,0 +1,79 @@
+To construct the tree from the given Prüfer code, we can follow these steps:
+
+1. Create a frequency array to count the number of occurrences of each node in the Prüfer code.
+2. Find the smallest leaf node, which is the node with a frequency of 1 in the Prüfer code.
+3. Find the smallest unused node, which is the node with a frequency of 0 in the Prüfer code and hasn't been added to the tree yet.
+4. Connect the leaf node and the unused node by adding an edge between them.
+5. Decrease the frequency of the leaf node and the unused node by 1.
+6. Repeat steps 2-5 until there are only two nodes left in the Prüfer code.
+7. Connect the remaining two nodes by adding an edge between them.
+
+Here is the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> constructTree(int n, vector<int>& code) {
+    vector<int> frequency(n + 1, 0);
+    for (int i = 0; i < n - 2; i++) {
+        frequency[code[i]]++;
+    }
+
+    vector<int> treeEdges;
+
+    int leafNode = 1;
+    while (frequency[leafNode] != 0) {
+        leafNode++;
+    }
+
+    int unusedNode = 1;
+    while (frequency[unusedNode] != 0 || unusedNode == leafNode) {
+        unusedNode++;
+    }
+
+    for (int i = 0; i < n - 2; i++) {
+        treeEdges.push_back(leafNode);
+        treeEdges.push_back(code[i]);
+
+        frequency[code[i]]--;
+        if (frequency[code[i]] == 0 && code[i] < unusedNode) {
+            unusedNode = code[i];
+        }
+
+        if (frequency[leafNode] == 0) {
+            leafNode = unusedNode;
+            while (frequency[leafNode] != 0) {
+                leafNode++;
+            }
+        }
+    }
+
+    treeEdges.push_back(leafNode);
+    treeEdges.push_back(unusedNode);
+
+    return treeEdges;
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> code(n - 2);
+    for (int i = 0; i < n - 2; i++) {
+        cin >> code[i];
+    }
+
+    vector<int> treeEdges = constructTree(n, code);
+
+    for (int i = 0; i < n - 1; i += 2) {
+        cout << treeEdges[i] << " " << treeEdges[i + 1] << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the number of nodes in the tree.

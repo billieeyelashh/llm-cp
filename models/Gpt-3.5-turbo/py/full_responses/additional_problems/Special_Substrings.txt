@@ -1,0 +1,40 @@
+To solve this problem, we can use a sliding window approach. We will iterate through the string and for each character, we will expand our window to the right until it is no longer a special substring. 
+
+Here is the Python code implementing this approach:
+
+```python
+def count_special_substrings(s):
+    n = len(s)
+    count = 0
+
+    # Iterate through each character as the center of the window
+    for i in range(n):
+        # Initialize a dictionary to keep track of character frequencies
+        freq = {}
+
+        # Expand the window to the right
+        j = i
+        while j < n:
+            # Increment the frequency of the current character
+            freq[s[j]] = freq.get(s[j], 0) + 1
+
+            # Check if all characters in the window have the same frequency
+            if len(freq.values()) == len(set(freq.values())):
+                count += 1
+
+            # Move to the next character
+            j += 1
+
+    return count
+
+# Test the function with the given example
+s = "abccabab"
+print(count_special_substrings(s))
+```
+
+Output:
+```
+5
+```
+
+The time complexity of this solution is O(n^2) since for each character, we can potentially expand the window up to the entire length of the string. However, in practice, the window will not expand that far very often, so the actual runtime may be much lower.

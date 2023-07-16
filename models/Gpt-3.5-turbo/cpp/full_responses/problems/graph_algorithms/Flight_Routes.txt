@@ -1,0 +1,64 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest paths from Syrjälä to all other cities. However, instead of stopping when we find the shortest path to Metsälä, we will keep track of the $k$ cheapest routes.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <functional>
+
+using namespace std;
+
+const long long INF = 1e18;
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<vector<pair<int, int>>> adj(n + 1);
+    for (int i = 0; i < m; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj[a].push_back({b, c});
+    }
+
+    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> pq;
+    vector<vector<long long>> dist(n + 1, vector<long long>(k, INF));
+    pq.push({0, 1});
+    dist[1][0] = 0;
+
+    while (!pq.empty()) {
+        long long cost = pq.top().first;
+        int u = pq.top().second;
+        pq.pop();
+
+        for (auto [v, w] : adj[u]) {
+            long long newCost = cost + w;
+
+            if (newCost < dist[v][k - 1]) {
+                dist[v][k - 1] = newCost;
+                pq.push({newCost, v});
+                sort(dist[v].begin(), dist[v].end());
+            }
+        }
+    }
+
+    for (int i = 0; i < k; i++) {
+        cout << dist[n][i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+The code first reads the input values for $n$, $m$, and $k$. Then, it creates an adjacency list to represent the flights between cities. Next, it initializes a priority queue to store the cities to visit and a 2D vector `dist` to store the cheapest routes.
+
+The code starts with Syrjälä as the source city and initializes the distance to all other cities as infinity, except for Syrjälä itself which is set to 0. It pushes the source city into the priority queue.
+
+Then, it starts a loop until the priority queue is empty. In each iteration, it extracts the city with the smallest cost from the priority queue. For each neighbor city, it calculates the new cost and updates the `dist` vector if the new cost is smaller than the current $k$-th cheapest route.
+
+Finally, it outputs the $k$ cheapest routes to Metsälä.
+
+The time complexity of this solution is $O((n + m) \log k)$, where $n$ is the number of cities and $m$ is the number of flights.

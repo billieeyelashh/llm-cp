@@ -1,0 +1,27 @@
+To solve this problem, we can use Kadane's algorithm, which is an efficient dynamic programming approach.
+
+Kadane's algorithm works by iterating through the array and keeping track of two variables: the maximum subarray sum ending at the current element, and the maximum subarray sum seen so far.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+max_ending_here = max_so_far = arr[0]
+
+for i in range(1, n):
+    max_ending_here = max(arr[i], max_ending_here + arr[i])
+    max_so_far = max(max_so_far, max_ending_here)
+
+print(max_so_far)
+```
+
+Explanation:
+- We initialize both `max_ending_here` and `max_so_far` with the first element of the array.
+- Then, we iterate through the rest of the array.
+- For each element, we update `max_ending_here` by taking the maximum value between the current element alone or the sum of the current element and the previous maximum subarray sum.
+- We also update `max_so_far` by taking the maximum value between the current `max_so_far` and the updated `max_ending_here`.
+- Finally, we print the value of `max_so_far`, which represents the maximum subarray sum.
+
+The time complexity of this solution is O(n), where n is the size of the array.

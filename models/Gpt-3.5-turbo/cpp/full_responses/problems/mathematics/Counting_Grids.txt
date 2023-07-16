@@ -1,0 +1,72 @@
+To solve this problem optimally, we can use the concept of bit manipulation and modular arithmetic. 
+
+First, let's define a helper function `pow_mod` that calculates the modular exponentiation of a number `base` raised to the power of `exponent` modulo `mod`.
+
+```cpp
+long long pow_mod(long long base, long long exponent, long long mod) {
+    long long result = 1;
+    while (exponent > 0) {
+        if (exponent & 1)
+            result = (result * base) % mod;
+        base = (base * base) % mod;
+        exponent >>= 1;
+    }
+    return result;
+}
+```
+
+Now, let's solve the problem using the following steps:
+
+1. Calculate the total number of grids without considering rotational symmetry.
+2. Calculate the number of grids that have rotational symmetry.
+3. Subtract the number of grids with rotational symmetry from the total number of grids to get the final answer.
+
+Step 1: Calculate the total number of grids without considering rotational symmetry.
+
+For each cell in the grid, there are 2 possibilities (black or white). So, the total number of grids is 2 raised to the power of the total number of cells, which is `pow_mod(2, n*n, 1000000007)`.
+
+Step 2: Calculate the number of grids that have rotational symmetry.
+
+For a grid to have rotational symmetry, the pattern of black and white cells must remain the same after rotation. There are two cases to consider:
+
+Case 1: n is odd.
+In this case, the center cell of the grid will remain unchanged after any rotation. So, the number of grids with rotational symmetry is equal to the number of possible patterns for the remaining cells (excluding the center cell). This is `pow_mod(2, (n-1)*(n-1), 1000000007)`.
+
+Case 2: n is even.
+In this case, there is no center cell that remains unchanged after rotation. So, the number of grids with rotational symmetry is equal to the number of possible patterns for all cells. This is `pow_mod(2, n*n, 1000000007)`.
+
+Step 3: Subtract the number of grids with rotational symmetry from the total number of grids.
+
+The final answer is `pow_mod(2, n*n, 1000000007) - pow_mod(2, (n-1)*(n-1), 1000000007)`.
+
+Here's the complete C++ code:
+
+```cpp
+#include <iostream>
+
+long long pow_mod(long long base, long long exponent, long long mod) {
+    long long result = 1;
+    while (exponent > 0) {
+        if (exponent & 1)
+            result = (result * base) % mod;
+        base = (base * base) % mod;
+        exponent >>= 1;
+    }
+    return result;
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    long long total_grids = pow_mod(2, n * n, 1000000007);
+    long long symmetric_grids = (n % 2 == 0) ? total_grids : pow_mod(2, (n-1) * (n-1), 1000000007);
+    long long answer = (total_grids - symmetric_grids + 1000000007) % 1000000007;
+
+    std::cout << answer << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(log n) and a space complexity of O(1).

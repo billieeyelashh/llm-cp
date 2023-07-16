@@ -1,0 +1,88 @@
+To solve this problem efficiently, we can use a combination of a trie and a priority queue.
+
+First, we will build a trie data structure that represents all the distinct substrings of the given string. Each node in the trie will represent a prefix of a substring.
+
+Next, we will perform a depth-first search (DFS) on the trie to generate all the distinct substrings in lexicographical order. During the DFS, we will keep track of the count of distinct substrings encountered so far.
+
+To optimize the DFS, we will use a priority queue to store the nodes of the trie. The priority queue will be ordered based on the lexicographical order of the substring represented by each node.
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+struct TrieNode {
+    TrieNode* children[26];
+    bool isEndOfWord;
+};
+
+TrieNode* createNode() {
+    TrieNode* newNode = new TrieNode();
+    newNode->isEndOfWord = false;
+    for (int i = 0; i < 26; i++) {
+        newNode->children[i] = nullptr;
+    }
+    return newNode;
+}
+
+void insert(TrieNode* root, const string& word) {
+    TrieNode* curr = root;
+    for (char c : word) {
+        int index = c - 'a';
+        if (curr->children[index] == nullptr) {
+            curr->children[index] = createNode();
+        }
+        curr = curr->children[index];
+    }
+    curr->isEndOfWord = true;
+}
+
+void dfs(TrieNode* node, priority_queue<string, vector<string>, greater<string>>& pq, int& count, int k) {
+    if (node == nullptr) {
+        return;
+    }
+    if (node->isEndOfWord) {
+        count++;
+        if (count == k) {
+            return;
+        }
+    }
+    for (int i = 0; i < 26; i++) {
+        if (node->children[i] != nullptr) {
+            char c = 'a' + i;
+            dfs(node->children[i], pq, count, k);
+            if (count == k) {
+                pq.push(string(1, c));
+            }
+        }
+    }
+}
+
+string findKthSmallestSubstring(const string& s, int k) {
+    TrieNode* root = createNode();
+    int n = s.length();
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            insert(root, s.substr(i, j - i + 1));
+        }
+    }
+    priority_queue<string, vector<string>, greater<string>> pq;
+    int count = 0;
+    dfs(root, pq, count, k);
+    return pq.top();
+}
+
+int main() {
+    string s;
+    int k;
+    cin >> s >> k;
+    cout << findKthSmallestSubstring(s, k) << endl;
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2) for building the trie, and the space complexity is O(n^2) as well. The overall time complexity to find the kth smallest distinct substring is O(n^2 log n).

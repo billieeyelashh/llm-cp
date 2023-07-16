@@ -1,0 +1,46 @@
+To solve this problem optimally, we can precompute the destination planet for each planet after travelling through $2^i$ teleporters, where $i$ is a power of 2.
+
+Let's define a 2D array $dp$ of size $(n \times \log_2(k+1))$, where $dp[i][j]$ represents the planet we will reach if we start at planet $i$ and travel through $2^j$ teleporters.
+
+We can initialize the base case of $dp[i][0]$ as the destination planet $t_i$ for each planet $i$. Then, we can fill in the rest of the $dp$ array using the following recurrence relation:
+
+$dp[i][j] = dp[dp[i][j-1]][j-1]$
+
+This means that to compute $dp[i][j]$, we look at the planet we will reach after travelling through $2^{j-1}$ teleporters from planet $i$ (which is $dp[i][j-1]$), and then look at the planet we will reach after travelling through another $2^{j-1}$ teleporters from that planet.
+
+After precomputing the $dp$ array, we can answer each query by finding the planet we will reach after travelling through the given number of teleporters. Let's call this number of teleporters $k'$.
+
+We can start with the initial planet $x$ and iterate over the bits of $k'$ from most significant to least significant. If the $i$-th bit is set (i.e., $k' \& (1 << i)$ is non-zero), then we update the current planet by setting it to $dp[current][i]$.
+
+Finally, the current planet will be the answer to the query.
+
+Here is the Python code implementing this solution:
+
+```python
+n, q = map(int, input().split())
+t = list(map(int, input().split()))
+
+# Precompute the dp array
+log_k = int(math.log2(max(q for _, q in queries)) + 1)
+dp = [[0] * log_k for _ in range(n)]
+for i in range(n):
+    dp[i][0] = t[i]
+
+for j in range(1, log_k):
+    for i in range(n):
+        dp[i][j] = dp[dp[i][j-1]][j-1]
+
+# Answer each query
+for _ in range(q):
+    x, k = map(int, input().split())
+
+    # Find the planet after travelling through k teleporters
+    current = x
+    for i in range(log_k-1, -1, -1):
+        if k & (1 << i):
+            current = dp[current][i]
+
+    print(current)
+```
+
+This solution has a time complexity of $O(n \log k + q \log k)$, where $k$ is the maximum number of teleporters in a query.

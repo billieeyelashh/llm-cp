@@ -1,0 +1,17 @@
+We can solve this problem by constructing a bit string that contains all possible substrings of length $n$. 
+
+To do this, we will start with a bit string of length $n-1$ consisting of all 0's. Then, we will add a 1 at the beginning and concatenate the reverse of the bit string. This will ensure that all substrings of length $n$ are present in the final bit string.
+
+Here is the Python code that implements this approach:
+
+```python
+n = int(input())
+
+# Construct the bit string
+bit_string = '0' * (n-1) + '1' + '0' * (n-1)[::-1]
+
+# Print the bit string
+print(bit_string)
+```
+
+This solution has a time complexity of $O(n)$, as we only need to construct the bit string once.

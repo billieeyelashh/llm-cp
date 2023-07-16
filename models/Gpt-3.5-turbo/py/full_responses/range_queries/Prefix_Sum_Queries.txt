@@ -1,0 +1,62 @@
+To solve this problem efficiently, we can use a segment tree data structure. A segment tree is a binary tree where each node represents an interval of the array. The root node represents the entire array, and each leaf node represents a single element of the array. 
+
+Each internal node of the segment tree stores the maximum prefix sum of its corresponding interval. The maximum prefix sum of an interval [a, b] can be calculated by taking the maximum of the maximum prefix sums of its left and right child intervals.
+
+To update a value at position k, we can simply update the corresponding leaf node in the segment tree and propagate the changes upwards to the root by updating the parent nodes.
+
+To answer a query of type 2, we can traverse the segment tree starting from the root and recursively explore the left or right child based on the query range. If the current interval is completely outside the query range, we can return a minimum value (e.g., -infinity) since it won't contribute to the maximum prefix sum. If the current interval is completely within the query range, we can return the maximum prefix sum stored at that node. Otherwise, if the interval overlaps with the query range, we need to explore both left and right child intervals and return the maximum of their results.
+
+Here is the Python code that implements the solution:
+
+```python
+def build_segment_tree(arr, tree, node, start, end):
+    if start == end:
+        tree[node] = arr[start]
+    else:
+        mid = (start + end) // 2
+        build_segment_tree(arr, tree, 2 * node, start, mid)
+        build_segment_tree(arr, tree, 2 * node + 1, mid + 1, end)
+        tree[node] = max(tree[2 * node], tree[2 * node + 1])
+
+def update_segment_tree(arr, tree, node, start, end, idx, val):
+    if start == end:
+        arr[idx] = val
+        tree[node] = val
+    else:
+        mid = (start + end) // 2
+        if start <= idx <= mid:
+            update_segment_tree(arr, tree, 2 * node, start, mid, idx, val)
+        else:
+            update_segment_tree(arr, tree, 2 * node + 1, mid + 1, end, idx, val)
+        tree[node] = max(tree[2 * node], tree[2 * node + 1])
+
+def query_segment_tree(tree, node, start, end, left, right):
+    if start > right or end < left:
+        return float('-inf')
+    if left <= start and end <= right:
+        return tree[node]
+    mid = (start + end) // 2
+    left_sum = query_segment_tree(tree, 2 * node, start, mid, left, right)
+    right_sum = query_segment_tree(tree, 2 * node + 1, mid + 1, end, left, right)
+    return max(left_sum, right_sum)
+
+n, q = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# Build the segment tree
+tree = [0] * (4 * n)
+build_segment_tree(arr, tree, 1, 0, n - 1)
+
+# Process the queries
+for _ in range(q):
+    query = list(map(int, input().split()))
+    if query[0] == 1:
+        k, u = query[1], query[2]
+        update_segment_tree(arr, tree, 1, 0, n - 1, k - 1, u)
+    else:
+        a, b = query[1], query[2]
+        result = query_segment_tree(tree, 1, 0, n - 1, a - 1, b - 1)
+        print(result)
+```
+
+The time complexity of this solution is O((n + q) log n), where n is the number of values and q is the number of queries. The space complexity is O(4n) for the segment tree.

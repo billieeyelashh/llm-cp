@@ -1,0 +1,40 @@
+To solve this problem, we can use the concept of exponentiation by squaring to calculate the result in an efficient way. 
+
+First, we need to understand that for each bit position, there are two possibilities: 0 or 1. Since there are $n$ positions, the total number of bit strings is $2^n$. 
+
+To calculate $2^n$ efficiently, we can use exponentiation by squaring. The idea is to divide the exponent in half and recursively calculate the result. For example, to calculate $2^8$, we can calculate $(2^4)^2$. This technique reduces the number of multiplications needed.
+
+Here's the C++ code to solve this problem:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+long long power(long long base, long long exponent) {
+    long long result = 1;
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result = (result * base) % MOD;
+        }
+        base = (base * base) % MOD;
+        exponent /= 2;
+    }
+    return result;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    long long result = power(2, n);
+    cout << result << endl;
+    return 0;
+}
+```
+
+The `power` function uses exponentiation by squaring to calculate `base^exponent` modulo `MOD`. It iteratively multiplies the result by `base` if the current bit of `exponent` is 1 and squares `base` at each iteration.
+
+The code reads the input value of `n`, calculates `2^n` using the `power` function, and prints the result modulo `MOD`.
+
+The time complexity of this solution is O(log n), which is efficient enough to handle the given constraints.

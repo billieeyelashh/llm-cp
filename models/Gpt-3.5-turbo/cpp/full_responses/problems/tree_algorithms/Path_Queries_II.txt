@@ -1,0 +1,115 @@
+To solve this problem, we can use the concept of segment trees on trees.
+
+First, we need to build a tree data structure to represent the given tree. We can use an adjacency list to store the edges of the tree.
+
+Next, we need to perform a depth-first search (DFS) to calculate the subtree sizes and depths of each node. We can store this information in separate arrays.
+
+Then, we can build a segment tree on top of the depth array. Each node of the segment tree represents a range of nodes in the original tree. The value of each node in the segment tree is the maximum depth of the nodes in that range.
+
+To answer a query of type 2, we first find the lowest common ancestor (LCA) of nodes a and b using the depths array. Then, we use the LCA to divide the path between a and b into two parts: one from a to the LCA, and the other from the LCA to b. We can find the maximum depth on each part using the segment tree. The maximum depth on the entire path is the maximum of these two values.
+
+To answer a query of type 1, we simply update the value of the corresponding node in the original tree and recalculate the segment tree.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MAXN = 2e5+5;
+const int MAX_LOGN = 20;
+
+vector<int> adj[MAXN];
+int depth[MAXN], parent[MAXN][MAX_LOGN], subtreeSize[MAXN];
+int depthArray[MAXN], segmentTree[4*MAXN];
+
+void dfs(int u, int p, int d) {
+    depth[u] = d;
+    parent[u][0] = p;
+    subtreeSize[u] = 1;
+
+    for (int v : adj[u]) {
+        if (v != p) {
+            dfs(v, u, d+1);
+            subtreeSize[u] += subtreeSize[v];
+        }
+    }
+}
+
+void buildLCA(int n) {
+    for (int j = 1; j < MAX_LOGN; j++) {
+        for (int i = 1; i <= n; i++) {
+            if (parent[i][j-1] != -1) {
+                parent[i][j] = parent[parent[i][j-1]][j-1];
+            }
+        }
+    }
+}
+
+int getLCA(int a, int b) {
+    if (depth[a] < depth[b]) {
+        swap(a, b);
+    }
+
+    for (int j = MAX_LOGN-1; j >= 0; j--) {
+        if (depth[a] - (1 << j) >= depth[b]) {
+            a = parent[a][j];
+        }
+    }
+
+    if (a == b) {
+        return a;
+    }
+
+    for (int j = MAX_LOGN-1; j >= 0; j--) {
+        if (parent[a][j] != -1 && parent[a][j] != parent[b][j]) {
+            a = parent[a][j];
+            b = parent[b][j];
+        }
+    }
+
+    return parent[a][0];
+}
+
+void buildSegmentTree(int node, int start, int end) {
+    if (start == end) {
+        segmentTree[node] = depthArray[start];
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    buildSegmentTree(2*node, start, mid);
+    buildSegmentTree(2*node+1, mid+1, end);
+
+    segmentTree[node] = max(segmentTree[2*node], segmentTree[2*node+1]);
+}
+
+int querySegmentTree(int node, int start, int end, int left, int right) {
+    if (start > right || end < left) {
+        return -1;
+    }
+
+    if (start >= left && end <= right) {
+        return segmentTree[node];
+    }
+
+    int mid = (start + end) / 2;
+    int maxLeft = querySegmentTree(2*node, start, mid, left, right);
+    int maxRight = querySegmentTree(2*node+1, mid+1, end, left, right);
+
+    return max(maxLeft, maxRight);
+}
+
+void updateSegmentTree(int node, int start, int end, int idx, int val) {
+    if (start == end) {
+        segmentTree[node] = val;
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    if (idx <= mid) {
+        updateSegmentTree(2*node, start, mid, idx, val);
+    } else {
+        updateSegmentTree(2*node+1, mid+1, end, idx, val);
+   

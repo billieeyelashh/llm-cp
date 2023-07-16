@@ -1,0 +1,62 @@
+To solve this problem efficiently, we can use graph traversal algorithms, such as Depth First Search (DFS) or Breadth First Search (BFS).
+
+First, we will represent the road connections between cities using an adjacency list. We can create a vector of vectors to represent the graph, where each element of the vector represents a city and contains a list of its neighboring cities.
+
+Next, for each query, we will perform a graph traversal from city $a$ to city $b$, avoiding city $c$. We can use DFS or BFS to explore all possible routes from $a$ to $b$, ensuring that we skip city $c$ during the traversal.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void dfs(vector<vector<int>>& graph, vector<bool>& visited, int current, int target, int forbidden, bool& found) {
+    if (current == target) {
+        found = true;
+        return;
+    }
+
+    visited[current] = true;
+
+    for (int neighbor : graph[current]) {
+        if (!visited[neighbor] && neighbor != forbidden) {
+            dfs(graph, visited, neighbor, target, forbidden, found);
+        }
+    }
+}
+
+string findRoute(vector<vector<int>>& graph, int a, int b, int c) {
+    vector<bool> visited(graph.size(), false);
+    bool found = false;
+
+    dfs(graph, visited, a, b, c, found);
+
+    return found ? "YES" : "NO";
+}
+
+int main() {
+    int n, m, q;
+    cin >> n >> m >> q;
+
+    vector<vector<int>> graph(n + 1);  // +1 to handle 1-based indexing
+
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
+        graph[a].push_back(b);
+        graph[b].push_back(a);
+    }
+
+    for (int i = 0; i < q; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        cout << findRoute(graph, a, b, c) << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n + m + q)$, where $n$ is the number of cities, $m$ is the number of roads, and $q$ is the number of queries. The graph traversal takes $O(n + m)$ time, and we perform it for each query, resulting in $O(q)$ time complexity.

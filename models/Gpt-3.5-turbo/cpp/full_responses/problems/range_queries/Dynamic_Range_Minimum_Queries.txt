@@ -1,0 +1,84 @@
+To solve this problem efficiently, we can use a segment tree data structure.
+
+First, we need to build a segment tree for the given array of values. Each node of the segment tree will represent a range of values and store the minimum value within that range.
+
+The update operation can be implemented by traversing down the segment tree and updating the corresponding values. If the current node represents the range that contains the position k, we update its value with u. Then, we update the values of its children nodes, recursively.
+
+The query operation can be implemented by traversing down the segment tree and finding the minimum value within the given range [a, b]. If the current node represents a range that is completely outside the query range, we return a large value (e.g., INT_MAX). If the current node represents a range that is completely inside the query range, we return its stored value. Otherwise, we recursively query its children nodes and return the minimum value among them.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+void build_segment_tree(vector<int>& arr, vector<int>& seg_tree, int node, int start, int end) {
+    if (start == end) {
+        seg_tree[node] = arr[start];
+    } else {
+        int mid = (start + end) / 2;
+        build_segment_tree(arr, seg_tree, 2 * node, start, mid);
+        build_segment_tree(arr, seg_tree, 2 * node + 1, mid + 1, end);
+        seg_tree[node] = min(seg_tree[2 * node], seg_tree[2 * node + 1]);
+    }
+}
+
+void update_value(vector<int>& seg_tree, int node, int start, int end, int pos, int new_val) {
+    if (start == end) {
+        seg_tree[node] = new_val;
+    } else {
+        int mid = (start + end) / 2;
+        if (pos <= mid) {
+            update_value(seg_tree, 2 * node, start, mid, pos, new_val);
+        } else {
+            update_value(seg_tree, 2 * node + 1, mid + 1, end, pos, new_val);
+        }
+        seg_tree[node] = min(seg_tree[2 * node], seg_tree[2 * node + 1]);
+    }
+}
+
+int query_min(vector<int>& seg_tree, int node, int start, int end, int query_start, int query_end) {
+    if (query_start > end || query_end < start) {
+        return INT_MAX;
+    }
+    if (query_start <= start && query_end >= end) {
+        return seg_tree[node];
+    }
+    int mid = (start + end) / 2;
+    int left_min = query_min(seg_tree, 2 * node, start, mid, query_start, query_end);
+    int right_min = query_min(seg_tree, 2 * node + 1, mid + 1, end, query_start, query_end);
+    return min(left_min, right_min);
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    vector<int> seg_tree(4 * n); // Assuming maximum size of seg_tree
+
+    build_segment_tree(arr, seg_tree, 1, 0, n - 1);
+
+    while (q--) {
+        int type, a, b;
+        cin >> type >> a >> b;
+        if (type == 1) {
+            update_value(seg_tree, 1, 0, n - 1, a - 1, b);
+        } else if (type == 2) {
+            int min_val = query_min(seg_tree, 1, 0, n - 1, a - 1, b - 1);
+            cout << min_val << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+This code builds the segment tree in O(n log n) time and space complexity. Each update and query operation takes O(log n) time. Therefore, the overall time complexity of the solution is O((n+q) log n), which is efficient enough to handle the given constraints.

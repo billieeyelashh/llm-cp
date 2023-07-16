@@ -1,0 +1,35 @@
+To solve this problem efficiently, we can use the concept of a suffix array. A suffix array is an array that contains all the suffixes of a given string sorted in lexicographical order. Once we have the suffix array, we can easily find the kth smallest substring by indexing into the suffix array.
+
+Here's the step-by-step solution in Python:
+
+1. Read the input string and the value of k.
+2. Create a list of tuples, where each tuple contains the suffix and its starting index in the original string.
+3. Sort the list of tuples in lexicographical order.
+4. Iterate through the sorted list and concatenate all the suffixes to form the suffix array.
+5. Find the kth smallest substring by indexing into the suffix array.
+6. Print the kth smallest substring.
+
+Here's the Python code:
+
+```python
+# Step 1: Read input
+s = input().strip()
+k = int(input())
+
+# Step 2: Create list of tuples (suffix, starting index)
+suffixes = [(s[i:], i) for i in range(len(s))]
+
+# Step 3: Sort the list of tuples
+suffixes.sort()
+
+# Step 4: Concatenate all suffixes to form suffix array
+suffix_array = ''.join([suffix[0] for suffix in suffixes])
+
+# Step 5: Find kth smallest substring
+kth_smallest_substring = suffix_array[k-1:]
+
+# Step 6: Print result
+print(kth_smallest_substring)
+```
+
+This solution has a time complexity of O(n log n) because of the sorting step.

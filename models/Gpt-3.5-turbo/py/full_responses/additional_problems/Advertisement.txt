@@ -1,0 +1,29 @@
+To solve this problem optimally, we can use a two-pointer approach. We will iterate through the fence from left to right using two pointers: one at the leftmost board and one at the rightmost board.
+
+At each step, we calculate the area of the rectangle formed by the current left and right board heights and update our maximum area if necessary. Then, we move the pointer that corresponds to the shorter board inward, as this will allow us to potentially increase the area.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+heights = list(map(int, input().split()))
+
+left = 0
+right = n - 1
+max_area = 0
+
+while left < right:
+    width = right - left
+    height = min(heights[left], heights[right])
+    area = width * height
+    max_area = max(max_area, area)
+
+    if heights[left] < heights[right]:
+        left += 1
+    else:
+        right -= 1
+
+print(max_area)
+```
+
+The time complexity of this solution is O(n), where n is the width of the fence. This is because we iterate through the fence using two pointers, and each pointer moves at most n times. Therefore, the solution is efficient and optimal.

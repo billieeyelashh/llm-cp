@@ -1,0 +1,16 @@
+To solve this problem, we can iterate over each integer from 1 to the given number and count the divisors.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+for _ in range(n):
+    x = int(input())
+    divisors = 0
+    for i in range(1, x+1):
+        if x % i == 0:
+            divisors += 1
+    print(divisors)
+```
+
+In this solution, we first read the number of integers, `n`, from the input. Then, we iterate `n` times to read each integer `x`. For each `x`, we initialize a variable `divisors` to 0 and iterate from 1 to `x`. If `x` is divisible by the current number `i`, we increment the `divisors` count. Finally, we print the `divisors` count for each integer.

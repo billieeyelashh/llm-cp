@@ -1,0 +1,31 @@
+To solve this problem, we can iterate through each pair of integers in the list and check if they are coprime. If they are, we increment a counter by one.
+
+Here is the Python solution:
+
+```python
+def gcd(a, b):
+    # Euclidean algorithm to find the greatest common divisor
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def count_coprime_pairs(n, arr):
+    count = 0
+    
+    for i in range(n):
+        for j in range(i+1, n):
+            if gcd(arr[i], arr[j]) == 1:
+                count += 1
+    
+    return count
+
+# Read input
+n = int(input())
+arr = list(map(int, input().split()))
+
+# Compute and print the result
+result = count_coprime_pairs(n, arr)
+print(result)
+```
+
+This solution has a time complexity of O(n^2), where n is the number of elements in the list. It iterates through each pair of integers and checks if they are coprime using the gcd function.

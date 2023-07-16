@@ -1,0 +1,42 @@
+To solve this problem, we need to observe the pattern in the number spiral. We can see that the number at row $y$ and column $x$ can be represented as follows:
+
+If $x \ge y$, then the number is $x^2 - (y-1)$ if $x$ is even, or $(x-1)^2 + y$ if $x$ is odd.
+
+If $y > x$, then the number is $y^2 - (x-1)$ if $y$ is odd, or $(y-1)^2 + x$ if $y$ is even.
+
+Here's the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    
+    while (t--) {
+        int y, x;
+        cin >> y >> x;
+        
+        long long number;
+        if (x >= y) {
+            if (x % 2 == 0)
+                number = 1LL * x * x - (y - 1);
+            else
+                number = 1LL * (x - 1) * (x - 1) + y;
+        } else {
+            if (y % 2 == 1)
+                number = 1LL * y * y - (x - 1);
+            else
+                number = 1LL * (y - 1) * (y - 1) + x;
+        }
+        
+        cout << number << endl;
+    }
+    
+    return 0;
+}
+```
+
+This code takes the input for the number of tests, and for each test, it takes the input for the row and column. It then calculates the number based on the conditions mentioned above and prints it as output.

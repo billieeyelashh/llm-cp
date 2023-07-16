@@ -1,0 +1,72 @@
+To solve this problem efficiently, we can use a 2D prefix sum array. The prefix sum array will store the cumulative sum of trees encountered so far in each row and column.
+
+First, we initialize the prefix sum array with all zeros.
+
+Then, for each tree in the forest, we update the prefix sum array by adding 1 to the corresponding row and column.
+
+To answer the queries of type 2, we can use the prefix sum array to calculate the number of trees in the given rectangle. The formula is as follows:
+```
+number_of_trees = prefix_sum[y2][x2] - prefix_sum[y2][x1-1] - prefix_sum[y1-1][x2] + prefix_sum[y1-1][x1-1]
+```
+where `prefix_sum[y][x]` represents the cumulative sum of trees from (1,1) to (y,x).
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<vector<int>> forest(n + 1, vector<int>(n + 1, 0));
+    vector<vector<int>> prefix_sum(n + 1, vector<int>(n + 1, 0));
+
+    // Read the forest map
+    for (int i = 1; i <= n; i++) {
+        string row;
+        cin >> row;
+        for (int j = 1; j <= n; j++) {
+            if (row[j - 1] == '*') {
+                forest[i][j] = 1;
+            }
+        }
+    }
+
+    // Calculate prefix sum
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            prefix_sum[i][j] = forest[i][j] + prefix_sum[i - 1][j] + prefix_sum[i][j - 1] - prefix_sum[i - 1][j - 1];
+        }
+    }
+
+    // Process queries
+    while (q--) {
+        int type;
+        cin >> type;
+
+        if (type == 1) {
+            int y, x;
+            cin >> y >> x;
+            forest[y][x] = 1 - forest[y][x]; // Toggle the state of the square
+            for (int i = y; i <= n; i++) {
+                for (int j = x; j <= n; j++) {
+                    prefix_sum[i][j] += (forest[y][x] == 1) ? 1 : -1; // Update the prefix sum accordingly
+                }
+            }
+        } else {
+            int y1, x1, y2, x2;
+            cin >> y1 >> x1 >> y2 >> x2;
+            int number_of_trees = prefix_sum[y2][x2] - prefix_sum[y2][x1 - 1] - prefix_sum[y1 - 1][x2] + prefix_sum[y1 - 1][x1 - 1];
+            cout << number_of_trees << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2 + q), which is efficient enough to handle the given constraints.

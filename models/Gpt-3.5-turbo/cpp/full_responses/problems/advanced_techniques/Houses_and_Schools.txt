@@ -1,0 +1,54 @@
+To solve this problem optimally, we can use the concept of dynamic programming. Let's define a state $dp[i][j]$ as the minimum total walking distance if we establish $j$ schools for the first $i$ houses. Our goal is to find $dp[n][k]$.
+
+We can derive the recurrence relation as follows:
+
+$dp[i][j] = \min(dp[i][j], dp[l][j-1] + \text{distance}(l+1, i))$
+
+where $l$ ranges from $0$ to $i-1$.
+
+The base cases are:
+- $dp[0][0] = 0$
+- $dp[i][0] = \infty$ for $i > 0$
+
+To calculate the distance between two houses $a$ and $b$, we can use the formula $|a-b|$.
+
+Finally, our answer will be $dp[n][k]$.
+
+Here's the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> c(n + 1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> c[i];
+    }
+
+    vector<vector<int>> dp(n + 1, vector<int>(k + 1, INT_MAX));
+    dp[0][0] = 0;
+
+    for (int i = 1; i <= n; ++i) {
+        dp[i][0] = INT_MAX;
+        for (int j = 1; j <= k; ++j) {
+            for (int l = 0; l < i; ++l) {
+                dp[i][j] = min(dp[i][j], dp[l][j - 1] + abs(c[i] - c[l + 1]));
+            }
+        }
+    }
+
+    cout << dp[n][k] << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n^3 \cdot k)$, which is efficient enough to handle the given constraints.

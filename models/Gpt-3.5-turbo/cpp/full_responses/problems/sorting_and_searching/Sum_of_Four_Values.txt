@@ -1,0 +1,43 @@
+To solve this problem, we can use a nested loop approach. We iterate through all possible pairs of values in the array and for each pair, we check if there exists another pair that sums up to the target value. If we find such a pair, we output their positions and return.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    unordered_map<int, vector<int>> mp;
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        mp[arr[i]].push_back(i + 1);
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            int remaining = x - (arr[i] + arr[j]);
+            if (mp.count(remaining)) {
+                for (int k : mp[remaining]) {
+                    if (k != i + 1 && k != j + 1) {
+                        cout << i + 1 << " " << j + 1 << " " << k << " " << mp[remaining][0] << endl;
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+
+    cout << "IMPOSSIBLE" << endl;
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n^2) as we have nested loops iterating through all possible pairs. We use an unordered map to store the positions of values for quick lookup, which adds an additional space complexity of O(n).

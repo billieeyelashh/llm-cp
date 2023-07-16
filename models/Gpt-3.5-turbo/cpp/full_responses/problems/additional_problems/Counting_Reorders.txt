@@ -1,0 +1,50 @@
+To solve this problem, we can use dynamic programming to count the number of ways to reorder the characters of the string.
+
+Let's define a 2D array dp where dp[i][j] represents the number of ways to reorder the first i characters of the string such that the last character is j.
+
+We can iterate through the characters of the string and update the dp array based on the previous values. For each position i, we can calculate dp[i][j] by summing up the dp values for all possible previous characters, excluding j.
+
+Finally, the answer will be the sum of all dp[n][j], where n is the length of the string and j ranges from a to z.
+
+Here is the C++ code implementing this approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+int countWays(std::string s) {
+    int n = s.length();
+    std::vector<std::vector<int>> dp(n + 1, std::vector<int>(26, 0));
+
+    // Base case: there is only one way to reorder an empty string
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < 26; j++) {
+            // Exclude the case where the current character is the same as the last character
+            if (j != (s[i - 1] - 'a')) {
+                for (int k = 0; k < 26; k++) {
+                    dp[i][j] = (dp[i][j] + dp[i - 1][k]) % MOD;
+                }
+            }
+        }
+    }
+
+    int ans = 0;
+    for (int j = 0; j < 26; j++) {
+        ans = (ans + dp[n][j]) % MOD;
+    }
+    return ans;
+}
+
+int main() {
+    std::string s;
+    std::cin >> s;
+    std::cout << countWays(s) << std::endl;
+    return 0;
+}
+```
+
+This code has a time complexity of O(n * 26 * 26) and a space complexity of O(n * 26), which is efficient enough to handle the given constraints.

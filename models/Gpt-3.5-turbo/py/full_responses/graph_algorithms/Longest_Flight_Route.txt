@@ -1,0 +1,49 @@
+To solve this problem, we can use Depth First Search (DFS) algorithm to traverse the flight network and find the longest path from city 1 to city n.
+
+Here is the Python solution:
+
+```python
+from collections import defaultdict
+
+def dfs(graph, visited, city):
+    visited[city] = True
+    path = [city]
+
+    for neighbor in graph[city]:
+        if not visited[neighbor]:
+            path += dfs(graph, visited, neighbor)
+
+    return path
+
+def find_maximum_route(n, m, flights):
+    graph = defaultdict(list)
+
+    for a, b in flights:
+        graph[a].append(b)
+
+    visited = [False] * (n + 1)
+    route = dfs(graph, visited, 1)
+
+    if route[-1] == n:
+        return len(route), route
+    else:
+        return "IMPOSSIBLE"
+
+# Read input
+n, m = map(int, input().split())
+flights = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Find maximum route
+result = find_maximum_route(n, m, flights)
+
+# Print result
+if isinstance(result, tuple):
+    print(result[0])
+    print(" ".join(map(str, result[1])))
+else:
+    print(result)
+```
+
+The main idea is to use a graph data structure to represent the flight network. We initialize an empty graph and populate it with the flights information. Then, we use DFS to traverse the graph and find the longest path from city 1 to city n. The visited array is used to keep track of the visited cities during the DFS traversal.
+
+If the last city in the resulting path is city n, then we have found a valid route and we print the length of the route and the cities in order. Otherwise, if there is no valid route, we print "IMPOSSIBLE".

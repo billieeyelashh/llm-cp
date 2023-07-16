@@ -1,0 +1,52 @@
+To solve this problem optimally, we can follow these steps:
+
+1. Read the input values: the number of movies $n$, the number of club members $k$, and the movie start and end times.
+
+2. Sort the movies based on their end time in ascending order. This will allow us to prioritize movies that end earlier.
+
+3. Initialize a variable `count` to keep track of the maximum total number of movies watched.
+
+4. Initialize a priority queue or min-heap `end_times` to store the ending times of the movies.
+
+5. Iterate over each movie in the sorted order. For each movie, do the following:
+
+   - While the priority queue is not empty and the smallest element (representing the earliest ending time) is less than or equal to the starting time of the current movie, remove it from the priority queue.
+   
+   - If the size of the priority queue is less than the number of club members, increment `count` by 1 and add the ending time of the current movie to the priority queue.
+   
+6. Print the value of `count`, which represents the maximum total number of movies that can be watched entirely.
+
+Python Solution:
+
+```python
+import heapq
+
+# Step 1: Read input values
+n, k = map(int, input().split())
+movies = [list(map(int, input().split())) for _ in range(n)]
+
+# Step 2: Sort movies based on end time
+movies.sort(key=lambda x: x[1])
+
+# Step 3: Initialize variables
+count = 0
+end_times = []
+
+# Step 5: Iterate over each movie
+for movie in movies:
+    start_time, end_time = movie
+    
+    # Remove movies that have already ended
+    while end_times and end_times[0] <= start_time:
+        heapq.heappop(end_times)
+    
+    # If there are still available slots, increment count and add current movie's end time
+    if len(end_times) < k:
+        count += 1
+        heapq.heappush(end_times, end_time)
+
+# Step 6: Print maximum total number of movies
+print(count)
+```
+
+This solution has a time complexity of O(n log n) due to the sorting step and the heap operations.

@@ -1,0 +1,52 @@
+To solve this problem, we can use a sliding window approach. We will maintain a window of elements and keep track of the distinct elements within the window using a hashmap.
+
+Here is the step-by-step approach:
+
+1. Initialize variables: count = 0, left = 0
+2. Create an empty hashmap to store the frequency of each element.
+3. Iterate over the array from index 0 to n-1:
+   - Increment the frequency of the current element in the hashmap.
+   - If the number of distinct elements in the hashmap exceeds k, move the left pointer to the right until the number of distinct elements becomes k again.
+   - Add the length of the current subarray (right - left + 1) to the count.
+4. Print the count as the result.
+
+Here is the C++ code implementing this approach:
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    int count = 0, left = 0;
+    unordered_map<int, int> freq;
+    
+    for (int right = 0; right < n; right++) {
+        freq[arr[right]]++;
+        
+        while (freq.size() > k) {
+            freq[arr[left]]--;
+            if (freq[arr[left]] == 0) {
+                freq.erase(arr[left]);
+            }
+            left++;
+        }
+        
+        count += (right - left + 1);
+    }
+    
+    cout << count << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n) as we iterate over the array once, and a space complexity of O(k) to store the frequency of distinct elements.

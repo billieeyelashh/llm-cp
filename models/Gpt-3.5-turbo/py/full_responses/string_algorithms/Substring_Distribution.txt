@@ -1,0 +1,41 @@
+To solve this problem optimally, we can use the concept of a rolling hash. The rolling hash is a hashing technique that allows us to update the hash value of a substring efficiently as we move from one substring to the next.
+
+Here's the step-by-step approach:
+
+1. Initialize a set to keep track of distinct substrings.
+2. Initialize an empty dictionary to store the rolling hashes of substrings.
+3. Iterate over the string from left to right.
+4. For each position, iterate from the current position to the end of the string to generate all possible substrings of different lengths.
+5. Calculate the rolling hash of each substring and add it to the set of distinct substrings.
+6. Print the size of the set, which represents the number of distinct substrings for each length.
+
+Now let's implement this in Python:
+
+```python
+def count_distinct_substrings(string):
+    n = len(string)
+    distinct_substrings = set()
+    rolling_hashes = {}
+
+    for i in range(n):
+        hash_value = 0
+        p = 31  # prime number for hashing
+        power = 1
+
+        for j in range(i, n):
+            # Calculate the rolling hash of the current substring
+            hash_value = (hash_value + (ord(string[j]) - ord('a') + 1) * power) % (10**9 + 7)
+            power = (power * p) % (10**9 + 7)
+
+            distinct_substrings.add(hash_value)
+
+    # Print the number of distinct substrings for each length
+    for length in range(1, n + 1):
+        print(len(distinct_substrings))
+
+# Driver code
+string = input().strip()
+count_distinct_substrings(string)
+```
+
+This solution works in O(n^2) time complexity, where n is the length of the input string. This is because for each position, we iterate over all possible substrings starting from that position.

@@ -1,0 +1,39 @@
+To solve this problem, we can use the concept of cycle detection. We start with an empty list of rounds and iterate through the array. For each element, if it is not in its correct position, we create a new round.
+
+In each round, we perform swaps to bring the elements in their correct positions. To do this, we can swap the current element with the element at its correct position. After each swap, we update the positions of the swapped elements.
+
+Here is the Python code to solve the problem:
+
+```python
+def solve(n, arr):
+    rounds = []
+    positions = [0] * (n + 1)
+    
+    for i in range(n):
+        positions[arr[i]] = i + 1
+    
+    for i in range(1, n + 1):
+        while arr[i - 1] != i:
+            j = positions[i]
+            rounds.append([(i, j)])
+            arr[i - 1], arr[j - 1] = arr[j - 1], arr[i - 1]
+            positions[arr[i - 1]], positions[arr[j - 1]] = positions[arr[j - 1]], positions[arr[i - 1]]
+    
+    return rounds
+
+# Read input
+n = int(input())
+arr = list(map(int, input().split()))
+
+# Solve the problem
+rounds = solve(n, arr)
+
+# Print the output
+print(len(rounds))
+for round in rounds:
+    print(len(round))
+    for swap in round:
+        print(*swap)
+```
+
+This solution has a time complexity of O(n) because we iterate through the array once.

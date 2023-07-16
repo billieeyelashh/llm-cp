@@ -1,0 +1,38 @@
+To solve this problem, we can use the concept of derangements. 
+
+A derangement is a permutation of elements such that no element appears in its original position. In other words, it is a permutation without fixed points.
+
+Let's denote the number of derangements of $n$ elements as $D_n$. 
+
+We can calculate $D_n$ using the following recurrence relation:
+
+$D_n = (n-1) \times (D_{n-1} + D_{n-2})$
+
+Note that $D_1 = 0$ and $D_2 = 1$.
+
+The reasoning behind this recurrence relation is as follows: 
+- For the first element, there are $(n-1)$ choices to place it in a position other than its original position. 
+- If we place the first element in position $i$, then there are two possibilities:
+  - If the element in position $i$ is placed in the first position, then we need to find a derangement of the remaining $n-2$ elements.
+  - If the element in position $i$ is not placed in the first position, then we need to find a derangement of the remaining $n-1$ elements.
+- Therefore, the total number of derangements is $(n-1) \times (D_{n-1} + D_{n-2})$.
+
+Finally, we need to print the result modulo $10^9+7$.
+
+Here is the Python code implementing the solution:
+
+```python
+n = int(input())
+
+# Calculate derangements using dynamic programming
+MOD = int(1e9) + 7
+dp = [0] * (n + 1)
+dp[1] = 0
+dp[2] = 1
+for i in range(3, n + 1):
+    dp[i] = (i - 1) * (dp[i - 1] + dp[i - 2]) % MOD
+
+print(dp[n])
+```
+
+This solution has a time complexity of O(n) and will work efficiently for the given constraints.

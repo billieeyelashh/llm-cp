@@ -1,0 +1,48 @@
+To solve this problem, we can use a modified version of the Bellman-Ford algorithm. First, we need to create an adjacency list to represent the tunnels.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+const int INF = 1e9;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    
+    vector<int> coins(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> coins[i];
+    }
+    
+    vector<vector<int>> tunnels(n);
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
+        tunnels[a-1].push_back(b-1);
+    }
+    
+    vector<int> dp(n, -INF);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < tunnels[i].size(); ++j) {
+            int next_room = tunnels[i][j];
+            dp[next_room] = max(dp[next_room], dp[i] + coins[next_room]);
+        }
+    }
+    
+    int max_coins = *max_element(dp.begin(), dp.end());
+    cout << max_coins << endl;
+    
+    return 0;
+}
+```
+
+The algorithm starts by initializing an array `dp` to store the maximum number of coins that can be collected when starting from each room. We initialize all elements of `dp` to a very small value (negative infinity in this case) to indicate that we have not visited any room yet.
+
+Then, we iterate through each room and its tunnels. For each tunnel, we update the maximum number of coins in the next room by taking the maximum between the current maximum number of coins in the next room and the maximum number of coins in the current room plus the number of coins in the next room.
+
+Finally, we find the maximum number of coins in `dp` and print it as the result.
+
+The time complexity of this solution is O(n + m), where n is the number of rooms and m is the number of tunnels.

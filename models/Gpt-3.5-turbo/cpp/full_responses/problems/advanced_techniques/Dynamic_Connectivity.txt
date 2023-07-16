@@ -1,0 +1,78 @@
+To solve this problem efficiently, we can use the Disjoint-Set Union (DSU) data structure.
+
+First, let's initialize an array `parent` of size `n+1` to represent the parent of each node. Initially, each node is its own parent.
+
+For each edge, we will iterate through the list of edges and perform the following steps:
+1. Find the parent of node `a` and node `b` using the `find` function.
+2. If the parents are different, it means that `a` and `b` belong to different components. So, we merge the components by assigning the parent of `a` as the parent of `b`.
+3. Decrement the number of components by 1.
+
+After processing all the edges, we can print the initial number of components.
+
+For each event, we will iterate through the list of events and perform the following steps:
+1. If the event is of type 1 (create a new edge), we follow the same steps as above.
+2. If the event is of type 2 (remove an edge), we simply check if the parent of `a` and `b` are different. If they are, it means that `a` and `b` belong to different components and the number of components remains the same.
+
+Finally, after processing all the events, we can print the number of components after each event.
+
+Here's the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> parent;
+vector<int> components;
+
+int find(int x) {
+    if (parent[x] == x) {
+        return x;
+    }
+    return parent[x] = find(parent[x]);
+}
+
+void merge(int a, int b) {
+    a = find(a);
+    b = find(b);
+    if (a != b) {
+        parent[b] = a;
+        components[a]--;
+    }
+}
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    parent.resize(n + 1);
+    components.resize(n + 1, 1);
+
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        merge(a, b);
+    }
+
+    for (int i = 0; i <= k; i++) {
+        cout << components[find(1)] << " ";
+
+        if (i != k) {
+            int t, a, b;
+            cin >> t >> a >> b;
+            if (t == 1) {
+                merge(a, b);
+            }
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(m + k * α(n)), where α(n) is the inverse Ackermann function.

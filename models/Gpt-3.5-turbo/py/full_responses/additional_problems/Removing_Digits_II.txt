@@ -1,0 +1,33 @@
+To solve this problem, we can use a simple recursive approach. We will define a function `min_steps` that takes an integer `n` as input and returns the minimum number of steps required to make `n` equal to 0.
+
+In each step, we subtract any one-digit number that appears in `n`. We can iterate through each digit of `n` and call the `min_steps` function recursively with `n` minus that digit. We then take the minimum of all the recursive calls and add 1 to account for the current step.
+
+Here is the Python code for the solution:
+
+```python
+def min_steps(n):
+    # Base case: if n is 0, no steps are required
+    if n == 0:
+        return 0
+    
+    # Initialize minimum steps to a large value
+    min_steps = float('inf')
+    
+    # Iterate through each digit of n
+    for digit in str(n):
+        # Subtract the digit from n and call min_steps recursively
+        steps = 1 + min_steps(n - int(digit))
+        
+        # Update the minimum steps
+        min_steps = min(min_steps, steps)
+    
+    return min_steps
+
+# Read the input
+n = int(input())
+
+# Call the min_steps function and print the result
+print(min_steps(n))
+```
+
+This solution has a time complexity of O(log n) since in each recursive call, the number of digits in `n` decreases by at least 1.

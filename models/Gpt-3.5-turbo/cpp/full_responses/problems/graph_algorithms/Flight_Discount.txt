@@ -1,0 +1,68 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest path from Syrjälä to Metsälä. We will maintain a priority queue of vertices to visit next, sorted by the total cost to reach that vertex. Additionally, we will keep track of the minimum cost to reach each vertex.
+
+First, we initialize the minimum cost array with a large value for all vertices except Syrjälä, which we set to 0. We insert Syrjälä into the priority queue with a cost of 0.
+
+Then, while the priority queue is not empty, we extract the vertex with the minimum cost and iterate over its adjacent flights. For each flight, we calculate the total cost to reach the destination vertex by adding the flight cost to the minimum cost of the current vertex. If this total cost is less than the current minimum cost of the destination vertex, we update the minimum cost and insert the destination vertex into the priority queue.
+
+Finally, we return the minimum cost of Metsälä. However, we need to consider the case where we can use the discount coupon. To handle this, we will maintain an additional array to store the minimum cost after using the discount coupon for each vertex. Initially, this array is filled with a large value for all vertices except Syrjälä, which we set to 0. During the Dijkstra's algorithm, when we calculate the total cost to reach the destination vertex, we also check if using the discount coupon would result in a lower cost. If so, we update the minimum cost after using the discount coupon for the destination vertex.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+const int INF = 1e9;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<pair<int, int>>> adj(n + 1);
+    for (int i = 0; i < m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj[a].push_back({b, c});
+    }
+
+    vector<int> minCost(n + 1, INF);
+    vector<int> minCostAfterCoupon(n + 1, INF);
+    minCost[1] = minCostAfterCoupon[1] = 0;
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, 1});
+
+    while (!pq.empty()) {
+        int cost = pq.top().first;
+        int u = pq.top().second;
+        pq.pop();
+
+        if (cost > minCostAfterCoupon[u]) {
+            continue;
+        }
+
+        for (auto p : adj[u]) {
+            int v = p.first;
+            int flightCost = p.second;
+
+            int totalCost = cost + flightCost;
+            if (totalCost < minCost[v]) {
+                minCostAfterCoupon[v] = min(minCostAfterCoupon[v], minCost[v]);
+                minCost[v] = totalCost;
+                pq.push({totalCost, v});
+            } else if (totalCost < minCostAfterCoupon[v]) {
+                minCostAfterCoupon[v] = totalCost;
+                pq.push({totalCost, v});
+            }
+        }
+    }
+
+    cout << min(minCost[n], minCostAfterCoupon[n]) << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O((n + m)log n) due to the Dijkstra's algorithm using a priority queue.

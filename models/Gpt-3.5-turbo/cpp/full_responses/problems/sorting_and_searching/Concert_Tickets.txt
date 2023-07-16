@@ -1,0 +1,45 @@
+To solve this problem optimally, we can use a data structure called a multiset, which is implemented as a balanced binary search tree. 
+
+We will start by inserting all the ticket prices into the multiset. The multiset will automatically sort the prices in ascending order.
+
+Next, we will iterate through each customer. For each customer, we will find the ticket with the highest price that does not exceed the maximum price the customer is willing to pay. To do this, we will use the lower_bound function of the multiset, which returns an iterator pointing to the first element that is not less than the given value.
+
+If the iterator is equal to the end of the multiset or the price is greater than the maximum price, it means that there are no tickets available for the customer. In this case, we will print -1. Otherwise, we will print the price of the ticket and erase it from the multiset.
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    multiset<int> tickets;
+    for (int i = 0; i < n; i++) {
+        int h;
+        cin >> h;
+        tickets.insert(h);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int t;
+        cin >> t;
+
+        auto it = tickets.lower_bound(t);
+        if (it == tickets.end() || *it > t) {
+            cout << -1 << endl;
+        } else {
+            cout << *it << endl;
+            tickets.erase(it);
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O((n+m)\log n)$, as we perform $m$ queries on the multiset, each taking $O(\log n)$ time. The space complexity is $O(n)$ to store the ticket prices in the multiset.

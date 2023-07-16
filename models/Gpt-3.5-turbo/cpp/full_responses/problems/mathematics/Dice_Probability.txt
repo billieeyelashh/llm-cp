@@ -1,0 +1,43 @@
+To solve this problem, we can use dynamic programming. We will create a 2D table dp[n+1][6n+1], where dp[i][j] represents the probability of getting a sum of j using i dice throws.
+
+We initialize the base case dp[0][0] = 1, since the probability of getting a sum of 0 using 0 dice throws is 1.
+
+Next, we use a nested loop to fill in the remaining cells of the dp table. For each dice throw, we iterate over all possible outcomes (from 1 to 6). For each outcome, we update the probabilities in the dp table by adding the probabilities from the previous dice throw.
+
+Finally, we calculate the probability of getting a sum between a and b by summing up the probabilities in the dp table from column a to b (inclusive) for the last row.
+
+Here's the code in C++:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    int n, a, b;
+    cin >> n >> a >> b;
+
+    double dp[101][601] = {0};
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= 6 * i; j++) {
+            for (int k = 1; k <= min(j, 6); k++) {
+                dp[i][j] += dp[i - 1][j - k];
+            }
+            dp[i][j] /= 6;
+        }
+    }
+
+    double probability = 0;
+    for (int j = a; j <= b; j++) {
+        probability += dp[n][j];
+    }
+
+    cout << fixed << setprecision(6) << probability << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n^3), which is efficient enough to handle the given constraints.

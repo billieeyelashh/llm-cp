@@ -1,0 +1,20 @@
+We can solve this problem by iteratively applying the operations one by one. We start with the given string and for each operation, we reverse the substring specified by $a$ and $b$.
+
+Here is the Python solution:
+
+```python
+# Read input
+n, m = map(int, input().split())
+s = input()
+
+# Apply each operation
+for _ in range(m):
+    a, b = map(int, input().split())
+    # Reverse the substring from position a to position b
+    s = s[:a-1] + s[a-1:b][::-1] + s[b:]
+
+# Print the final string
+print(s)
+```
+
+The time complexity of this solution is $O(n \cdot m)$, where $n$ is the length of the string and $m$ is the number of operations.

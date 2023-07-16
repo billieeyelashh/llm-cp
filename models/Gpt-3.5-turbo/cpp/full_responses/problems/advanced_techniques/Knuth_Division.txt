@@ -1,0 +1,53 @@
+To solve this problem optimally, we can use a priority queue to always choose the subarray with the smallest sum for splitting. 
+
+Here's the step-by-step approach:
+1. Read the input values: $n$ and the array elements.
+2. Initialize a priority queue (min heap) and insert all the array elements into it.
+3. Initialize a variable `totalCost` to 0 to keep track of the minimum total cost.
+4. Repeat the following steps until the priority queue is empty:
+   1. Remove the smallest element from the priority queue and assign it to a variable `smallest`.
+   2. Remove the second smallest element from the priority queue and assign it to a variable `secondSmallest`.
+   3. Add `smallest + secondSmallest` to `totalCost`.
+   4. If the priority queue is not empty, insert `smallest + secondSmallest` back into the priority queue.
+5. Print the value of `totalCost`.
+
+Here's the C++ code:
+
+```cpp
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    priority_queue<int, vector<int>, greater<int>> pq; // min heap
+
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        pq.push(x);
+    }
+
+    long long totalCost = 0;
+
+    while (pq.size() > 1) {
+        int smallest = pq.top();
+        pq.pop();
+        int secondSmallest = pq.top();
+        pq.pop();
+
+        totalCost += smallest + secondSmallest;
+
+        pq.push(smallest + secondSmallest);
+    }
+
+    cout << totalCost << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) due to the use of the priority queue.

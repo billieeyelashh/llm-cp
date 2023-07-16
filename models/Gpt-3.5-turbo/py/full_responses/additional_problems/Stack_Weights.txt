@@ -1,0 +1,47 @@
+To solve this problem optimally, we can use a binary search approach. 
+
+We know that the coins have distinct weights, so we can assign a weight of 1 to the lightest coin and $n$ to the heaviest coin. 
+
+We will maintain two variables, left_weight and right_weight, which represent the cumulative weight of the coins in the left and right stacks respectively.
+
+Initially, both left_weight and right_weight are 0.
+
+For each move, we update the weight of the corresponding stack based on the weight of the moved coin. If the coin is moved to the left stack, we add its weight to left_weight. If the coin is moved to the right stack, we add its weight to right_weight.
+
+After each move, we compare left_weight and right_weight to determine which stack is heavier.
+
+If left_weight > right_weight, we print '>'. If left_weight < right_weight, we print '<'. Otherwise, if the weights are equal, we print '?'.
+
+Finally, we need to keep track of the range of possible weights for each stack. Initially, the left stack can have weights from 0 to n, and the right stack can have weights from 0 to n. 
+
+After each move, we update the range of possible weights based on the weight of the moved coin. If the coin is moved to the left stack, the range of possible weights for the left stack becomes [left_weight, left_weight + weight_of_moved_coin - 1]. If the coin is moved to the right stack, the range of possible weights for the right stack becomes [right_weight, right_weight + weight_of_moved_coin - 1].
+
+Python code:
+
+```python
+n = int(input())
+left_weight = 0
+right_weight = 0
+left_range = (0, n)
+right_range = (0, n)
+
+for _ in range(n):
+    c, s = map(int, input().split())
+    if s == 1:
+        weight_of_moved_coin = left_range[1] - left_range[0] + 1
+        left_weight += weight_of_moved_coin
+        left_range = (left_weight, left_weight + weight_of_moved_coin - 1)
+    else:
+        weight_of_moved_coin = right_range[1] - right_range[0] + 1
+        right_weight += weight_of_moved_coin
+        right_range = (right_weight, right_weight + weight_of_moved_coin - 1)
+
+    if left_range[1] < right_range[0]:
+        print('<')
+    elif right_range[1] < left_range[0]:
+        print('>')
+    else:
+        print('?')
+```
+
+This solution has a time complexity of O(n) as we only iterate over the moves once.

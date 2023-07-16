@@ -1,0 +1,43 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to calculate the number of subordinates for each employee. 
+
+First, we will construct an adjacency list representation of the company structure based on the given input. Each employee will be represented as a node in the graph, and their direct boss will be an adjacent node in the adjacency list.
+
+Next, we will perform a DFS traversal starting from the general director (employee 1). For each employee encountered during the traversal, we will increment a counter variable to keep track of the number of subordinates. Finally, we will store the count for each employee in a result array.
+
+Here is the Python code to solve the problem:
+
+```python
+def calculate_subordinates(n, bosses):
+    # Construct the adjacency list representation of the company structure
+    graph = [[] for _ in range(n + 1)]
+    for i in range(2, n + 1):
+        graph[bosses[i - 2]].append(i)
+
+    # Initialize the result array
+    subordinates = [0] * (n + 1)
+
+    # Perform DFS traversal starting from the general director (employee 1)
+    def dfs(node):
+        count = 1  # Include the current employee in the count
+        for neighbor in graph[node]:
+            count += dfs(neighbor)
+        subordinates[node] = count
+        return count
+
+    dfs(1)
+
+    # Return the result array without including the general director (employee 1)
+    return subordinates[1:]
+
+# Read the input
+n = int(input())
+bosses = list(map(int, input().split()))
+
+# Calculate the number of subordinates for each employee
+result = calculate_subordinates(n, bosses)
+
+# Print the result
+print(*result)
+```
+
+The time complexity of this solution is O(n), where n is the number of employees.

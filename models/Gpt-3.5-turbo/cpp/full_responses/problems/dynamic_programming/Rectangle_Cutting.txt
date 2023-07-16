@@ -1,0 +1,57 @@
+To solve this problem, we can use a dynamic programming approach. We will create a 2D array dp[a][b] to store the minimum number of moves required to cut an $a \times b$ rectangle into squares.
+
+First, we handle the base cases:
+- If a = b, then the rectangle is already a square and no cuts are needed, so dp[a][b] = 0.
+- If a = 1 or b = 1, then the rectangle can be cut into squares of size 1x1, so dp[a][b] = a + b - 1.
+
+For other cases, we iterate through all possible sizes for the first cut. We can cut either horizontally or vertically, so we consider both cases:
+- For horizontal cuts, we iterate from 1 to a/2. For each cut size i, we calculate the minimum number of moves required for the two resulting rectangles: dp[i][b] and dp[a-i][b]. The total number of moves is 1 + dp[i][b] + dp[a-i][b].
+- For vertical cuts, we iterate from 1 to b/2. For each cut size j, we calculate the minimum number of moves required for the two resulting rectangles: dp[a][j] and dp[a][b-j]. The total number of moves is 1 + dp[a][j] + dp[a][b-j].
+
+We take the minimum number of moves from both cases as the final result for dp[a][b].
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+
+    vector<vector<int>> dp(a+1, vector<int>(b+1));
+
+    // Base cases
+    for (int i = 1; i <= a; i++) {
+        dp[i][i] = 0;
+        dp[i][1] = i;
+    }
+    for (int j = 1; j <= b; j++) {
+        dp[1][j] = j;
+    }
+
+    // Dynamic programming
+    for (int i = 2; i <= a; i++) {
+        for (int j = 2; j <= b; j++) {
+            dp[i][j] = INT_MAX;
+            for (int k = 1; k <= i/2; k++) {
+                dp[i][j] = min(dp[i][j], 1 + dp[k][j] + dp[i-k][j]);
+            }
+            for (int k = 1; k <= j/2; k++) {
+                dp[i][j] = min(dp[i][j], 1 + dp[i][k] + dp[i][j-k]);
+            }
+        }
+    }
+
+    cout << dp[a][b] << endl;
+
+    return 0;
+}
+```
+
+The code first reads the input values of a and b. It then initializes the dp array with base cases. Finally, it iterates through the dp array to calculate the minimum number of moves and prints the result.
+
+This solution has a time complexity of O(a * b * min(a, b)), which is efficient enough for the given constraints.

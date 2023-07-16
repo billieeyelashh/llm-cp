@@ -1,0 +1,43 @@
+To solve this problem optimally, we need to find the common length of all the sticks. 
+
+First, we calculate the sum of all the lengths of the sticks. Let's call it `total_length`. 
+
+Then, we find the average length of the sticks by dividing `total_length` by the number of sticks `n`. Let's call it `average_length`. 
+
+Now, for each stick, we calculate the absolute difference between its length and `average_length`, and sum up these differences. This will give us the minimum total cost.
+
+Here is the C++ code for this solution:
+
+```cpp
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    int total_length = 0;
+    for (int i = 0; i < n; i++) {
+        int length;
+        cin >> length;
+        total_length += length;
+    }
+    
+    int average_length = total_length / n;
+    
+    int total_cost = 0;
+    for (int i = 0; i < n; i++) {
+        int length;
+        cin >> length;
+        total_cost += abs(length - average_length);
+    }
+    
+    cout << total_cost << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n) as we need to iterate over all the sticks twice.

@@ -1,0 +1,50 @@
+To solve this problem optimally, we can use a prefix xor array. We will iterate through the array and calculate the xor sum of all values up to the current index. This prefix xor array will help us quickly calculate the xor sum of any range [a,b] in O(1) time complexity.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Calculate the prefix xor array
+    vector<int> prefixXor(n);
+    prefixXor[0] = arr[0];
+    for (int i = 1; i < n; i++) {
+        prefixXor[i] = prefixXor[i-1] ^ arr[i];
+    }
+
+    // Process the queries
+    for (int i = 0; i < q; i++) {
+        int a, b;
+        cin >> a >> b;
+
+        // If the range starts from the beginning of the array, the xor sum is the prefix xor value at index b
+        if (a == 1) {
+            cout << prefixXor[b-1] << endl;
+        }
+        // Otherwise, the xor sum is the xor of prefix xor values at index a-2 and b-1
+        else {
+            cout << (prefixXor[a-2] ^ prefixXor[b-1]) << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+The code first reads the input values and stores them in an array. It then calculates the prefix xor array by iterating through the array and keeping track of the xor sum of all values up to the current index.
+
+For each query, the code checks if the range starts from the beginning of the array. If it does, it directly prints the prefix xor value at index b-1. Otherwise, it calculates the xor sum by taking the xor of prefix xor values at index a-2 and b-1.
+
+This solution has a time complexity of O(n) for preprocessing the prefix xor array and O(q) for processing the queries, resulting in an overall time complexity of O(n+q).

@@ -1,0 +1,34 @@
+To solve this problem, we can use dynamic programming. We will create an $(n+1) \times (n+1)$ grid to keep track of the number of possible paths to reach each square.
+
+Let's define a 2D list `dp` where `dp[i][j]` represents the number of possible paths to reach square $(i,j)$.
+
+We will initialize `dp[1][1] = 1` since there is only one way to reach the top-left square.
+
+Then, for each square $(i,j)$ in the grid, we will update `dp[i][j]` as follows:
+- If there is a trap at square $(i,j)$, we set `dp[i][j]` to 0.
+- Otherwise, `dp[i][j]` is the sum of the number of possible paths to reach square $(i-1,j)$ and the number of possible paths to reach square $(i,j-1)`. In other words, `dp[i][j] = dp[i-1][j] + dp[i][j-1]`.
+
+Finally, the answer will be `dp[n][n]`.
+
+Here is the Python code that implements the above solution:
+
+```python
+n, m = map(int, input().split())
+traps = [list(map(int, input().split())) for _ in range(m)]
+
+mod = 10**9 + 7
+
+dp = [[0] * (n+1) for _ in range(n+1)]
+dp[1][1] = 1
+
+for i in range(1, n+1):
+    for j in range(1, n+1):
+        if [i,j] in traps:
+            dp[i][j] = 0
+        else:
+            dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % mod
+
+print(dp[n][n])
+```
+
+This solution has a time complexity of $O(n^2)$ and a space complexity of $O(n^2)$.

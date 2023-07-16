@@ -1,0 +1,31 @@
+To solve this problem optimally, we can follow the following steps:
+
+1. Read the input values: the size of the array, `n`, and the array elements, `arr`.
+2. Initialize an empty list, `reversals`, to store the reversals.
+3. Iterate from `i` = `n` to 1:
+   - If the element at index `i` is not in its correct position, find the index `j` where it should be in the sorted array.
+   - If `j` is not equal to `i`, add the reversal `(j, i)` to the `reversals` list.
+   - Reverse the subarray from index `j` to `i` in the `arr`.
+4. Print the number of reversals, `k`, which is the length of the `reversals` list.
+5. Print each reversal in a separate line.
+
+Here is the Python implementation of the solution:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+reversals = []
+for i in range(n, 0, -1):
+    if arr[i-1] != i:
+        j = arr.index(i)
+        if j != i-1:
+            reversals.append((j+1, i))
+        arr = arr[:j] + arr[j:i][::-1] + arr[i:]
+
+print(len(reversals))
+for reversal in reversals:
+    print(*reversal)
+```
+
+This solution has a time complexity of O(n^2) due to the `index` function used inside the loop. However, since the maximum value of `n` is 2 * 10^5, it will run efficiently within the given constraints.

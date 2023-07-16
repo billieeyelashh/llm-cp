@@ -1,0 +1,43 @@
+To solve this problem, we can use dynamic programming. Let's define a 2D array `dp` of size `(n+1) x (n+1)` to store the number of paths to each square.
+
+The base case is `dp[1][1] = 1`, since there is only one way to reach the top-left square.
+
+For each square `(i, j)` in the grid, we can reach it from either the square above `(i-1, j)` or the square to the left `(i, j-1)`. However, if `(i, j)` is a trap, we cannot reach it at all.
+
+Therefore, the recursive formula for `dp[i][j]` is:
+```
+if (i, j) is a trap:
+    dp[i][j] = 0
+else:
+    dp[i][j] = dp[i-1][j] + dp[i][j-1]
+```
+
+Finally, the answer is `dp[n][n]`.
+
+Here is the Python code:
+
+```python
+MOD = 10**9+7
+
+def count_paths(n, m, traps):
+    dp = [[0] * (n+1) for _ in range(n+1)]
+    dp[1][1] = 1
+
+    for i in range(1, n+1):
+        for j in range(1, n+1):
+            if (i, j) in traps:
+                dp[i][j] = 0
+            else:
+                dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % MOD
+
+    return dp[n][n]
+
+# Read input
+n, m = map(int, input().split())
+traps = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Compute and print the answer
+print(count_paths(n, m, traps))
+```
+
+This solution has a time complexity of O(n^2) and a space complexity of O(n^2), where n is the size of the grid.

@@ -1,0 +1,26 @@
+To solve this problem, we can follow a greedy approach. We will sort the movies based on their ending times in ascending order. Then, we will iterate through the sorted list and select each movie as long as its starting time is after the ending time of the previously selected movie.
+
+Here is the Python solution:
+
+```python
+n = int(input())
+movies = []
+
+for _ in range(n):
+    a, b = map(int, input().split())
+    movies.append((b, a))  # store ending time first for sorting
+
+movies.sort()  # sort movies based on ending time
+
+count = 0
+end_time = 0
+
+for movie in movies:
+    if movie[1] >= end_time:
+        count += 1
+        end_time = movie[0]
+
+print(count)
+```
+
+The time complexity of this solution is O(n log n) due to the sorting operation.

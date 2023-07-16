@@ -1,0 +1,93 @@
+To solve this problem optimally, we can use a Union-Find data structure.
+We will initialize a Union-Find data structure where each element is its own parent initially.
+
+For each operation:
+1. Find the root parent for both elements involved in the swap.
+2. If the root parents are different, merge them by making one the parent of the other.
+3. If the root parents are the same, it means they are already in the same group, so no rounds are affected.
+
+After each swap, the number of rounds is equal to the number of groups in the Union-Find data structure.
+So, we will keep track of the number of groups after each swap and print it as the output.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class UnionFind {
+private:
+    vector<int> parent;
+    vector<int> size;
+    int components;
+
+public:
+    UnionFind(int n) {
+        parent.resize(n + 1);
+        size.resize(n + 1, 1);
+        components = n;
+
+        for (int i = 1; i <= n; ++i) {
+            parent[i] = i;
+        }
+    }
+
+    int findRoot(int x) {
+        if (parent[x] == x) {
+            return x;
+        }
+
+        return parent[x] = findRoot(parent[x]);
+    }
+
+    void merge(int x, int y) {
+        int rootX = findRoot(x);
+        int rootY = findRoot(y);
+
+        if (rootX != rootY) {
+            if (size[rootX] < size[rootY]) {
+                swap(rootX, rootY);
+            }
+
+            parent[rootY] = rootX;
+            size[rootX] += size[rootY];
+            components--;
+        }
+    }
+
+    int getComponents() {
+        return components;
+    }
+};
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> arr(n + 1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> arr[i];
+    }
+
+    UnionFind uf(n);
+
+    vector<int> rounds(m);
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
+
+        uf.merge(arr[a], arr[b]);
+        rounds[i] = uf.getComponents();
+    }
+
+    for (int round : rounds) {
+        cout << round << endl;
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n + m * α(n)), where α(n) is the inverse Ackermann function and can be considered constant for practical purposes.

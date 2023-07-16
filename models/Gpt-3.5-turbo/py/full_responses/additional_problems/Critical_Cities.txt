@@ -1,0 +1,51 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to find the critical cities. 
+
+First, we need to represent the flight connections using an adjacency list. We can create an empty list of size $n+1$ (since the cities are numbered from $1$ to $n$) and for each flight connection $(a, b)$, we add $b$ to the adjacency list of $a$. 
+
+Next, we initialize a boolean array called "visited" of size $n+1$ to keep track of the visited cities during the DFS traversal. We also initialize an empty set called "critical_cities" to store the critical cities.
+
+Then, we start the DFS traversal from Syrjälä (city $1$). In each recursive call of the DFS function, we mark the current city as visited and iterate through all its adjacent cities. If an adjacent city has not been visited before, we recursively call the DFS function on that city. 
+
+After the DFS traversal, we iterate through all the cities and check if each city has been visited. If a city has not been visited, it means it is not reachable from Syrjälä and therefore cannot be a critical city. Otherwise, we add the city to the "critical_cities" set.
+
+Finally, we print the size of the "critical_cities" set followed by the sorted list of critical cities.
+
+Here is the Python code implementing the above algorithm:
+
+```python
+def dfs(city, adj_list, visited):
+    visited[city] = True
+    for neighbor in adj_list[city]:
+        if not visited[neighbor]:
+            dfs(neighbor, adj_list, visited)
+
+n, m = map(int, input().split())
+adj_list = [[] for _ in range(n+1)]
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    adj_list[a].append(b)
+
+visited = [False] * (n+1)
+critical_cities = set()
+
+dfs(1, adj_list, visited)
+
+for city in range(1, n+1):
+    if not visited[city]:
+        continue
+    is_critical = True
+    for neighbor in adj_list[city]:
+        if not visited[neighbor]:
+            is_critical = False
+            break
+    if is_critical:
+        critical_cities.add(city)
+
+critical_cities = sorted(critical_cities)
+
+print(len(critical_cities))
+print(*critical_cities)
+```
+
+The time complexity of this solution is $O(n + m)$, where $n$ is the number of cities and $m$ is the number of flight connections.

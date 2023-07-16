@@ -1,0 +1,47 @@
+To count the number of paths from node 1 to node n with exactly k edges, we can use dynamic programming. Let's define dp[i][j] as the number of paths starting from node 1 and ending at node i using exactly j edges.
+
+We can initialize dp[1][0] = 1, since there is exactly one path from node 1 to itself with 0 edges.
+
+Then, for each node i from 1 to n and for each edge j from 1 to k, we can calculate dp[i][j] as the sum of dp[u][j-1] for all nodes u such that there is an edge from u to i.
+
+Finally, the answer will be dp[n][k]. We can output this value modulo 10^9+7 to handle large inputs.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<vector<int>> adj(n + 1);
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+    }
+
+    vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
+    dp[1][0] = 1;
+
+    for (int j = 1; j <= k; j++) {
+        for (int i = 1; i <= n; i++) {
+            for (int u : adj[i]) {
+                dp[i][j] = (dp[i][j] + dp[u][j - 1]) % MOD;
+            }
+        }
+    }
+
+    cout << dp[n][k] << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(nmk), which is efficient enough to handle the given constraints.

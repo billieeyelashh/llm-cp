@@ -1,0 +1,72 @@
+To solve this problem, we can use recursion and divide the tree into smaller sub-trees based on the preorder and inorder traversals.
+
+First, let's define a function `build_postorder` that takes in the preorder and inorder lists as input and returns the postorder traversal list.
+
+Here is the step-by-step approach:
+
+1. Base case: If the length of the preorder list is 0, return an empty list.
+
+2. Create a variable `root` and set it as the first element of the preorder list.
+
+3. Find the index `idx` of the `root` element in the inorder list.
+
+4. Recursively call `build_postorder` on the left subtree by passing the sublist of the preorder list from index 1 to `idx` (excluding `idx`) and the sublist of the inorder list from index 0 to `idx` (excluding `idx`).
+
+5. Recursively call `build_postorder` on the right subtree by passing the sublist of the preorder list from index `idx + 1` to the end and the sublist of the inorder list from index `idx + 1` to the end.
+
+6. Concatenate the results of the left and right subtree traversals with the `root` element, and return the resulting list.
+
+Now, let's implement the solution in Python:
+
+```python
+def build_postorder(preorder, inorder):
+    if len(preorder) == 0:
+        return []
+    
+    root = preorder[0]
+    idx = inorder.index(root)
+    
+    left_subtree_preorder = preorder[1:idx+1]
+    left_subtree_inorder = inorder[:idx]
+    right_subtree_preorder = preorder[idx+1:]
+    right_subtree_inorder = inorder[idx+1:]
+    
+    left_subtree_postorder = build_postorder(left_subtree_preorder, left_subtree_inorder)
+    right_subtree_postorder = build_postorder(right_subtree_preorder, right_subtree_inorder)
+    
+    return left_subtree_postorder + right_subtree_postorder + [root]
+
+# Read input
+n = int(input())
+preorder = list(map(int, input().split()))
+inorder = list(map(int, input().split()))
+
+# Call the function and print the result
+postorder = build_postorder(preorder, inorder)
+print(' '.join(map(str, postorder)))
+```
+
+This solution has a time complexity of O(n^2) because finding the index of the root element in the inorder list takes O(n) time, and this operation is called recursively for each subtree. However, we can optimize it to O(n) by using a dictionary to store the indices of the elements in the inorder list.
+
+```python
+def build_postorder(preorder, inorder):
+    def build_postorder_helper(pre_start, pre_end, in_start, in_end):
+        if pre_start > pre_end:
+            return []
+        
+        root = preorder[pre_start]
+        idx = index_map[root]
+        
+        left_subtree_size = idx - in_start
+        right_subtree_size = in_end - idx
+        
+        left_subtree_postorder = build_postorder_helper(pre_start + 1, pre_start + left_subtree_size, in_start, idx - 1)
+        right_subtree_postorder = build_postorder_helper(pre_start + left_subtree_size + 1, pre_end, idx + 1, in_end)
+        
+        return left_subtree_postorder + right_subtree_postorder + [root]
+    
+    index_map = {val: idx for idx, val in enumerate(inorder)}
+    return build_postorder_helper(0, n - 1, 0, n - 1)
+```
+
+Now, the solution has a time complexity of O(n) as we can find the index of each element in the inorder list in O(1) time using the dictionary.

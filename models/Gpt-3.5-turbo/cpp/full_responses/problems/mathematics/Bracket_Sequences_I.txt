@@ -1,0 +1,44 @@
+To solve this problem, we can use dynamic programming.
+
+Let's define a function $dp[i]$ as the number of valid bracket sequences of length $i$. We need to find the value of $dp[n]$.
+
+We can observe that for any valid bracket sequence of length $i$, the first bracket can either be an opening bracket '(' or a closing bracket ')'. 
+
+If the first bracket is an opening bracket '(', then the last bracket must be a closing bracket ')'. In this case, there are $dp[i-2]$ valid bracket sequences of length $i$.
+
+If the first bracket is a closing bracket ')', then we need to find the position of the corresponding opening bracket. Let's say this position is $j$. The bracket sequence from position $2$ to $j-1$ must be a valid bracket sequence. Also, the bracket sequence from position $j+1$ to $i-1$ must be a valid bracket sequence. In this case, there are $dp[j-2]$ * $dp[i-j-1]$ valid bracket sequences of length $i$.
+
+To calculate $dp[i]$, we can use the above two cases and sum up the values for all possible positions of the first closing bracket.
+
+The base case is $dp[0] = 1$ (an empty string is a valid bracket sequence).
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1000000007;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> dp(n+1);
+    dp[0] = 1;
+
+    for (int i = 2; i <= n; i += 2) {
+        for (int j = 2; j <= i; j += 2) {
+            dp[i] = (dp[i] + 1LL * dp[j-2] * dp[i-j]) % MOD;
+        }
+    }
+
+    cout << dp[n] << endl;
+
+    return 0;
+}
+```
+
+This code has a time complexity of $O(n^2)$ and a space complexity of $O(n)$.

@@ -1,0 +1,38 @@
+To solve this problem, we can use dynamic programming. Let's define an array dp of size n, where dp[i] represents the number of ways to reach level i.
+
+We can initialize dp[1] = 1, since there is only one way to reach level 1 (starting from level 1 itself).
+
+Then, for each teleporter (a, b), we can update dp[b] by adding dp[a] to it. This is because if we can reach level a, then we can also reach level b by taking the teleporter from a to b.
+
+Finally, the answer will be dp[n], which represents the number of ways to reach level n.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> dp(n + 1, 0);
+    dp[1] = 1;
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        dp[b] = (dp[b] + dp[a]) % MOD;
+    }
+
+    cout << dp[n] << endl;
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(m), where m is the number of teleporters.

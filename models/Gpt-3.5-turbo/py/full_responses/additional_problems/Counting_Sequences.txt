@@ -1,0 +1,51 @@
+To solve this problem, we can use the concept of permutations with repetitions. 
+
+First, we need to understand that the number of sequences is equivalent to the number of ways we can arrange the integers between 1 and k in a sequence of length n. 
+
+To calculate the number of sequences, we can use the formula for permutations with repetitions:
+\[ P(n, k) = k^n \]
+
+However, this formula considers all possible permutations, including those where not all integers between 1 and k appear at least once. To account for this, we need to subtract the number of sequences where at least one integer from 1 to k is missing.
+
+To find the number of sequences where at least one integer is missing, we can use the principle of inclusion-exclusion. We first calculate the number of sequences where only a subset of the k integers appear. Then, we subtract this value from the total number of sequences.
+
+To calculate the number of sequences where only a subset of the k integers appear, we can use the same formula as before, but with the number of integers reduced to the size of the subset. For a subset of size i, the number of sequences is \( (k-i)^n \).
+
+Using the principle of inclusion-exclusion, we can calculate the final answer as follows:
+
+\[
+P(n, k) - \binom{k}{1}(k-1)^n + \binom{k}{2}(k-2)^n - \ldots + (-1)^{k-1}\binom{k}{k-1}(k-(k-1))^n
+\]
+
+Now, let's implement this solution in Python:
+
+```python
+MOD = int(1e9) + 7
+
+def count_sequences(n, k):
+    result = pow(k, n, MOD)  # Calculate k^n % MOD
+    for i in range(1, k):
+        coeff = pow(-1, i) * comb(k, i)  # Calculate (-1)^i * binomial coefficient
+        result += coeff * pow(k - i, n, MOD)  # Add/subtract the term to the result
+        result %= MOD  # Take modulo after each step to avoid overflow
+    return result
+
+def comb(n, r):
+    # Calculate binomial coefficient (n choose r) % MOD using dynamic programming
+    C = [[0] * (r + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        for j in range(min(i, r) + 1):
+            if j == 0 or j == i:
+                C[i][j] = 1
+            else:
+                C[i][j] = (C[i-1][j-1] + C[i-1][j]) % MOD
+    return C[n][r]
+
+# Read input
+n, k = map(int, input().split())
+
+# Count sequences and print the result
+print(count_sequences(n, k))
+```
+
+This solution has a time complexity of O(k^2).

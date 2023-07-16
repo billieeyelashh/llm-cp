@@ -1,0 +1,34 @@
+We can solve this problem efficiently using the concept of prefix sums.
+
+First, we calculate the prefix sum array, which stores the cumulative sum of the original array. This can be done in linear time.
+
+Next, for each query of type 1, we update the prefix sum array to reflect the increase in the given range. To do this, we add the update value to the prefix sum at index a-1 and subtract the update value from the prefix sum at index b. This ensures that the increase is applied only within the specified range.
+
+Finally, for each query of type 2, we can directly find the value at position k by subtracting the prefix sum at index k-1 from the prefix sum at index k.
+
+Here is the Python code implementing this solution:
+
+```python
+n, q = map(int, input().split())
+array = list(map(int, input().split()))
+
+# Calculate prefix sum array
+prefix_sum = [0] * (n+1)
+for i in range(1, n+1):
+    prefix_sum[i] = prefix_sum[i-1] + array[i-1]
+
+# Process queries
+for _ in range(q):
+    query = list(map(int, input().split()))
+    if query[0] == 1:
+        a, b, u = query[1:]
+        # Update prefix sum array
+        prefix_sum[a-1] += u
+        prefix_sum[b] -= u
+    else:
+        k = query[1]
+        # Find value at position k
+        print(prefix_sum[k] - prefix_sum[k-1])
+```
+
+The time complexity of this solution is O(n+q), which is efficient enough to handle the given constraints.

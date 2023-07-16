@@ -1,0 +1,75 @@
+To solve this problem, we can use a depth-first search (DFS) approach. 
+
+First, we need to construct an adjacency list to represent the given tree. Then, we can start the DFS from any node and calculate the size of each subtree rooted at that node. We can also keep track of the maximum subtree size encountered during the DFS.
+
+During the DFS, for each node, we can calculate the size of its subtree by recursively visiting all its children and summing up their subtree sizes. We can store this information in an array called "subtree_size" where subtree_size[u] represents the size of the subtree rooted at node u.
+
+After calculating the subtree sizes, for each node u, we can check if its subtree size is greater than or equal to n/2. If it is, then u cannot be a centroid because there exists a subtree with more than n/2 nodes. Otherwise, u can be a centroid.
+
+Finally, we can iterate through all the nodes and check if each node is a centroid. We can print the first node we encounter that satisfies the condition.
+
+Here is the C++ code that implements this approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int N = 2e5 + 5;
+
+vector<int> adj[N];
+int subtree_size[N];
+
+int dfs(int u, int parent) {
+    subtree_size[u] = 1;
+    int max_subtree_size = 0;
+    
+    for (int v : adj[u]) {
+        if (v != parent) {
+            subtree_size[u] += dfs(v, u);
+            max_subtree_size = max(max_subtree_size, subtree_size[v]);
+        }
+    }
+    
+    max_subtree_size = max(max_subtree_size, n - subtree_size[u]);
+    return subtree_size[u];
+}
+
+int find_centroid(int u, int parent, int n) {
+    int max_subtree_size = 0;
+    int centroid = u;
+    
+    for (int v : adj[u]) {
+        if (v != parent && subtree_size[v] > n / 2) {
+            return find_centroid(v, u, n);
+        }
+        
+        if (v != parent && subtree_size[v] > max_subtree_size) {
+            max_subtree_size = subtree_size[v];
+            centroid = v;
+        }
+    }
+    
+    return centroid;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    for (int i = 0; i < n - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    
+    dfs(1, 0);
+    cout << find_centroid(1, 0, n) << endl;
+    
+    return 0;
+}
+```
+
+This code has a time complexity of O(n), where n is the number of nodes in the tree.

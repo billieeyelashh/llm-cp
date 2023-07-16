@@ -1,0 +1,48 @@
+To solve this problem efficiently, we can use a technique called prefix sums.
+
+First, we need to preprocess the array to calculate the prefix sums. Let's create an array `prefix` of size n+1, where `prefix[i]` will store the sum of the first i elements of the input array.
+
+Next, for each query, we can calculate the minimum number of operations required to make the subarray increasing by comparing the value at position a with the sum of the previous elements in the subarray (i.e., `prefix[a-1]`). If the value at position a is smaller than the prefix sum, we need to add the difference between them to make it increasing. Otherwise, no operations are required.
+
+Here is the C++ code that implements this approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> arr(n + 1);
+    vector<long long> prefix(n + 1);
+
+    // Read the input array
+    for (int i = 1; i <= n; i++) {
+        cin >> arr[i];
+    }
+
+    // Calculate the prefix sums
+    for (int i = 1; i <= n; i++) {
+        prefix[i] = prefix[i - 1] + arr[i];
+    }
+
+    // Process the queries
+    while (q--) {
+        int a, b;
+        cin >> a >> b;
+
+        // Calculate the minimum number of operations
+        int operations = arr[a] - prefix[a - 1];
+
+        // Print the result
+        cout << operations << endl;
+    }
+
+    return 0;
+}
+```
+
+The overall time complexity of this solution is O(n + q), which is efficient enough to handle the given constraints.

@@ -1,0 +1,23 @@
+We can solve this problem efficiently using the prefix sum technique. First, we calculate the prefix sum of the given array.
+
+To calculate the prefix sum, we iterate through the array and store the sum of values up to the current index at each position in a separate array. Let's call this array "prefix".
+
+Using the prefix array, we can answer each query in constant time. For each query (a, b), we can simply return the difference between prefix[b] and prefix[a-1]. If a is 1, we don't need to subtract prefix[a-1] since it will be zero.
+
+Here is the Python implementation:
+
+```python
+n, q = map(int, input().split())
+values = list(map(int, input().split()))
+
+prefix = [0] * (n+1)
+for i in range(1, n+1):
+    prefix[i] = prefix[i-1] + values[i-1]
+
+for _ in range(q):
+    a, b = map(int, input().split())
+    result = prefix[b] - prefix[a-1] if a > 1 else prefix[b]
+    print(result)
+```
+
+This solution has a time complexity of O(n+q) and will work efficiently for the given constraints.

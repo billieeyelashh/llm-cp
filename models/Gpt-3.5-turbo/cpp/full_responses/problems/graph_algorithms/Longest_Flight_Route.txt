@@ -1,0 +1,69 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to find the longest path from Syrjälä to Lehmälä.
+
+First, we'll represent the flight network using an adjacency list. We'll create a vector of vectors, where each element represents a city and its corresponding flights.
+
+Next, we'll initialize a visited array to keep track of the cities we have visited during the DFS. Initially, all cities are marked as not visited.
+
+We'll start the DFS from Syrjälä (city 1). For each unvisited neighbor of the current city, we'll recursively explore the flights until we reach Lehmälä (city n). During the DFS, we'll keep track of the path by storing the cities in a separate vector.
+
+To find the maximum number of cities on the route, we can simply take the length of the path vector. If the path vector is empty after the DFS, it means there is no valid path from Syrjälä to Lehmälä, and we'll output "IMPOSSIBLE".
+
+Here's the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> flights;
+vector<bool> visited;
+vector<int> path;
+
+void dfs(int city) {
+    visited[city] = true;
+    path.push_back(city);
+
+    if (city == flights.size() - 1) {
+        // Reached Lehmälä, print the path and return
+        cout << path.size() << endl;
+        for (int c : path) {
+            cout << c << " ";
+        }
+        cout << endl;
+        return;
+    }
+
+    for (int neighbor : flights[city]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor);
+            visited[neighbor] = false;  // Reset the visited flag for backtracking
+            path.pop_back();  // Remove the last city from the path for backtracking
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    flights.resize(n);
+    visited.resize(n);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        flights[a - 1].push_back(b - 1);
+    }
+
+    dfs(0);  // Start DFS from Syrjälä (city 1)
+
+    if (path.empty()) {
+        cout << "IMPOSSIBLE" << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m), where n is the number of cities and m is the number of flights.

@@ -1,0 +1,34 @@
+To calculate $a^b \mod (10^9+7)$ efficiently, we can use the modular exponentiation algorithm. This algorithm reduces the time complexity from $O(b)$ to $O(\log b)$.
+
+Here is the Python solution:
+
+```python
+MOD = 10**9 + 7
+
+def modular_exponentiation(a, b):
+    result = 1
+    while b > 0:
+        if b % 2 == 1:
+            result = (result * a) % MOD
+        a = (a * a) % MOD
+        b //= 2
+    return result
+
+n = int(input())
+for _ in range(n):
+    a, b = map(int, input().split())
+    print(modular_exponentiation(a, b))
+```
+
+Explanation:
+1. We define a constant `MOD` as $10^9+7$.
+2. The `modular_exponentiation` function takes two parameters `a` and `b` and calculates $a^b \mod (10^9+7)$ using the modular exponentiation algorithm.
+3. Inside the function, we initialize `result` as 1.
+4. We iterate while `b` is greater than 0.
+5. If `b` is odd (i.e., `b % 2 == 1`), we update `result` by multiplying it with `a` modulo `MOD`.
+6. We update `a` by squaring it modulo `MOD`.
+7. We divide `b` by 2.
+8. Finally, we return the `result`.
+9. In the main program, we read the number of calculations `n` from input.
+10. We iterate `n` times and for each iteration, we read `a` and `b` from input.
+11. We call the `modular_exponentiation` function with `a` and `b` as arguments and print the result.

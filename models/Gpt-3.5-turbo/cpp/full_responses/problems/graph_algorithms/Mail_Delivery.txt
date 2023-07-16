@@ -1,0 +1,67 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to find a route that satisfies the given conditions.
+
+First, we need to represent the city as an adjacency list. We can use a vector of vectors to store the streets connecting each crossing. 
+
+Next, we initialize an empty vector called "route" to store the crossings in the order we visit them. We also initialize a boolean array called "visited" to keep track of the crossings we have already visited during the DFS.
+
+We start the DFS from the post office crossing (crossing 1). For each unvisited street connected to the current crossing, we recursively explore it by calling the DFS function on the other crossing of the street. 
+
+During the DFS, we mark each visited crossing as true in the "visited" array and add it to the "route" vector.
+
+Finally, after the DFS is complete, if the size of the "route" vector is equal to the number of crossings, we print the crossings in the "route" vector. Otherwise, we print "IMPOSSIBLE" as there is no valid route.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<bool> visited;
+vector<int> route;
+
+void dfs(int crossing) {
+    visited[crossing] = true;
+    route.push_back(crossing);
+
+    for (int i = 0; i < adj[crossing].size(); i++) {
+        int nextCrossing = adj[crossing][i];
+
+        if (!visited[nextCrossing]) {
+            dfs(nextCrossing);
+            route.push_back(crossing); // backtrack after exploring the next crossing
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    adj.resize(n + 1);
+    visited.resize(n + 1);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    dfs(1);
+
+    if (route.size() == n) {
+        for (int i = 0; i < route.size(); i++) {
+            cout << route[i] << " ";
+        }
+    } else {
+        cout << "IMPOSSIBLE";
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n + m), where n is the number of crossings and m is the number of streets.

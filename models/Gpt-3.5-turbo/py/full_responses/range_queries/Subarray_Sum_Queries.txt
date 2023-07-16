@@ -1,0 +1,37 @@
+To solve this problem, we can use the Kadane's algorithm to find the maximum subarray sum efficiently. 
+
+First, we initialize two variables: `max_sum` and `current_sum` to keep track of the maximum sum found so far and the sum of the current subarray.
+
+Then, for each update, we update the corresponding element in the array, and if the updated element is part of the current subarray, we update `current_sum` by subtracting the previous value and adding the new value. 
+
+After each update, we update `max_sum` if `current_sum` is greater than `max_sum`. Finally, we print `max_sum` after each update.
+
+Here is the Python implementation:
+
+```python
+n, m = map(int, input().split())
+arr = list(map(int, input().split()))
+
+max_sum = 0
+current_sum = 0
+
+for i in range(n):
+    current_sum = max(arr[i], current_sum + arr[i])
+    max_sum = max(max_sum, current_sum)
+    print(max_sum)
+
+for _ in range(m):
+    k, x = map(int, input().split())
+    k -= 1
+    arr[k] = x
+
+    if current_sum > 0:
+        current_sum += x - arr[k]
+    else:
+        current_sum = max(x, current_sum + x)
+
+    max_sum = max(max_sum, current_sum)
+    print(max_sum)
+```
+
+This solution has a time complexity of O(n + m), where n is the size of the array and m is the number of updates.

@@ -1,0 +1,51 @@
+To solve this problem, we can use dynamic programming to count the number of ways to divide the numbers into two sets of equal sum.
+
+First, we need to calculate the total sum of the numbers from 1 to n. Let's call this sum "totalSum".
+
+Next, we initialize a 2D array "dp" of size (n+1) x (totalSum+1), where dp[i][j] represents the number of ways to divide the numbers from 1 to i into two sets of sum j.
+
+We can set the base cases as follows:
+- dp[0][0] = 1, since there is one way to divide an empty set into two empty sets.
+- For i > 0, dp[i][0] = 1, since there is one way to divide any set into an empty set and itself.
+
+Then, we can iterate through each number from 1 to n and calculate the values of dp[i][j] based on the previous values:
+- If j < i, then dp[i][j] = dp[i-1][j], since we cannot include the number i in the set of sum j.
+- Otherwise, dp[i][j] = dp[i-1][j] + dp[i-1][j-i], since we can either exclude the number i or include it in the set of sum j.
+
+Finally, the answer to the problem will be dp[n][totalSum/2], since we want to divide the numbers into two sets of equal sum.
+
+Here is the C++ implementation of the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    int totalSum = (n * (n + 1)) / 2;
+
+    // Initialize dp array
+    std::vector<std::vector<int>> dp(n + 1, std::vector<int>(totalSum + 1, 0));
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= totalSum; j++) {
+            dp[i][j] = dp[i - 1][j];
+            if (j >= i) {
+                dp[i][j] = (dp[i][j] + dp[i - 1][j - i]) % MOD;
+            }
+        }
+    }
+
+    int answer = dp[n][totalSum / 2];
+    std::cout << answer << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n^2) and will run efficiently within the given constraints.

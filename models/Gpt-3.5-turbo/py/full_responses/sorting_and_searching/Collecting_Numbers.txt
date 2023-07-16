@@ -1,0 +1,23 @@
+To solve this problem, we can iterate through the array and keep track of the maximum number encountered so far. Whenever we encounter the current maximum number, we increment a counter variable representing the number of rounds.
+
+Here is the Python solution:
+
+```python
+def collect_numbers(n, array):
+    max_num = 0
+    rounds = 0
+    for num in array:
+        max_num = max(max_num, num)
+        if max_num == rounds + 1:
+            rounds += 1
+    return rounds
+
+# Read input
+n = int(input())
+array = list(map(int, input().split()))
+
+# Call the function and print the result
+print(collect_numbers(n, array))
+```
+
+This solution has a time complexity of O(n), where n is the size of the array.

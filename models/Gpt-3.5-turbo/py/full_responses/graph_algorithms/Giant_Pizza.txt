@@ -1,0 +1,34 @@
+To solve this problem optimally, we can use a simple approach. We will initialize an array of size $m$ with all elements set to "+" (indicating that all toppings are included in the pizza). Then, for each family member's wish, we will update the array accordingly.
+
+Here is the Python solution:
+
+```python
+def solve(n, m, wishes):
+    toppings = ["+"] * m
+
+    for i in range(n):
+        for wish in wishes[i]:
+            sign, topping = wish[0], int(wish[1:])
+            if sign == "+":
+                toppings[topping-1] = "+"
+            else:
+                toppings[topping-1] = "-"
+
+    return "".join(toppings)
+
+# Read input
+n, m = map(int, input().split())
+wishes = []
+for _ in range(n):
+    wishes.append(input().split())
+
+# Solve and print the result
+result = solve(n, m, wishes)
+print(result)
+```
+
+The `solve` function takes the number of family members `n`, the number of toppings `m`, and the list of wishes as input. It initializes an array `toppings` with all elements set to "+". Then, for each family member's wish, it updates the `toppings` array accordingly. Finally, it returns the joined string of the `toppings` array.
+
+In the main part, we read the input, store the wishes in a list, and call the `solve` function. Finally, we print the result.
+
+This solution has a time complexity of O(n*m), where n is the number of family members and m is the number of toppings.

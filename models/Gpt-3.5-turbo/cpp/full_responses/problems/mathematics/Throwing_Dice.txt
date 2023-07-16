@@ -1,0 +1,45 @@
+To solve this problem, we can use dynamic programming to calculate the number of ways to get a sum of $n$ by throwing dice.
+
+Let's define a function $dp(n)$ which calculates the number of ways to get a sum $n$ by throwing dice. We can express $dp(n)$ in terms of $dp(n-1), dp(n-2), \ldots, dp(n-6)$ as follows:
+
+$dp(n) = dp(n-1) + dp(n-2) + \ldots + dp(n-6)$
+
+The base cases for this function are $dp(0) = 1$ and $dp(i) = 0$ for all negative values of $i$.
+
+We can calculate the values of $dp(i)$ iteratively starting from $dp(0)$ up to $dp(n)$. Finally, we return the value of $dp(n)$.
+
+Here is the C++ code to solve this problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+int countWays(int n) {
+    std::vector<int> dp(n + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= 6; ++j) {
+            if (i - j >= 0) {
+                dp[i] = (dp[i] + dp[i - j]) % MOD;
+            }
+        }
+    }
+
+    return dp[n];
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    int ways = countWays(n);
+    std::cout << ways << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$ and a space complexity of $O(n)$. It can handle the given constraints efficiently.

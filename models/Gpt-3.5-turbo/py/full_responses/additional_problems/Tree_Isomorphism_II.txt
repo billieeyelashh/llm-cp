@@ -1,0 +1,59 @@
+To solve this problem, we can use a recursive approach. We will start by defining a function `isomorphic(t1, t2)` that takes in two trees `t1` and `t2` as input and returns whether they are isomorphic or not.
+
+In the `isomorphic` function, we will perform the following steps:
+
+1. If the number of nodes in `t1` is not equal to the number of nodes in `t2`, return False.
+2. If the number of children of the root node in `t1` is not equal to the number of children of the root node in `t2`, return False.
+3. If both trees have only one node, return True (as a single node can be considered isomorphic to itself).
+4. For each child of the root node in `t1`, find a corresponding child in `t2` such that the sub-trees rooted at these children are isomorphic. If no such corresponding child is found, return False.
+5. Repeat step 4 for each child of the root node in `t2`.
+
+Finally, we can call the `isomorphic` function for each test case in the main code.
+
+Here is the Python implementation:
+
+```python
+def isomorphic(t1, t2):
+    if len(t1) != len(t2):
+        return False
+    
+    if len(t1[1]) != len(t2[1]):
+        return False
+    
+    if len(t1) == 2 and len(t2) == 2:
+        return True
+    
+    for i in range(1, len(t1)):
+        found = False
+        for j in range(1, len(t2)):
+            if isomorphic(t1[t1[i]], t2[t2[j]]):
+                found = True
+                break
+        if not found:
+            return False
+        
+    return True
+
+# Main code
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    t1 = [[] for _ in range(n+1)]
+    t2 = [[] for _ in range(n+1)]
+    
+    for _ in range(n-1):
+        u, v = map(int, input().split())
+        t1[u].append(v)
+    
+    for _ in range(n-1):
+        u, v = map(int, input().split())
+        t2[u].append(v)
+    
+    if isomorphic(t1, t2):
+        print("YES")
+    else:
+        print("NO")
+```
+
+The time complexity of this solution is O(n^2) since we are iterating over each node in both trees and recursively checking their sub-trees.

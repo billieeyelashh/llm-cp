@@ -1,0 +1,25 @@
+To solve this problem, we can use a greedy approach. We will sort the weights of the people in non-decreasing order and then assign them to the elevator in a way that minimizes the number of rides.
+
+Here is the Python code for the solution:
+
+```python
+n, x = map(int, input().split())
+weights = list(map(int, input().split()))
+
+weights.sort()  # Sort the weights in non-decreasing order
+
+rides = 0
+left = 0  # Index of the heaviest person on the left side of the elevator
+right = n - 1  # Index of the lightest person on the right side of the elevator
+
+while left <= right:
+    if weights[left] + weights[right] <= x:
+        # If the weights of the heaviest and lightest person can fit in one ride
+        left += 1  # Move the index of the heaviest person towards the right
+    right -= 1  # Move the index of the lightest person towards the left
+    rides += 1  # Increment the number of rides
+
+print(rides)
+```
+
+The time complexity of this solution is O(nlogn) due to the sorting step.

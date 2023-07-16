@@ -1,0 +1,86 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest path from Syrjälä to Lehmälä while keeping track of the number of parcels carried along the way.
+
+First, we initialize an adjacency list to represent the routes between cities. Each entry in the adjacency list will contain the destination city, the maximum number of parcels that can be carried, and the cost per parcel.
+
+Next, we initialize a priority queue to store the cities we will visit. The priority is determined by the total cost to reach the city.
+
+We start by adding Syrjälä to the priority queue with a cost of 0 and the number of parcels carried as 0.
+
+While the priority queue is not empty, we extract the city with the minimum cost from the priority queue. Let's call this city "current".
+
+For each adjacent city to "current", we update the number of parcels carried and the cost to reach that city if it results in a lower cost than previously recorded. We then add the adjacent city to the priority queue with the updated cost and number of parcels carried.
+
+Finally, once we reach Lehmälä, we check if the number of parcels carried is equal to k. If it is, we return the cost to reach Lehmälä. Otherwise, we return -1 as there is no solution.
+
+Here is the C++ code implementing the above algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <limits>
+
+using namespace std;
+
+const int INF = numeric_limits<int>::max();
+
+struct Route {
+    int destination;
+    int maxParcels;
+    int costPerParcel;
+};
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<vector<Route>> adjList(n);
+    for (int i = 0; i < m; ++i) {
+        int a, b, r, c;
+        cin >> a >> b >> r >> c;
+        adjList[a-1].push_back({b-1, r, c});
+    }
+
+    vector<vector<int>> dp(n, vector<int>(k + 1, INF));
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<>> pq;
+    pq.push({0, {0, 0}});
+    dp[0][0] = 0;
+
+    while (!pq.empty()) {
+        int cost = pq.top().first;
+        int city = pq.top().second.first;
+        int parcels = pq.top().second.second;
+        pq.pop();
+
+        if (cost > dp[city][parcels]) {
+            continue;
+        }
+
+        for (const auto& route : adjList[city]) {
+            int nextCity = route.destination;
+            int nextParcels = parcels + 1;
+            int nextCost = cost + route.costPerParcel;
+
+            if (nextParcels <= k && nextCost < dp[nextCity][nextParcels]) {
+                dp[nextCity][nextParcels] = nextCost;
+                pq.push({nextCost, {nextCity, nextParcels}});
+            }
+        }
+    }
+
+    int minCost = INF;
+    for (int i = 0; i <= k; ++i) {
+        minCost = min(minCost, dp[n-1][i]);
+    }
+
+    if (minCost == INF) {
+        cout << -1 << endl;
+    } else {
+        cout << minCost << endl;
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(mlog(nk)) since Dijkstra's algorithm runs in O((n+m)logn) and we run it k times. The space complexity is O(nk) to store the dynamic programming table.

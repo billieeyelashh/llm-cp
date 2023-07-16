@@ -1,0 +1,33 @@
+Solution:
+
+To solve this problem efficiently, we can use the concept of Josephus problem. 
+
+The Josephus problem is a theoretical problem related to a certain counting-out game. In this problem, given n people standing in a circle, we count from 1 to k and remove the k-th person from the circle. This process continues until only one person is left.
+
+The key observation is that when we remove the k-th person from a circle of size n, the next circle will have size n-1 and the position of the k-th person will shift by k positions. Therefore, the position of the k-th person in the original circle can be found by shifting the position in the smaller circle by k positions.
+
+Based on this observation, we can solve each query efficiently by finding the position of the k-th child in a circle of size n. The formula for finding the position is as follows:
+
+position = (k - 1) % n + 1
+
+This formula gives us the position of the k-th child in the original circle of size n. We can apply this formula to each query to find the answer.
+
+Here is the Python implementation of the solution:
+
+```python
+# read the number of queries
+q = int(input())
+
+# iterate through each query
+for _ in range(q):
+    # read the values of n and k
+    n, k = map(int, input().split())
+    
+    # calculate the position of the k-th child in the original circle
+    position = (k - 1) % n + 1
+    
+    # print the answer for the query
+    print(position)
+```
+
+This solution has a time complexity of O(q), where q is the number of queries.

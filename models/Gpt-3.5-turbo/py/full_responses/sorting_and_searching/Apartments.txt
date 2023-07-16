@@ -1,0 +1,38 @@
+To solve this problem, we can use a two-pointer approach. We will sort the desired apartment sizes and the apartment sizes in ascending order. Then, we will iterate through both lists with two pointers, comparing the sizes.
+
+Here is the step-by-step solution in Python:
+
+```python
+# Read input
+n, m, k = map(int, input().split())
+desired_sizes = list(map(int, input().split()))
+apartment_sizes = list(map(int, input().split()))
+
+# Sort both lists
+desired_sizes.sort()
+apartment_sizes.sort()
+
+# Initialize variables
+i = 0  # Pointer for desired_sizes
+j = 0  # Pointer for apartment_sizes
+count = 0  # Counter for the number of applicants who will get an apartment
+
+# Iterate through both lists
+while i < n and j < m:
+    # Check if the current apartment size is within the desired range
+    if abs(desired_sizes[i] - apartment_sizes[j]) <= k:
+        count += 1
+        i += 1
+        j += 1
+    # If the current apartment size is too small, move to the next apartment size
+    elif desired_sizes[i] - apartment_sizes[j] > k:
+        j += 1
+    # If the current apartment size is too large, move to the next desired size
+    else:
+        i += 1
+
+# Print the result
+print(count)
+```
+
+The time complexity of this solution is O(n log n + m log m), where n is the number of applicants and m is the number of apartments. This is because we need to sort both the desired_sizes list and the apartment_sizes list. The overall space complexity is O(n + m) to store the input and output lists.

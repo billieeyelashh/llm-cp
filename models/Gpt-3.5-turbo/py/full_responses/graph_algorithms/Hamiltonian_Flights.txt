@@ -1,0 +1,49 @@
+To solve this problem, we can use backtracking to generate all possible routes and count the valid ones.
+
+We will maintain a visited array to keep track of the cities we have already visited. Initially, all cities are unvisited.
+
+Starting from Syrjälä (city 1), we will explore all possible flights from the current city to the next unvisited city. If a flight is available, we mark the next city as visited and recursively explore the next city.
+
+Once we reach Lehmälä (city n), we have completed one possible route. We increment our count of valid routes and backtrack by unmarking the last visited city.
+
+Finally, we return the count of valid routes modulo $10^9+7$.
+
+Here's the Python code:
+
+```python
+MOD = int(1e9) + 7
+
+def count_routes(n, m, flights):
+    count = 0
+    visited = [False] * n
+
+    def backtrack(city):
+        nonlocal count
+        if city == n:
+            count += 1
+            return
+        visited[city] = True
+        for next_city in range(n):
+            if not visited[next_city] and flights[city][next_city]:
+                backtrack(next_city)
+        visited[city] = False
+
+    flights = [[False] * n for _ in range(n)]
+    for a, b in flights:
+        flights[a - 1][b - 1] = True
+
+    backtrack(0)
+    return count % MOD
+
+# Read input
+n, m = map(int, input().split())
+flights = []
+for _ in range(m):
+    a, b = map(int, input().split())
+    flights.append((a, b))
+
+# Count routes and print the result
+print(count_routes(n, m, flights))
+```
+
+The time complexity of this solution is $O(n! \cdot n)$, where $n!$ represents the number of possible routes to explore and $n$ is the time complexity to check flight availability. This solution should work efficiently for the given constraints.

@@ -1,0 +1,32 @@
+To solve this problem, we can simulate the game using a deque data structure in Python. A deque is a double-ended queue that allows for efficient insertion and removal of elements from both ends.
+
+Here is the Python solution:
+
+```python
+from collections import deque
+
+# Read the input
+n = int(input())
+
+# Create a deque with numbers from 1 to n
+circle = deque(range(1, n+1))
+
+# Initialize an empty list to store the removal order
+removal_order = []
+
+# Simulate the game until the circle is empty
+while circle:
+    # Remove the first child from the circle and append it to the removal order
+    removal_order.append(circle.popleft())
+    
+    # If the circle is not empty, move the second child to the end
+    if circle:
+        circle.append(circle.popleft())
+
+# Print the removal order
+print(' '.join(map(str, removal_order)))
+```
+
+The solution uses a deque to represent the circle of children. In each iteration, we remove the first child from the circle and append it to the removal order list. Then, if the circle is not empty, we move the second child to the end of the circle. We repeat this process until the circle is empty.
+
+Finally, we print the removal order by joining the elements of the removal_order list with spaces.

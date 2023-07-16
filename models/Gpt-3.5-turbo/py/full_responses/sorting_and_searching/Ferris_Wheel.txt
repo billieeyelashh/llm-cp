@@ -1,0 +1,33 @@
+To solve this problem optimally, we can use a greedy approach.
+
+First, we need to sort the weights of the children in non-decreasing order.
+
+Next, we can iterate through the sorted list of weights and pair up the children with the highest and lowest weights. If their combined weight does not exceed $x$, we can put them in the same gondola. Otherwise, we put the child with the highest weight in a separate gondola.
+
+We repeat this process until we have paired up or assigned all the children to gondolas.
+
+Finally, the minimum number of gondolas needed will be equal to the number of iterations (or steps) taken.
+
+Here is the Python code implementing this approach:
+
+```python
+n, x = map(int, input().split())
+weights = list(map(int, input().split()))
+
+weights.sort()  # Sort the weights in non-decreasing order
+
+# Initialize variables
+gondola_count = 0
+left = 0
+right = n - 1
+
+while left <= right:
+    if weights[left] + weights[right] <= x:
+        left += 1  # Pair up the child with the lowest weight and the child with the highest weight
+    right -= 1  # Put the child with the highest weight in a separate gondola
+    gondola_count += 1
+
+print(gondola_count)
+```
+
+This solution has a time complexity of $O(n \log n)$ due to the sorting operation.

@@ -1,0 +1,39 @@
+To solve this problem, we can use the "Expand Around Center" approach. This approach involves iterating through each character in the string and treating it as the center of a possible palindrome. We will expand around each center to check if the substring is a palindrome and keep track of the longest palindrome found so far.
+
+Here is the Python solution:
+
+```python
+def longest_palindrome(s):
+    n = len(s)
+    start = end = 0
+
+    for i in range(n):
+        # Check for odd-length palindromes
+        left = right = i
+        while left >= 0 and right < n and s[left] == s[right]:
+            if right - left + 1 > end - start + 1:
+                start = left
+                end = right
+            left -= 1
+            right += 1
+
+        # Check for even-length palindromes
+        left = i
+        right = i + 1
+        while left >= 0 and right < n and s[left] == s[right]:
+            if right - left + 1 > end - start + 1:
+                start = left
+                end = right
+            left -= 1
+            right += 1
+
+    return s[start:end+1]
+```
+
+The main function `longest_palindrome` takes a string `s` as input and returns the longest palindrome found in the string. It initializes `start` and `end` variables to keep track of the start and end indices of the longest palindrome found so far.
+
+The algorithm iterates through each character in the string (`i` represents the center of the possible palindrome). It then expands around the center to check for both odd-length and even-length palindromes. If a longer palindrome is found, it updates the `start` and `end` indices.
+
+Finally, it returns the substring from `start` to `end` (inclusive), which is the longest palindrome in the string.
+
+The time complexity of this solution is O(n^2) as we iterate through each character and expand around each center.

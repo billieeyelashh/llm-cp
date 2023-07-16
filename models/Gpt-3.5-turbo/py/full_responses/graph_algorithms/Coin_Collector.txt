@@ -1,0 +1,25 @@
+To solve this problem, we can use a dynamic programming approach. We will create an array dp of size n to store the maximum number of coins we can collect starting from each room.
+
+First, we initialize dp[i] with the number of coins in room i for all i from 1 to n.
+
+Then, for each tunnel (a, b), we update dp[b] to be the maximum between dp[b] and dp[a] + number of coins in room b.
+
+Finally, we output the maximum value in dp.
+
+Here is the Python implementation:
+
+```python
+n, m = map(int, input().split())
+coins = list(map(int, input().split()))
+
+dp = coins.copy()
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    dp[b-1] = max(dp[b-1], dp[a-1] + coins[b-1])
+
+max_coins = max(dp)
+print(max_coins)
+```
+
+This solution has a time complexity of O(n + m) as we process each room and tunnel once.

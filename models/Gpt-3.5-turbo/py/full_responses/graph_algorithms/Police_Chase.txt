@@ -1,0 +1,59 @@
+To solve this problem, we can use a graph traversal algorithm to find all the connected crossings from the bank to the harbor. Then, we can remove any street that connects these crossings to disconnect the bank and the harbor.
+
+Here is the Python code to solve this problem:
+
+```python
+from collections import deque
+
+def find_connected_crossings(n, m, streets):
+    graph = [[] for _ in range(n)]
+    for a, b in streets:
+        graph[a-1].append(b-1)
+        graph[b-1].append(a-1)
+    
+    visited = [False] * n
+    visited[0] = True
+    queue = deque([0])
+    connected_crossings = set()
+    
+    while queue:
+        crossing = queue.popleft()
+        connected_crossings.add(crossing)
+        
+        for neighbor in graph[crossing]:
+            if not visited[neighbor]:
+                visited[neighbor] = True
+                queue.append(neighbor)
+    
+    return connected_crossings
+
+def find_minimum_streets(n, m, streets):
+    connected_crossings = find_connected_crossings(n, m, streets)
+    disconnected_streets = []
+    
+    for a, b in streets:
+        if a-1 not in connected_crossings or b-1 not in connected_crossings:
+            disconnected_streets.append((a, b))
+    
+    return disconnected_streets
+
+# Read inputs
+n, m = map(int, input().split())
+streets = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Find minimum streets
+disconnected_streets = find_minimum_streets(n, m, streets)
+
+# Print the result
+print(len(disconnected_streets))
+for a, b in disconnected_streets:
+    print(a, b)
+```
+
+This code first defines a function `find_connected_crossings` that performs a breadth-first search to find all the crossings connected to the bank. It takes the number of crossings `n`, the number of streets `m`, and the list of streets as input, and returns a set of connected crossings.
+
+Then, the function `find_minimum_streets` uses `find_connected_crossings` to find the connected crossings and iterates through the streets to find the disconnected streets. It returns a list of disconnected streets.
+
+Finally, the main part reads the inputs, calls `find_minimum_streets`, and prints the result.
+
+Note that there may be multiple valid solutions, so the order of the disconnected streets in the output may vary.

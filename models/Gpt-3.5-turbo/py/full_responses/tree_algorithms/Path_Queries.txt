@@ -1,0 +1,46 @@
+To solve this problem, we can use the concept of a binary indexed tree (BIT) or Fenwick tree. A BIT is a data structure that allows us to efficiently update elements and calculate prefix sums in an array.
+
+First, we will create a list called `tree` of size `n+1` to represent the BIT. Each index `i` in the `tree` list will store the sum of values from index `i - (i & -i) + 1` to index `i`. Initially, all elements of the `tree` list will be set to zero.
+
+Next, we will define two helper functions. The `update` function will update the value at index `i` in the `tree` list, adding `x` to the current value. The `query` function will calculate the sum of values from index `1` to index `i` in the `tree` list.
+
+To process the queries, we will iterate through each query. If the query is of type 1, we will update the value at index `s` in the `tree` list. If the query is of type 2, we will calculate the sum of values on the path from the root to node `s` using the `query` function and print the result.
+
+Here is the Python code that implements this solution:
+
+```python
+def update(tree, i, x):
+    while i < len(tree):
+        tree[i] += x
+        i += i & -i
+
+def query(tree, i):
+    result = 0
+    while i > 0:
+        result += tree[i]
+        i -= i & -i
+    return result
+
+n, q = map(int, input().split())
+values = list(map(int, input().split()))
+edges = [list(map(int, input().split())) for _ in range(n-1)]
+queries = [list(map(int, input().split())) for _ in range(q)]
+
+tree = [0] * (n+1)
+
+# Build the tree
+for a, b in edges:
+    update(tree, b, values[b-1])
+
+# Process queries
+for query_type, s, *args in queries:
+    if query_type == 1:
+        x = args[0]
+        update(tree, s, x - values[s-1])
+        values[s-1] = x
+    elif query_type == 2:
+        result = query(tree, s)
+        print(result + values[0])
+```
+
+The time complexity of this solution is O((n+q) log n), where n is the number of nodes and q is the number of queries. This is because both updating and querying the BIT take O(log n) time, and there are n updates and q queries.

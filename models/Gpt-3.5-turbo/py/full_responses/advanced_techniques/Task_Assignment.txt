@@ -1,0 +1,84 @@
+To solve this problem optimally, we can use the Hungarian algorithm, also known as the Munkres algorithm. This algorithm is a well-known method for solving the assignment problem in polynomial time.
+
+The Hungarian algorithm works by finding a maximum-weight matching in a bipartite graph. In our case, the bipartite graph consists of employees on one side and tasks on the other side. The weight of an edge between an employee and a task represents the cost of assigning that task to that employee.
+
+Here's the step-by-step process:
+
+1. First, create a cost matrix from the input. The cost matrix will have dimensions $n \times n$, where $n$ is the number of employees/tasks. Each element $c_{ij}$ in the matrix represents the cost of assigning task $j$ to employee $i$.
+
+2. Initialize an assignment matrix $A$ of the same dimensions as the cost matrix, initially filled with zeros. Each element $A_{ij}$ represents whether task $j$ is assigned to employee $i$. If $A_{ij} = 1$, it means task $j$ is assigned to employee $i$, and if $A_{ij} = 0$, it means task $j$ is not assigned to employee $i$.
+
+3. While there are unassigned tasks, perform the following steps:
+   - Calculate the row and column reductions in the cost matrix. Subtract the minimum value in each row from all elements in that row, and subtract the minimum value in each column from all elements in that column.
+   - Find a maximum-weight matching in the reduced cost matrix using the Hungarian algorithm. This can be done by finding an augmenting path in the graph until no more augmenting paths exist.
+   - Update the assignment matrix $A$ based on the matching found in the previous step.
+
+4. Calculate the minimum total cost by summing the costs of the assigned tasks in the original cost matrix.
+
+5. Print the minimum total cost.
+6. Print the assignments in the assignment matrix $A$.
+
+Here's the Python code implementing the above algorithm:
+
+```python
+import sys
+
+def hungarian(cost_matrix):
+    n = len(cost_matrix)
+    INF = sys.maxsize
+
+    def reduce(cost_matrix):
+        for i in range(n):
+            min_val = min(cost_matrix[i])
+            for j in range(n):
+                cost_matrix[i][j] -= min_val
+
+        for j in range(n):
+            min_val = INF
+            for i in range(n):
+                min_val = min(min_val, cost_matrix[i][j])
+            for i in range(n):
+                cost_matrix[i][j] -= min_val
+
+    def dfs(u, assignment, visited):
+        for v in range(n):
+            if not visited[v] and cost_matrix[u][v] == 0:
+                visited[v] = True
+                if assignment[v] == -1 or dfs(assignment[v], assignment, visited):
+                    assignment[v] = u
+                    return True
+        return False
+
+    assignment = [-1] * n
+    for i in range(n):
+        while True:
+            visited = [False] * n
+            if dfs(i, assignment, visited):
+                break
+            else:
+                reduce(cost_matrix)
+
+    return assignment
+
+# Read input
+n = int(input())
+cost_matrix = []
+for _ in range(n):
+    row = list(map(int, input().split()))
+    cost_matrix.append(row)
+
+# Solve using Hungarian algorithm
+assignment = hungarian(cost_matrix)
+
+# Calculate minimum total cost
+min_cost = sum(cost_matrix[i][assignment[i]] for i in range(n))
+
+# Print minimum total cost
+print(min_cost)
+
+# Print assignments
+for i in range(n):
+    print(i+1, assignment[i]+1)
+```
+
+The code reads the input, solves the problem using the Hungarian algorithm, and then prints the minimum total cost and the assignments.

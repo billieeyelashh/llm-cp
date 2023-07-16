@@ -1,0 +1,35 @@
+To solve this problem, we can start by creating a list of players and their desired number of games. Then, we can sort the list in descending order based on the number of games.
+
+Next, we can iterate through the list and pair up players with the highest number of desired games with players who have the lowest number of desired games. We can continue this process until all players have been paired up or there are no more pairs available.
+
+If all players have been paired up, we can print the number of games played and the pairs of players. Otherwise, we can print "IMPOSSIBLE" to indicate that there is no valid solution.
+
+Here is the Python code for this solution:
+
+```python
+n = int(input())
+games = list(map(int, input().split()))
+
+players = [(i+1, games[i]) for i in range(n)]
+players.sort(key=lambda x: x[1], reverse=True)
+
+pairs = []
+while len(players) > 1:
+    player1 = players[0]
+    player2 = players[-1]
+    if player1[1] == 0 or player2[1] == 0:
+        break
+    pairs.append((player1[0], player2[0]))
+    players[0] = (player1[0], player1[1] - 1)
+    players[-1] = (player2[0], player2[1] - 1)
+    players.sort(key=lambda x: x[1], reverse=True)
+
+if len(pairs) == n // 2:
+    print(len(pairs))
+    for pair in pairs:
+        print(pair[0], pair[1])
+else:
+    print("IMPOSSIBLE")
+```
+
+This solution has a time complexity of O(n log n) since we need to sort the list of players. The rest of the operations can be done in linear time.

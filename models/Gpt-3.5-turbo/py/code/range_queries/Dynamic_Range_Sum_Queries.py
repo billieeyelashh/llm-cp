@@ -1,0 +1,53 @@
+
+class SegmentTree:
+    def __init__(self, arr):
+        self.n = len(arr)
+        self.tree = [0] * (4 * self.n)
+        self.build(arr, 0, 0, self.n - 1)
+
+    def build(self, arr, v, tl, tr):
+        if tl == tr:
+            self.tree[v] = arr[tl]
+        else:
+            tm = (tl + tr) // 2
+            self.build(arr, 2 * v + 1, tl, tm)
+            self.build(arr, 2 * v + 2, tm + 1, tr)
+            self.tree[v] = self.tree[2 * v + 1] + self.tree[2 * v + 2]
+
+    def update(self, v, tl, tr, pos, new_val):
+        if tl == tr:
+            self.tree[v] = new_val
+        else:
+            tm = (tl + tr) // 2
+            if pos <= tm:
+                self.update(2 * v + 1, tl, tm, pos, new_val)
+            else:
+                self.update(2 * v + 2, tm + 1, tr, pos, new_val)
+            self.tree[v] = self.tree[2 * v + 1] + self.tree[2 * v + 2]
+
+    def query(self, v, tl, tr, l, r):
+        if l > r:
+            return 0
+        if l == tl and r == tr:
+            return self.tree[v]
+        tm = (tl + tr) // 2
+        left_sum = self.query(2 * v + 1, tl, tm, l, min(r, tm))
+        right_sum = self.query(2 * v + 2, tm + 1, tr, max(l, tm + 1), r)
+        return left_sum + right_sum
+
+
+# Read input
+n, q = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# Build segment tree
+st = SegmentTree(arr)
+
+# Process queries
+for _ in range(q):
+    query_type, a, b = map(int, input().split())
+    if query_type == 1:
+        st.update(0, 0, st.n - 1, a - 1, b)
+    else:
+        result = st.query(0, 0, st.n - 1, a - 1, b - 1)
+        print(result)

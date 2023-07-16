@@ -1,0 +1,50 @@
+To solve this problem, we can use dynamic programming. We'll define an array dp of size n+1 to store the number of ways to create each prefix of the given string.
+
+Let's initialize dp[0] to 1 since there is exactly one way to create an empty string.
+
+For each position i from 1 to n, we'll iterate over all words in the dictionary and check if the current word matches the substring starting at position i minus its length. If it does, we'll update dp[i] by adding dp[i - length of the current word].
+
+Finally, the answer will be stored in dp[n] modulo $10^9+7$.
+
+Here's the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    string s;
+    cin >> s;
+    
+    int n = s.length();
+    
+    int k;
+    cin >> k;
+    
+    vector<string> words(k);
+    for (int i = 0; i < k; i++) {
+        cin >> words[i];
+    }
+    
+    vector<int> dp(n + 1, 0);
+    dp[0] = 1;
+    
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < k; j++) {
+            int length = words[j].length();
+            if (i >= length && s.substr(i - length, length) == words[j]) {
+                dp[i] = (dp[i] + dp[i - length]) % MOD;
+            }
+        }
+    }
+    
+    cout << dp[n] << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * k * m), where m is the maximum length of a word in the dictionary. Since the total length of the words is at most $10^6$, this solution will run efficiently within the given constraints.

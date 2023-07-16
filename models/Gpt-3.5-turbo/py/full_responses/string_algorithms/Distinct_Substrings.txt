@@ -1,0 +1,48 @@
+To solve this problem optimally, we can use a data structure called a trie. A trie is an efficient tree-like data structure that allows us to store and search for strings in a way that minimizes both time and space complexity.
+
+Here's the Python solution using a trie:
+
+```python
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+
+def insert(root, word):
+    node = root
+    for char in word:
+        if char not in node.children:
+            node.children[char] = TrieNode()
+        node = node.children[char]
+    node.is_end_of_word = True
+
+def count_distinct_substrings(string):
+    root = TrieNode()
+    n = len(string)
+    count = 0
+    
+    for i in range(n):
+        node = root
+        for j in range(i, n):
+            char = string[j]
+            if char not in node.children:
+                node.children[char] = TrieNode()
+                count += 1
+            node = node.children[char]
+            
+            if node.is_end_of_word:
+                break
+        node.is_end_of_word = True
+    
+    return count
+
+# Driver code
+string = input()
+print(count_distinct_substrings(string))
+```
+
+The main idea of the solution is to iterate over each character in the string and build a trie on the fly. As we encounter each character, we check if it already exists as a child of the current node. If not, we create a new node and increment the count of distinct substrings. Finally, we mark the last node of each substring as the end of a word.
+
+The time complexity of this solution is O(n^2), where n is the length of the string. This is because in the worst case scenario, we may have to iterate over all possible substrings of the string. However, thanks to the trie data structure, the actual number of operations performed is much smaller, resulting in an efficient solution.
+
+The space complexity of this solution is O(n), as we only need to store the string and the trie data structure.

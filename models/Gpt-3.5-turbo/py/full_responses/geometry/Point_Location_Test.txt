@@ -1,0 +1,28 @@
+To solve this problem, we can use the concept of cross product of two vectors. Given three points $p_1=(x_1,y_1)$, $p_2=(x_2,y_2)$, and $p_3=(x_3,y_3)$, we can compute the cross product of the vectors $\overrightarrow{p_2p_1}$ and $\overrightarrow{p_2p_3}$. If the cross product is positive, it means that $p_3$ is on the left side of the line. If the cross product is negative, it means that $p_3$ is on the right side of the line. If the cross product is zero, it means that $p_3$ is on the line.
+
+Here is the Python implementation:
+
+```python
+def orientation(x1, y1, x2, y2, x3, y3):
+    # Compute the cross product of vectors p2p1 and p2p3
+    cross_product = (x2 - x1) * (y3 - y2) - (y2 - y1) * (x3 - x2)
+    
+    if cross_product > 0:
+        return "LEFT"
+    elif cross_product < 0:
+        return "RIGHT"
+    else:
+        return "TOUCH"
+
+# Read the number of tests
+t = int(input())
+
+for _ in range(t):
+    # Read the coordinates for each test
+    x1, y1, x2, y2, x3, y3 = map(int, input().split())
+    
+    # Print the result for each test
+    print(orientation(x1, y1, x2, y2, x3, y3))
+```
+
+This solution has a time complexity of O(t), where t is the number of tests.

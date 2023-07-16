@@ -1,0 +1,43 @@
+To solve this problem, we can use the concept of backtracking. We will generate all possible permutations of the given string and store them in a set to eliminate duplicates. Finally, we will sort the set and print the result.
+
+Here is the Python code to solve the problem:
+
+```python
+def generate_permutations(s):
+    # Set to store unique permutations
+    permutations = set()
+
+    def backtrack(s, curr):
+        # Base case: if the current permutation is of length n
+        if len(curr) == len(s):
+            permutations.add(curr)
+            return
+        
+        # Recursive case: try all possible characters at the current position
+        for i in range(len(s)):
+            if s[i] not in curr:
+                # Add the character to the current permutation
+                curr += s[i]
+                # Recursively generate permutations
+                backtrack(s, curr)
+                # Remove the character for backtracking
+                curr = curr[:-1]
+
+    # Start backtracking
+    backtrack(s, "")
+
+    return permutations
+
+# Driver code
+s = input().strip()
+permutations = generate_permutations(s)
+
+# Print the number of strings and the strings in alphabetical order
+print(len(permutations))
+for p in sorted(permutations):
+    print(p)
+```
+
+Time complexity: The time complexity of this solution is O(n!), where n is the length of the input string. This is because there are n! possible permutations of the string.
+
+Space complexity: The space complexity is O(n), where n is the length of the input string. This is because we are using a set to store the unique permutations, which can have at most n elements.

@@ -1,0 +1,30 @@
+To solve this problem, we can use dynamic programming. Let's define a function $dp[i][j]$ which represents the number of functional graphs with $i$ nodes and $j$ components.
+
+We can observe that for each $i \ge 2$, a functional graph with $i$ nodes and $j$ components can be obtained by adding a new node to a functional graph with $i-1$ nodes and $j-1$ components. This new node will be connected to one of the existing nodes in the graph. Therefore, we can express the recurrence relation as follows:
+
+$dp[i][j] = dp[i-1][j-1] \cdot (i-1) + dp[i-1][j] \cdot (j)$
+
+The first term $dp[i-1][j-1] \cdot (i-1)$ represents the case where the new node is connected to an existing node in the graph, and the second term $dp[i-1][j] \cdot (j)$ represents the case where the new node forms a new component by itself.
+
+To calculate the number of functional graphs for each $k=1 \dots n$, we can initialize $dp[i][j]$ as $0$ for all $i$ and $j$, and then use the recurrence relation to fill in the values. Finally, we can print the values of $dp[n][k]$ for each $k=1 \dots n$.
+
+Here is the Python code to solve the problem:
+
+```python
+MOD = int(1e9+7)
+
+def functional_graphs(n):
+    dp = [[0] * (n+1) for _ in range(n+1)]
+    
+    # Base case: there is only one way to have a functional graph with 1 node and 1 component
+    dp[1][1] = 1
+    
+    for i in range(2, n+1):
+        for j in range(1, i+1):
+            dp[i][j] = (dp[i-1][j-1] * (i-1) + dp[i-1][j] * j) % MOD
+    
+    for k in range(1, n+1):
+        print(dp[n][k])
+```
+
+To solve the example input, you can call the function `functional_graphs(3)`.

@@ -1,0 +1,73 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to traverse the tree and keep track of the number of distinct colors in each subtree.
+
+First, we create an adjacency list to represent the tree structure. We can use a vector of vectors in C++ to store the edges.
+
+Next, we define a function dfs(node, parent) that takes a node and its parent as parameters. This function will recursively traverse the tree and update the number of distinct colors for each node.
+
+Inside the dfs function, we initialize a set to store the distinct colors in the current subtree. We iterate over all the children of the current node and call the dfs function recursively for each child, passing the current node as the parent.
+
+After visiting all the children, we add the color of the current node to the set of distinct colors.
+
+Finally, we update the number of distinct colors for the current node by taking the size of the set.
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <set>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<int> colors;
+vector<int> distinctColors;
+
+void dfs(int node, int parent) {
+    set<int> colorSet;
+    for (int child : adj[node]) {
+        if (child != parent) {
+            dfs(child, node);
+        }
+    }
+    colorSet.insert(colors[node-1]);
+    for (int child : adj[node]) {
+        if (child != parent) {
+            for (int color : distinctColors[child-1]) {
+                colorSet.insert(color);
+            }
+        }
+    }
+    distinctColors[node-1] = colorSet.size();
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    colors.resize(n);
+    for (int i = 0; i < n; i++) {
+        cin >> colors[i];
+    }
+    
+    adj.resize(n+1);
+    for (int i = 0; i < n-1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    
+    distinctColors.resize(n);
+    dfs(1, -1);
+    
+    for (int i = 0; i < n; i++) {
+        cout << distinctColors[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the number of nodes in the tree, because we visit each node and each edge exactly once during the DFS traversal.

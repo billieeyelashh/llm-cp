@@ -1,0 +1,22 @@
+To find the middle element in the sorted multiplication table, we can observe that the middle element will always be the square of the integer value of $\frac{n+1}{2}$.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int middleElement = (n + 1) / 2;
+    int middleValue = middleElement * middleElement;
+
+    cout << middleValue << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(1) as it directly calculates the middle element using a simple formula.

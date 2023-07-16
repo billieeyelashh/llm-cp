@@ -1,0 +1,35 @@
+To count the number of ways to distribute the apples among the children, we can use a combinatorial approach. 
+
+First, we need to understand that the problem is equivalent to finding the number of ways to distribute $m$ identical apples into $n$ distinct boxes. This is a classic problem in combinatorics known as "stars and bars" or "balls and urns".
+
+The solution involves finding the number of ways to place $m$ identical apples into $n-1$ separators, where each separator represents a division between two adjacent boxes. 
+
+The total number of positions for the apples and separators is $m + n - 1$. We need to choose the positions for the separators among these $m + n - 1$ possibilities. 
+
+Therefore, the final solution can be calculated as:
+
+```
+def count_ways(n, m):
+    mod = 10**9 + 7
+    total_positions = m + n - 1
+    separators = n - 1
+
+    # Calculate the binomial coefficient using modular exponentiation
+    def binomial(n, k):
+        res = 1
+        for i in range(1, k+1):
+            res = (res * (n-i+1) // i) % mod
+        return res
+
+    # Calculate the number of ways using the binomial coefficient
+    ways = binomial(total_positions, separators)
+    return ways
+
+# Read input
+n, m = map(int, input().split())
+
+# Calculate and print the number of ways
+print(count_ways(n, m))
+```
+
+This solution has a time complexity of O(n), where n is the larger of the two input integers.

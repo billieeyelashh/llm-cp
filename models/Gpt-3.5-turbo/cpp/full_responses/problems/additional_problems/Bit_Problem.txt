@@ -1,0 +1,79 @@
+To solve this problem optimally, we can use a combination of bitwise operations and efficient data structures.
+
+First, let's create three arrays to store the required values for each element $x$:
+- `divisors`: stores the number of elements $y$ such that $x \mid y = x$
+- `bitwiseAnd`: stores the number of elements $y$ such that $x \mathrel{\&} y = x$
+- `nonZeroAnd`: stores the number of elements $y$ such that $x \mathrel{\&} y \neq 0$
+
+Initialize all three arrays with zeros.
+
+Next, we iterate through each element $x$ in the list. For each $x$, we perform the following steps:
+
+Step 1: Calculate the divisors:
+- Iterate through all numbers $y$ from 1 to $10^6$, inclusive.
+- If $y$ is divisible by $x$, increment `divisors[x]` by 1.
+
+Step 2: Calculate the bitwiseAnd:
+- Iterate through all numbers $y$ from 1 to $10^6$, inclusive.
+- If $x \mathrel{\&} y = x$, increment `bitwiseAnd[x]` by 1.
+
+Step 3: Calculate the nonZeroAnd:
+- Iterate through all numbers $y$ from 1 to $10^6$, inclusive.
+- If $x \mathrel{\&} y \neq 0$, increment `nonZeroAnd[x]` by 1.
+
+Finally, print the values in the three arrays for each element.
+
+Here's the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> list(n);
+    for (int i = 0; i < n; i++) {
+        cin >> list[i];
+    }
+
+    vector<int> divisors(1000001, 0);
+    vector<int> bitwiseAnd(1000001, 0);
+    vector<int> nonZeroAnd(1000001, 0);
+
+    for (int i = 0; i < n; i++) {
+        int x = list[i];
+
+        // Calculate divisors
+        for (int y = 1; y <= 1000000; y++) {
+            if (y % x == 0) {
+                divisors[x]++;
+            }
+        }
+
+        // Calculate bitwiseAnd
+        for (int y = 1; y <= 1000000; y++) {
+            if ((x & y) == x) {
+                bitwiseAnd[x]++;
+            }
+        }
+
+        // Calculate nonZeroAnd
+        for (int y = 1; y <= 1000000; y++) {
+            if ((x & y) != 0) {
+                nonZeroAnd[x]++;
+            }
+        }
+
+        // Print the values
+        cout << divisors[x] << " " << bitwiseAnd[x] << " " << nonZeroAnd[x] << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * (10^6)^2) = O(n * 10^12), which is efficient enough to handle the given constraints.

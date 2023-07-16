@@ -1,0 +1,56 @@
+To solve this problem optimally, we can use dynamic programming. We will create a 2D array dp[i][j], where dp[i][j] represents the maximum number of pages that can be bought using the first i books and a total price of j.
+
+We can populate the dp array using the following recurrence relation:
+
+dp[i][j] = max(dp[i-1][j], dp[i][j-h[i]] + s[i])
+
+Where:
+- dp[i-1][j] represents the maximum number of pages that can be bought using the first i-1 books and a total price of j.
+- dp[i][j-h[i]] + s[i] represents the maximum number of pages that can be bought by purchasing one copy of book i and using the remaining budget to buy books from the first i books.
+
+The base case is dp[0][j] = 0, which means that we cannot buy any books if there are no books available.
+
+Finally, the answer will be the maximum value in the last row of the dp array.
+
+Here's the C++ code implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> h(n+1), s(n+1), k(n+1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> h[i];
+    }
+    for (int i = 1; i <= n; ++i) {
+        cin >> s[i];
+    }
+    for (int i = 1; i <= n; ++i) {
+        cin >> k[i];
+    }
+
+    vector<vector<int>> dp(n+1, vector<int>(x+1, 0));
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j <= x; ++j) {
+            dp[i][j] = dp[i-1][j];
+            for (int t = 1; t <= k[i]; ++t) {
+                if (j >= t * h[i]) {
+                    dp[i][j] = max(dp[i][j], dp[i][j - t * h[i]] + t * s[i]);
+                }
+            }
+        }
+    }
+
+    cout << dp[n][x] << endl;
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(n * x * k), where n is the number of books, x is the maximum total price, and k is the maximum number of copies of a book. Since the constraints are small, this solution will run efficiently.

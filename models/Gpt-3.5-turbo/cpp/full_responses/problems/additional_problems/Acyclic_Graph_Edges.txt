@@ -1,0 +1,64 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to traverse the graph. 
+
+Here's the step-by-step solution:
+
+1. Read the input values of $n$ and $m$, and construct an adjacency list to represent the undirected graph.
+
+2. Initialize a boolean array called "visited" of size $n$, and set all elements to false. This array will be used to keep track of visited nodes during the DFS.
+
+3. Create a function called "dfs" that takes the current node, the graph adjacency list, and the output stream as parameters.
+
+4. Inside the "dfs" function, mark the current node as visited by setting the corresponding element in the "visited" array to true.
+
+5. Iterate through each neighbor of the current node in the adjacency list.
+
+6. If the neighbor has not been visited, output the edge from the current node to the neighbor in the desired direction (current node -> neighbor), and recursively call the "dfs" function with the neighbor as the new current node.
+
+7. After the loop, backtrack by outputting the edge from the neighbor to the current node (neighbor -> current node). This ensures that the resulting directed graph is acyclic.
+
+8. Finally, call the "dfs" function with any unvisited node as the starting node and the output stream as the parameter.
+
+9. Print the output stream to get the final solution.
+
+Here's the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void dfs(int node, const vector<vector<int>>& graph, vector<bool>& visited, ostream& out) {
+    visited[node] = true;
+
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            out << node + 1 << " " << neighbor + 1 << "\n";
+            dfs(neighbor, graph, visited, out);
+            out << neighbor + 1 << " " << node + 1 << "\n";
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> graph(n);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        graph[a - 1].push_back(b - 1);
+        graph[b - 1].push_back(a - 1);
+    }
+
+    vector<bool> visited(n, false);
+
+    dfs(0, graph, visited, cout);
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m), where n is the number of nodes and m is the number of edges.

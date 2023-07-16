@@ -1,0 +1,28 @@
+Solution:
+
+To solve the Tower of Hanoi problem, we can use a recursive approach. The key idea is to move $n-1$ disks from the left stack to the middle stack, then move the largest disk from the left stack to the right stack, and finally move the $n-1$ disks from the middle stack to the right stack.
+
+Here is the Python code to solve the problem:
+
+```python
+def tower_of_hanoi(n, source, auxiliary, destination):
+    if n == 1:
+        print(source, destination)
+        return 1
+    else:
+        moves = 0
+        moves += tower_of_hanoi(n-1, source, destination, auxiliary)
+        print(source, destination)
+        moves += 1
+        moves += tower_of_hanoi(n-1, auxiliary, source, destination)
+        return moves
+
+n = int(input())
+print(tower_of_hanoi(n, 1, 2, 3))
+```
+
+The `tower_of_hanoi` function takes four parameters: `n` (the number of disks), `source` (the stack number where the disks are initially placed), `auxiliary` (the stack number to be used as an intermediate stack), and `destination` (the stack number where the disks should be moved to). 
+
+If `n` is equal to 1, we print the move from `source` to `destination` and return 1 (as there is only one disk to move). Otherwise, we recursively call `tower_of_hanoi` to move `n-1` disks from `source` to `auxiliary`, then print the move from `source` to `destination`, increase the move count by 1, and finally recursively call `tower_of_hanoi` to move the remaining `n-1` disks from `auxiliary` to `destination`.
+
+The final output is the minimum number of moves, followed by the sequence of moves required to solve the problem.

@@ -1,0 +1,38 @@
+To solve this problem, we can use dynamic programming to build our solution bottom-up. We will create an array dp of size n+1 to store the number of ways to construct each sum from 1 to n.
+
+We start by initializing dp[0] = 1, since there is one way to construct the sum 0 (by not throwing the dice at all).
+
+Then, for each sum i from 1 to n, we iterate through all possible outcomes of throwing the dice (from 1 to 6), and add the number of ways to construct sum i-outcome to dp[i].
+
+Finally, the answer will be stored in dp[n].
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    std::vector<int> dp(n + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 1; i <= n; ++i) {
+        for (int outcome = 1; outcome <= 6; ++outcome) {
+            if (i - outcome >= 0) {
+                dp[i] = (dp[i] + dp[i - outcome]) % MOD;
+            }
+        }
+    }
+
+    std::cout << dp[n] << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * 6) = O(n), which is efficient enough to handle the given constraints.

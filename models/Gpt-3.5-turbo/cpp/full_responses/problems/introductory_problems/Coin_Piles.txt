@@ -1,0 +1,35 @@
+To solve this problem, we need to check if it is possible to empty both the piles. 
+
+Let's analyze the problem. We can make two observations:
+1. If the total number of coins in the piles (a + b) is odd, it is impossible to empty both piles because the number of coins removed on each move is always even.
+2. If either pile has more than twice the number of coins in the other pile, it is impossible to empty both piles because we can only remove at most three coins at a time.
+
+Based on these observations, we can conclude that it is possible to empty both piles if and only if the total number of coins is even and both piles have a similar number of coins.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int a, b;
+        cin >> a >> b;
+
+        if ((a + b) % 2 == 0 && abs(a - b) <= min(a, b)) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(t), where t is the number of tests.

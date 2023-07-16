@@ -1,0 +1,44 @@
+To solve this problem optimally, we can use a greedy approach. We will iterate over each child and check if they have more food than required. If a child has excess food, we will distribute it to their neighbors, one unit at a time, until their food requirement is met. To minimize the number of steps, we will always try to give food to the child with the lowest requirement.
+
+Here's the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> currentFood(n);
+    vector<int> requiredFood(n);
+
+    for (int i = 0; i < n; i++) {
+        cin >> currentFood[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        cin >> requiredFood[i];
+    }
+
+    int minSteps = 0;
+
+    for (int i = 0; i < n; i++) {
+        int diff = requiredFood[i] - currentFood[i];
+        if (diff > 0) {
+            int nextChild = (i + 1) % n;
+            currentFood[i] += diff;
+            currentFood[nextChild] -= diff;
+            minSteps += diff;
+        }
+    }
+
+    cout << minSteps << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n), where n is the number of children.

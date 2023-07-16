@@ -1,0 +1,66 @@
+To solve this problem in an optimal way, we can use the Union-Find algorithm to keep track of the components.
+
+First, we initialize an array `parent` of size `n+1` to represent the parent of each city. Initially, each city is its own parent.
+
+Next, for each road, we find the parents of the cities `a` and `b`. If they are different, it means they belong to different components. In this case, we merge the components by making one city's parent point to the other city's parent. Additionally, we update the size of the largest component if necessary.
+
+Finally, after each road is constructed, we output the number of components and the size of the largest component.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> parent;
+vector<int> componentSize;
+
+int find(int x) {
+    if (parent[x] == x) {
+        return x;
+    }
+    return parent[x] = find(parent[x]);
+}
+
+void merge(int a, int b) {
+    int parentA = find(a);
+    int parentB = find(b);
+    if (parentA != parentB) {
+        parent[parentA] = parentB;
+        componentSize[parentB] += componentSize[parentA];
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    parent.resize(n + 1);
+    componentSize.resize(n + 1, 1);
+
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+
+    int largestComponent = 1;
+    int numComponents = n;
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        
+        merge(a, b);
+        
+        largestComponent = max(largestComponent, componentSize[find(a)]);
+        numComponents--;
+
+        cout << numComponents << " " << largestComponent << "\n";
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(m * α(n)), where α(n) is the inverse Ackermann function. This complexity is considered to be almost constant for all practical values of n and m.

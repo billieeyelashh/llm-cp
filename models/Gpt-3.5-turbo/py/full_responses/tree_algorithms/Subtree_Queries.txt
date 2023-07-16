@@ -1,0 +1,42 @@
+To solve this problem efficiently, we can use a depth-first search (DFS) algorithm to traverse the tree and calculate the sum of values in each subtree. We can also use an array to store the sum of values for each node.
+
+First, we create an adjacency list to represent the tree. Then, we initialize an array `subtree_sum` of size `n` to store the sum of values in each subtree.
+
+Next, we define a recursive function `dfs` that takes in the current node `v` as an argument. In the `dfs` function, we iterate over all the neighbors of `v` and call the `dfs` function recursively on each neighbor. After visiting all the neighbors, we update the `subtree_sum` array by adding the value of the current node `v` to the sum of values in all its subtrees.
+
+Finally, we process each query. If the query is of type 1, we update the value of node `s` to `x`. If the query is of type 2, we print the sum of values in the subtree of node `s` using the `subtree_sum` array.
+
+Here is the Python code that implements the above approach:
+
+```python
+n, q = map(int, input().split())
+values = list(map(int, input().split()))
+
+adj_list = [[] for _ in range(n)]
+for _ in range(n - 1):
+    a, b = map(int, input().split())
+    adj_list[a - 1].append(b - 1)
+    adj_list[b - 1].append(a - 1)
+
+subtree_sum = [0] * n
+
+def dfs(v):
+    subtree_sum[v] = values[v]
+    for neighbor in adj_list[v]:
+        if subtree_sum[neighbor] == 0:
+            dfs(neighbor)
+        subtree_sum[v] += subtree_sum[neighbor]
+
+dfs(0)
+
+for _ in range(q):
+    query = input().split()
+    if query[0] == '1':
+        s, x = map(int, query[1:])
+        values[s - 1] = x
+    elif query[0] == '2':
+        s = int(query[1])
+        print(subtree_sum[s - 1])
+```
+
+The time complexity of this solution is O(n+q), where n is the number of nodes and q is the number of queries. This is because we perform a depth-first search to calculate the sum of values in each subtree, which takes O(n) time. The processing of each query takes O(1) time.

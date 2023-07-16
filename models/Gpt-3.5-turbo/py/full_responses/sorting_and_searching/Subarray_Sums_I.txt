@@ -1,0 +1,32 @@
+To solve this problem, we can use a sliding window technique. We'll maintain a window that represents the current subarray we are considering. We'll start with an empty window and keep expanding it from the right side until the sum of the subarray equals or exceeds the target sum $x$. If the sum becomes greater than $x$, we'll start contracting the window from the left side.
+
+Here is the Python implementation for the solution:
+
+```python
+def count_subarrays(n, x, a):
+    count = 0
+    window_sum = 0
+    left = 0
+
+    for right in range(n):
+        window_sum += a[right]
+
+        while window_sum > x:
+            window_sum -= a[left]
+            left += 1
+
+        if window_sum == x:
+            count += 1
+
+    return count
+
+# Read input
+n, x = map(int, input().split())
+a = list(map(int, input().split()))
+
+# Call the function and print the result
+result = count_subarrays(n, x, a)
+print(result)
+```
+
+The time complexity of this solution is O(n) as we are iterating through the array only once.

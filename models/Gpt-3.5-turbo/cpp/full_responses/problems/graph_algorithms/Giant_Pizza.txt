@@ -1,0 +1,55 @@
+To solve this problem optimally, we can use a greedy strategy. 
+
+First, we initialize an array of size $m$ filled with "+" symbols to represent that no topping has been included yet.
+
+Then, for each family member's wish, we update the array according to their wishes. If they wish for a topping to be included, we mark it with a "+". If they wish for a topping to be excluded, we mark it with a "-".
+
+After processing all the wishes, we check if there is any topping that is neither marked as "+" nor "-". In this case, we cannot satisfy all the wishes, so we print "IMPOSSIBLE". Otherwise, we print the final array of symbols as the solution.
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<char> toppings(m, '+');
+
+    for (int i = 0; i < n; i++) {
+        char op;
+        int x;
+        cin >> op >> x;
+
+        if (op == '+') {
+            toppings[x - 1] = '+';
+        } else {
+            toppings[x - 1] = '-';
+        }
+    }
+
+    bool hasEmpty = false;
+    for (char c : toppings) {
+        if (c != '+' && c != '-') {
+            hasEmpty = true;
+            break;
+        }
+    }
+
+    if (hasEmpty) {
+        cout << "IMPOSSIBLE" << endl;
+    } else {
+        for (char c : toppings) {
+            cout << c << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(n + m) since we iterate over all the wishes and the toppings once.

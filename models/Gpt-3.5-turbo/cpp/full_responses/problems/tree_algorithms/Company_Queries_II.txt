@@ -1,0 +1,106 @@
+To solve this problem efficiently, we can use the concept of Lowest Common Ancestor (LCA) in a tree.
+
+First, we need to build a data structure to represent the tree hierarchy. We can use an adjacency list to store the parent of each employee. This can be done by iterating through the input and creating a vector of vectors, where the index represents the employee and the value represents their boss.
+
+Next, we need to preprocess the tree to calculate the LCA for each pair of employees. We can use a technique called Binary Lifting to efficiently compute the LCA.
+
+The idea of Binary Lifting is to precalculate the ancestors of each employee at various powers of 2. This allows us to jump directly to the ancestor at a certain level without traversing the tree multiple times.
+
+We can start by initializing a table, let's call it "ancestors", where ancestors[i][j] represents the 2^j-th ancestor of employee i. We can fill this table using dynamic programming as follows:
+
+1. Set ancestors[i][0] = boss[i] for each employee i.
+2. For j from 1 to log2(n), do:
+   - For each employee i, set ancestors[i][j] = ancestors[ancestors[i][j-1]][j-1].
+
+Once we have calculated the ancestors table, we can answer each query efficiently. For each query (a, b), we need to find the deepest common ancestor of employees a and b.
+
+To find the LCA, we can follow these steps:
+
+1. If the depth of a is greater than the depth of b, swap a and b.
+2. Iterate from the highest power of 2 to 0:
+   - If the depth of b is greater than or equal to 2^i, move b up to its 2^i-th ancestor.
+3. If a and b are equal, return a.
+4. Iterate from the highest power of 2 to 0:
+   - If the ancestor of a at 2^i is different from the ancestor of b at 2^i, move both a and b up to their 2^i-th ancestors.
+5. Return the boss of a (or b) as the LCA.
+
+Here is the final solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+const int MAXN = 2e5 + 5;
+const int MAXLOG = 20;
+
+vector<int> adj[MAXN];
+int depth[MAXN];
+int ancestors[MAXN][MAXLOG];
+
+void dfs(int node, int parent) {
+    depth[node] = depth[parent] + 1;
+    ancestors[node][0] = parent;
+
+    for (int i = 1; i < MAXLOG; i++) {
+        ancestors[node][i] = ancestors[ancestors[node][i - 1]][i - 1];
+    }
+
+    for (int child : adj[node]) {
+        if (child != parent) {
+            dfs(child, node);
+        }
+    }
+}
+
+int lca(int a, int b) {
+    if (depth[a] > depth[b]) {
+        swap(a, b);
+    }
+
+    for (int i = MAXLOG - 1; i >= 0; i--) {
+        if (depth[b] - depth[a] >= (1 << i)) {
+            b = ancestors[b][i];
+        }
+    }
+
+    if (a == b) {
+        return a;
+    }
+
+    for (int i = MAXLOG - 1; i >= 0; i--) {
+        if (ancestors[a][i] != ancestors[b][i]) {
+            a = ancestors[a][i];
+            b = ancestors[b][i];
+        }
+    }
+
+    return ancestors[a][0];
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    for (int i = 2; i <= n; i++) {
+        int boss;
+        cin >> boss;
+        adj[boss].push_back(i);
+    }
+
+    depth[0] = -1;
+    dfs(1, 0);
+
+    while (q--) {
+        int a, b;
+        cin >> a >> b;
+        cout << lca(a, b) << "\n";
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) for preprocessing the tree and O(log n) for each query, resulting in an overall time complexity of O((n + q) log n).

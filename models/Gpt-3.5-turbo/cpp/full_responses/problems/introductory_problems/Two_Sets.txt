@@ -1,0 +1,51 @@
+Observations:
+1. If the sum of numbers from 1 to n is odd, it is not possible to divide the numbers into two sets with equal sum.
+2. If the sum is even, we can divide the numbers into two sets by including all even numbers in one set and all odd numbers in the other set.
+
+Solution:
+1. Read the input integer n.
+2. Calculate the sum of numbers from 1 to n as sum = n * (n + 1) / 2.
+3. If sum is odd, print "NO" and return.
+4. Print "YES".
+5. Print n/2 in the first line.
+6. Print all even numbers from 2 to n in the second line.
+7. Print n/2-1 in the third line.
+8. Print all odd numbers from 1 to n-1 in the fourth line.
+
+C++ Code:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int sum = n * (n + 1) / 2;
+    if (sum % 2 != 0) {
+        cout << "NO";
+        return 0;
+    }
+
+    cout << "YES" << endl;
+    cout << n / 2 << endl;
+
+    for (int i = 2; i <= n; i += 2) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    cout << n / 2 - 1 << endl;
+
+    for (int i = 1; i <= n - 1; i += 2) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+Time Complexity Analysis:
+The time complexity of this solution is O(n) as we iterate from 2 to n in steps of 2 and from 1 to n-1 in steps of 2.

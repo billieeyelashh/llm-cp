@@ -1,0 +1,31 @@
+To solve this problem, we can use a greedy approach. We keep track of the current towers and their topmost cubes. 
+
+We iterate through the given cubes in order. For each cube, we check if it can be placed on top of any existing tower. If not, we start a new tower. 
+
+To optimize the algorithm, we can store the topmost cube of each tower in a list. Whenever we encounter a cube that is smaller than any of the topmost cubes, we replace the smallest topmost cube with the current cube. This ensures that we always have the smallest possible topmost cubes for each tower.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+cubes = list(map(int, input().split()))
+
+topmost_cubes = []
+towers = 0
+
+for cube in cubes:
+    placed = False
+    for i in range(towers):
+        if cube < topmost_cubes[i]:
+            topmost_cubes[i] = cube
+            placed = True
+            break
+    
+    if not placed:
+        towers += 1
+        topmost_cubes.append(cube)
+
+print(towers)
+```
+
+The time complexity of this solution is O(n), where n is the number of cubes.

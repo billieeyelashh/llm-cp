@@ -1,0 +1,73 @@
+To solve this problem optimally, we can use a technique called line sweep algorithm.
+
+First, we need to sort all the x-coordinates of the rectangles in ascending order. If there are multiple rectangles with the same x-coordinate, we can sort them based on their y-coordinates. This will help us handle the rectangles in a systematic manner.
+
+Next, we initialize an empty set of active rectangles. We will iterate through the sorted x-coordinates of the rectangles and process them one by one.
+
+For each x-coordinate, we insert the rectangles that start at this x-coordinate into the active set. Then, we scan through the active set and calculate the total vertical length covered by the rectangles at this x-coordinate. We update the answer by adding the product of the vertical length and the horizontal distance between the current and previous x-coordinates.
+
+Finally, we remove the rectangles that end at this x-coordinate from the active set.
+
+Here is the C++ code implementing this algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+
+using namespace std;
+
+struct Rectangle {
+    int x1, y1, x2, y2;
+};
+
+bool cmp(const Rectangle& r1, const Rectangle& r2) {
+    return r1.x1 < r2.x1 || (r1.x1 == r2.x1 && r1.y1 < r2.y1);
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<Rectangle> rectangles(n);
+    for (int i = 0; i < n; i++) {
+        cin >> rectangles[i].x1 >> rectangles[i].y1 >> rectangles[i].x2 >> rectangles[i].y2;
+    }
+
+    sort(rectangles.begin(), rectangles.end(), cmp);
+
+    long long ans = 0;
+    int prevX = rectangles[0].x1;
+    multiset<int> activeSet;
+    activeSet.insert(rectangles[0].y1);
+
+    for (int i = 1; i < n; i++) {
+        ans += 1LL * (rectangles[i].x1 - prevX) * (*activeSet.rbegin());
+
+        prevX = rectangles[i].x1;
+
+        if (rectangles[i].x1 == rectangles[i - 1].x1) {
+            activeSet.insert(rectangles[i].y1);
+        } else {
+            for (auto it = activeSet.begin(); it != activeSet.end(); ) {
+                if (*it >= rectangles[i].x1) {
+                    break;
+                }
+                activeSet.erase(it++);
+            }
+            activeSet.insert(rectangles[i].y1);
+        }
+
+        activeSet.erase(activeSet.find(rectangles[i].y2));
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n log n) due to the sorting step. The space complexity is O(n) to store the rectangles and the active set.
+
+This solution will work efficiently even for the maximum constraint of n = 10^5.

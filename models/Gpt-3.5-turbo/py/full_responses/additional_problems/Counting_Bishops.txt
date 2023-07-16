@@ -1,0 +1,39 @@
+To solve this problem, we can use a dynamic programming approach. Let's define a 2D array `dp` of size `(n+1) x (k+1)` where `dp[i][j]` represents the number of ways to place `j` bishops on an `i x i` chessboard.
+
+We can start by initializing the base cases:
+
+- For `i = 0`, `dp[0][j] = 0` since there are no rows on the chessboard.
+- For `j = 0`, `dp[i][0] = 1` since there are no bishops to be placed.
+
+Now, let's fill in the rest of the `dp` array using the following recurrence relation:
+
+- `dp[i][j] = dp[i-1][j] + dp[i-1][j-1] * (i-1)`, which represents two cases:
+  1. The `j` bishops are placed in the first `i-1` rows, so we can simply copy the value from `dp[i-1][j]`.
+  2. The `j-1` bishops are placed in the first `i-1` rows, and the `j`th bishop is placed in the `i`th row. We multiply by `(i-1)` to account for the number of possible positions for the `j`th bishop in the `i`th row.
+
+Finally, the answer will be `dp[n][k]`.
+
+Here's the Python code that implements the above approach:
+
+```python
+MOD = int(1e9+7)
+
+def count_ways(n, k):
+    dp = [[0] * (k+1) for _ in range(n+1)]
+    for i in range(n+1):
+        dp[i][0] = 1
+    for i in range(1, n+1):
+        for j in range(1, k+1):
+            dp[i][j] = dp[i-1][j] + dp[i-1][j-1] * (i-1)
+            dp[i][j] %= MOD
+    return dp[n][k]
+
+# Read input
+n, k = map(int, input().split())
+
+# Calculate and print result
+result = count_ways(n, k)
+print(result)
+```
+
+This solution has a time complexity of O(n^2 * k), which is efficient enough to handle the given constraints.

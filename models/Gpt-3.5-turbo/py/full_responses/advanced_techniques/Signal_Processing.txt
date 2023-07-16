@@ -1,0 +1,39 @@
+To solve this problem, we can iterate through the signal and calculate the sum of products for each mask position.
+
+Here's the step-by-step solution in Python:
+
+```python
+def process_signal(signal, mask):
+    n = len(signal)
+    m = len(mask)
+    
+    result = []
+    
+    # Iterate through each mask position
+    for i in range(n + m - 1):
+        # Calculate the starting and ending indices for signal
+        start = max(0, i - m + 1)
+        end = min(i + 1, n)
+        
+        # Calculate the sum of products for the current mask position
+        sum_of_products = sum(signal[j] * mask[i - j] for j in range(start, end))
+        
+        result.append(sum_of_products)
+    
+    return result
+
+# Read input
+n, m = map(int, input().split())
+signal = list(map(int, input().split()))
+mask = list(map(int, input().split()))
+
+# Call the function to process the signal
+output = process_signal(signal, mask)
+
+# Print the output
+print(*output)
+```
+
+The `process_signal` function takes the signal and mask as input and returns a list of the sum of products for each mask position. The main logic is in the loop where we calculate the starting and ending indices for the signal based on the current mask position. Then, we use a list comprehension to calculate the sum of products using the `signal` and `mask` values at the corresponding indices. Finally, we append the sum to the result list.
+
+Note: This solution has a time complexity of O((n + m) * min(n, m)), where n and m are the lengths of the signal and mask respectively.

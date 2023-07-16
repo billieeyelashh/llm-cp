@@ -1,0 +1,39 @@
+To solve this problem, we can use depth-first search (DFS) to identify the necessary cities. 
+
+First, we'll build an adjacency list representation of the cities and roads from the input. Then, we'll initialize a boolean array called "visited" to keep track of the visited cities during the DFS.
+
+Next, we'll define a recursive function called "dfs" that takes a city as input. In this function, we'll mark the current city as visited and iterate through its adjacent cities. For each unvisited adjacent city, we'll recursively call the "dfs" function. 
+
+Finally, after the DFS is complete, we'll iterate through all the cities and check if there are any unvisited cities. If a city is unvisited, it means that removing that city will disconnect some other cities, making it necessary. We'll add these cities to a list called "necessary_cities".
+
+Here's the Python code for the solution:
+
+```python
+def dfs(city):
+    visited[city] = True
+    for adj_city in adj_list[city]:
+        if not visited[adj_city]:
+            dfs(adj_city)
+
+n, m = map(int, input().split())
+
+adj_list = [[] for _ in range(n + 1)]
+visited = [False] * (n + 1)
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    adj_list[a].append(b)
+    adj_list[b].append(a)
+
+necessary_cities = []
+
+for city in range(1, n + 1):
+    if not visited[city]:
+        necessary_cities.append(city)
+        dfs(city)
+
+print(len(necessary_cities))
+print(*necessary_cities)
+```
+
+The time complexity of this solution is O(n + m), where n is the number of cities and m is the number of roads. This is because we perform a depth-first search on each unvisited city, which takes O(n + m) time in total.

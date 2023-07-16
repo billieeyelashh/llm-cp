@@ -1,0 +1,29 @@
+To solve this problem optimally, we can use a stack data structure to keep track of the nearest positions to the left with smaller values.
+Here is the python solution:
+
+```python
+n = int(input())
+a = list(map(int, input().split()))
+
+stack = []
+ans = []
+for i in range(n):
+    while stack and stack[-1][0] >= a[i]:
+        stack.pop()
+    if not stack:
+        ans.append(0)
+    else:
+        ans.append(stack[-1][1])
+    stack.append((a[i], i+1))
+
+print(*ans)
+```
+
+Explanation:
+- We iterate through the array from left to right.
+- For each element, we compare it with the top of the stack. If the element is smaller, we remove the top of the stack until we find a smaller element or the stack becomes empty.
+- If the stack is empty, it means there is no smaller element to the left, so we append 0 to the answer list.
+- If the stack is not empty, the top of the stack contains the nearest position to the left with a smaller value, so we append its position to the answer list.
+- Finally, we print the answer list.
+
+The time complexity of this solution is O(n) as we only iterate through the array once. The space complexity is also O(n) as the stack can have at most n elements.

@@ -1,0 +1,68 @@
+To solve this problem efficiently, we can use a segment tree data structure. 
+
+First, we initialize the segment tree with the initial contents of the array. Each node of the segment tree will represent a range of values in the array, and the value stored in each node will be the sum of the values in that range.
+
+For each query of type 1, we update the values in the range [a,b] by adding the corresponding values (1, 2, 3, ...) to the segment tree.
+
+For each query of type 2, we calculate the sum of the values in the range [a,b] by traversing the segment tree and summing the values stored in the relevant nodes.
+
+Here is the Python code for the solution:
+
+```python
+class SegmentTree:
+    def __init__(self, n):
+        self.size = 1 << (n - 1).bit_length()
+        self.tree = [0] * (2 * self.size)
+
+    def update(self, a, b):
+        a += self.size
+        b += self.size
+        while a <= b:
+            if a % 2 == 1:
+                self.tree[a] += a - self.size + 1
+                a += 1
+            if b % 2 == 0:
+                self.tree[b] += b - self.size + 1
+                b -= 1
+            a //= 2
+            b //= 2
+
+    def query(self, a, b):
+        a += self.size
+        b += self.size
+        result = 0
+        while a <= b:
+            if a % 2 == 1:
+                result += self.tree[a]
+                a += 1
+            if b % 2 == 0:
+                result += self.tree[b]
+                b -= 1
+            a //= 2
+            b //= 2
+        return result
+
+
+# Read input
+n, q = map(int, input().split())
+t = list(map(int, input().split()))
+
+# Build segment tree
+segment_tree = SegmentTree(n)
+for i in range(n):
+    segment_tree.tree[segment_tree.size + i] = t[i]
+for i in range(segment_tree.size - 1, 0, -1):
+    segment_tree.tree[i] = segment_tree.tree[2 * i] + segment_tree.tree[2 * i + 1]
+
+# Process queries
+for _ in range(q):
+    query_type, a, b = map(int, input().split())
+    if query_type == 1:
+        segment_tree.update(a - 1, b - 1)
+    else:
+        print(segment_tree.query(a - 1, b - 1))
+```
+
+The `SegmentTree` class represents the segment tree data structure. The `update` method updates the values in the given range, and the `query` method calculates the sum of the values in the given range.
+
+We build the segment tree using the initial contents of the array, and then process each query according to its type. For type 1 queries, we call the `update` method, and for type 2 queries, we call the `query` method and print the result.

@@ -1,0 +1,59 @@
+To count the number of distinct paths of length k in a tree, we can use a depth-first search (DFS) approach. 
+
+First, we need to construct the tree using an adjacency list representation. Then, we can start the DFS from any node and keep track of the current path length. Whenever the path length becomes equal to k, we increment a counter variable to count the path.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj; // adjacency list representation of the tree
+vector<int> visited; // visited array to keep track of visited nodes
+int pathCount = 0; // counter variable to count the paths
+
+void dfs(int node, int pathLength) {
+    visited[node] = true;
+    
+    if (pathLength == k) {
+        pathCount++;
+        return;
+    }
+    
+    for (int neighbor : adj[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, pathLength + 1);
+        }
+    }
+    
+    visited[node] = false; // backtrack: mark the current node as unvisited
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    
+    // Initialize the adjacency list and visited array
+    adj.resize(n + 1);
+    visited.resize(n + 1, false);
+    
+    // Read the edges of the tree
+    for (int i = 0; i < n - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    
+    // Start the DFS from any node
+    dfs(1, 0);
+    
+    cout << pathCount << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the number of nodes in the tree.

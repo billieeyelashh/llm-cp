@@ -1,0 +1,37 @@
+
+def find_kingdoms(n, m, teleporters):
+    # Create an adjacency list representation of the graph
+    adj_list = [[] for _ in range(n+1)]
+    for a, b in teleporters:
+        adj_list[a].append(b)
+        adj_list[b].append(a)
+    
+    # Initialize an array to store the kingdom labels
+    kingdom_labels = [0] * (n+1)
+    kingdom_count = 0
+    
+    def dfs(node, label):
+        if kingdom_labels[node] != 0:
+            return
+        kingdom_labels[node] = label
+        for neighbor in adj_list[node]:
+            dfs(neighbor, label)
+    
+    # Traverse the graph using depth-first search
+    for i in range(1, n+1):
+        if kingdom_labels[i] == 0:
+            kingdom_count += 1
+            dfs(i, kingdom_count)
+    
+    return kingdom_count, kingdom_labels[1:]
+
+# Read input
+n, m = map(int, input().split())
+teleporters = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Solve the problem
+kingdom_count, kingdom_labels = find_kingdoms(n, m, teleporters)
+
+# Print the output
+print(kingdom_count)
+print(*kingdom_labels)

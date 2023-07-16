@@ -1,0 +1,30 @@
+To solve this problem, we can use the Euclidean algorithm to find the greatest common divisor (GCD) of two numbers. The algorithm states that the GCD of two numbers can be found by repeatedly subtracting the smaller number from the larger number until one of the numbers becomes zero. The remaining non-zero number will be the GCD.
+
+In this problem, we need to find the two numbers with the maximum GCD. To do this, we can iterate through all pairs of numbers in the array and calculate their GCD using the Euclidean algorithm. We keep track of the maximum GCD found so far and update it whenever we find a larger one.
+
+Here is the Python code to solve the problem:
+
+```python
+from math import gcd
+
+def find_max_gcd(n, arr):
+    max_gcd = 0
+    
+    for i in range(n):
+        for j in range(i+1, n):
+            max_gcd = max(max_gcd, gcd(arr[i], arr[j]))
+    
+    return max_gcd
+
+# Read input
+n = int(input())
+arr = list(map(int, input().split()))
+
+# Find maximum GCD
+max_gcd = find_max_gcd(n, arr)
+
+# Print output
+print(max_gcd)
+```
+
+This solution has a time complexity of O(n^2) since we are iterating through all pairs of numbers in the array. It should work efficiently for the given constraints.

@@ -1,0 +1,54 @@
+To solve this problem, we can use the concept of derangements. A derangement is a permutation of elements such that no element appears in its original position.
+
+Let's say we have $n$ children. We can consider the first child and choose a gift for them in $(n-1)$ ways (as we cannot give them their own gift). Now, we can consider two cases:
+
+1. If the first child chooses the gift of the second child, then we are left with $(n-2)$ children and we need to distribute their gifts in a derangement manner.
+2. If the first child does not choose the gift of the second child, then we can consider two sub-cases:
+   a. The second child chooses the gift of the first child: In this case, we are left with $(n-2)$ children and we need to distribute their gifts in a derangement manner.
+   b. The second child does not choose the gift of the first child: In this case, we are left with $(n-1)$ children and we need to distribute their gifts in a derangement manner.
+
+Based on this observation, we can formulate a recursive formula for calculating the number of ways to distribute gifts for $n$ children:
+
+$D(n) = (n-1) \cdot (D(n-2) + D(n-1))$
+
+where $D(n)$ represents the number of derangements for $n$ children.
+
+To implement this recursively, we can use memoization to avoid redundant calculations:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+std::vector<int> memo;
+
+int derangements(int n) {
+    if (n <= 1) {
+        return 0;
+    }
+    if (n == 2) {
+        return 1;
+    }
+    if (memo[n] != -1) {
+        return memo[n];
+    }
+    int derange = (n - 1) * (derangements(n - 1) + derangements(n - 2)) % MOD;
+    memo[n] = derange;
+    return derange;
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    memo.resize(n + 1, -1);
+    memo[2] = 1;
+
+    std::cout << derangements(n) << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$ and a space complexity of $O(n)$.

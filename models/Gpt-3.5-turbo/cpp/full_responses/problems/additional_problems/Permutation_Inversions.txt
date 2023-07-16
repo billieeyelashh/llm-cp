@@ -1,0 +1,50 @@
+To solve this problem, we can use dynamic programming to count the number of permutations with exactly $k$ inversions.
+
+Let's define a 2D array $dp[n+1][k+1]$ where $dp[i][j]$ represents the number of permutations of the first $i$ elements with exactly $j$ inversions.
+
+We can observe that $dp[i][j]$ can be calculated using the following recurrence relation:
+$dp[i][j] = dp[i-1][j] + dp[i-1][j-1] + dp[i-1][j-2] + \dots + dp[i-1][j-(i-1)]$
+
+The first term $dp[i-1][j]$ represents the number of permutations of the first $i-1$ elements with exactly $j$ inversions, without considering the $i$th element. The second term $dp[i-1][j-1]$ represents the number of permutations of the first $i-1$ elements with exactly $j-1$ inversions, considering the $i$th element in an inverted position. The remaining terms follow the same pattern.
+
+We can initialize $dp[i][j]$ as $0$ for $i=0$ and $j=0$, and $1$ for $i=1$ and $j=0$, since there is only one permutation with $0$ inversions for the first $1$ element.
+
+Finally, the answer to the problem is $dp[n][k]$. However, since the answer needs to be printed modulo $10^9+7$, we need to take the modulo of each $dp[i][j]$ during calculation.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+int countPermutations(int n, int k) {
+    std::vector<std::vector<int>> dp(n + 1, std::vector<int>(k + 1, 0));
+
+    dp[1][0] = 1;
+
+    for (int i = 2; i <= n; ++i) {
+        dp[i][0] = 1;
+        for (int j = 1; j <= k; ++j) {
+            dp[i][j] = (dp[i][j] + dp[i - 1][j]) % MOD;
+            for (int l = 1; l <= i - 1 && l <= j; ++l) {
+                dp[i][j] = (dp[i][j] + dp[i - 1][j - l]) % MOD;
+            }
+        }
+    }
+
+    return dp[n][k];
+}
+
+int main() {
+    int n, k;
+    std::cin >> n >> k;
+
+    std::cout << countPermutations(n, k) << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n^2k)$.

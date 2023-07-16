@@ -1,0 +1,69 @@
+To solve this problem, we can use Kruskal's algorithm to find the minimum spanning tree of the graph. The minimum spanning tree will ensure that there is a decent route between any two cities with the minimum total reparation cost.
+
+Here's the step-by-step solution in Python:
+
+1. Read the input values for `n` and `m`.
+2. Create a list of tuples to store the roads, where each tuple contains the cities connected by the road and the reparation cost.
+3. Sort the list of roads based on the reparation cost in ascending order.
+4. Create a list `parent` of size `n+1` and initialize each element as its own parent. This list will be used to track the parent of each city in the minimum spanning tree.
+5. Create a function `find_parent` to find the parent of a city using the union-find algorithm.
+   - If the parent of the city is not itself, recursively call `find_parent` on the parent until the root parent is found.
+   - Set the parent of the city to the root parent to compress the path.
+   - Return the root parent.
+6. Create a function `union` to merge two cities into the same set in the union-find data structure.
+   - Find the parent of each city using `find_parent`.
+   - If the parents are different, set the parent of one city as the parent of the other city.
+7. Initialize variables `total_cost` and `edge_count` as 0.
+8. Iterate through each road in the sorted list of roads.
+   - Get the cities and reparation cost of the road.
+   - Check if the cities are in different sets using `find_parent`.
+   - If they are in different sets, merge the sets using `union` and add the reparation cost to `total_cost`.
+   - Increment `edge_count`.
+   - If `edge_count` is equal to `n-1`, break the loop as we have found the minimum spanning tree.
+9. Check if `edge_count` is equal to `n-1`.
+   - If it is, print `total_cost`.
+   - Otherwise, print "IMPOSSIBLE" as there is no solution.
+   
+Here's the Python code implementing the solution:
+
+```python
+n, m = map(int, input().split())
+
+roads = []
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    roads.append((a, b, c))
+
+roads.sort(key=lambda x: x[2])
+
+parent = [i for i in range(n+1)]
+
+def find_parent(city):
+    if parent[city] != city:
+        parent[city] = find_parent(parent[city])
+    return parent[city]
+
+def union(city1, city2):
+    parent1 = find_parent(city1)
+    parent2 = find_parent(city2)
+    if parent1 != parent2:
+        parent[parent2] = parent1
+
+total_cost = 0
+edge_count = 0
+for road in roads:
+    a, b, c = road
+    if find_parent(a) != find_parent(b):
+        union(a, b)
+        total_cost += c
+        edge_count += 1
+    if edge_count == n-1:
+        break
+
+if edge_count == n-1:
+    print(total_cost)
+else:
+    print("IMPOSSIBLE")
+```
+
+The time complexity of this solution is O(m log m), where m is the number of roads. This is because we sort the list of roads and iterate through it once. The union-find operations have a time complexity of O(log n), where n is the number of cities.

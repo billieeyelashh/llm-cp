@@ -1,0 +1,38 @@
+To solve this problem in the most optimal way, we can use a greedy approach.
+
+First, let's try to understand the pattern of the distinct subsequences for different values of $n$:
+- For $n=1$, the minimum length bit string is "0".
+- For $n=2$, the minimum length bit string is "01".
+- For $n=3$, the minimum length bit string is "010".
+- For $n=4$, the minimum length bit string is "0101".
+- For $n=5$, the minimum length bit string is "01010".
+- For $n=6$, the minimum length bit string is "010101".
+
+From these examples, we can observe that the minimum length bit string consists of alternating "0" and "1" characters, with an additional "1" at the end if $n$ is odd.
+
+Based on this pattern, we can create the following solution in C++:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    string ans = "0";
+    for (int i = 1; i < n; i++) {
+        ans += (i % 2 == 0) ? "0" : "1";
+    }
+
+    if (n % 2 == 1) {
+        ans += "1";
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n) and will find the minimum length bit string that has exactly $n$ distinct subsequences.

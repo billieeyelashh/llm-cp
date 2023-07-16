@@ -1,0 +1,52 @@
+To solve this problem, we can use graph traversal algorithms such as Breadth-First Search (BFS) or Depth-First Search (DFS) to explore all possible routes from the starting city to the destination city, while avoiding the forbidden city.
+
+Here is the Python solution using the Breadth-First Search algorithm:
+
+```python
+from collections import defaultdict, deque
+
+def has_route_without_city(n, m, q, roads, queries):
+    # Create an adjacency list representation of the graph
+    graph = defaultdict(list)
+    for a, b in roads:
+        graph[a].append(b)
+        graph[b].append(a)
+
+    # Process each query
+    for a, b, c in queries:
+        # Perform BFS starting from city a
+        visited = [False] * (n + 1)
+        queue = deque([a])
+        visited[a] = True
+
+        while queue:
+            current_city = queue.popleft()
+
+            # If the current city is the destination city, return "YES"
+            if current_city == b:
+                print("YES")
+                break
+
+            # Explore neighboring cities
+            for neighbor in graph[current_city]:
+                # Skip the forbidden city
+                if neighbor == c:
+                    continue
+
+                # Visit unvisited neighboring cities
+                if not visited[neighbor]:
+                    queue.append(neighbor)
+                    visited[neighbor] = True
+        else:  # If BFS completes without reaching the destination, return "NO"
+            print("NO")
+
+# Read input
+n, m, q = map(int, input().split())
+roads = [list(map(int, input().split())) for _ in range(m)]
+queries = [list(map(int, input().split())) for _ in range(q)]
+
+# Solve the problem
+has_route_without_city(n, m, q, roads, queries)
+```
+
+The time complexity of this solution is O(n + m + q), where n is the number of cities, m is the number of roads, and q is the number of queries.

@@ -1,0 +1,77 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest path from Syrjälä to Lehmälä. Dijkstra's algorithm is an efficient algorithm for finding the shortest path in a graph with non-negative edge weights.
+
+Here's the step-by-step solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+const int INF = 1e9;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<pair<int, int>>> adj(n + 1);
+    vector<int> dist(n + 1, INF);
+    vector<int> prev(n + 1, -1);
+
+    for (int i = 0; i < m; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj[a].push_back({b, c});
+    }
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    dist[1] = 0;
+    pq.push({0, 1});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+
+        if (d > dist[u]) {
+            continue;
+        }
+
+        for (pair<int, int> edge : adj[u]) {
+            int v = edge.first;
+            int w = edge.second;
+
+            if (dist[u] + w < dist[v]) {
+                dist[v] = dist[u] + w;
+                prev[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    vector<int> path;
+    int city = n;
+    while (city != -1) {
+        path.push_back(city);
+        city = prev[city];
+    }
+
+    reverse(path.begin(), path.end());
+
+    cout << path.size() << endl;
+    for (int city : path) {
+        cout << city << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+The code first reads the input, initializes the adjacency list `adj`, and sets the initial distances to infinity except for the source city.
+
+Then, it uses a priority queue `pq` to repeatedly extract the city with the smallest distance from the source. For each neighboring city, if the distance through the current city is shorter than its current distance, we update its distance and add it to the priority queue.
+
+After finding the shortest path, the code reconstructs the path from the destination city to the source city by following the previous city pointers. Finally, it prints the number of cities in the path and the cities themselves.

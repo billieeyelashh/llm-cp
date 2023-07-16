@@ -1,0 +1,61 @@
+To solve this problem, we can use a graph traversal algorithm, such as Depth First Search (DFS), to find the connected components in the graph.
+
+First, we will create an adjacency list to represent the graph. Then, we will perform DFS on each unvisited planet to find all the planets in its connected component. We will assign a unique kingdom label to each connected component.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<bool> visited;
+vector<int> kingdom;
+
+void dfs(int planet, int k) {
+    visited[planet] = true;
+    kingdom[planet] = k;
+
+    for (int neighbor : adj[planet]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, k);
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    adj.resize(n + 1);
+    visited.resize(n + 1, false);
+    kingdom.resize(n + 1);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    int k = 0;
+    for (int planet = 1; planet <= n; planet++) {
+        if (!visited[planet]) {
+            k++;
+            dfs(planet, k);
+        }
+    }
+
+    cout << k << endl;
+    for (int planet = 1; planet <= n; planet++) {
+        cout << kingdom[planet] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is $O(n + m)$ since we perform a DFS on each unvisited planet, and each edge is visited exactly once.

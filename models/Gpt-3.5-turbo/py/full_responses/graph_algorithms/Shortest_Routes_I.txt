@@ -1,0 +1,53 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest route from Syrjälä to every other city.
+
+First, we initialize an array `dist` of size `n` (number of cities) with all elements set to infinity, except for the element at index 0 (representing Syrjälä) which is set to 0. This array will store the shortest route lengths from Syrjälä to each city.
+
+We also initialize an empty priority queue `pq` to store the cities to be processed, where each element in the priority queue is a pair `(distance, city)`.
+
+Next, we add the pair `(0, 0)` to the priority queue to start the algorithm.
+
+While the priority queue is not empty, we extract the pair with the minimum distance from the priority queue. Let's call this pair `(d, u)`, where `d` is the distance to reach city `u`.
+
+For each flight connection starting from city `u`, let's say `(u, v, w)` where `v` is the destination city and `w` is the length of the flight, we check if the distance to reach `v` via `u` is shorter than the current distance stored in `dist[v]`. If it is, we update `dist[v]` to the new shorter distance and add the pair `(dist[v], v)` to the priority queue.
+
+Finally, we print the array `dist`, which contains the shortest route lengths from Syrjälä to each city.
+
+Here is the Python implementation:
+
+```python
+import heapq
+
+def dijkstra(n, m, connections):
+    dist = [float('inf')] * n
+    dist[0] = 0
+
+    pq = [(0, 0)]
+
+    while pq:
+        d, u = heapq.heappop(pq)
+
+        if d > dist[u]:
+            continue
+
+        for v, w in connections[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(pq, (dist[v], v))
+
+    return dist
+
+# Read input
+n, m = map(int, input().split())
+connections = [[] for _ in range(n)]
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    connections[a-1].append((b-1, c))
+
+# Run Dijkstra's algorithm
+distances = dijkstra(n, m, connections)
+
+# Print the shortest route lengths from Syrjälä to each city
+print(*distances)
+```
+
+This solution has a time complexity of $O((n + m) \log n)$, where $n$ is the number of cities and $m$ is the number of flight connections.

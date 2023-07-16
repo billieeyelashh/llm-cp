@@ -1,0 +1,71 @@
+To solve this problem optimally, we can use a data structure called a segment tree. A segment tree is a binary tree where each node represents an interval of the array. Each node stores the distinct values within that interval.
+
+Here is the step-by-step solution using a segment tree:
+
+1. Create an empty segment tree with $4 \cdot n$ nodes, where $n$ is the size of the array.
+2. Build the segment tree by recursively dividing the array into two halves. At each step, compute the distinct values within the current interval and store it in the corresponding node of the segment tree.
+3. For each query, traverse the segment tree starting from the root and find the nodes that cover the given range $[a,b]$. Return the sum of distinct values stored in those nodes.
+4. Repeat step 3 for all queries and print the results.
+
+Here is the C++ code implementing the above solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+const int MAX_N = 2e5;
+int n, q;
+int arr[MAX_N + 1];
+vector<set<int>> segTree(4 * MAX_N);
+
+// Function to build the segment tree
+void build(int node, int start, int end) {
+    if (start == end) {
+        segTree[node].insert(arr[start]);
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    build(2 * node, start, mid);
+    build(2 * node + 1, mid + 1, end);
+
+    segTree[node].insert(segTree[2 * node].begin(), segTree[2 * node].end());
+    segTree[node].insert(segTree[2 * node + 1].begin(), segTree[2 * node + 1].end());
+}
+
+// Function to answer a query
+int query(int node, int start, int end, int left, int right) {
+    if (start > right || end < left)
+        return 0;
+
+    if (start >= left && end <= right)
+        return segTree[node].size();
+
+    int mid = (start + end) / 2;
+    int leftCount = query(2 * node, start, mid, left, right);
+    int rightCount = query(2 * node + 1, mid + 1, end, left, right);
+
+    return leftCount + rightCount;
+}
+
+int main() {
+    cin >> n >> q;
+
+    for (int i = 1; i <= n; i++)
+        cin >> arr[i];
+
+    build(1, 1, n);
+
+    for (int i = 0; i < q; i++) {
+        int a, b;
+        cin >> a >> b;
+        cout << query(1, 1, n, a, b) << endl;
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is $O(n \log n + q \log n)$, where $n$ is the size of the array and $q$ is the number of queries. The space complexity is $O(n \log n)$ for the segment tree.

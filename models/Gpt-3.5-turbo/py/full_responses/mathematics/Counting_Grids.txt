@@ -1,0 +1,32 @@
+To solve this problem, we need to count the number of different $n \times n$ grids with each square being black or white. 
+
+Let's analyze the problem for small values of $n$ to find a pattern:
+
+For $n = 1$, there is only one possible grid.
+
+For $n = 2$, there are 2 possible grids.
+
+For $n = 3$, there are 4 possible grids.
+
+For $n = 4$, there are 8 possible grids.
+
+From the above observations, we can see that the number of possible grids doubles for each increase in $n$. This suggests an exponential relationship.
+
+Therefore, the number of possible grids for any given $n$ can be calculated as $2^{n \times n}$.
+
+Now, let's write the final solution in Python:
+
+```python
+MOD = 10**9 + 7
+
+def count_grids(n):
+    return pow(2, n * n, MOD)
+
+# Read input
+n = int(input())
+
+# Calculate and print the answer
+print(count_grids(n))
+```
+
+This solution uses the `pow()` function with three arguments to calculate $2^{n \times n}$ modulo $10^9+7$.

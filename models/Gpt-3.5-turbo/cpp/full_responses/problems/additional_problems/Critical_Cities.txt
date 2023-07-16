@@ -1,0 +1,67 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to find all the critical cities.
+
+First, we need to build an adjacency list representing the flight connections between cities. We can use a vector of vectors for this purpose.
+
+Then, we can initialize a boolean array called "visited" to keep track of which cities we have visited during the DFS.
+
+Next, we can define a recursive function called "dfs" that takes a city as input. In this function, we mark the current city as visited and iterate through all its neighboring cities. For each neighboring city that has not been visited, we recursively call the "dfs" function on it.
+
+After the DFS is complete, we can count the number of critical cities by iterating through all the cities and checking if they have been visited. If a city has not been visited, it is not a critical city.
+
+Finally, we can print the number of critical cities and then iterate through all the cities again to print the critical cities in increasing order.
+
+Here's the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<bool> visited;
+
+void dfs(int city) {
+    visited[city] = true;
+    for (int neighbor : adj[city]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor);
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    adj.resize(n + 1);
+    visited.resize(n + 1, false);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+    }
+
+    dfs(1);
+
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            count++;
+        }
+    }
+
+    cout << count << endl;
+
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            cout << i << " ";
+        }
+    }
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(n + m) since we perform a DFS on the adjacency list to visit all the cities and their neighboring cities. The space complexity is also O(n + m) since we store the adjacency list and the visited array.

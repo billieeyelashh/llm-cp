@@ -1,0 +1,60 @@
+To solve this problem optimally, we can follow these steps:
+
+1. Count the total number of coins in the grid and divide it by 2. Let's call this value "target".
+
+2. Iterate over each cell in the grid. If the number of coins in a cell is greater than "target", we need to move the excess coins to other cells.
+
+3. To minimize the number of moves, we can start from the leftmost cell in the top row and move the excess coins to the right. If there are no cells to the right, move to the next row.
+
+4. Keep track of the total number of moves required to move the excess coins.
+
+5. Finally, print the total number of moves.
+
+Here's the C++ code that implements this algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int n;
+  cin >> n;
+
+  vector<vector<int>> grid(2, vector<int>(n));
+  int totalCoins = 0;
+
+  for (int i = 0; i < 2; ++i) {
+    for (int j = 0; j < n; ++j) {
+      cin >> grid[i][j];
+      totalCoins += grid[i][j];
+    }
+  }
+
+  int target = totalCoins / 2;
+  int moves = 0;
+
+  for (int i = 0; i < 2; ++i) {
+    for (int j = 0; j < n; ++j) {
+      if (grid[i][j] > target) {
+        int excess = grid[i][j] - target;
+        moves += excess;
+        grid[i][j] -= excess;
+
+        if (i == 0 && j < n - 1) {
+          grid[i][j + 1] += excess;
+        } else if (i == 1 && j > 0) {
+          grid[i][j - 1] += excess;
+        }
+      }
+    }
+  }
+
+  cout << moves << endl;
+
+  return 0;
+}
+```
+
+This code has a time complexity of O(n) because we iterate over each cell in the grid only once.

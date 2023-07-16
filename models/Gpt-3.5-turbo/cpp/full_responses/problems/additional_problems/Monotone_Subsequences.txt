@@ -1,0 +1,52 @@
+To solve this problem, we can use the following approach:
+
+1. For each test case, if $k$ is equal to $n$, it is impossible to have a permutation with exactly $k$ elements in the longest monotone subsequence. In this case, we print "IMPOSSIBLE" and move to the next test case.
+
+2. Otherwise, we can construct a valid permutation by starting with the numbers from $k$ to $1$, in decreasing order. Then, we append the remaining numbers from $k+1$ to $n$ in increasing order.
+
+Here is the C++ code that implements this approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void solve(int n, int k) {
+    if (k == n) {
+        cout << "IMPOSSIBLE\n";
+        return;
+    }
+
+    vector<int> permutation;
+    for (int i = k; i >= 1; i--) {
+        permutation.push_back(i);
+    }
+
+    for (int i = k + 1; i <= n; i++) {
+        permutation.push_back(i);
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << permutation[i] << " ";
+    }
+    cout << "\n";
+}
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+        solve(n, k);
+    }
+
+    return 0;
+}
+```
+
+This code reads the number of test cases $t$ from the input, and for each test case, it reads the values of $n$ and $k$. The `solve` function is then called to find and print the valid permutation.
+
+The time complexity of this solution is $O(n)$ for each test case, where $n$ is the size of the permutation.

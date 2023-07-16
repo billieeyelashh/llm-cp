@@ -1,0 +1,63 @@
+We can solve this problem using Pick's theorem. 
+
+Pick's theorem states that for a simple polygon with vertices having integer coordinates, the area of the polygon can be calculated as:
+Area = B/2 + I - 1
+where B is the number of lattice points on the boundary of the polygon and I is the number of lattice points inside the polygon.
+
+To calculate the number of lattice points on the boundary of the polygon, we can use the Bresenham's line algorithm to iterate over each line segment of the polygon and count the number of lattice points on that line.
+
+To calculate the number of lattice points inside the polygon, we can use the ray casting algorithm. We start from a point outside the polygon and cast a horizontal ray towards the right. For each intersection with a line segment of the polygon, we count the number of lattice points that the ray crosses.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+int countBoundaryLatticePoints(int x1, int y1, int x2, int y2) {
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int g = gcd(dx, dy);
+    return g + 1;
+}
+
+int countInsideLatticePoints(int n, int* x, int* y) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        int x1 = x[i];
+        int y1 = y[i];
+        int x2 = x[(i + 1) % n];
+        int y2 = y[(i + 1) % n];
+        count += countBoundaryLatticePoints(x1, y1, x2, y2) - 1;
+    }
+    return count;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    int x[n], y[n];
+    for (int i = 0; i < n; i++) {
+        cin >> x[i] >> y[i];
+    }
+    int insidePoints = countInsideLatticePoints(n, x, y);
+    int boundaryPoints = 0;
+    for (int i = 0; i < n; i++) {
+        boundaryPoints += countBoundaryLatticePoints(x[i], y[i], x[(i + 1) % n], y[(i + 1) % n]);
+    }
+    boundaryPoints -= n;
+    int area = insidePoints + boundaryPoints/2 - 1;
+    cout << insidePoints << " " << boundaryPoints << endl;
+    return 0;
+}
+```
+
+This code calculates the number of lattice points inside the polygon and on its boundary. The `countBoundaryLatticePoints` function calculates the number of lattice points on a line segment using the Bresenham's line algorithm. The `countInsideLatticePoints` function iterates over each line segment of the polygon and counts the number of lattice points inside the polygon using the ray casting algorithm. Finally, the code calculates the area of the polygon using Pick's theorem.

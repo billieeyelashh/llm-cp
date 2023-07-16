@@ -1,0 +1,67 @@
+To solve this problem, we can use backtracking. We will recursively try to place a queen on each row of the chessboard, ensuring that no two queens are attacking each other.
+
+Here is the Python solution:
+
+```python
+def is_safe(board, row, col):
+    # Check if a queen can be placed at board[row][col]
+    
+    # Check the same column
+    for i in range(row):
+        if board[i][col] == 'Q':
+            return False
+    
+    # Check the upper diagonal
+    i, j = row, col
+    while i >= 0 and j >= 0:
+        if board[i][j] == 'Q':
+            return False
+        i -= 1
+        j -= 1
+    
+    # Check the lower diagonal
+    i, j = row, col
+    while i >= 0 and j < 8:
+        if board[i][j] == 'Q':
+            return False
+        i -= 1
+        j += 1
+    
+    return True
+
+
+def count_arrangements(board, row):
+    # Base case: If all queens are placed, increment the count
+    if row == 8:
+        return 1
+    
+    count = 0
+    
+    # Try to place a queen in each column of the current row
+    for col in range(8):
+        if is_safe(board, row, col) and board[row][col] == '.':
+            # Place the queen
+            board[row][col] = 'Q'
+            
+            # Recur for the next row
+            count += count_arrangements(board, row + 1)
+            
+            # Remove the queen (backtrack)
+            board[row][col] = '.'
+    
+    return count
+
+
+# Read the input chessboard
+board = [list(input()) for _ in range(8)]
+
+# Count the number of arrangements
+arrangements = count_arrangements(board, 0)
+
+# Print the result
+print(arrangements)
+```
+
+This solution uses a helper function `is_safe` to check if a queen can be placed at a given position without attacking any other queens. The main function `count_arrangements` recursively tries to place a queen on each row, and keeps track of the count of valid arrangements.
+
+The time complexity of this solution is O(8^8), which is the maximum number of possible configurations for placing the queens. However, in practice, the actual number of recursive calls will be much less due to the constraints and the backtracking technique used.

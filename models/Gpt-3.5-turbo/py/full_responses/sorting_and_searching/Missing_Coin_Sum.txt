@@ -1,0 +1,32 @@
+To solve this problem optimally, we can use a greedy approach.
+
+First, we sort the coins in ascending order. This allows us to consider the coins in increasing order of their values.
+
+Next, we initialize a variable `smallest_sum` to 1. This represents the smallest sum that we cannot create using any subset of the coins so far.
+
+Then, we iterate through each coin in the sorted order. For each coin, if its value is not greater than `smallest_sum`, we update `smallest_sum` by adding the current coin's value to it. This is because if we can create all sums up to `smallest_sum` using the previous coins, we can also create sums up to `smallest_sum + coin_value` using the current coin.
+
+If the current coin's value is greater than `smallest_sum`, we break out of the loop since we have found the smallest sum that cannot be created.
+
+Finally, we print the value of `smallest_sum`, which is our desired output.
+
+Here's the Python code for the solution:
+
+```python
+n = int(input())
+coins = list(map(int, input().split()))
+
+coins.sort()  # Sort the coins in ascending order
+
+smallest_sum = 1
+
+for coin in coins:
+    if coin <= smallest_sum:
+        smallest_sum += coin
+    else:
+        break
+
+print(smallest_sum)
+```
+
+This solution has a time complexity of O(n log n) due to the sorting operation.

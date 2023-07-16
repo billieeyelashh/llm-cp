@@ -1,0 +1,56 @@
+To solve this problem optimally, we can use the principle of inclusion-exclusion.
+
+First, we calculate the count of numbers divisible by each prime individually. Let's denote this count as $cnt_i$ for the $i$-th prime $a_i$. For each prime $a_i$, the count $cnt_i$ can be calculated as $cnt_i = n / a_i$.
+
+Next, we calculate the count of numbers divisible by the intersection of any two primes. Let's denote this count as $cnt_{ij}$ for the intersection of primes $a_i$ and $a_j$. For each pair of primes $a_i$ and $a_j$, the count $cnt_{ij}$ can be calculated as $cnt_{ij} = n / (a_i \cdot a_j)$.
+
+We continue this process for each possible intersection of primes, until we have accounted for all possible intersections.
+
+Finally, we calculate the count of numbers divisible by the union of all primes using the principle of inclusion-exclusion. We add the counts of numbers divisible by each individual prime, subtract the counts of numbers divisible by each intersection of two primes, add the counts of numbers divisible by each intersection of three primes, and so on.
+
+Our final answer is the count of numbers divisible by the union of all primes.
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    long long n, k;
+    cin >> n >> k;
+
+    vector<long long> primes(k);
+    for (int i = 0; i < k; i++) {
+        cin >> primes[i];
+    }
+
+    long long ans = 0;
+    for (int mask = 1; mask < (1 << k); mask++) {
+        long long prod = 1;
+        int bits = 0;
+
+        for (int i = 0; i < k; i++) {
+            if (mask & (1 << i)) {
+                prod *= primes[i];
+                bits++;
+            }
+        }
+
+        long long cnt = n / prod;
+        if (bits % 2 == 1) {
+            ans += cnt;
+        } else {
+            ans -= cnt;
+        }
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(2^k), where k is the number of given primes.

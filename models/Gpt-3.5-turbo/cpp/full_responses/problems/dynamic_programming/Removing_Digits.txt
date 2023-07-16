@@ -1,0 +1,42 @@
+To solve this problem optimally, we can follow the following steps:
+
+1. Initialize a variable `steps` to 0, which will keep track of the number of steps taken.
+
+2. Convert the integer `n` to a string `numStr` for easier manipulation of digits.
+
+3. Iterate over each character in `numStr` from left to right.
+
+4. For each character, subtract its integer value from `n` and increment `steps` by 1.
+
+5. Repeat steps 3 and 4 until `n` becomes 0.
+
+6. Print the final value of `steps`.
+
+Here is the C++ code implementing the above algorithm:
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    string numStr = to_string(n);
+    int steps = 0;
+
+    for (char c : numStr) {
+        int digit = c - '0';
+        n -= digit;
+        steps++;
+    }
+
+    cout << steps << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(log n) as we are converting the number to a string, where n is the given integer.

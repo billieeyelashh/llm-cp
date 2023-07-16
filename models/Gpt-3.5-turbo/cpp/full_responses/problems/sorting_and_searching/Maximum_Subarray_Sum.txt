@@ -1,0 +1,38 @@
+To solve this problem, we can use Kadane's algorithm, which is an efficient way to find the maximum subarray sum in linear time.
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <climits>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int max_sum = INT_MIN;
+    int current_sum = 0;
+
+    for (int i = 0; i < n; i++) {
+        current_sum = max(arr[i], current_sum + arr[i]);
+        max_sum = max(max_sum, current_sum);
+    }
+
+    cout << max_sum << endl;
+
+    return 0;
+}
+```
+
+The algorithm iterates through the array, keeping track of the maximum sum found so far (`max_sum`) and the sum of the current subarray (`current_sum`). At each iteration, `current_sum` is updated to either the current element or the sum of the current element and the previous subarray sum, whichever is greater. Then, `max_sum` is updated if `current_sum` is greater.
+
+Finally, we output the `max_sum`, which represents the maximum subarray sum.
+
+The time complexity of this solution is O(n), where n is the size of the array.

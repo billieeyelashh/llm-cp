@@ -1,0 +1,55 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest path from Syrjälä to Lehmälä while considering the number of parcels to be sent.
+
+We will maintain a priority queue to store the vertices to be processed. Each element in the priority queue will be a tuple (cost, vertex, parcels), where cost is the total cost to reach vertex, and parcels is the number of parcels sent so far.
+
+Initially, we add (0, 1, 0) to the priority queue, indicating that we start at vertex 1 (Syrjälä), with a cost of 0 and no parcels sent.
+
+While the priority queue is not empty, we extract the element with the minimum cost. Let's call this element (cur_cost, cur_vertex, cur_parcels).
+
+If cur_vertex is Lehmälä (vertex n) and cur_parcels is equal to k, we have reached the destination with the required number of parcels. We return cur_cost as the minimum total cost.
+
+Otherwise, for each route (cur_vertex, next_vertex, max_parcels, parcel_cost), if cur_parcels + 1 is less than or equal to k and cur_cost + parcel_cost is less than the cost to reach next_vertex, we update the cost to reach next_vertex and add (cur_cost + parcel_cost, next_vertex, cur_parcels + 1) to the priority queue.
+
+If we reach the end of the loop without finding a valid solution, we return -1.
+
+Here is the Python code for the solution:
+
+```python
+import heapq
+
+def cheapest_way(n, m, k, routes):
+    # Create an adjacency list to represent the graph
+    graph = [[] for _ in range(n + 1)]
+    for a, b, r, c in routes:
+        graph[a].append((b, r, c))
+
+    # Create a priority queue to store the vertices to be processed
+    pq = [(0, 1, 0)]  # (cost, vertex, parcels)
+    heapq.heapify(pq)
+
+    # Create a list to store the minimum cost to reach each vertex
+    min_cost = [float('inf')] * (n + 1)
+    min_cost[1] = 0
+
+    while pq:
+        cur_cost, cur_vertex, cur_parcels = heapq.heappop(pq)
+
+        if cur_vertex == n and cur_parcels == k:
+            return cur_cost
+
+        for next_vertex, max_parcels, parcel_cost in graph[cur_vertex]:
+            if cur_parcels + 1 <= k and cur_cost + parcel_cost < min_cost[next_vertex]:
+                min_cost[next_vertex] = cur_cost + parcel_cost
+                heapq.heappush(pq, (cur_cost + parcel_cost, next_vertex, cur_parcels + 1))
+
+    return -1
+
+# Read input
+n, m, k = map(int, input().split())
+routes = [list(map(int, input().split())) for _ in range(m)]
+
+# Call the function and print the result
+print(cheapest_way(n, m, k, routes))
+```
+
+This solution has a time complexity of O((n + m) log n), where n is the number of cities and m is the number of routes.

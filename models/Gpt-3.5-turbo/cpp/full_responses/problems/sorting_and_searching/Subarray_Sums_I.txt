@@ -1,0 +1,51 @@
+To solve this problem, we can use the two-pointer technique. We'll maintain two pointers, one at the start of the subarray and one at the end of the subarray. We'll move the pointers accordingly based on the sum of the elements between the pointers.
+
+Here's the step-by-step solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int countSubarrays(vector<int>& arr, int targetSum) {
+    int n = arr.size();
+    int count = 0;
+    int sum = 0;
+    int start = 0;
+
+    for (int end = 0; end < n; end++) {
+        sum += arr[end];
+
+        while (sum > targetSum) {
+            sum -= arr[start];
+            start++;
+        }
+
+        if (sum == targetSum) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int n, targetSum;
+    cin >> n >> targetSum;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int result = countSubarrays(arr, targetSum);
+    cout << result << endl;
+
+    return 0;
+}
+```
+
+The `countSubarrays` function takes an array `arr` and the target sum `targetSum` as inputs. It initializes variables for the count, sum, and start pointer. Then, it iterates through the array using the end pointer. It updates the sum by adding the current element and checks if the sum exceeds the target sum. If the sum is greater than the target sum, it moves the start pointer and subtracts the element at that position from the sum until the sum is less than or equal to the target sum. If the sum becomes equal to the target sum, it increments the count. Finally, it returns the count.
+
+In the `main` function, we read the input values, call the `countSubarrays` function, and print the result.

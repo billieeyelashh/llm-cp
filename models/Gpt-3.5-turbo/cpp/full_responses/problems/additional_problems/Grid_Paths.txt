@@ -1,0 +1,48 @@
+To solve this problem, we can use dynamic programming. Let's define a 2D array dp where dp[i][j] represents the number of paths to reach square (i, j). We can initialize dp[1][1] as 1 because there is only one way to reach the top-left square.
+
+We can fill the dp array iteratively. For each square (i, j), if it is not a trap, the number of paths to reach square (i, j) is equal to the sum of the number of paths to reach square (i-1, j) and the number of paths to reach square (i, j-1). We can update dp[i][j] as dp[i-1][j] + dp[i][j-1].
+
+If square (i, j) is a trap, we set dp[i][j] as 0 because we cannot reach a trap.
+
+Finally, the answer will be stored in dp[n][n]. We can print the answer modulo 10^9+7.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+int main() {
+    int n, m;
+    std::cin >> n >> m;
+
+    std::vector<std::vector<int>> dp(n + 1, std::vector<int>(n + 1, 0));
+    dp[1][1] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (i == 1 && j == 1) continue;
+
+            dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % MOD;
+
+            for (int k = 0; k < m; k++) {
+                int trapY, trapX;
+                std::cin >> trapY >> trapX;
+
+                if (trapY == i && trapX == j) {
+                    dp[i][j] = 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    std::cout << dp[n][n] << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n^2 + m) and a space complexity of O(n^2).

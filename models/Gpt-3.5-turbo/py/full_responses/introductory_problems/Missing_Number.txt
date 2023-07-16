@@ -1,0 +1,18 @@
+To solve this problem, we can use the property of the sum of consecutive numbers. The sum of all numbers from 1 to n can be calculated using the formula n * (n+1) / 2.
+
+We can calculate the sum of all numbers from 1 to n using this formula and subtract the sum of the given (n-1) numbers. The difference will be the missing number.
+
+Here is the Python implementation:
+
+```python
+n = int(input())
+numbers = list(map(int, input().split()))
+
+total_sum = n * (n + 1) // 2
+given_sum = sum(numbers)
+
+missing_number = total_sum - given_sum
+print(missing_number)
+```
+
+This solution has a time complexity of O(n) and will work efficiently within the given constraints.

@@ -1,0 +1,62 @@
+To solve this problem, we can use the concept of dynamic programming. We will create a 2D boolean array, dp, where dp[i][j] will be true if the substring from index i to j is a palindrome.
+
+1. Initialize dp[i][i] as true for all i, since single characters are palindromes.
+2. Initialize maxLen = 1 and start = 0, which will keep track of the longest palindrome found so far.
+3. Iterate over the string from length 2 to n:
+   a. For each length, iterate over the string from index 0 to n - length:
+      - Set end = start + length - 1.
+      - If the characters at start and end are equal and dp[start+1][end-1] is true (i.e., the substring between start and end is a palindrome), then set dp[start][end] as true.
+      - If dp[start][end] is true and length is greater than maxLen, update maxLen and start.
+4. Print the substring of the input string from start to start + maxLen - 1.
+
+Here is the C++ code that implements the above algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+string longestPalindrome(string s) {
+    int n = s.length();
+    vector<vector<bool>> dp(n, vector<bool>(n, false));
+
+    // Single characters are palindromes
+    for (int i = 0; i < n; i++) {
+        dp[i][i] = true;
+    }
+
+    int maxLen = 1, start = 0;
+
+    // Check for palindromes of length 2 or more
+    for (int length = 2; length <= n; length++) {
+        for (int i = 0; i < n - length + 1; i++) {
+            int end = i + length - 1;
+
+            if (s[i] == s[end]) {
+                // If inner substring is palindrome, then current substring is also palindrome
+                if (length == 2 || dp[i + 1][end - 1]) {
+                    dp[i][end] = true;
+
+                    if (length > maxLen) {
+                        maxLen = length;
+                        start = i;
+                    }
+                }
+            }
+        }
+    }
+
+    return s.substr(start, maxLen);
+}
+
+int main() {
+    string s;
+    cin >> s;
+
+    cout << longestPalindrome(s) << endl;
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(n^2) and space complexity of O(n^2), where n is the length of the input string.

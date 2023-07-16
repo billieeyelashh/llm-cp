@@ -1,0 +1,40 @@
+To solve this problem, we can use a greedy approach. We can sort the movies based on their ending times in ascending order. 
+
+Then, we iterate through the sorted list of movies and keep track of the latest ending time of the movies we've chosen so far. If the starting time of the current movie is after the latest ending time, we can watch this movie entirely, so we increment our answer by 1 and update the latest ending time to the ending time of the current movie.
+
+Here is the C++ code that implements this approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<pair<int, int>> movies(n);
+    for (int i = 0; i < n; i++) {
+        cin >> movies[i].second >> movies[i].first; // we store ending time as second and starting time as first
+    }
+
+    sort(movies.begin(), movies.end());
+
+    int answer = 0;
+    int latestEndingTime = 0;
+    for (int i = 0; i < n; i++) {
+        if (movies[i].second >= latestEndingTime) {
+            answer++;
+            latestEndingTime = movies[i].first;
+        }
+    }
+
+    cout << answer << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(nlogn) because of the sorting step.

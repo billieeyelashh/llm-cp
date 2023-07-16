@@ -1,0 +1,34 @@
+To count the number of beautiful permutations, we can use dynamic programming. Let's define a state $dp[i][j]$ as the number of beautiful permutations of length $i$ ending with the number $j$.
+
+We can observe that $dp[1][j] = 1$ for all $1 \le j \le n$ since there is only one number in a permutation of length $1$.
+
+For each state $dp[i][j]$, we can calculate it by considering the previous state $dp[i-1][k]$ where $k$ is any number such that $|j-k| > 1$. This is because in a beautiful permutation, the adjacent elements cannot have a difference of $1$.
+
+The final answer will be the sum of all $dp[n][j]$ for all $1 \le j \le n$.
+
+Here is the Python code to solve the problem:
+
+```python
+MOD = 10**9 + 7
+
+def countBeautifulPermutations(n):
+    dp = [[0] * (n+1) for _ in range(n+1)]
+
+    for j in range(1, n+1):
+        dp[1][j] = 1
+
+    for i in range(2, n+1):
+        for j in range(1, n+1):
+            for k in range(1, n+1):
+                if abs(j-k) > 1:
+                    dp[i][j] = (dp[i][j] + dp[i-1][k]) % MOD
+
+    ans = sum(dp[n]) % MOD
+    return ans
+
+# Test the code
+n = int(input())
+print(countBeautifulPermutations(n))
+```
+
+This code has a time complexity of $O(n^3)$ which is efficient enough to handle the given constraints.

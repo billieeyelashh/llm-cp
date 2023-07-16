@@ -1,0 +1,26 @@
+To solve this problem, we can use a greedy algorithm. We sort the books based on their price per page ratio in non-decreasing order. Then, we iterate through the sorted books and buy as many copies as possible until we reach the maximum total price $x$. 
+
+Here is the Python code to solve the problem:
+
+```python
+n, x = map(int, input().split())
+prices = list(map(int, input().split()))
+pages = list(map(int, input().split()))
+copies = list(map(int, input().split()))
+
+# Create a list of (price per page, book index) tuples
+book_ratios = [(prices[i] / pages[i], i) for i in range(n)]
+book_ratios.sort()
+
+total_pages = 0
+total_price = 0
+
+for ratio, book_index in book_ratios:
+    max_copies = min(copies[book_index], (x - total_price) // prices[book_index])
+    total_pages += max_copies * pages[book_index]
+    total_price += max_copies * prices[book_index]
+
+print(total_pages)
+```
+
+The time complexity of this solution is O(n log n) due to the sorting step.

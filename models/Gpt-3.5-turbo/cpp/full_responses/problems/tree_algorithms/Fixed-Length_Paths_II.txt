@@ -1,0 +1,65 @@
+To count the number of distinct paths with at least $k_1$ and at most $k_2$ edges in a tree, we can use a depth-first search (DFS) algorithm.
+
+First, we construct an adjacency list to represent the tree. Then, we start DFS from each node to explore all possible paths.
+
+During the DFS, we maintain a counter for each node that represents the number of paths with length between $k_1$ and $k_2$ that end at that node. Initially, all counters are set to zero.
+
+For each node $u$ visited during the DFS, we update the counters for all its adjacent nodes $v$ as follows:
+
+- If the number of edges from the root to $u$ is between $k_1$ and $k_2$, we increment the counter for $v$ by one.
+- If the number of edges from the root to $u$ is less than $k_2$, we add the counter for $u$ to the counter for $v$.
+
+Finally, we sum up all the counters for all nodes to get the total number of distinct paths with length between $k_1$ and $k_2$.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MAXN = 2e5 + 5;
+
+vector<int> adj[MAXN];
+int counter[MAXN];
+
+void dfs(int u, int parent, int depth, int k1, int k2) {
+    if (depth >= k1 && depth <= k2) {
+        counter[u]++;
+    }
+
+    if (depth < k2) {
+        counter[u] += counter[parent];
+    }
+
+    for (int v : adj[u]) {
+        if (v != parent) {
+            dfs(v, u, depth + 1, k1, k2);
+        }
+    }
+}
+
+int main() {
+    int n, k1, k2;
+    cin >> n >> k1 >> k2;
+
+    for (int i = 0; i < n - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    dfs(1, 0, 0, k1, k2);
+
+    int totalPaths = 0;
+    for (int i = 1; i <= n; i++) {
+        totalPaths += counter[i];
+    }
+
+    cout << totalPaths << endl;
+
+    return 0;
+}
+```

@@ -1,0 +1,37 @@
+To solve this problem, we can perform the operations one by one and update the string accordingly. 
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    string s;
+    cin >> s;
+
+    while (m--) {
+        int a, b;
+        cin >> a >> b;
+
+        string substring = s.substr(a-1, b-a+1);
+        s.erase(a-1, b-a+1);
+        s += substring;
+    }
+
+    cout << s << endl;
+
+    return 0;
+}
+```
+
+First, we read the length of the string and the number of operations from the input. Then, we read the string itself. 
+
+In the loop, we read the positions of the substring to cut and paste. We use the `substr()` function to extract the substring and `erase()` function to remove it from the original string. Finally, we append the extracted substring to the end of the string using the `+=` operator.
+
+After performing all the operations, we print the final string.

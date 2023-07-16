@@ -1,0 +1,21 @@
+To solve this problem optimally, we can use the concept of bitwise XOR operation. The XOR operation between two equal bits is 0, and between two different bits is 1.
+
+We can initialize the minimum Hamming distance as infinity. Then, for every pair of strings, we can calculate their XOR and count the number of set bits (bits with value 1) in the XOR result. If this count is less than the current minimum Hamming distance, update the minimum distance.
+
+Here is the Python code that implements this approach:
+
+```python
+n, k = map(int, input().split())
+strings = [input() for _ in range(n)]
+
+min_distance = float('inf')
+
+for i in range(n):
+    for j in range(i+1, n):
+        distance = bin(int(strings[i], 2) ^ int(strings[j], 2)).count('1')
+        min_distance = min(min_distance, distance)
+
+print(min_distance)
+```
+
+This solution has a time complexity of O(n^2 * k), where n is the number of bit strings and k is the length of each string.

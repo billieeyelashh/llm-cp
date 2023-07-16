@@ -1,0 +1,62 @@
+To solve this problem, we can use a greedy approach. We will sort the weights of the people in non-decreasing order, and then try to fit in as many people as possible into each elevator ride until the weight limit is reached.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> weights(n);
+    for (int i = 0; i < n; i++) {
+        cin >> weights[i];
+    }
+
+    sort(weights.begin(), weights.end());
+
+    int rides = 0;
+    int current_weight = 0;
+    int i = 0;
+
+    while (i < n) {
+        if (current_weight + weights[i] <= x) {
+            current_weight += weights[i];
+            i++;
+        } else {
+            rides++;
+            current_weight = 0;
+        }
+    }
+
+    if (current_weight > 0) {
+        rides++;
+    }
+
+    cout << rides << endl;
+
+    return 0;
+}
+```
+
+Explanation:
+1. Read the number of people $n$ and the maximum allowed weight $x$ from input.
+2. Read the weights of each person and store them in a vector.
+3. Sort the vector of weights in non-decreasing order.
+4. Initialize the number of rides as 0, the current weight in the elevator as 0, and the index $i$ as 0.
+5. While there are people left to be picked up:
+   - If the current weight plus the weight of the next person is less than or equal to the maximum allowed weight:
+     - Add the weight of the next person to the current weight.
+     - Increment the index $i$.
+   - Otherwise:
+     - Increment the number of rides.
+     - Reset the current weight to 0.
+6. If there are still people in the elevator after the loop ends, increment the number of rides by 1.
+7. Print the number of rides.
+
+This solution has a time complexity of $O(n\log n)$ due to the sorting step.

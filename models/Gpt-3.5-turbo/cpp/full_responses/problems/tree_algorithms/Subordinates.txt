@@ -1,0 +1,51 @@
+To solve this problem, we can use a simple approach: build a tree data structure to represent the company hierarchy, and then perform a depth-first search (DFS) to count the number of subordinates for each employee.
+
+Here's the C++ code for this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MAXN = 2e5 + 5;
+
+vector<int> adj[MAXN];
+int subordinates[MAXN];
+
+void dfs(int employee) {
+    for (int subordinate : adj[employee]) {
+        dfs(subordinate);
+        subordinates[employee] += subordinates[subordinate] + 1;
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    for (int i = 2; i <= n; i++) {
+        int boss;
+        cin >> boss;
+        adj[boss].push_back(i);
+    }
+
+    dfs(1);
+
+    for (int i = 1; i <= n; i++) {
+        cout << subordinates[i] << " ";
+    }
+
+    return 0;
+}
+```
+
+The `adj` array is used to store the adjacency list representation of the company hierarchy. Each index corresponds to an employee, and the value is a vector containing the direct subordinates of that employee.
+
+The `subordinates` array is used to store the number of subordinates for each employee. Initially, all values are set to 0.
+
+The `dfs` function performs a depth-first search starting from the general director (employee 1). For each employee, it recursively visits their direct subordinates, updates their number of subordinates, and adds 1 to account for the current subordinate itself.
+
+Finally, we print the number of subordinates for each employee.
+
+This solution has a time complexity of O(n), where n is the number of employees, as we perform a single DFS traversal.

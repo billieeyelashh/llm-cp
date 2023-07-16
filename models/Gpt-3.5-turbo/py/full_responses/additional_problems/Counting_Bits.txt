@@ -1,0 +1,18 @@
+We can solve this problem by counting the number of set bits (or one bits) in each number from $1$ to $n$. To count the set bits efficiently, we can use the Brian Kernighan's algorithm.
+
+The Brian Kernighan's algorithm states that for any positive integer $x$, $x \& (x-1)$ clears the least significant set bit of $x$. We can use this property to count the number of set bits in an integer.
+
+Here is the solution in Python:
+
+```python
+n = int(input())
+
+count = 0
+while n > 0:
+    count += 1
+    n = n & (n - 1)
+
+print(count)
+```
+
+In this solution, we initialize a variable `count` to keep track of the number of set bits. We iterate while `n` is greater than 0. In each iteration, we increment `count` and update `n` by clearing its least significant set bit using the expression `n = n & (n - 1)`. Finally, we print the value of `count`, which gives us the total number of set bits in the binary representations of integers between $1$ and $n$.

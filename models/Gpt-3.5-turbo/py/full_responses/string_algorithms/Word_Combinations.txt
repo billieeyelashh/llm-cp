@@ -1,0 +1,33 @@
+To solve this problem, we can use dynamic programming. We will create an array dp of size n+1, where dp[i] represents the number of ways to create the string up to index i.
+
+We will initialize dp[0] = 1, as there is only one way to create an empty string.
+
+For each index i from 1 to n, we will iterate over each word in the dictionary and check if it matches the substring starting at index i minus the length of the word. If it matches, we can add the number of ways to create the substring up to that index to the current dp[i].
+
+Finally, we return dp[n] modulo 10^9+7 as the result.
+
+Here is the Python code:
+
+```python
+def count_ways(s, k, words):
+    n = len(s)
+    dp = [0] * (n + 1)
+    dp[0] = 1
+
+    for i in range(1, n + 1):
+        for word in words:
+            if s[i - len(word):i] == word:
+                dp[i] += dp[i - len(word)]
+                dp[i] %= 1000000007
+
+    return dp[n]
+
+# Example usage
+s = "ababc"
+k = 4
+words = ["ab", "abab", "c", "cb"]
+print(count_ways(s, k, words))
+```
+
+Output:
+2

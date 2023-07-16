@@ -1,0 +1,44 @@
+To solve this problem, we can use a sliding window approach. We will maintain a sorted window of size k and update it as we move to the next window.
+
+Here is the step-by-step solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Create a window of size k
+    vector<int> window(arr.begin(), arr.begin() + k);
+    sort(window.begin(), window.end());
+
+    // Print the median of the first window
+    cout << window[k/2] << " ";
+
+    // Slide the window and update the sorted window
+    for (int i = k; i < n; i++) {
+        // Remove the first element from the window
+        window.erase(lower_bound(window.begin(), window.end(), arr[i-k]));
+
+        // Insert the new element into the window
+        window.insert(upper_bound(window.begin(), window.end(), arr[i]), arr[i]);
+
+        // Print the median of the current window
+        cout << window[k/2] << " ";
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n*k*log(k)), where n is the number of elements and k is the size of the window.

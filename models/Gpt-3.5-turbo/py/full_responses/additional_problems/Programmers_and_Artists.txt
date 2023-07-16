@@ -1,0 +1,44 @@
+To solve this problem optimally, we can use a greedy approach. We sort the applicants in descending order of their total skills (sum of programming and artistic skills) and iterate through them. 
+
+We maintain two counters, one for the number of programmers hired ($p_count$) and one for the number of artists hired ($a_count$). Initially, both counters are set to 0.
+
+While iterating through the sorted applicants, we check if the applicant has higher programming skills or artistic skills. If $p_count < a$ and the applicant has higher programming skills, we hire them as a programmer and increment $p_count$ by 1. Similarly, if $a_count < b$ and the applicant has higher artistic skills, we hire them as an artist and increment $a_count$ by 1.
+
+Finally, we sum up the skills of the hired programmers and artists and return that as the maximum sum of skills.
+
+Here is the Python code implementation:
+
+```python
+# Read input
+a, b, n = map(int, input().split())
+applicants = []
+for _ in range(n):
+    x, y = map(int, input().split())
+    applicants.append((x+y, x, y))
+
+# Sort applicants in descending order of total skills
+applicants.sort(reverse=True)
+
+# Counters for the number of hired programmers and artists
+p_count = 0
+a_count = 0
+
+# Sum of skills
+max_skill_sum = 0
+
+# Iterate through applicants
+for _, x, y in applicants:
+    # Check if the applicant has higher programming skills and we need more programmers
+    if p_count < a and x >= y:
+        max_skill_sum += x
+        p_count += 1
+    # Check if the applicant has higher artistic skills and we need more artists
+    elif a_count < b and y > x:
+        max_skill_sum += y
+        a_count += 1
+
+# Print the maximum sum of skills
+print(max_skill_sum)
+```
+
+This solution runs in O(n log n) time complexity due to the sorting step.

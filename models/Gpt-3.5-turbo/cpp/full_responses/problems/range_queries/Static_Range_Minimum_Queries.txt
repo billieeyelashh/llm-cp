@@ -1,0 +1,77 @@
+To solve this problem efficiently, we can use the concept of segment trees. A segment tree is a binary tree structure that allows efficient querying and updating of intervals.
+
+Here's the step-by-step solution in C++:
+
+1. Define a struct to represent a node in the segment tree. Each node will store the minimum value in its corresponding range.
+
+```cpp
+struct Node {
+    int min_value;
+};
+```
+
+2. Implement a function to build the segment tree recursively. This function will take the input array, the current range, and the current node as parameters.
+
+```cpp
+void build_segment_tree(vector<int>& arr, vector<Node>& tree, int curr_node, int left, int right) {
+    if (left == right) {
+        tree[curr_node].min_value = arr[left];
+        return;
+    }
+
+    int mid = (left + right) / 2;
+    build_segment_tree(arr, tree, 2 * curr_node, left, mid);
+    build_segment_tree(arr, tree, 2 * curr_node + 1, mid + 1, right);
+
+    tree[curr_node].min_value = min(tree[2 * curr_node].min_value, tree[2 * curr_node + 1].min_value);
+}
+```
+
+3. Implement a function to query the minimum value in a given range. This function will take the current range, the query range, and the current node as parameters.
+
+```cpp
+int query_range(vector<Node>& tree, int curr_node, int curr_left, int curr_right, int query_left, int query_right) {
+    // If the current range is completely outside the query range, return a large value
+    if (curr_right < query_left || curr_left > query_right)
+        return INT_MAX;
+
+    // If the current range is completely inside the query range, return the value in the current node
+    if (curr_left >= query_left && curr_right <= query_right)
+        return tree[curr_node].min_value;
+
+    int mid = (curr_left + curr_right) / 2;
+    int left_min = query_range(tree, 2 * curr_node, curr_left, mid, query_left, query_right);
+    int right_min = query_range(tree, 2 * curr_node + 1, mid + 1, curr_right, query_left, query_right);
+
+    return min(left_min, right_min);
+}
+```
+
+4. Read the input values and build the segment tree using the provided array.
+
+```cpp
+int n, q;
+cin >> n >> q;
+
+vector<int> arr(n);
+for (int i = 0; i < n; i++)
+    cin >> arr[i];
+
+vector<Node> tree(4 * n);
+build_segment_tree(arr, tree, 1, 0, n - 1);
+```
+
+5. Process each query and print the result.
+
+```cpp
+for (int i = 0; i < q; i++) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;  // Convert 1-based indexing to 0-based indexing
+
+    int min_value = query_range(tree, 1, 0, n - 1, a, b);
+    cout << min_value << endl;
+}
+```
+
+This solution has a time complexity of O(n + q log n), where n is the number of values and q is the number of queries. The space complexity is O(4n) for the segment tree.

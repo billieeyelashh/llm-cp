@@ -1,0 +1,70 @@
+To solve this problem, we can use the concept of prefix function, also known as the failure function. The prefix function for a string `s` of length `n` is an array `pi` of length `n`, where `pi[i]` represents the length of the longest proper prefix of `s[0...i]` that is also a suffix of `s[0...i]`.
+
+The period lengths of the string can be found by checking if `n % (n - pi[n-1]) == 0`. If this condition holds, then `n - pi[n-1]` is a period length.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> computePrefixFunction(const string& s) {
+    int n = s.length();
+    vector<int> pi(n);
+    pi[0] = 0;
+
+    for (int i = 1; i < n; i++) {
+        int j = pi[i - 1];
+        while (j > 0 && s[i] != s[j]) {
+            j = pi[j - 1];
+        }
+        if (s[i] == s[j]) {
+            j++;
+        }
+        pi[i] = j;
+    }
+    return pi;
+}
+
+vector<int> findPeriodLengths(const string& s) {
+    int n = s.length();
+    vector<int> pi = computePrefixFunction(s);
+    vector<int> periodLengths;
+
+    // Check if n - pi[n-1] is a period length
+    if (n % (n - pi[n - 1]) == 0) {
+        periodLengths.push_back(n - pi[n - 1]);
+    }
+
+    // Check for other potential period lengths
+    int k = n - pi[n - 1];
+    while (k > 0 && pi[k - 1] > 0) {
+        if (n % (k - pi[k - 1]) == 0) {
+            periodLengths.push_back(k - pi[k - 1]);
+        }
+        k = pi[k - 1];
+    }
+
+    return periodLengths;
+}
+
+int main() {
+    string s;
+    cin >> s;
+
+    vector<int> periodLengths = findPeriodLengths(s);
+
+    // Print period lengths in increasing order
+    for (int length : periodLengths) {
+        cout << length << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+The `computePrefixFunction` function computes the prefix function `pi` using the Knuth-Morris-Pratt algorithm. The `findPeriodLengths` function finds the period lengths of the string by checking if `n % (n - pi[n-1]) == 0` and also checks for other potential period lengths. The main function reads the input string, calls the `findPeriodLengths` function, and prints the period lengths in increasing order.
+
+The time complexity of this solution is O(n), where n is the length of the input string.

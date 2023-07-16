@@ -1,0 +1,66 @@
+To solve this problem optimally, we can use binary search on the range of possible maximum sums in the subarrays. We can start with a lower bound of 1 and an upper bound of the sum of all elements in the array.
+
+For each mid value in the binary search, we can simulate the division of the array into subarrays. We iterate through the array and keep adding elements to a current subarray until the sum of the subarray exceeds the mid value. At that point, we start a new subarray. If the number of subarrays formed is less than or equal to k, then we can update our answer to be the mid value and continue the binary search with a lower mid value. Otherwise, we need to increase the mid value and continue the binary search with a higher mid value.
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+bool isPossible(vector<int>& arr, int maxSum, int k) {
+    int cnt = 1;
+    int currSum = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] > maxSum) {
+            return false;
+        }
+        if (currSum + arr[i] > maxSum) {
+            cnt++;
+            currSum = arr[i];
+        } else {
+            currSum += arr[i];
+        }
+    }
+    return cnt <= k;
+}
+
+int solve(vector<int>& arr, int k) {
+    int left = 1;
+    int right = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        right += arr[i];
+    }
+
+    int ans = right;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (isPossible(arr, mid, k)) {
+            ans = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return ans;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int result = solve(arr, k);
+    cout << result << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n log M), where M is the sum of all elements in the array.

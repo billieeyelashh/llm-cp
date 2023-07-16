@@ -1,0 +1,43 @@
+To solve this problem, we can use binary search to find the minimum maximum sum in a subarray. 
+
+First, we need to define the search space. The minimum possible value for the maximum sum in a subarray is the maximum value in the array. The maximum possible value for the maximum sum in a subarray is the sum of all elements in the array.
+
+We can then use binary search to find the optimal maximum sum in a subarray. For each iteration of the binary search, we calculate the mid value of the search space and check if it is a valid solution. To check if a mid value is valid, we iterate through the array and create subarrays such that the sum of each subarray is less than or equal to the mid value. If the number of subarrays created is less than or equal to k, then the mid value is a valid solution.
+
+If the mid value is a valid solution, we update our answer to be the mid value and continue the binary search on the lower half of the search space. Otherwise, we continue the binary search on the upper half of the search space.
+
+Finally, once the binary search is complete, we will have the minimum maximum sum in a subarray.
+
+Here is the Python code for the solution:
+
+```python
+n, k = map(int, input().split())
+array = list(map(int, input().split()))
+
+low = max(array)
+high = sum(array)
+result = 0
+
+while low <= high:
+    mid = (low + high) // 2
+    count = 0
+    current_sum = 0
+    
+    for num in array:
+        if current_sum + num > mid:
+            count += 1
+            current_sum = 0
+        current_sum += num
+    
+    count += 1
+    
+    if count <= k:
+        result = mid
+        high = mid - 1
+    else:
+        low = mid + 1
+
+print(result)
+```
+
+The time complexity of this solution is O(n * log(sum(array))), where n is the size of the array.

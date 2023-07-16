@@ -1,0 +1,46 @@
+To solve this problem, we can use dynamic programming. We will create a two-dimensional array dp, where dp[i][j] represents the maximum number of pages we can buy using the first i books and with a total price of at most j.
+
+We can fill the dp array in a bottom-up manner. For each book i, we have two choices: either we include it in our purchase or we exclude it. If we include it, then the maximum number of pages we can buy is the maximum of the number of pages of book i plus the maximum number of pages we can buy using the remaining budget after purchasing book i. If we exclude it, then the maximum number of pages we can buy is the same as the maximum number of pages we can buy using the remaining budget without book i.
+
+The final answer will be stored in dp[n][x], where n is the number of books and x is the maximum total price.
+
+Here is the C++ code to implement the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> price(n);
+    vector<int> pages(n);
+    for (int i = 0; i < n; i++) {
+        cin >> price[i];
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> pages[i];
+    }
+
+    vector<vector<int>> dp(n + 1, vector<int>(x + 1, 0));
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= x; j++) {
+            // Exclude book i
+            dp[i][j] = dp[i - 1][j];
+
+            // Include book i if price[i-1] is less than or equal to j
+            if (price[i - 1] <= j) {
+                dp[i][j] = max(dp[i][j], pages[i - 1] + dp[i - 1][j - price[i - 1]]);
+            }
+        }
+    }
+
+    cout << dp[n][x] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n*x), where n is the number of books and x is the maximum total price.

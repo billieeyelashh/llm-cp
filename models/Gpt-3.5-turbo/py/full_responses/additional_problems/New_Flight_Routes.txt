@@ -1,0 +1,52 @@
+To solve this problem, we can use the concept of connected components in a graph. We need to find the number of connected components in the given graph and add edges between them to make it fully connected.
+
+Here is the step-by-step approach to solving the problem:
+
+1. Read the input values for the number of cities and flights.
+
+2. Create an adjacency list to represent the graph. Initialize it as an empty dictionary.
+
+3. Read the flight connections and add them to the adjacency list.
+
+4. Implement a depth-first search (DFS) function to calculate the number of connected components in the graph. The DFS function should take a starting node and a visited set as arguments. In each recursive call, mark the current node as visited and explore all its unvisited neighbors recursively.
+
+5. Initialize a counter variable `component_count` to 0.
+
+6. Iterate over all the cities. If a city is not visited, call the DFS function on that city, increment `component_count` by 1, and mark all the visited nodes in that component.
+
+7. Print `component_count - 1` as the number of new flights required. Since the graph is initially disconnected, we need to add edges equal to the number of connected components minus 1 to make it fully connected.
+
+8. Iterate over all the cities again. For each city, iterate over its unvisited neighbors and print the city and its neighbor as a new flight connection. This will ensure that each connected component is connected to at least one other component.
+
+Here is the final solution in Python:
+
+```python
+def dfs(node, visited, adj_list):
+    visited.add(node)
+    for neighbor in adj_list[node]:
+        if neighbor not in visited:
+            dfs(neighbor, visited, adj_list)
+
+n, m = map(int, input().split())
+adj_list = {i: [] for i in range(1, n+1)}
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    adj_list[a].append(b)
+
+visited = set()
+component_count = 0
+
+for city in range(1, n+1):
+    if city not in visited:
+        component_count += 1
+        dfs(city, visited, adj_list)
+
+print(component_count - 1)
+
+for city in range(1, n+1):
+    for neighbor in adj_list[city]:
+        print(city, neighbor)
+```
+
+This solution has a time complexity of O(n + m), where n is the number of cities and m is the number of flight connections.

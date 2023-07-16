@@ -1,0 +1,74 @@
+To solve this problem, we can use a topological sorting algorithm. Topological sorting is a linear ordering of the vertices of a directed acyclic graph (DAG) such that for every directed edge (u, v), vertex u comes before vertex v in the ordering.
+
+Here's the step-by-step approach:
+
+1. Read the input values for the number of courses ($n$) and requirements ($m$).
+
+2. Create an adjacency list to represent the graph. Initialize an empty list for each course.
+
+3. Read the $m$ lines of requirements and update the adjacency list accordingly. For each requirement (a, b), add b to the adjacency list of a.
+
+4. Initialize an array, `indegree`, of size $n+1$ with all elements set to 0. `indegree[i]` represents the number of incoming edges to course i.
+
+5. For each course, iterate through its adjacency list and increment the `indegree` of the connected courses.
+
+6. Create an empty queue.
+
+7. Iterate through the courses. If the `indegree` of a course is 0, enqueue it.
+
+8. While the queue is not empty, do the following:
+   - Dequeue a course from the queue and append it to the result.
+   - Iterate through the adjacency list of the dequeued course.
+   - Decrement the `indegree` of the connected courses.
+   - If the `indegree` of a connected course becomes 0, enqueue it.
+
+9. Print the result, which represents the order in which the courses should be completed.
+
+Python code:
+
+```python
+from collections import defaultdict, deque
+
+# Step 1
+n, m = map(int, input().split())
+
+# Step 2
+adj_list = defaultdict(list)
+
+# Step 3
+for _ in range(m):
+    a, b = map(int, input().split())
+    adj_list[a].append(b)
+
+# Step 4
+indegree = [0] * (n+1)
+
+# Step 5
+for a in adj_list:
+    for b in adj_list[a]:
+        indegree[b] += 1
+
+# Step 6
+queue = deque()
+
+# Step 7
+for i in range(1, n+1):
+    if indegree[i] == 0:
+        queue.append(i)
+
+# Step 8
+result = []
+while queue:
+    curr = queue.popleft()
+    result.append(curr)
+
+    for next_course in adj_list[curr]:
+        indegree[next_course] -= 1
+        if indegree[next_course] == 0:
+            queue.append(next_course)
+
+# Step 9
+print(' '.join(map(str, result)))
+```
+
+The time complexity of this solution is O(n + m), where n is the number of courses and m is the number of requirements.

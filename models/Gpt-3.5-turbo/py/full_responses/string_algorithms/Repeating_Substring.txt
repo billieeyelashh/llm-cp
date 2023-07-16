@@ -1,0 +1,42 @@
+To solve this problem, we can use the binary search algorithm to find the length of the longest repeating substring.
+
+First, we define a helper function called `is_repeating_substring` that takes two arguments: the string `s` and the length `length`. This function checks if there is a repeating substring of length `length` in the string `s`. We can use a hash set to store all the substrings of length `length` encountered while iterating through the string. If we encounter a substring that is already in the set, it means that the substring is repeating and we return `True`. Otherwise, we continue iterating until the end of the string and return `False`.
+
+Next, we define the main function `longest_repeating_substring` that takes the input string `s` as an argument. We initialize the variables `low` and `high` to 1 and the length of the string `s` respectively. These variables represent the range of possible lengths for the longest repeating substring.
+
+Inside a while loop, we check if `low` is less than or equal to `high`. If it is not, we break out of the loop. Otherwise, we calculate the mid point of the range as `mid = (low + high) // 2` and check if there is a repeating substring of length `mid` using the `is_repeating_substring` function.
+
+If there is a repeating substring, we update `low` to `mid + 1` since the longest repeating substring must have a length greater than or equal to `mid`. Otherwise, we update `high` to `mid - 1` since the longest repeating substring must have a length less than `mid`.
+
+Finally, outside the loop, we return the substring of length `low - 1` from the input string `s` as the longest repeating substring.
+
+Here is the Python implementation of the solution:
+
+```python
+def is_repeating_substring(s, length):
+    seen = set()
+    for i in range(len(s) - length + 1):
+        substring = s[i:i+length]
+        if substring in seen:
+            return True
+        seen.add(substring)
+    return False
+
+def longest_repeating_substring(s):
+    low = 1
+    high = len(s)
+    while low <= high:
+        mid = (low + high) // 2
+        if is_repeating_substring(s, mid):
+            low = mid + 1
+        else:
+            high = mid - 1
+    return s[:low - 1]
+
+# Example usage
+s = input().strip()
+result = longest_repeating_substring(s)
+print(result if result != "" else -1)
+```
+
+The time complexity of this solution is O(n log n), where n is the length of the input string.

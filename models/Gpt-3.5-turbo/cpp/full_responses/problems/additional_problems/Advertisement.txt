@@ -1,0 +1,61 @@
+To solve this problem optimally, we can use the concept of a monotonic stack.
+
+1. First, we initialize an empty stack to store the indices of the boards.
+2. We iterate through each board from left to right.
+3. For each board, we check if the stack is empty or the height of the current board is greater than the height of the board at the top of the stack.
+4. If either of the conditions is true, we push the index of the current board onto the stack.
+5. Otherwise, we keep popping the indices from the stack until we find a board with a height less than the current board.
+6. For each popped index, we calculate the area of the rectangle by multiplying the height of the popped board with the width (the difference between the current board's index and the index at the top of the stack).
+7. We update the maximum area if the calculated area is greater than the current maximum area.
+8. After the loop ends, we check if there are any remaining boards in the stack.
+9. For each remaining index, we calculate the area of the rectangle by multiplying the height of the board with the width (the difference between the total number of boards and the index at the top of the stack).
+10. We update the maximum area if the calculated area is greater than the current maximum area.
+11. Finally, we print the maximum area as the output.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> heights(n);
+    for (int i = 0; i < n; i++) {
+        cin >> heights[i];
+    }
+
+    stack<int> st;
+    int maxArea = 0;
+
+    for (int i = 0; i < n; i++) {
+        while (!st.empty() && heights[st.top()] >= heights[i]) {
+            int height = heights[st.top()];
+            st.pop();
+
+            int width = st.empty() ? i : (i - st.top() - 1);
+            maxArea = max(maxArea, height * width);
+        }
+        st.push(i);
+    }
+
+    while (!st.empty()) {
+        int height = heights[st.top()];
+        st.pop();
+
+        int width = st.empty() ? n : (n - st.top() - 1);
+        maxArea = max(maxArea, height * width);
+    }
+
+    cout << maxArea << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n) since we iterate through each board once and perform constant time operations for each board. The space complexity is O(n) as we store the heights in a vector and the indices in a stack.

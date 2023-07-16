@@ -1,0 +1,98 @@
+To solve this problem, we can use a modified Dijkstra's algorithm to find the shortest path from room 1 to room n. We will keep track of the minimum cost to reach each room, as well as the previous room in the optimal path.
+
+Here is the step-by-step solution:
+
+1. Read the input values for n, m, and k.
+2. Initialize an adjacency list to store the teleporters. For each teleporter, add the destination room to the list of neighbors for the starting room.
+3. Initialize an array "cost" of size n, where cost[i] represents the minimum cost to reach room i from room 1. Initialize all elements of the array to a large value, except for cost[1] which is set to 0.
+4. Initialize an array "prev" of size n, where prev[i] represents the previous room in the optimal path to reach room i from room 1. Initialize all elements of the array to -1.
+5. Create a priority queue to store the rooms to be visited. Each element in the priority queue will be a pair (room, cost), where room is the current room and cost is the minimum cost to reach that room.
+6. Push the initial room 1 with cost 0 into the priority queue.
+7. While the priority queue is not empty:
+     - Pop the room with the smallest cost from the priority queue.
+     - For each neighbor of the current room:
+         - If the cost to reach the neighbor through the current room is smaller than the current cost stored in the "cost" array:
+             - Update the "cost" array with the new cost.
+             - Update the "prev" array with the current room as the previous room for the neighbor.
+             - Push the neighbor into the priority queue with the new cost.
+8. After the Dijkstra's algorithm finishes, check if it is possible to play the game for k days:
+     - If the cost[n] is equal to infinity or the previous room for room n is still -1, print -1 and return.
+9. To find the minimum number of coins you have to pay if you play optimally, calculate the total cost by multiplying the cost[n] by k.
+10. To print the k route descriptions, initialize a vector "route" to store the rooms in each day's route.
+11. Starting from room n, trace back the optimal path using the "prev" array and add each room to the "route" vector.
+12. Reverse the "route" vector to get the correct order.
+13. Print the minimum number of coins and then print each route in the "route" vector.
+
+Here is the final solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <limits>
+
+using namespace std;
+
+const int INF = numeric_limits<int>::max();
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+    
+    vector<vector<int>> teleporters(n + 1);
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        teleporters[a].push_back(b);
+    }
+    
+    vector<int> cost(n + 1, INF);
+    vector<int> prev(n + 1, -1);
+    cost[1] = 0;
+    
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, 1});
+    
+    while (!pq.empty()) {
+        int room = pq.top().second;
+        int current_cost = pq.top().first;
+        pq.pop();
+        
+        if (current_cost > cost[room]) {
+            continue;
+        }
+        
+        for (int neighbor : teleporters[room]) {
+            int new_cost = current_cost + 1;
+            if (new_cost < cost[neighbor]) {
+                cost[neighbor] = new_cost;
+                prev[neighbor] = room;
+                pq.push({new_cost, neighbor});
+            }
+        }
+    }
+    
+    if (cost[n] == INF || prev[n] == -1) {
+        cout << -1 << endl;
+        return 0;
+    }
+    
+    int total_cost = cost[n] * k;
+    cout << total_cost << endl;
+    
+    vector<vector<int>> routes(k);
+    int current_room = n;
+    
+    for (int i = 0; i < k; i++) {
+        while (current_room != -1) {
+            routes[i].push_back(current_room);
+            current_room = prev[current_room];
+        }
+        
+        reverse(routes[i].begin(), routes[i].end());
+        current_room = n;
+    }
+    
+    for (const vector<int>& route : routes) {
+        for (int room : route) {
+           

@@ -1,0 +1,40 @@
+To solve this problem, we can use the concept of Burnside's lemma. 
+
+Burnside's lemma states that the number of distinct necklaces under rotation is equal to the average number of necklaces fixed by each rotation.
+
+Let's denote the number of pearls as `n` and the number of colors as `m`.
+
+To calculate the number of necklaces fixed by each rotation, we need to consider each possible rotation and count the number of necklaces that remain the same.
+
+Let's say we have a necklace with `n` pearls. A full rotation of the necklace is equivalent to shifting all the pearls one position to the right. So, to calculate the number of necklaces fixed by a full rotation, we need to count the number of necklaces where all the pearls have the same color.
+
+Since each pearl can have `m` possible colors, the number of necklaces fixed by a full rotation is `m`.
+
+Now, let's consider other rotations. For each divisor `d` of `n`, we need to calculate the number of necklaces fixed by a rotation of `2 * pi / d` radians. This can be done using the formula `(m ^ (gcd(n, d))) % (10^9 + 7)`, where `gcd(n, d)` is the greatest common divisor of `n` and `d`.
+
+Finally, we can calculate the total number of distinct necklaces by taking the average of the number of necklaces fixed by each rotation. The formula for the total number of distinct necklaces is:
+
+`(1/n) * (sum((m ^ (gcd(n, d))) % (10^9 + 7) for d in divisors(n))) % (10^9 + 7)`
+
+Here is the Python code implementing the solution:
+
+```python
+from math import gcd
+
+def count_distinct_necklaces(n, m):
+    mod = int(1e9) + 7
+
+    result = pow(m, n, mod)
+
+    for d in range(1, n):
+        if n % d == 0:
+            result = (result + pow(m, gcd(n, d), mod)) % mod
+
+    return (result * pow(n, -1, mod)) % mod
+
+# Example usage:
+n, m = map(int, input().split())
+print(count_distinct_necklaces(n, m))
+```
+
+This solution has a time complexity of O(n * log(n)) as we iterate over the divisors of `n` and calculate the greatest common divisor for each divisor.

@@ -1,0 +1,28 @@
+To solve this problem optimally, we can use dynamic programming. We will create an array dp of size n+1, where dp[i] represents the minimum total time to win the game starting from level i.
+
+We can initialize dp[n] to 0, since at the last level, we have already won the game. Then, we can iterate from n-1 to 1 and calculate dp[i] using the following formula:
+
+dp[i] = min(s[i]*f[i] + dp[j]) for all j such that s[j] >= s[i] and j > i
+
+Here, s[i] represents the strength of the monster at level i and f[i] represents the skill factor we get after killing the monster at level i.
+
+Finally, the minimum total time to win the game will be stored in dp[1].
+
+Here is the Python code to solve the problem:
+
+```python
+n, x = map(int, input().split())
+s = list(map(int, input().split()))
+f = list(map(int, input().split()))
+
+dp = [0] * (n+1)
+for i in range(n-1, 0, -1):
+    dp[i] = float('inf')
+    for j in range(i+1, n+1):
+        if s[j-1] >= s[i-1]:
+            dp[i] = min(dp[i], s[i-1]*f[i-1] + dp[j])
+
+print(dp[1])
+```
+
+The time complexity of this solution is O(n^2) as we have nested loops to fill up the dp array. However, with the given constraints, it should run within the time limit.

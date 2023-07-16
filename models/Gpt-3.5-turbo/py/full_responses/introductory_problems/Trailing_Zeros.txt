@@ -1,0 +1,23 @@
+To count the number of trailing zeros in the factorial of a number $n$, we need to determine the power of 10 in the factorial.
+
+Approach:
+1. Initialize a variable `count` to 0.
+2. Iterate while $n$ is greater than or equal to 5.
+3. Divide $n$ by 5 and add the result to `count`.
+4. Divide $n$ by 5 again and update `count` with the new result.
+5. Print `count`.
+
+Python Solution:
+
+```python
+n = int(input())
+count = 0
+
+while n >= 5:
+    n //= 5
+    count += n
+
+print(count)
+```
+
+This solution has a time complexity of $O(\log n)$ as we divide $n$ by 5 in each iteration until $n$ becomes less than 5.

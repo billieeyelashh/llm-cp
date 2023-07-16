@@ -1,0 +1,74 @@
+To solve this problem, we can use a sweep line algorithm.
+
+1. Read the input values: the number of line segments $n$, and the coordinates of each line segment.
+2. Create an empty set called "events" to store all the events (start and end points) of the line segments.
+3. For each line segment, add two events to the "events" set: one for the starting point and one for the ending point. Each event should store the x-coordinate, y-coordinate, and the type (start or end) of the event.
+4. Sort the "events" set based on the x-coordinate of the events. If two events have the same x-coordinate, sort them based on the type of event (start events first).
+5. Initialize a variable called "intersections" to 0, which will store the count of intersection points.
+6. Create an empty set called "active" to store the line segments that are currently active (intersecting with the sweep line).
+7. Iterate over each event in the sorted "events" set.
+   - If the event is a start event:
+     - Add the corresponding line segment to the "active" set.
+     - For each line segment in the "active" set, check if it intersects with the current line segment. If it does, increment the "intersections" variable.
+   - If the event is an end event:
+     - Remove the corresponding line segment from the "active" set.
+8. Print the value of the "intersections" variable as the output.
+
+Here is the C++ implementation of the above algorithm:
+
+```cpp
+#include <iostream>
+#include <set>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Event {
+    int x, y, type;
+};
+
+bool cmp(const Event& a, const Event& b) {
+    if (a.x == b.x) {
+        return a.type < b.type;
+    }
+    return a.x < b.x;
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<Event> events;
+    for (int i = 0; i < n; i++) {
+        int x1, y1, x2, y2;
+        cin >> x1 >> y1 >> x2 >> y2;
+
+        events.push_back({x1, y1, 0});
+        events.push_back({x2, y2, 1});
+    }
+
+    sort(events.begin(), events.end(), cmp);
+
+    int intersections = 0;
+    set<pair<int, int>> active;
+    for (const Event& event : events) {
+        if (event.type == 0) {
+            for (const pair<int, int>& line : active) {
+                if (line.second > event.y && line.first < event.x) {
+                    intersections++;
+                }
+            }
+            active.insert({event.y, event.x});
+        } else {
+            active.erase({event.y, event.x});
+        }
+    }
+
+    cout << intersections << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n log n) due to the sorting step.

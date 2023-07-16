@@ -1,0 +1,73 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to traverse the cities and find a valid round trip.
+
+1. Create an adjacency list to represent the graph, where each city is a node and the roads are edges.
+2. Initialize a boolean array "visited" of size n to keep track of visited cities during the DFS.
+3. Initialize an empty vector "route" to store the cities in the order they will be visited.
+4. Choose a starting city and mark it as visited.
+5. Call the DFS function with the starting city as the parameter.
+6. In the DFS function:
+   - Add the current city to the "route" vector.
+   - Check if there is a road from the current city back to the starting city. If so, return true.
+   - Iterate over all adjacent cities of the current city.
+     - If an adjacent city has not been visited, recursively call the DFS function with the adjacent city as the parameter.
+       - If the recursive call returns true, return true.
+   - If no valid round trip is found from the current city, remove it from the "route" vector and mark it as unvisited.
+7. If the DFS function returns false for all cities, print "IMPOSSIBLE".
+8. Otherwise, print the size of the "route" vector and then print the cities in the "route" vector.
+
+Here is the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MAXN = 100005;
+vector<int> graph[MAXN];
+bool visited[MAXN];
+vector<int> route;
+
+bool dfs(int city, int start) {
+    visited[city] = true;
+    route.push_back(city);
+
+    for (int adj : graph[city]) {
+        if (adj == start) {
+            return true; // Found a road back to the starting city
+        }
+        if (!visited[adj] && dfs(adj, start)) {
+            return true; // Found a valid round trip from the adjacent city
+        }
+    }
+
+    route.pop_back();
+    visited[city] = false;
+    return false;
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        graph[a].push_back(b);
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i] && dfs(i, i)) {
+            cout << route.size() << '\n';
+            for (int city : route) {
+                cout << city << ' ';
+            }
+            return 0;
+        }
+    }
+
+    cout << "IMPOSSIBLE\n";
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n+m), where n is the number of cities and m is the number of roads.

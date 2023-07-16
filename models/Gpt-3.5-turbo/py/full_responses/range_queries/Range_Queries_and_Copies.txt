@@ -1,0 +1,68 @@
+To solve this problem optimally, we can use a data structure called a segment tree. A segment tree is a binary tree where each node represents a range of elements in the array. The root node represents the entire array, and each leaf node represents a single element of the array.
+
+We can build the segment tree in a bottom-up manner. Initially, each leaf node contains a single element from the array. To build the tree, we take the sum of the values in the left and right children of each internal node, and store it in the node itself. This way, the root node will contain the sum of all the elements in the array.
+
+To update the value of an element, we start at the root node and recursively update the appropriate child node until we reach the leaf node representing the element. We update the value in the leaf node and propagate the changes upwards, updating the sum in each parent node.
+
+To calculate the sum of values in a given range, we start at the root node and recursively traverse down the tree, taking the sum of the ranges that overlap with the query range. If the current node's range is completely outside the query range, we can ignore it. If the current node's range is completely inside the query range, we can add its sum to the total. Otherwise, we recursively traverse to its left and right children.
+
+Here is the implementation in Python:
+
+```python
+class SegmentTree:
+    def __init__(self, arr):
+        self.arr = arr
+        self.tree = [0] * (4 * len(arr))  # segment tree array
+    
+    def build(self, node, start, end):
+        if start == end:
+            self.tree[node] = self.arr[start]
+        else:
+            mid = (start + end) // 2
+            self.build(2 * node, start, mid)
+            self.build(2 * node + 1, mid + 1, end)
+            self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
+    
+    def update(self, node, start, end, idx, val):
+        if start == end:
+            self.arr[idx] = val
+            self.tree[node] = val
+        else:
+            mid = (start + end) // 2
+            if start <= idx <= mid:
+                self.update(2 * node, start, mid, idx, val)
+            else:
+                self.update(2 * node + 1, mid + 1, end, idx, val)
+            self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
+    
+    def query(self, node, start, end, left, right):
+        if start > right or end < left:
+            return 0
+        if left <= start and end <= right:
+            return self.tree[node]
+        mid = (start + end) // 2
+        sum_left = self.query(2 * node, start, mid, left, right)
+        sum_right = self.query(2 * node + 1, mid + 1, end, left, right)
+        return sum_left + sum_right
+
+n, q = map(int, input().split())
+arr = list(map(int, input().split()))
+
+tree = SegmentTree(arr)
+tree.build(1, 0, n - 1)
+
+for _ in range(q):
+    query = list(map(int, input().split()))
+    if query[0] == 1:
+        k, a, x = query[1:]
+        tree.update(1, 0, n - 1, a - 1, x)
+    elif query[0] == 2:
+        k, a, b = query[1:]
+        print(tree.query(1, 0, n - 1, a - 1, b - 1))
+    else:
+        k = query[1]
+        arr.append(arr[k - 1])
+        tree.build(1, 0, n - 1)
+```
+
+In this solution, we define the `SegmentTree` class which handles the construction, updating, and querying of the segment tree. We then read the input, build the segment tree, and process each query accordingly.

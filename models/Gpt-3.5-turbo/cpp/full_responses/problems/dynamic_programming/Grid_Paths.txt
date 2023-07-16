@@ -1,0 +1,52 @@
+To solve this problem, we can use dynamic programming. Let's define a 2D array `dp` of size `n` by `n`, where `dp[i][j]` represents the number of possible paths to reach square `(i, j)`.
+
+We can initialize `dp[0][0] = 1` since there is only one way to reach the top-left square. Then, for each square `(i, j)`, we can calculate `dp[i][j]` using the following recurrence relation:
+
+```
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
+```
+
+This means that the number of paths to reach square `(i, j)` is equal to the number of paths to reach the square above `(i, j)` plus the number of paths to reach the square on the left of `(i, j)`.
+
+However, we need to take into account the traps. For each trap `(y, x)`, we can set `dp[y-1][x-1] = 0` since we cannot reach that trap square. This will ensure that any path passing through a trap square will have a count of 0.
+
+Finally, the answer will be `dp[n-1][n-1]`, which represents the number of paths to reach the bottom-right square.
+
+Here is the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n, m;
+    std::cin >> n >> m;
+
+    std::vector<std::vector<int>> dp(n, std::vector<int>(n, 0));
+    dp[0][0] = 1;
+
+    for (int i = 0; i < m; ++i) {
+        int y, x;
+        std::cin >> y >> x;
+        dp[y-1][x-1] = 0;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (i > 0)
+                dp[i][j] += dp[i-1][j];
+            if (j > 0)
+                dp[i][j] += dp[i][j-1];
+            dp[i][j] %= MOD;
+        }
+    }
+
+    std::cout << dp[n-1][n-1] << std::endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2), which is efficient enough to handle the given constraints.

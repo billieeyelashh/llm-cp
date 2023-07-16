@@ -1,0 +1,34 @@
+To find the maximum number of edges in a matching for a given tree, we can use a simple depth-first search (DFS) algorithm.
+
+First, we will construct an adjacency list representation of the tree using a dictionary in Python. Each node will be a key in the dictionary, and its value will be a list of its adjacent nodes.
+
+Next, we will define a recursive function `dfs` that takes two parameters: the current node and a boolean flag indicating whether the current node is included in the matching or not. Inside the `dfs` function, we will iterate over all the adjacent nodes of the current node and recursively call `dfs` on each adjacent node. If the current node is included in the matching, we will skip the adjacent nodes that are already included in the matching. Otherwise, we will include the adjacent node in the matching and recursively call `dfs` on it.
+
+Finally, we will call the `dfs` function on the root node of the tree with the flag set to `False` (indicating that the root node is not included in the matching). The number of edges in the matching will be equal to the number of nodes that are included in the matching.
+
+Here is the Python code to solve the problem:
+
+```python
+n = int(input())
+adj = {i: [] for i in range(1, n+1)}
+
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    adj[a].append(b)
+    adj[b].append(a)
+
+def dfs(node, include):
+    count = 0
+    for neighbor in adj[node]:
+        if (not include) or (neighbor not in matching):
+            count += dfs(neighbor, not include)
+    return count + include
+
+matching = set()
+result = dfs(1, False)
+print(result)
+```
+
+In this code, the variable `matching` is a set that keeps track of the nodes included in the matching. The function `dfs` returns the number of nodes included in the matching rooted at the given node. We start the DFS from the root node with the flag set to `False`, as we want to find the maximum number of edges in a matching where the root node is not included.
+
+The time complexity of this solution is O(n), where n is the number of nodes in the tree, as we perform a depth-first search on the tree.

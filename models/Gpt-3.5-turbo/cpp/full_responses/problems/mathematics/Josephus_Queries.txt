@@ -1,0 +1,46 @@
+To solve this problem efficiently, we can use a formula to calculate the position of the child that will be removed at a given step. 
+
+Let's analyze the pattern for different values of $n$:
+
+If $n$ is a power of 2, the first child to be removed will always be the last child (child $n$). The second child to be removed will be the first child (child 1), and so on. This pattern will repeat until there is only one child left.
+
+For example, when $n = 8$, the order of removal will be: $8, 1, 6, 3, 5, 7, 4, 2$.
+
+If $n$ is not a power of 2, we can find the largest power of 2 less than $n$ (let's call it $m$). The number of children to be removed before the pattern starts repeating is $n - m$. So, we can calculate the position of the child to be removed using the formula:
+
+$k_{\text{adjusted}} = (k + n - m - 1) \mod n$
+
+The child at position $k_{\text{adjusted}}$ will be the $k$th child to be removed in a circle of size $n$.
+
+Here's the C++ code to implement this solution:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q;
+    cin >> q;
+
+    while (q--) {
+        int n, k;
+        cin >> n >> k;
+
+        int m = 1;
+        while (m * 2 <= n) {
+            m *= 2;
+        }
+
+        int k_adjusted = (k + n - m - 1) % n;
+        if (k_adjusted == 0) {
+            k_adjusted = n;
+        }
+
+        cout << k_adjusted << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(q log n), where q is the number of queries and n is the maximum value of n in the queries.

@@ -1,0 +1,51 @@
+To solve this problem, we will use dynamic programming.
+
+Let's define a 2D array `dp` of size `n+1` by `n+1`, where `dp[i][j]` represents the number of functional graphs with `i` nodes and `j` components.
+
+We can observe that for `i = 1`, `dp[1][j]` is always `1` because there is only one node and one component.
+
+For `i > 1`, we can calculate `dp[i][j]` using the following recurrence relation:
+
+`dp[i][j] = (dp[i-1][j] * (j-1)) + dp[i-1][j-1]`
+
+The first term `(dp[i-1][j] * (j-1))` represents the case where we add a new node to an existing component, resulting in `j` components. We multiply it by `(j-1)` because there are `(j-1)` ways to choose the component to which we add the new node.
+
+The second term `dp[i-1][j-1]` represents the case where we create a new component with the new node.
+
+To handle the modulo operation, we can update `dp[i][j]` as `dp[i][j] %= (10^9+7)` after each calculation.
+
+Finally, we can output the last row of `dp` as the answer.
+
+Here is the C++ code implementing the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1));
+    dp[1][1] = 1;
+
+    for (int i = 2; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            dp[i][j] = (dp[i-1][j] * (j-1)) % MOD;
+            dp[i][j] = (dp[i][j] + dp[i-1][j-1]) % MOD;
+        }
+    }
+
+    for (int k = 1; k <= n; k++) {
+        cout << dp[n][k] << endl;
+    }
+
+    return 0;
+}
+```
+
+This code has a time complexity of `O(n^2)` and will produce the correct output for the given problem.

@@ -1,0 +1,67 @@
+To solve this problem, we can use a simple approach. First, we need to check if it is possible to assign directions to the edges such that each node has an even outdegree. If it is not possible, we print "IMPOSSIBLE". Otherwise, we can assign directions to the edges in the following way:
+
+1. Start with an arbitrary node and assign directions to its adjacent edges such that they are outgoing from the node. We can choose any direction, as long as we are consistent with the direction assignment.
+
+2. For each node, assign directions to its remaining adjacent edges such that they are incoming to the node. Again, we can choose any direction, as long as we are consistent with the direction assignment.
+
+3. Repeat steps 1 and 2 until all nodes have even outdegree.
+
+Here is the C++ implementation of this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> adj(n + 1);
+    vector<int> outdegree(n + 1, 0);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+        outdegree[a]++;
+        outdegree[b]++;
+    }
+
+    queue<int> q;
+    vector<bool> visited(n + 1, false);
+
+    for (int i = 1; i <= n; i++) {
+        if (outdegree[i] % 2 != 0) {
+            cout << "IMPOSSIBLE" << endl;
+            return 0;
+        }
+        if (outdegree[i] > 0) {
+            q.push(i);
+            visited[i] = true;
+        }
+    }
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+
+        for (int neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                cout << node << " " << neighbor << endl;
+                outdegree[neighbor]--;
+                if (outdegree[neighbor] % 2 == 0) {
+                    q.push(neighbor);
+                    visited[neighbor] = true;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m) since we visit each node and each edge once.

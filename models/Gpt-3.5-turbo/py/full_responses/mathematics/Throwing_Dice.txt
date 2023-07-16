@@ -1,0 +1,32 @@
+To solve this problem, we can use dynamic programming. We can define a list `dp` where `dp[i]` represents the number of ways to get a sum `i` using the given dice.
+
+The base case is `dp[0] = 1` because there is only one way to get a sum of 0 (by not throwing any dice).
+
+For each sum `i` from 1 to `n`, we iterate through all possible outcomes of throwing a dice (from 1 to 6) and update `dp[i]` accordingly. The value of `dp[i]` can be computed by summing up `dp[i - j]` for all possible dice outcomes `j`.
+
+Finally, we return `dp[n]` as the number of ways to get a sum of `n`.
+
+Here is the Python code:
+
+```python
+MOD = 10**9 + 7
+
+def count_ways(n):
+    dp = [0] * (n + 1)
+    dp[0] = 1
+
+    for i in range(1, n + 1):
+        for j in range(1, 7):
+            if i - j >= 0:
+                dp[i] = (dp[i] + dp[i - j]) % MOD
+
+    return dp[n]
+
+# Read input
+n = int(input())
+
+# Compute and print the number of ways
+print(count_ways(n))
+```
+
+This solution has a time complexity of O(n) and a space complexity of O(n), where n is the input number.

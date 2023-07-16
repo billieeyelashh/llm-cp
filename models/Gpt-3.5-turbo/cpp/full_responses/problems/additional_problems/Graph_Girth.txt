@@ -1,0 +1,69 @@
+To solve this problem, we can use a breadth-first search (BFS) algorithm to find the shortest cycle in the graph.
+
+Here is the step-by-step solution in C++:
+
+1. Read the number of nodes and edges from input.
+2. Create an adjacency list to represent the graph.
+3. Read the edges and populate the adjacency list accordingly.
+4. Initialize a variable `girth` to store the shortest cycle length and set its initial value to -1.
+5. For each node in the graph, perform a BFS starting from that node.
+6. In the BFS, maintain a visited array to keep track of visited nodes and a distance array to store the distance from the starting node.
+7. For each neighbor of the current node, check if it has been visited before. If not, mark it as visited, update its distance, and add it to the queue.
+8. If a neighbor has been visited before and its distance from the starting node is at least 2, update the `girth` variable with the minimum of its current value and the distance from the current node to the neighbor plus 1.
+9. After the BFS, if the `girth` variable is still -1, there is no cycle in the graph. Otherwise, print the value of `girth`.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <limits>
+
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> adj(n + 1);
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    int girth = -1;
+    for (int start = 1; start <= n; ++start) {
+        vector<bool> visited(n + 1, false);
+        vector<int> distance(n + 1, numeric_limits<int>::max());
+
+        queue<int> q;
+        q.push(start);
+        visited[start] = true;
+        distance[start] = 0;
+
+        while (!q.empty()) {
+            int curr = q.front();
+            q.pop();
+
+            for (int neighbor : adj[curr]) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    distance[neighbor] = distance[curr] + 1;
+                    q.push(neighbor);
+                } else if (distance[neighbor] >= 2) {
+                    girth = (girth == -1) ? distance[curr] + distance[neighbor] + 1 : min(girth, distance[curr] + distance[neighbor] + 1);
+                }
+            }
+        }
+    }
+
+    cout << girth << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m), where n is the number of nodes and m is the number of edges.

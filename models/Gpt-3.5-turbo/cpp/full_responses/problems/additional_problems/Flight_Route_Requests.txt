@@ -1,0 +1,60 @@
+To solve this problem, we can use a graph data structure and perform a depth-first search (DFS) to find the minimum number of flight connections needed.
+
+First, we create an adjacency list to represent the graph. For each request, we add an edge from city $a$ to city $b$ in the adjacency list.
+
+Next, we initialize a visited array to keep track of visited cities during the DFS. We also initialize a variable to store the minimum number of flight connections needed.
+
+Then, we start a DFS from each unvisited city. During the DFS, we mark the current city as visited and recursively explore its adjacent cities. For each adjacent city, if it has not been visited, we increment the minimum number of flight connections by 1 and continue the DFS from that city.
+
+Finally, we return the minimum number of flight connections as the answer.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<bool> visited;
+
+void dfs(int v, int& minConnections) {
+    visited[v] = true;
+    
+    for (int u : adj[v]) {
+        if (!visited[u]) {
+            minConnections++;
+            dfs(u, minConnections);
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    adj.resize(n + 1);
+    visited.resize(n + 1, false);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+    }
+
+    int minConnections = 0;
+
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            dfs(i, minConnections);
+        }
+    }
+
+    cout << minConnections << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n + m), where n is the number of cities and m is the number of requests. This is because we perform a DFS on each unvisited city, which takes O(n + m) time.

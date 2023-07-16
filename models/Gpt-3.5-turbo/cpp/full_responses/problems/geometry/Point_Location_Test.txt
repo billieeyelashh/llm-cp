@@ -1,0 +1,36 @@
+We can solve this problem using the concept of cross product. The cross product of two vectors $AB$ and $BC$ gives us a vector that is perpendicular to the plane formed by these two vectors.
+
+If the cross product of vectors $p_1p_2$ and $p_1p_3$ is positive, then $p_3$ is on the left side of the line. If the cross product is negative, then $p_3$ is on the right side of the line. If the cross product is zero, then $p_3$ lies on the line.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int x1, y1, x2, y2, x3, y3;
+        cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+
+        long long cross_product = (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
+        
+        if (cross_product > 0) {
+            cout << "LEFT\n";
+        } else if (cross_product < 0) {
+            cout << "RIGHT\n";
+        } else {
+            cout << "TOUCH\n";
+        }
+    }
+
+    return 0;
+}
+```
+
+The code takes the number of tests as input and then for each test, it takes the coordinates of the three points. It calculates the cross product using the given formula and then prints the result based on the sign of the cross product.
+
+This solution has a time complexity of O(t), where t is the number of tests.

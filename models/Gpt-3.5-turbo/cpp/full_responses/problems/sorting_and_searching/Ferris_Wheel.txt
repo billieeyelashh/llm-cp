@@ -1,0 +1,44 @@
+To solve this problem, we can use a greedy approach. We will sort the weights of the children in non-decreasing order and then pair them up starting from the lightest and heaviest child. If the combined weight of a pair does not exceed $x$, they can share a gondola. Otherwise, the heaviest child will have to ride alone.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> weights(n);
+    for (int i = 0; i < n; i++) {
+        cin >> weights[i];
+    }
+
+    sort(weights.begin(), weights.end());
+
+    int gondolas = 0;
+    int left = 0, right = n - 1;
+
+    while (left <= right) {
+        if (weights[left] + weights[right] <= x) {
+            left++;
+            right--;
+        } else {
+            right--;
+        }
+        gondolas++;
+    }
+
+    cout << gondolas << endl;
+
+    return 0;
+}
+```
+
+The code reads the input values, sorts the weights, and then uses two pointers to pair up the children. The `gondolas` variable keeps track of the number of gondolas used.
+
+The time complexity of this solution is $O(n\log n)$, where $n$ is the number of children.

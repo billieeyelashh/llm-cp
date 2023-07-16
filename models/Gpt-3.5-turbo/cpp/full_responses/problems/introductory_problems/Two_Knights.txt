@@ -1,0 +1,36 @@
+To solve this problem, we can observe that the number of ways two knights can be placed on a $k \times k$ chessboard without attacking each other is equal to the number of ways they can be placed on the board minus the number of ways they can attack each other.
+
+Let's start with counting the total number of ways two knights can be placed on the board. For a $k \times k$ chessboard, there are $k^2$ possible positions for the first knight and $(k^2 - 1)$ possible positions for the second knight.
+
+Now, let's count the number of ways they can attack each other. There are two types of attacks that can occur:
+1. The knights are in the same row or column, but not adjacent to each other. In this case, there are $4(k-1)(k-2)$ possible positions for the second knight.
+2. The knights are in an L-shape configuration. In this case, there are $2(k-2)(k-1)$ possible positions for the second knight.
+
+Therefore, the number of ways the knights can attack each other is $4(k-1)(k-2) + 2(k-2)(k-1)$.
+
+Finally, the number of ways two knights can be placed on a $k \times k$ chessboard without attacking each other is equal to the total number of ways minus the number of ways they can attack each other, which is $k^2(k^2 - 1) - (4(k-1)(k-2) + 2(k-2)(k-1))$.
+
+Here is the final solution in C++:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    for (int k = 1; k <= n; k++) {
+        long long total_ways = 1LL * k * k * (k * k - 1);
+        long long attack_ways = 2LL * (k - 2) * (k - 1) + 4LL * (k - 1) * (k - 2);
+        long long non_attack_ways = total_ways - attack_ways;
+
+        cout << non_attack_ways << " ";
+    }
+
+    return 0;
+}
+```
+
+This solution iterates over the values of $k$ from $1$ to $n$, calculates the number of ways two knights can be placed on a $k \times k$ chessboard without attacking each other using the formula derived above, and prints the results.

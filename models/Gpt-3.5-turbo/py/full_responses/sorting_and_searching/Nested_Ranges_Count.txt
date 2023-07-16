@@ -1,0 +1,46 @@
+To solve this problem, we can use a sorted list to store all the ranges. We will sort the list based on the starting point of each range. 
+
+First, we will iterate through the ranges in the sorted list and count how many other ranges each range contains. We can do this by keeping track of the current maximum ending point. If the starting point of the next range is less than or equal to the current maximum ending point, it means the current range contains the next range. Otherwise, we update the current maximum ending point.
+
+Next, we will iterate through the ranges again, but this time in reverse order, and count how many other ranges contain each range. We can do this by keeping track of the current minimum starting point. If the ending point of the next range is greater than or equal to the current minimum starting point, it means the current range is contained by the next range. Otherwise, we update the current minimum starting point.
+
+Finally, we will print the counts for each range in the input order.
+
+Here is the Python solution:
+
+```python
+n = int(input())
+ranges = []
+for _ in range(n):
+    x, y = map(int, input().split())
+    ranges.append((x, y))
+
+# Sort the ranges based on the starting point
+ranges.sort()
+
+# Initialize counts for each range
+contains_count = [0] * n
+contained_by_count = [0] * n
+
+# Count how many other ranges each range contains
+max_end = float('-inf')
+for i in range(n):
+    if ranges[i][1] <= max_end:
+        contains_count[i] = 1
+    else:
+        max_end = ranges[i][1]
+
+# Count how many other ranges contain each range
+min_start = float('inf')
+for i in range(n-1, -1, -1):
+    if ranges[i][0] >= min_start:
+        contained_by_count[i] = 1
+    else:
+        min_start = ranges[i][0]
+
+# Print the counts for each range
+print(' '.join(map(str, contains_count)))
+print(' '.join(map(str, contained_by_count)))
+```
+
+This solution has a time complexity of O(n log n) due to the sorting step.

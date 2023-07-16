@@ -1,0 +1,25 @@
+To solve this problem, we can use dynamic programming. We will create an array dp of size x+1 to store the number of ways to make each sum from 0 to x.
+
+The base case is dp[0] = 1, since there is one way to make a sum of 0 (by not selecting any coins).
+
+For each coin value c, we iterate from c to x and update dp[i] by adding dp[i-c]. This means that if we have already found the number of ways to make a sum of i-c, we can use this coin to make a sum of i by adding it to the sum of i-c.
+
+Finally, the answer will be stored in dp[x].
+
+Here is the implementation in Python:
+
+```python
+n, x = map(int, input().split())
+coins = list(map(int, input().split()))
+
+dp = [0] * (x + 1)
+dp[0] = 1
+
+for coin in coins:
+    for i in range(coin, x + 1):
+        dp[i] = (dp[i] + dp[i - coin]) % (10**9 + 7)
+
+print(dp[x])
+```
+
+This solution has a time complexity of O(n*x) and a space complexity of O(x), where n is the number of coins and x is the desired sum of money.

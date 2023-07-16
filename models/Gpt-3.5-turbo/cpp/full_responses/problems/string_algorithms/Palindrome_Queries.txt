@@ -1,0 +1,68 @@
+To solve this problem optimally, we can use the concept of a prefix array. 
+
+First, we will create an array called "prefix" that stores the count of each character in the prefix of the string up to that position. This can be done in O(n) time complexity.
+
+Next, for each operation of type 2, we can check if the substring from position a to b is a palindrome by comparing the count of each character in the substring. If the count of each character in the substring is even and at most one character has an odd count, then the substring is a palindrome. Otherwise, it is not a palindrome. This check can be done in O(1) time complexity.
+
+Finally, for each operation of type 1, we will update the prefix array accordingly by decrementing the count of the previous character at position k and incrementing the count of the new character x at position k. This update can be done in O(1) time complexity.
+
+Here is the final C++ solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    
+    string s;
+    cin >> s;
+    
+    vector<vector<int>> prefix(n + 1, vector<int>(26));
+    for (int i = 1; i <= n; i++) {
+        prefix[i] = prefix[i - 1];
+        prefix[i][s[i - 1] - 'a']++;
+    }
+    
+    for (int i = 0; i < m; i++) {
+        int type, a, b;
+        cin >> type >> a >> b;
+        
+        if (type == 1) {
+            s[a - 1] = b;
+            
+            for (int j = a; j <= n; j++) {
+                prefix[j][s[a - 1] - 'a']++;
+                prefix[j][s[a - 1] - 'a']--;
+            }
+        } else {
+            bool palindrome = true;
+            
+            for (int j = 0; j < 26; j++) {
+                int count = prefix[b][j] - prefix[a - 1][j];
+                
+                if (count % 2 != 0) {
+                    if (!palindrome) {
+                        palindrome = false;
+                        break;
+                    } else {
+                        palindrome = true;
+                    }
+                }
+            }
+            
+            if (palindrome) {
+                cout << "YES" << endl;
+            } else {
+                cout << "NO" << endl;
+            }
+        }
+    }
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m), which is the most optimal solution for this problem.

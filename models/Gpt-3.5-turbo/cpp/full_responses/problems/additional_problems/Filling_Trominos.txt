@@ -1,0 +1,83 @@
+To solve this problem, we can observe that for a grid to be filled with L-trominos, the number of cells in the grid must be divisible by 3.
+
+Algorithm:
+1. Read the number of test cases, t.
+2. For each test case, do the following steps:
+   a. Read the dimensions of the grid, n and m.
+   b. If n * m is not divisible by 3, print NO and continue to the next test case.
+   c. Create a 2D array of characters with dimensions n x m.
+   d. Fill the grid with 'A' in the first row and 'B' in the first column.
+   e. Iterate over the remaining cells of the grid using nested loops:
+      - If the cell is in an even row and an odd column, assign the character at the cell as the character one column to the left.
+      - If the cell is in an odd row and an even column, assign the character at the cell as the character one row above.
+      - Otherwise, assign the character at the cell as the character one cell to the top-left.
+   f. Print YES.
+   g. Print the contents of the grid.
+
+Here is the C++ code implementing the above algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+bool solveGrid(int n, int m) {
+    if (n * m % 3 != 0) {
+        return false;
+    }
+
+    vector<vector<char>> grid(n, vector<char>(m));
+
+    // Fill the first row with 'A'
+    for (int j = 0; j < m; j++) {
+        grid[0][j] = 'A';
+    }
+
+    // Fill the first column with 'B'
+    for (int i = 0; i < n; i++) {
+        grid[i][0] = 'B';
+    }
+
+    // Fill the remaining cells
+    for (int i = 1; i < n; i++) {
+        for (int j = 1; j < m; j++) {
+            if (i % 2 == 0 && j % 2 == 1) {
+                grid[i][j] = grid[i][j - 1];
+            } else if (i % 2 == 1 && j % 2 == 0) {
+                grid[i][j] = grid[i - 1][j];
+            } else {
+                grid[i][j] = grid[i - 1][j - 1];
+            }
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+
+        if (solveGrid(n, m)) {
+            cout << "YES" << endl;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    cout << grid[i][j];
+                }
+                cout << endl;
+            }
+        } else {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+This code reads the number of test cases, and for each test case, it reads the dimensions of the grid. It then calls the `solveGrid` function to check if a solution exists and prints the result accordingly. If a solution is found, it prints the contents of the grid.

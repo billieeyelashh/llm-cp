@@ -1,0 +1,67 @@
+To solve this problem efficiently, we can use a depth-first search (DFS) algorithm to traverse the graph. We will keep track of the number of nodes we can reach from each node.
+
+Here is the step-by-step solution:
+
+1. Read the input values for $n$ and $m$.
+2. Create an adjacency list to represent the directed graph.
+3. Initialize an array `reachable` of size $n$ with all elements set to 0. This array will store the number of reachable nodes from each node.
+4. Implement a DFS function that takes a node as input and performs the following steps:
+   - Mark the current node as visited.
+   - Increment the `reachable` count for the current node.
+   - Iterate through all the neighboring nodes of the current node.
+   - If a neighboring node is not visited, recursively call the DFS function on that node.
+5. Iterate through all the nodes from 1 to $n$ and if a node is not visited, call the DFS function on that node.
+6. Print the `reachable` array.
+
+Here is the C++ code implementing the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<bool> visited;
+vector<int> reachable;
+
+void dfs(int node) {
+    visited[node] = true;
+    reachable[node]++;
+
+    for (int neighbor : adj[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor);
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    adj.resize(n + 1);
+    visited.resize(n + 1);
+    reachable.resize(n + 1);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            dfs(i);
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        cout << reachable[i] << " ";
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n + m) as we perform a DFS traversal on the graph, visiting each node and edge once.

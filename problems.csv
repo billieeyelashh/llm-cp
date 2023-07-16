@@ -1,0 +1,857 @@
+problems,category,model,failure-mode,prompt,prompt-type,programming-lang
+Apples_and_Bananas.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Beautiful_Subgrids.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Cut_and_Paste.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distinct_Routes_II.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Dynamic_Connectivity.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Eulerian_Subgraphs.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Hamming_Distance.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Houses_and_Schools.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Knuth_Division.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Meet_in_the_Middle.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Monster_Game_I.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Monster_Game_II.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Necessary_Cities.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Necessary_Roads.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+New_Roads_Queries.txt,advanced_techniques,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+One_Bit_Positions.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Parcel_Delivery.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Reachability_Queries.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Reachable_Nodes.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Reversals_and_Sums.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Signal_Processing.txt,advanced_techniques,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subarray_Squares.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Substring_Reversals.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Task_Assignment.txt,advanced_techniques,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Array_Description.txt,dynamic_programming,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Book_Shop.txt,dynamic_programming,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Coin_Combinations_I.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Coin_Combinations_II.txt,dynamic_programming,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Numbers.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Tilings.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Towers.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Dice_Combinations.txt,dynamic_programming,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Edit_Distance.txt,dynamic_programming,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Elevator_Rides.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Grid_Paths.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Increasing_Subsequence.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Minimizing_Coins.txt,dynamic_programming,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Money_Sums.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Projects.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Rectangle_Cutting.txt,dynamic_programming,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Removal_Game.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Removing_Digits.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Two_Sets_II.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Convex_Hull.txt,geometry,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Line_Segment_Intersection.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Minimum_Euclidean_Distance.txt,geometry,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Point_in_Polygon.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Point_Location_Test.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Polygon_Area.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Polygon_Lattice_Points.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Building_Roads.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Building_Teams.txt,graph_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Coin_Collector.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Rooms.txt,graph_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Course_Schedule.txt,graph_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Cycle_Finding.txt,graph_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+De_Bruijn_Sequence.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distinct_Routes.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Download_Speed.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Flight_Discount.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Flight_Routes.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Flight_Routes_Check.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Game_Routes.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Giant_Pizza.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Hamiltonian_Flights.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+High_Score.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Investigation.txt,graph_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Knight's_Tour.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Labyrinth.txt,graph_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Longest_Flight_Route.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Mail_Delivery.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Message_Route.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Monsters.txt,graph_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Planets_and_Kingdoms.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Planets_Cycles.txt,graph_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Planets_Queries_I.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Planets_Queries_II.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Police_Chase.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Road_Construction.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Road_Reparation.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Round_Trip.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Round_Trip_II.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+School_Dance.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Shortest_Routes_I.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Shortest_Routes_II.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Teleporters_Path.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Apple_Division.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Bit_Strings.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Chessboard_and_Queens.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Coin_Piles.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Creating_Strings.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Digit_Queries.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Gray_Code.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Grid_Paths.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Increasing_Array.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Missing_Number.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Number_Spiral.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Palindrome_Reorder.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Permutations.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Repetitions.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Tower_of_Hanoi.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Trailing_Zeros.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Two_Knights.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Two_Sets.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Weird_Algorithm.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Binomial_Coefficients.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Bracket_Sequences_I.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Bracket_Sequences_II.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Christmas_Party.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Common_Divisors.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Coprime_Pairs.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Divisors.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Grids.txt,mathematics,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Necklaces.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Creating_Strings_II.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Dice_Probability.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distributing_Apples.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Divisor_Analysis.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Exponentiation.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Exponentiation_II.txt,mathematics,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Fibonacci_Numbers.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Graph_Paths_I.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Graph_Paths_II.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Josephus_Queries.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Prime_Multiples.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Sum_of_Divisors.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Throwing_Dice.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distinct_Values_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Dynamic_Range_Minimum_Queries.txt,range_queries,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Dynamic_Range_Sum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Forest_Queries.txt,range_queries,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Forest_Queries_II.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Hotel_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Increasing_Array_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+List_Removals.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Pizzeria_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Polynomial_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Prefix_Sum_Queries.txt,range_queries,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Range_Queries_and_Copies.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Range_Updates_and_Sums.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Range_Update_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Range_Xor_Queries.txt,range_queries,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Salary_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Static_Range_Minimum_Queries.txt,range_queries,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Static_Range_Sum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subarray_Sum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Apartments.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Array_Division.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Collecting_Numbers.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Collecting_Numbers_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Concert_Tickets.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distinct_Numbers.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Factory_Machines.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Ferris_Wheel.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Josephus_Problem_I.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Josephus_Problem_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Maximum_Subarray_Sum.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Maximum_Subarray_Sum_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Missing_Coin_Sum.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Movie_Festival.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Movie_Festival_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Nearest_Smaller_Values.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Nested_Ranges_Check.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Nested_Ranges_Count.txt,sorting_and_searching,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Playlist.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Reading_Books.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Restaurant_Customers.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Room_Allocation.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Sliding_Cost.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Sliding_Median.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Stick_Lengths.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subarray_Distinct_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subarray_Divisibility.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subarray_Sums_I.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subarray_Sums_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Sum_of_Four_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Sum_of_Three_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Sum_of_Two_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Tasks_and_Deadlines.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Towers.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Traffic_Lights.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Patterns.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distinct_Substrings.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Finding_Borders.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Finding_Patterns.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Finding_Periods.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Longest_Palindrome.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Minimal_Rotation.txt,string_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Palindrome_Queries.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Pattern_Positions.txt,string_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Repeating_Substring.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Required_Substring.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+String_Functions.txt,string_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+String_Matching.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Substring_Distribution.txt,string_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Substring_Order_I.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Substring_Order_II.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Word_Combinations.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Company_Queries_I.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Company_Queries_II.txt,tree_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Counting_Paths.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distance_Queries.txt,tree_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Distinct_Colors.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Finding_a_Centroid.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Fixed-Length_Paths_I.txt,tree_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Fixed-Length_Paths_II.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Path_Queries.txt,tree_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Path_Queries_II.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subordinates.txt,tree_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Subtree_Queries.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Tree_Diameter.txt,tree_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Tree_Distances_I.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Tree_Distances_II.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Tree_Matching.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in C++. Keep your explanations short and concise.",Zero-Shot CoT,cpp
+Apples_and_Bananas.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Beautiful_Subgrids.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Cut_and_Paste.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distinct_Routes_II.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Dynamic_Connectivity.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Eulerian_Subgraphs.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Hamming_Distance.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Houses_and_Schools.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Knuth_Division.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Meet_in_the_Middle.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Monster_Game_I.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Monster_Game_II.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Necessary_Cities.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Necessary_Roads.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+New_Roads_Queries.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+One_Bit_Positions.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Parcel_Delivery.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Reachability_Queries.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Reachable_Nodes.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Reversals_and_Sums.txt,advanced_techniques,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Signal_Processing.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subarray_Squares.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Substring_Reversals.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Task_Assignment.txt,advanced_techniques,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Array_Description.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Book_Shop.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Coin_Combinations_I.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Coin_Combinations_II.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Numbers.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Tilings.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Towers.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Dice_Combinations.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Edit_Distance.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Elevator_Rides.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Grid_Paths.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Increasing_Subsequence.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Minimizing_Coins.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Money_Sums.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Projects.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Rectangle_Cutting.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Removal_Game.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Removing_Digits.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Two_Sets_II.txt,dynamic_programming,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Convex_Hull.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Line_Segment_Intersection.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Minimum_Euclidean_Distance.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Point_in_Polygon.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Point_Location_Test.txt,geometry,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Polygon_Area.txt,geometry,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Polygon_Lattice_Points.txt,geometry,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Building_Roads.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Building_Teams.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Coin_Collector.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Rooms.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Course_Schedule.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Cycle_Finding.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+De_Bruijn_Sequence.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distinct_Routes.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Download_Speed.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Flight_Discount.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Flight_Routes.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Flight_Routes_Check.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Game_Routes.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Giant_Pizza.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Hamiltonian_Flights.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+High_Score.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Investigation.txt,graph_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Knight's_Tour.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Labyrinth.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Longest_Flight_Route.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Mail_Delivery.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Message_Route.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Monsters.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Planets_and_Kingdoms.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Planets_Cycles.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Planets_Queries_I.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Planets_Queries_II.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Police_Chase.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Road_Construction.txt,graph_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Road_Reparation.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Round_Trip.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Round_Trip_II.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+School_Dance.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Shortest_Routes_I.txt,graph_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Shortest_Routes_II.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Teleporters_Path.txt,graph_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Apple_Division.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Bit_Strings.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Chessboard_and_Queens.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Coin_Piles.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Creating_Strings.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Digit_Queries.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Gray_Code.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Grid_Paths.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Increasing_Array.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Missing_Number.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Number_Spiral.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Palindrome_Reorder.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Permutations.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Repetitions.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Tower_of_Hanoi.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Trailing_Zeros.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Two_Knights.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Two_Sets.txt,introductory_problems,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Weird_Algorithm.txt,introductory_problems,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Binomial_Coefficients.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Bracket_Sequences_I.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Bracket_Sequences_II.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Christmas_Party.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Common_Divisors.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Coprime_Pairs.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Divisors.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Grids.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Necklaces.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Creating_Strings_II.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Dice_Probability.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distributing_Apples.txt,mathematics,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Divisor_Analysis.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Exponentiation.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Exponentiation_II.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Fibonacci_Numbers.txt,mathematics,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Graph_Paths_I.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Graph_Paths_II.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Josephus_Queries.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Prime_Multiples.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Sum_of_Divisors.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Throwing_Dice.txt,mathematics,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distinct_Values_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Dynamic_Range_Minimum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Dynamic_Range_Sum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Forest_Queries.txt,range_queries,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Forest_Queries_II.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Hotel_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Increasing_Array_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+List_Removals.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Pizzeria_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Polynomial_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Prefix_Sum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Range_Queries_and_Copies.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Range_Updates_and_Sums.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Range_Update_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Range_Xor_Queries.txt,range_queries,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Salary_Queries.txt,range_queries,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Static_Range_Minimum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Static_Range_Sum_Queries.txt,range_queries,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subarray_Sum_Queries.txt,range_queries,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Apartments.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Array_Division.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Collecting_Numbers.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Collecting_Numbers_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Concert_Tickets.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distinct_Numbers.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Factory_Machines.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Ferris_Wheel.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Josephus_Problem_I.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Josephus_Problem_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Maximum_Subarray_Sum.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Maximum_Subarray_Sum_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Missing_Coin_Sum.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Movie_Festival.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Movie_Festival_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Nearest_Smaller_Values.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Nested_Ranges_Check.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Nested_Ranges_Count.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Playlist.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Reading_Books.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Restaurant_Customers.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Room_Allocation.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Sliding_Cost.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Sliding_Median.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Stick_Lengths.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subarray_Distinct_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subarray_Divisibility.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subarray_Sums_I.txt,sorting_and_searching,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subarray_Sums_II.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Sum_of_Four_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Sum_of_Three_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Sum_of_Two_Values.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Tasks_and_Deadlines.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Towers.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Traffic_Lights.txt,sorting_and_searching,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Patterns.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distinct_Substrings.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Finding_Borders.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Finding_Patterns.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Finding_Periods.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Longest_Palindrome.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Minimal_Rotation.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Palindrome_Queries.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Pattern_Positions.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Repeating_Substring.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Required_Substring.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+String_Functions.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+String_Matching.txt,string_algorithms,gpt-3.5-turbo,ACCEPTED,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Substring_Distribution.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Substring_Order_I.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Substring_Order_II.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Word_Combinations.txt,string_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Company_Queries_I.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Company_Queries_II.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Counting_Paths.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distance_Queries.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Distinct_Colors.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Finding_a_Centroid.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Fixed-Length_Paths_I.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Fixed-Length_Paths_II.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Path_Queries.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Path_Queries_II.txt,tree_algorithms,gpt-3.5-turbo,COMPILE ERROR,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subordinates.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Subtree_Queries.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Tree_Diameter.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Tree_Distances_I.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Tree_Distances_II.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py
+Tree_Matching.txt,tree_algorithms,gpt-3.5-turbo,WRONG ANSWER,"Imagine you are a world-class competitive programmer with multiple gold medals in the IOI. You always strive to solve problems in the most optimal way possible.
+Think carefully and step-by-step. Provide your final solution in python. Keep your explanations short and concise.",Zero-Shot CoT,py

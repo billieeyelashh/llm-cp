@@ -1,0 +1,37 @@
+To solve this problem optimally, we can observe a pattern in the string. The number of digits in each positive integer increases by $1$ as we move to the next integer. 
+
+Based on this observation, we can determine the length of the number that contains the digit at position $k$. We can then find the actual number and extract the digit at the desired position.
+
+Here is the Python solution:
+
+```python
+def find_digit(q, positions):
+    result = []
+    for k in positions:
+        length = 1
+        count = 9
+        while k > count * length:
+            k -= count * length
+            length += 1
+            count *= 10
+
+        num = 10 ** (length - 1) + (k - 1) // length
+        digit = str(num)[(k - 1) % length]
+        result.append(digit)
+
+    return result
+
+
+# Read the input
+q = int(input())
+positions = []
+for _ in range(q):
+    positions.append(int(input()))
+
+# Call the function and print the output
+output = find_digit(q, positions)
+for digit in output:
+    print(digit)
+```
+
+This solution has a time complexity of O(q), where q is the number of queries. It uses a while loop to find the length of the number and then calculates the actual number and extracts the digit at the desired position.

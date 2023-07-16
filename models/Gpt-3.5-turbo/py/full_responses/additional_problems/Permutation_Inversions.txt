@@ -1,0 +1,37 @@
+To count the number of permutations with exactly $k$ inversions, we can use dynamic programming to build a table where each entry represents the number of permutations with $i$ elements and $j$ inversions. 
+
+Let's define a 2D array dp of size (n+1) x (k+1), where dp[i][j] represents the number of permutations with i elements and j inversions.
+
+The base case is when i = 1, which means there is only one element. In this case, there are no inversions, so dp[1][0] = 1.
+
+We can fill the dp table using the following recurrence relation:
+
+dp[i][j] = sum(dp[i-1][j-x]) for x in range(min(j, i-1)+1)
+
+Explanation: To calculate the number of permutations with i elements and j inversions, we can consider the last element of the permutation. If the last element is i, then there are (i-1) elements before it, and we need to count the number of permutations with (i-1) elements and j-x inversions, where x is the number of inversions caused by the last element i. We iterate over all possible values of x, which range from 0 to min(j, i-1), because the maximum number of inversions caused by the last element i is min(j, i-1).
+
+Finally, the answer will be the value of dp[n][k].
+
+Here is the implementation in Python:
+
+```python
+MOD = int(1e9) + 7
+
+def count_permutations(n, k):
+    dp = [[0] * (k+1) for _ in range(n+1)]
+    dp[1][0] = 1
+
+    for i in range(2, n+1):
+        dp[i][0] = 1
+        for j in range(1, k+1):
+            dp[i][j] = (dp[i][j-1] + dp[i-1][j]) % MOD
+            if j >= i:
+                dp[i][j] = (dp[i][j] - dp[i-1][j-i] + MOD) % MOD
+
+    return dp[n][k]
+
+n, k = map(int, input().split())
+print(count_permutations(n, k))
+```
+
+This solution has a time complexity of O(n*k) and a space complexity of O(n*k).

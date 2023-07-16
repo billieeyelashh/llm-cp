@@ -1,0 +1,63 @@
+To solve this problem, we can use the concept of Union-Find data structure. We will keep track of the connected components of the cities.
+
+First, we initialize an array `parent` of size $n$ to represent the parent of each city. Initially, each city is its own parent.
+
+Then, for each road, we perform a union operation on the two cities connected by the road. In the union operation, we find the root (the ultimate parent) of both cities and make one of them the parent of the other.
+
+Finally, for each query, we check if the two cities are in the same connected component. If they are, we print the number of roads built until now. Otherwise, we print -1.
+
+Here's the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> parent;
+
+int find(int x) {
+    if (parent[x] == x) {
+        return x;
+    }
+    return parent[x] = find(parent[x]);
+}
+
+void unite(int a, int b) {
+    a = find(a);
+    b = find(b);
+    if (a != b) {
+        parent[b] = a;
+    }
+}
+
+int main() {
+    int n, m, q;
+    cin >> n >> m >> q;
+
+    parent.resize(n + 1);
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        unite(a, b);
+    }
+
+    while (q--) {
+        int a, b;
+        cin >> a >> b;
+        if (find(a) == find(b)) {
+            cout << "Connected after " << m << " roads" << endl;
+        } else {
+            cout << -1 << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is $O(n + m + q \cdot \alpha(n))$, where $\alpha(n)$ is the inverse Ackermann function.

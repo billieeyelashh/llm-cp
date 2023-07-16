@@ -1,0 +1,38 @@
+Solution:
+
+We can solve this problem using a simple approach. For each integer $x$, we will iterate from $1$ to $\sqrt{x}$ and count the divisors. If $i$ is a divisor of $x$, then both $i$ and $x/i$ are divisors. We need to handle the case when $i=\sqrt{x}$ separately to avoid counting it twice.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    while (n--) {
+        int x;
+        cin >> x;
+
+        int count = 0;
+        for (int i = 1; i <= sqrt(x); i++) {
+            if (x % i == 0) {
+                count++;
+                if (i != x / i) {
+                    count++;
+                }
+            }
+        }
+
+        cout << count << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n \sqrt{x})$ where $n$ is the number of integers and $x$ is the maximum value of $x$ in the input.

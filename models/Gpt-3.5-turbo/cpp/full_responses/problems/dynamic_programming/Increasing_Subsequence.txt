@@ -1,0 +1,47 @@
+To solve this problem, we can use the dynamic programming approach. We will create an array `dp` of size `n`, where `dp[i]` represents the length of the longest increasing subsequence ending at index `i`.
+
+We initialize `dp[i]` to 1 for all `i`, as the minimum length of any subsequence is 1.
+
+Then, for each index `i` from 1 to `n-1`, we iterate through all previous indices `j` from 0 to `i-1`. If `arr[i]` is greater than `arr[j]`, we update `dp[i]` to be the maximum of `dp[i]` and `dp[j] + 1`. This means that we have found a longer increasing subsequence by including the current element `arr[i]`.
+
+Finally, we can find the maximum value in the `dp` array and return it as the length of the longest increasing subsequence.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int longestIncreasingSubsequence(std::vector<int>& arr) {
+    int n = arr.size();
+    std::vector<int> dp(n, 1);
+
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            if (arr[i] > arr[j]) {
+                dp[i] = std::max(dp[i], dp[j] + 1);
+            }
+        }
+    }
+
+    return *std::max_element(dp.begin(), dp.end());
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    std::vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        std::cin >> arr[i];
+    }
+
+    int result = longestIncreasingSubsequence(arr);
+    std::cout << result << std::endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2) due to the nested loops, where n is the size of the array.

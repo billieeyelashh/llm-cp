@@ -1,0 +1,24 @@
+To solve this problem, we can simulate the game by following the teleporters and counting the number of teleportations for each planet. We'll start with an array `teleportations` of size `n` initialized with zeros.
+
+We'll iterate over each planet, starting from planet 1. For each planet, we'll follow the teleporters until we reach a planet that we have already visited before. While doing this, we'll keep track of the number of teleportations by incrementing the `teleportations` count for each planet we visit.
+
+Here's the Python code to solve the problem:
+
+```python
+n = int(input())
+teleporters = list(map(int, input().split()))
+
+teleportations = [0] * n
+
+for start_planet in range(1, n+1):
+    visited = set()
+    current_planet = start_planet
+    while current_planet not in visited:
+        visited.add(current_planet)
+        current_planet = teleporters[current_planet-1]
+        teleportations[start_planet-1] += 1
+
+print(" ".join(map(str, teleportations)))
+```
+
+This solution has a time complexity of O(n) as we iterate over each planet only once, and a space complexity of O(n) to store the `teleportations` array and the `visited` set.

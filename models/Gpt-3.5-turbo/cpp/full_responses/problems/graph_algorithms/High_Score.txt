@@ -1,0 +1,66 @@
+To solve this problem, we can use the Bellman-Ford algorithm to find the maximum score we can achieve by traversing through the tunnels.
+
+First, we initialize an array `dist` of size `n` to store the maximum score we can achieve at each room. We set `dist[1] = 0` since we start at room 1 and our initial score is 0.
+
+Next, we iterate `n-1` times, where in each iteration, we go through all the tunnels and update the maximum score for the destination room if it can be improved. We do this by comparing the current score at the source room with the sum of the score at the source room and the score of the tunnel.
+
+Finally, we check for negative cycles. If after `n-1` iterations, we can still improve the maximum score of any room, then there must be a negative cycle in the graph. In this case, we print `-1` to indicate that we can achieve an arbitrarily large score. Otherwise, we print `dist[n]`, which represents the maximum score we can achieve by reaching room `n`.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int INF = 1e9;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<pair<int, int>>> tunnels(n + 1);
+    for (int i = 0; i < m; ++i) {
+        int a, b, x;
+        cin >> a >> b >> x;
+        tunnels[a].push_back({b, x});
+    }
+
+    vector<int> dist(n + 1, INF);
+    dist[1] = 0;
+
+    for (int i = 0; i < n - 1; ++i) {
+        for (int u = 1; u <= n; ++u) {
+            for (auto tunnel : tunnels[u]) {
+                int v = tunnel.first;
+                int score = tunnel.second;
+                dist[v] = max(dist[v], dist[u] + score);
+            }
+        }
+    }
+
+    // Check for negative cycles
+    bool hasNegativeCycle = false;
+    for (int u = 1; u <= n; ++u) {
+        for (auto tunnel : tunnels[u]) {
+            int v = tunnel.first;
+            int score = tunnel.second;
+            if (dist[v] < dist[u] + score) {
+                hasNegativeCycle = true;
+                break;
+            }
+        }
+    }
+
+    if (hasNegativeCycle) {
+        cout << -1 << endl;
+    } else {
+        cout << dist[n] << endl;
+    }
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n * m), which is efficient enough to handle the given constraints.

@@ -1,0 +1,43 @@
+To generate the Gray code for a given length $n$, we can use a recursive approach. The idea is to generate the Gray code for a smaller length and then append the reverse of that code to itself.
+
+Here's the solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void generateGrayCode(int n) {
+    // Base case: Gray code for n = 1
+    if (n == 1) {
+        cout << "0\n1\n";
+        return;
+    }
+
+    // Recursive case: Generate Gray code for n-1
+    generateGrayCode(n - 1);
+
+    // Append the reverse of Gray code for n-1
+    vector<string> grayCode = {"0", "1"};
+    for (int i = grayCode.size() - 1; i >= 0; i--) {
+        cout << grayCode[i] << "\n";
+        grayCode.push_back("1" + grayCode[i]);
+        grayCode[i] = "0" + grayCode[i];
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    generateGrayCode(n);
+
+    return 0;
+}
+```
+
+The `generateGrayCode` function takes an integer `n` as input and prints the Gray code for that length. It uses a vector `grayCode` to store the current Gray code sequence. Starting with `0` and `1`, it iteratively appends the reverse of the code to itself, while updating the existing codes with a prefixed `0` and `1` respectively.
+
+The main function reads the input `n` and calls `generateGrayCode` to print the Gray code for the given length.
+
+This solution has a time complexity of O(2^n), as it generates all possible bit strings of length n.

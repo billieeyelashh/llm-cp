@@ -1,0 +1,31 @@
+To solve this problem, we can use the following observations:
+
+1. If either $n$ or $m$ is odd, it's impossible to fill the grid using L-trominos because L-trominos cover three squares and the grid has an even number of squares.
+
+2. If both $n$ and $m$ are even, we can fill the grid using L-trominos. We can divide the grid into 2x2 cells, and each cell can be filled with a different letter. By doing this, we ensure that adjacent squares have the same letter when they belong to the same tromino.
+
+Based on these observations, we can write the following solution in Python:
+
+```python
+def fill_grid(n, m):
+    if n % 2 == 1 or m % 2 == 1:
+        return "NO"
+    else:
+        grid = [['A' for _ in range(m)] for _ in range(n)]
+        for i in range(0, n, 2):
+            for j in range(0, m, 2):
+                grid[i][j] = 'A'
+                grid[i][j+1] = 'B'
+                grid[i+1][j] = 'C'
+                grid[i+1][j+1] = 'D'
+        return "YES\n" + '\n'.join([''.join(row) for row in grid])
+
+t = int(input())
+for _ in range(t):
+    n, m = map(int, input().split())
+    print(fill_grid(n, m))
+```
+
+The main function `fill_grid` takes the dimensions of the grid as input and returns either "NO" if a solution is not possible, or a string representation of the filled grid.
+
+In the main loop, we read the number of tests `t`, and for each test, we read the dimensions of the grid and print the result of calling `fill_grid`.

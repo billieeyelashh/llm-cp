@@ -1,0 +1,48 @@
+To solve this problem, we can use the Z-algorithm to calculate the values of the $z$ function and then use those values to calculate the values of the $\pi$ function.
+
+The Z-algorithm is a linear time algorithm that calculates the longest common prefix between a string and all of its suffixes. We can use this algorithm to calculate the values of the $z$ function.
+
+Here is the Python code to calculate the values of the $z$ function:
+
+```python
+def calculate_z_function(s):
+    n = len(s)
+    z = [0] * n
+    l = r = 0
+    for i in range(1, n):
+        if i <= r:
+            z[i] = min(r - i + 1, z[i - l])
+        while i + z[i] < n and s[i + z[i]] == s[z[i]]:
+            z[i] += 1
+        if i + z[i] - 1 > r:
+            l = i
+            r = i + z[i] - 1
+    return z
+```
+
+Now that we have the values of the $z$ function, we can calculate the values of the $\pi$ function using the following formula:
+
+$$\pi(i) = \max(\pi(i - 1) - 1, z(i))$$
+
+Here is the Python code to calculate the values of the $\pi$ function:
+
+```python
+def calculate_pi_function(z):
+    n = len(z)
+    pi = [0] * n
+    for i in range(1, n):
+        pi[i] = max(pi[i - 1] - 1, z[i])
+    return pi
+```
+
+Finally, we can put it all together and print the values of the $z$ function and the $\pi$ function:
+
+```python
+s = input().strip()
+z = calculate_z_function(s)
+pi = calculate_pi_function(z)
+print(' '.join(map(str, z)))
+print(' '.join(map(str, pi)))
+```
+
+This solution has a time complexity of $O(n)$, where $n$ is the length of the input string.

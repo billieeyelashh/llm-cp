@@ -1,0 +1,56 @@
+To solve this problem, we can use dynamic programming. Let's define a function $f(n)$ which represents the number of different towers we can build with a height of $n$. 
+
+We can observe that if $n=1$, there is only one possible tower: a single block of height $1$.
+
+For $n \geq 2$, we have two options for the top block: either it can have a width of $1$ or $2$. 
+
+If the top block has a width of $1$, then the bottom block must also have a width of $1$. In this case, the remaining height is $n-1$, and the number of possible towers is $f(n-1)$.
+
+If the top block has a width of $2$, then the bottom block can have a width of $1$ or $2$. In this case, the remaining height is $n-2$, and the number of possible towers is $2 \cdot f(n-2)$.
+
+Therefore, the recursive formula for $f(n)$ is:
+$$f(n) = \begin{cases} 1 & \text{ if } n = 1 \\ f(n-1) + 2 \cdot f(n-2) & \text{ if } n \geq 2 \end{cases}$$
+
+To avoid recomputing the same values multiple times, we can use memoization to store the computed values of $f(n)$ in an array.
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1000000007;
+
+vector<int> memo;
+
+int countTowers(int n) {
+    if (n == 1) {
+        return 1;
+    }
+    if (memo[n] != -1) {
+        return memo[n];
+    }
+    int ans = (countTowers(n-1) + 2 * countTowers(n-2)) % MOD;
+    memo[n] = ans;
+    return ans;
+}
+
+int main() {
+    int t;
+    cin >> t;
+
+    memo.resize(1000001, -1);
+    memo[1] = 1;
+
+    while (t--) {
+        int n;
+        cin >> n;
+        cout << countTowers(n) << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$, where $n$ is the maximum height of the tower in the test cases.

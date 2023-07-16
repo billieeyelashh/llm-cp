@@ -1,0 +1,32 @@
+To solve this problem, we can use a prefix xor array. Let's call this array "prefix_xor".
+
+First, we initialize a variable "max_xor" to 0, which will store the maximum xor sum found so far.
+
+Next, we iterate through the input array and calculate the prefix xor array. For each index i, the prefix xor value is obtained by taking the xor of the current element with the previous prefix xor value.
+
+After calculating the prefix xor array, we iterate through it again to find the maximum xor sum in a subarray. For each index i, we iterate from index 0 to i and update "max_xor" with the maximum value between "max_xor" and the xor of prefix_xor[i] with prefix_xor[j] for all j in the range [0, i-1].
+
+Finally, we print the value of "max_xor".
+
+Here is the Python code to implement this solution:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+prefix_xor = [0] * n
+prefix_xor[0] = arr[0]
+
+for i in range(1, n):
+    prefix_xor[i] = arr[i] ^ prefix_xor[i - 1]
+
+max_xor = 0
+
+for i in range(n):
+    for j in range(i):
+        max_xor = max(max_xor, prefix_xor[i] ^ prefix_xor[j])
+
+print(max_xor)
+```
+
+This solution has a time complexity of O(n^2) as we iterate through the prefix xor array twice. However, since the constraints allow for up to 2 * 10^5 elements in the array, this solution should run within the time limits.

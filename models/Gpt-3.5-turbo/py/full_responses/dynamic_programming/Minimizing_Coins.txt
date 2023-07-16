@@ -1,0 +1,28 @@
+To solve this problem, we can use a dynamic programming approach. We will create an array dp of size x+1, where dp[i] represents the minimum number of coins needed to make the sum i.
+
+Initially, we will set all elements of dp to a large value, except for dp[0] which will be 0 because we don't need any coins to make a sum of 0.
+
+For each coin value c, we will iterate over all possible sums from c to x. For each sum j, we will update dp[j] if dp[j-c]+1 is smaller than the current value of dp[j]. This means that we have found a better way to make the sum j using the coin value c.
+
+Finally, we will print dp[x] as the minimum number of coins required to make the sum x. If dp[x] is still a large value, it means it is not possible to make the desired sum and we will print -1.
+
+Here is the Python implementation:
+
+```python
+n, x = map(int, input().split())
+coins = list(map(int, input().split()))
+
+dp = [float('inf')] * (x+1)
+dp[0] = 0
+
+for c in coins:
+    for j in range(c, x+1):
+        dp[j] = min(dp[j], dp[j-c]+1)
+
+if dp[x] == float('inf'):
+    print(-1)
+else:
+    print(dp[x])
+```
+
+This solution has a time complexity of O(nx), where n is the number of coins and x is the desired sum.

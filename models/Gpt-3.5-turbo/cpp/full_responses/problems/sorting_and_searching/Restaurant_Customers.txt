@@ -1,0 +1,60 @@
+To solve this problem efficiently, we can use the following approach:
+
+1. Read the input values and store them in two separate arrays: `arrivals` and `leavings`. Sort both arrays in ascending order.
+
+2. Initialize two variables, `current_count` and `max_count`, to keep track of the current number of customers in the restaurant and the maximum number of customers seen so far. Set both variables to 0.
+
+3. Iterate through the sorted arrays `arrivals` and `leavings` simultaneously using two pointers, `i` and `j`, starting from the first index.
+
+4. Inside the loop, compare the arrival time at index `i` with the leaving time at index `j`.
+
+    - If the arrival time is less than or equal to the leaving time, increment `current_count` and move the `i` pointer forward.
+    
+    - If the arrival time is greater than the leaving time, decrement `current_count` and move the `j` pointer forward.
+    
+    - Update `max_count` if `current_count` is greater than `max_count`.
+    
+5. Continue this process until both pointers reach the end of their respective arrays.
+
+6. Print the value of `max_count` as the maximum number of customers in the restaurant at any time.
+
+Here is the C++ implementation of the solution:
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int arrivals[n], leavings[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arrivals[i] >> leavings[i];
+    }
+
+    sort(arrivals, arrivals + n);
+    sort(leavings, leavings + n);
+
+    int current_count = 0, max_count = 0;
+    int i = 0, j = 0;
+
+    while (i < n && j < n) {
+        if (arrivals[i] <= leavings[j]) {
+            current_count++;
+            i++;
+        } else {
+            current_count--;
+            j++;
+        }
+        max_count = max(max_count, current_count);
+    }
+
+    cout << max_count << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) due to the sorting step, where n is the number of customers. The subsequent loop runs in O(n) time.

@@ -1,0 +1,43 @@
+We can solve this problem efficiently using a hash table to count the number of apples and bananas with each weight. First, we initialize a hash table to store the count of each weight from $1 \ldots k$. Then, we iterate over the given weights of apples and bananas and increment the count in the hash table for each weight.
+
+Next, we iterate over each weight $w$ from $2 \ldots 2k$ and calculate the number of ways to choose an apple and a banana with a combined weight of $w$. We sum the product of the count of apples with weight $a$ and the count of bananas with weight $w-a$, where $a$ ranges from $1$ to $\min(w-1, k)$. Finally, we print the result for each weight.
+
+Here's the C++ code:
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    int k, n, m;
+    cin >> k >> n >> m;
+
+    unordered_map<int, int> appleCount, bananaCount;
+
+    for (int i = 0; i < n; i++) {
+        int weight;
+        cin >> weight;
+        appleCount[weight]++;
+    }
+
+    for (int i = 0; i < m; i++) {
+        int weight;
+        cin >> weight;
+        bananaCount[weight]++;
+    }
+
+    for (int w = 2; w <= 2 * k; w++) {
+        int ways = 0;
+        for (int a = 1; a <= min(w - 1, k); a++) {
+            int b = w - a;
+            ways += appleCount[a] * bananaCount[b];
+        }
+        cout << ways << " ";
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n + m + k)$, where $n$ is the number of apples, $m$ is the number of bananas, and $k$ is the maximum weight.

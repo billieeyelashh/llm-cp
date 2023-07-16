@@ -1,0 +1,46 @@
+To solve this problem efficiently, we can precompute the prefix sum array. The prefix sum at index $i$ will be the sum of all values from index 0 to $i-1$. 
+
+Here's the plan:
+
+1. Read the input values $n$ and $q$.
+2. Read the array values $x_1,x_2,\dots,x_n$.
+3. Compute the prefix sum array $prefix$ of size $n+1$. Initialize $prefix[0]$ to 0.
+4. For each $i$ from 1 to $n$, compute $prefix[i] = prefix[i-1] + x[i-1]$.
+5. For each query, read the values $a$ and $b$.
+6. Compute the sum of values in range $[a,b]$ as $prefix[b] - prefix[a-1]$.
+7. Print the result of each query.
+
+Here's the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> x(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> x[i];
+    }
+
+    vector<int> prefix(n + 1, 0);
+    for (int i = 1; i <= n; ++i) {
+        prefix[i] = prefix[i - 1] + x[i - 1];
+    }
+
+    for (int i = 0; i < q; ++i) {
+        int a, b;
+        cin >> a >> b;
+        int sum = prefix[b] - prefix[a - 1];
+        cout << sum << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n+q)$, where $n$ is the number of values and $q$ is the number of queries.

@@ -1,0 +1,46 @@
+To solve this problem, we can use a sliding window approach.
+
+We will maintain a set to keep track of the unique songs in the current window. We will also maintain two pointers, `left` and `right`, to define the current window.
+
+Initially, both `left` and `right` will be set to 0. We will iterate `right` from 0 to `n-1` and for each iteration, we will check if the song at index `right` is already present in the set. If it is not present, we will add it to the set and increment `right`. If it is present, we will remove the song at index `left` from the set, increment `left`, and continue with the next iteration.
+
+At each iteration, we will update the maximum length of the unique song sequence based on the size of the set.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <unordered_set>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    int songs[n];
+    for (int i = 0; i < n; ++i) {
+        cin >> songs[i];
+    }
+    
+    unordered_set<int> uniqueSongs;
+    int left = 0, right = 0;
+    int maxLength = 0;
+    
+    while (right < n) {
+        if (uniqueSongs.count(songs[right]) == 0) {
+            uniqueSongs.insert(songs[right]);
+            maxLength = max(maxLength, right - left + 1);
+            ++right;
+        } else {
+            uniqueSongs.erase(songs[left]);
+            ++left;
+        }
+    }
+    
+    cout << maxLength << endl;
+    
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n) since we iterate through the songs only once. The space complexity is also O(n) as we store at most n unique songs in the set.

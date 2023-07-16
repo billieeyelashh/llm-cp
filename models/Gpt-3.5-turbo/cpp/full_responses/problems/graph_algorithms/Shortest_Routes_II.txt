@@ -1,0 +1,84 @@
+To find the shortest route between two cities, we can use Dijkstra's algorithm. 
+
+First, we need to represent the graph using an adjacency list. We can create a vector of vectors, where each element of the vector represents a city and stores a pair of the connected city and the length of the road.
+
+Next, we need to implement Dijkstra's algorithm. We can use a priority queue to store the cities in the order of their distances from the source city. We initialize the distances of all cities except the source city to infinity. Then, we start with the source city, set its distance to 0 and push it to the priority queue.
+
+While the priority queue is not empty, we extract the city with the minimum distance from the queue. For each neighbor of the current city, we calculate the distance from the source city through the current city. If this distance is smaller than the current distance of the neighbor, we update its distance and push it to the priority queue.
+
+Finally, after processing all queries, we can output the distances of the target cities. If the distance is still infinity, it means there is no route between the source and target cities.
+
+Here is the C++ code implementing the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
+
+using namespace std;
+
+typedef pair<int, int> pii;
+
+void dijkstra(vector<vector<pii>>& graph, int source, vector<int>& distances) {
+    int n = graph.size();
+    distances.resize(n, INT_MAX);
+    distances[source] = 0;
+
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    pq.push({0, source});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+
+        if (d > distances[u]) {
+            continue;
+        }
+
+        for (auto& edge : graph[u]) {
+            int v = edge.first;
+            int w = edge.second;
+
+            if (distances[u] + w < distances[v]) {
+                distances[v] = distances[u] + w;
+                pq.push({distances[v], v});
+            }
+        }
+    }
+}
+
+int main() {
+    int n, m, q;
+    cin >> n >> m >> q;
+
+    vector<vector<pii>> graph(n);
+
+    for (int i = 0; i < m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        graph[a-1].push_back({b-1, c});
+        graph[b-1].push_back({a-1, c});
+    }
+
+    for (int i = 0; i < q; ++i) {
+        int a, b;
+        cin >> a >> b;
+
+        vector<int> distances;
+        dijkstra(graph, a-1, distances);
+
+        int shortest_distance = distances[b-1];
+        if (shortest_distance == INT_MAX) {
+            shortest_distance = -1;
+        }
+
+        cout << shortest_distance << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O((n + m) log n) for each query, where n is the number of cities and m is the number of roads.

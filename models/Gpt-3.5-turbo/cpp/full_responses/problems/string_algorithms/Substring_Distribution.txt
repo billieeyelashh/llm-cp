@@ -1,0 +1,52 @@
+To solve this problem optimally, we can use a trie data structure.
+
+First, we initialize an empty trie and a counter variable for the number of distinct substrings. Then, for every length $i$ between $1$ and $n$, we iterate over the string and add each substring of length $i$ to the trie. If the substring is already present in the trie, we skip it. Otherwise, we increment the counter and add the substring to the trie.
+
+Finally, we print the counter value for each length $i$.
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <unordered_set>
+using namespace std;
+
+struct TrieNode {
+    unordered_map<char, TrieNode*> children;
+};
+
+void insertSubstring(TrieNode* root, const string& str) {
+    TrieNode* curr = root;
+    for (char c : str) {
+        if (curr->children.find(c) == curr->children.end()) {
+            curr->children[c] = new TrieNode();
+        }
+        curr = curr->children[c];
+    }
+}
+
+int countDistinctSubstrings(const string& s) {
+    TrieNode* root = new TrieNode();
+    int counter = 0;
+    for (int i = 0; i < s.length(); i++) {
+        for (int j = i; j < s.length(); j++) {
+            string substring = s.substr(i, j - i + 1);
+            insertSubstring(root, substring);
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    for (int i = 1; i <= s.length(); i++) {
+        cout << countDistinctSubstrings(s.substr(0, i)) << " ";
+    }
+    cout << endl;
+    return 0;
+}
+```
+
+This code has a time complexity of $O(n^3)$, where $n$ is the length of the input string.

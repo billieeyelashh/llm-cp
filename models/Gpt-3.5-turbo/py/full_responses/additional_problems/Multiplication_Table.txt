@@ -1,0 +1,34 @@
+To solve this problem, we can use binary search to find the middle element in the sorted multiplication table. 
+
+First, we initialize two variables, `low` and `high`, to represent the range of possible values for the middle element. `low` is set to 1, representing the minimum value in the multiplication table, and `high` is set to `n * n`, representing the maximum value.
+
+Then, we enter a while loop that continues until `low` becomes greater than `high`. In each iteration of the loop, we calculate the average of `low` and `high`, and update `mid` to store the floor value of the average.
+
+Next, we count the number of elements less than or equal to `mid` in the multiplication table. We do this by iterating through each row from 1 to `n`, and adding the minimum value between `mid` divided by the row index and `n` to a variable `count`.
+
+If `count` is less than or equal to `(n * n) // 2`, it means that `mid` is not the middle element. In this case, we update `low` to be `mid + 1`. Otherwise, `mid` could be the middle element, so we update `high` to be `mid - 1`.
+
+Once the while loop exits, we print the value of `low`, which represents the middle element in the sorted multiplication table.
+
+Here is the Python solution:
+
+```python
+n = int(input())
+low = 1
+high = n * n
+
+while low <= high:
+    mid = (low + high) // 2
+    count = 0
+    for i in range(1, n + 1):
+        count += min(mid // i, n)
+    
+    if count <= (n * n) // 2:
+        low = mid + 1
+    else:
+        high = mid - 1
+
+print(low)
+```
+
+This solution has a time complexity of O(log(n^2)), which is equivalent to O(log(n)).

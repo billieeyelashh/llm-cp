@@ -1,0 +1,27 @@
+To solve this problem, we can iterate through each element in the list and count the number of elements that satisfy each condition. 
+
+Here is the Python solution:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+for x in arr:
+    count_divisible = 0
+    count_and = 0
+    count_not_zero = 0
+
+    for y in arr:
+        if y % x == 0:
+            count_divisible += 1
+        if (x & y) == x:
+            count_and += 1
+        if (x & y) != 0:
+            count_not_zero += 1
+
+    print(count_divisible, count_and, count_not_zero)
+```
+
+In this solution, we iterate through each element `x` in the list and initialize three counters: `count_divisible`, `count_and`, and `count_not_zero`. 
+
+For each element `y` in the list, we check if it satisfies the conditions and increment the respective counter. Finally, we print the values of the counters for each element `x`.

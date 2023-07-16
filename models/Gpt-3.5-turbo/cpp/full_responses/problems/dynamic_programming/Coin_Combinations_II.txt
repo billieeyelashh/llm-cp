@@ -1,0 +1,43 @@
+To solve this problem, we can use dynamic programming. Let's define a dp array where dp[i] represents the number of distinct ways to make a sum of i using the available coins.
+
+The base case is dp[0] = 1 since there is only one way to make a sum of 0 (by not choosing any coin).
+
+For each coin, we iterate from its value up to x and update the dp array. For each value j, we add dp[j-c] to dp[j] if j-c >= 0, where c is the value of the current coin. This means that we are considering using the current coin to make the sum j.
+
+Finally, the answer will be dp[x].
+
+Here's the code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> coins(n);
+    for (int i = 0; i < n; i++) {
+        cin >> coins[i];
+    }
+
+    vector<int> dp(x + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = coins[i]; j <= x; j++) {
+            dp[j] = (dp[j] + dp[j - coins[i]]) % MOD;
+        }
+    }
+
+    cout << dp[x] << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * x) and a space complexity of O(x), which is efficient enough to handle the given constraints.

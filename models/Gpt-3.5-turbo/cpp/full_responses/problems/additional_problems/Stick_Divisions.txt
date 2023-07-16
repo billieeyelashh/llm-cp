@@ -1,0 +1,54 @@
+To solve this problem optimally, we can use a priority queue (min-heap) to keep track of the lengths of the sticks. 
+
+First, we initialize the priority queue with the given lengths $d_1, d_2, \ldots, d_n$. 
+
+Next, we perform the following steps until there is only one stick left in the priority queue:
+
+1. Extract the two smallest sticks from the priority queue.
+2. Combine the two sticks into a new stick whose length is the sum of the two extracted sticks.
+3. Add the new stick back to the priority queue.
+4. Increment the cost by the sum of the lengths of the two extracted sticks.
+
+Finally, the final value of the cost will be our answer.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+int main() {
+    int x, n;
+    cin >> x >> n;
+
+    priority_queue<int, vector<int>, greater<int>> pq; // min-heap
+
+    for (int i = 0; i < n; i++) {
+        int d;
+        cin >> d;
+        pq.push(d);
+    }
+
+    long long cost = 0;
+
+    while (pq.size() > 1) {
+        int stick1 = pq.top();
+        pq.pop();
+        int stick2 = pq.top();
+        pq.pop();
+
+        int newStick = stick1 + stick2;
+        cost += newStick;
+
+        pq.push(newStick);
+    }
+
+    cout << cost << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) due to the operations on the priority queue.

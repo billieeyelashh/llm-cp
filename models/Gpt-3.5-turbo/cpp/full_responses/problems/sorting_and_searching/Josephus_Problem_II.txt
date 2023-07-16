@@ -1,0 +1,66 @@
+To solve this problem, we can use a data structure called a circular linked list. We will represent the circle of children using this data structure.
+
+First, we create a circular linked list with $n$ nodes, each representing a child. The value of each node will be the number of the child it represents.
+
+Next, we iterate through the circular linked list $n$ times, removing one child in each iteration. In each iteration, we first skip $k$ children, starting from the current child. We then remove the next child and update the links in the circular linked list accordingly.
+
+Finally, we print the removal order by traversing the circular linked list and printing the values of the removed children.
+
+Here is the C++ code implementing this algorithm:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int value;
+    Node* next;
+};
+
+Node* createCircularLinkedList(int n) {
+    Node* head = new Node();
+    Node* curr = head;
+    for (int i = 1; i <= n; i++) {
+        curr->value = i;
+        curr->next = new Node();
+        curr = curr->next;
+    }
+    curr->next = head;
+    return head;
+}
+
+void removeChildren(Node* head, int n, int k) {
+    Node* curr = head;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < k - 1; j++) {
+            curr = curr->next;
+        }
+        Node* next = curr->next;
+        curr->next = next->next;
+        delete next;
+        curr = curr->next;
+    }
+}
+
+void printRemovalOrder(Node* head, int n) {
+    Node* curr = head;
+    for (int i = 0; i < n; i++) {
+        cout << curr->value << " ";
+        curr = curr->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    Node* head = createCircularLinkedList(n);
+    removeChildren(head, n, k);
+    printRemovalOrder(head, n);
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(nk) since we iterate through the circular linked list $n$ times, and in each iteration, we skip $k$ children. The space complexity is O(n) since we create a circular linked list with $n$ nodes.

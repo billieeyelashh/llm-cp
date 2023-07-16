@@ -1,0 +1,43 @@
+We can solve the Tower of Hanoi problem using recursive backtracking. Here's the solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<pair<int, int>> moves; // to store the moves
+
+void towerOfHanoi(int n, int source, int target, int auxiliary) {
+    if (n > 0) {
+        // Move n-1 disks from source to auxiliary
+        towerOfHanoi(n - 1, source, auxiliary, target);
+        
+        // Move the nth disk from source to target
+        moves.push_back({source, target});
+
+        // Move the n-1 disks from auxiliary to target
+        towerOfHanoi(n - 1, auxiliary, target, source);
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    towerOfHanoi(n, 1, 3, 2); // start from source stack 1, target stack 3, and auxiliary stack 2
+    
+    cout << moves.size() << endl;
+    for (const auto& move : moves) {
+        cout << move.first << " " << move.second << endl;
+    }
+    
+    return 0;
+}
+```
+
+The main function takes input `n` which represents the number of disks. We then call the `towerOfHanoi` function with the source stack as 1, target stack as 3, and auxiliary stack as 2. This function recursively solves the Tower of Hanoi problem by moving n-1 disks from source to auxiliary, moving the nth disk from source to target, and finally moving the n-1 disks from auxiliary to target.
+
+The moves are stored in the `moves` vector, and after solving, we print the number of moves and each move in the required format.
+
+The time complexity of this solution is O(2^n), where n is the number of disks.

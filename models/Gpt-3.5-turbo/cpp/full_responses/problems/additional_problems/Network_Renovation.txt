@@ -1,0 +1,56 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to traverse the network and identify any disconnected components. 
+
+Here is the step-by-step approach:
+
+1. Read the input values: the number of computers $n$ and the $n-1$ connections between them.
+2. Create an adjacency list representation of the network using a vector of vectors.
+3. Initialize a boolean array, `visited`, of size $n$ to keep track of visited nodes during the DFS.
+4. Initialize an empty vector, `newConnections`, to store the new connections that need to be added.
+5. Perform a DFS starting from any arbitrary computer. For each unvisited neighbor, mark it as visited and add it to `newConnections`.
+6. Repeat step 5 for any remaining unvisited computers until all computers have been visited.
+7. Print the size of `newConnections` followed by the connections in `newConnections`.
+
+Here is the C++ code implementing the above approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void dfs(int node, vector<vector<int>>& adj, vector<bool>& visited, vector<pair<int,int>>& newConnections) {
+    visited[node] = true;
+    for (int neighbor : adj[node]) {
+        if (!visited[neighbor]) {
+            newConnections.push_back({node, neighbor});
+            dfs(neighbor, adj, visited, newConnections);
+        }
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<vector<int>> adj(n + 1); // adjacency list representation
+    for (int i = 0; i < n - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    vector<bool> visited(n + 1, false);
+    vector<pair<int,int>> newConnections;
+
+    dfs(1, adj, visited, newConnections);
+
+    cout << newConnections.size() << "\n";
+    for (auto connection : newConnections) {
+        cout << connection.first << " " << connection.second << "\n";
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the number of computers, as we perform a DFS traversal on the network.

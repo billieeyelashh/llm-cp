@@ -1,0 +1,36 @@
+To solve this problem optimally, we can iterate through the array from left to right and keep track of the minimum value seen so far. For each element, if it is smaller than the minimum value seen so far, we need to increase its value to match the minimum value.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int moves = 0;
+    int minVal = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < minVal) {
+            moves += minVal - arr[i];
+        } else {
+            minVal = arr[i];
+        }
+    }
+
+    cout << moves << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n) as we iterate through the array once.

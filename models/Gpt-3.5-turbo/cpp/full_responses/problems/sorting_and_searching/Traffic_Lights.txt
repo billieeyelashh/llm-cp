@@ -1,0 +1,67 @@
+To solve this problem optimally, we can use a data structure called an interval tree. An interval tree allows us to efficiently perform queries and modifications on intervals.
+
+Here is the step-by-step solution:
+
+1. Create an empty interval tree to represent the initial state of the street without any traffic lights.
+
+2. For each set of traffic lights added, do the following:
+   - Insert the interval [0, x] into the interval tree to represent the entire street.
+   - For each position p in the set of traffic lights, find the interval in the interval tree that contains p.
+   - Split the interval into two intervals at position p, removing the original interval from the tree.
+   - Calculate the length of the longest passage without traffic lights by finding the maximum length among all intervals in the tree.
+   - Print the length of the longest passage without traffic lights.
+
+Here is the C++ code implementing the above solution:
+
+```cpp
+#include <iostream>
+#include <set>
+#include <utility>
+
+using namespace std;
+
+int main() {
+    int x, n;
+    cin >> x >> n;
+
+    // Create an interval tree using a set of pairs (start, end)
+    set<pair<int, int>> intervals;
+
+    // Insert the initial interval representing the entire street
+    intervals.insert({0, x});
+
+    for (int i = 0; i < n; i++) {
+        int p;
+        cin >> p;
+
+        // Find the interval containing p
+        auto it = intervals.upper_bound({p, -1});
+        it--;
+
+        // Split the interval into two intervals
+        int start = it->first;
+        int end = it->second;
+        intervals.erase(it);
+        if (start < p) {
+            intervals.insert({start, p - 1});
+        }
+        if (p < end) {
+            intervals.insert({p + 1, end});
+        }
+
+        // Calculate the longest passage without traffic lights
+        int max_length = 0;
+        for (auto interval : intervals) {
+            int length = interval.second - interval.first + 1;
+            max_length = max(max_length, length);
+        }
+
+        // Print the longest passage length
+        cout << max_length << " ";
+    }
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(n log n) due to the use of the interval tree. Each insertion and query operation on the interval tree takes logarithmic time.

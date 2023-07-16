@@ -1,0 +1,86 @@
+To find the minimum price of the route, we can use Dijkstra's algorithm. We start from city 1 (Syrjälä) and keep track of the minimum cost to reach each city. Once we reach city $n$ (Lehmälä), we have the minimum price of the route.
+
+To find the number of minimum-price routes, we can use dynamic programming. We initialize an array dp with the number of routes to reach each city as 0, except for city 1 which is 1. Then, for each flight (a, b, c), if the cost to reach city a plus the cost of the flight is equal to the cost to reach city b, we increment dp[b] by dp[a]. After going through all the flights, dp[n] will give us the number of minimum-price routes modulo $10^9+7$.
+
+To find the minimum number of flights in a minimum-price route, we can use another dynamic programming approach. We initialize an array minFlights with a maximum value for each city. minFlights[1] is 0. Then, for each flight (a, b, c), if the cost to reach city a plus the cost of the flight is equal to the cost to reach city b, we update minFlights[b] to min(minFlights[b], minFlights[a] + 1). Finally, minFlights[n] will give us the minimum number of flights in a minimum-price route.
+
+To find the maximum number of flights in a minimum-price route, we can use a similar approach as finding the minimum number of flights. We initialize an array maxFlights with a minimum value for each city. maxFlights[1] is 0. Then, for each flight (a, b, c), if the cost to reach city a plus the cost of the flight is equal to the cost to reach city b, we update maxFlights[b] to max(maxFlights[b], maxFlights[a] + 1). Finally, maxFlights[n] will give us the maximum number of flights in a minimum-price route.
+
+Here is the C++ code that implements the above solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <limits>
+
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<pair<int, int>>> adj(n + 1);
+    for (int i = 0; i < m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj[a].push_back({b, c});
+    }
+
+    // Dijkstra's algorithm to find the minimum price of the route
+    vector<long long> minPrice(n + 1, numeric_limits<long long>::max());
+    minPrice[1] = 0;
+    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> pq;
+    pq.push({0, 1});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        long long dist = pq.top().first;
+        pq.pop();
+
+        if (dist > minPrice[u]) continue;
+
+        for (auto& edge : adj[u]) {
+            int v = edge.first;
+            int cost = edge.second;
+
+            if (minPrice[u] + cost < minPrice[v]) {
+                minPrice[v] = minPrice[u] + cost;
+                pq.push({minPrice[v], v});
+            }
+        }
+    }
+
+    // Dynamic programming to find the number of minimum-price routes
+    vector<long long> dp(n + 1, 0);
+    dp[1] = 1;
+
+    for (int i = 2; i <= n; ++i) {
+        for (auto& edge : adj[i]) {
+            int u = edge.first;
+            int cost = edge.second;
+
+            if (minPrice[u] + cost == minPrice[i]) {
+                dp[i] = (dp[i] + dp[u]) % MOD;
+            }
+        }
+    }
+
+    // Dynamic programming to find the minimum number of flights in a minimum-price route
+    vector<int> minFlights(n + 1, numeric_limits<int>::max());
+    minFlights[1] = 0;
+
+    for (int i = 2; i <= n; ++i) {
+        for (auto& edge : adj[i]) {
+            int u = edge.first;
+            int cost = edge.second;
+
+            if (minPrice[u] + cost == minPrice[i]) {
+                minFlights[i] = min(minFlights[i], minFlights[u] + 1);
+            }
+        }
+    }
+
+    // Dynamic programming to find

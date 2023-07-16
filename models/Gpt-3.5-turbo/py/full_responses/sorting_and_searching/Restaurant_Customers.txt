@@ -1,0 +1,45 @@
+To solve this problem, we can use a greedy approach. 
+
+First, we will create two lists: one for the arrival times and one for the leaving times. We will sort both lists in ascending order.
+
+Then, we will initialize two variables: `max_customers` as 0 and `current_customers` as 0.
+
+We will iterate through the sorted arrival times and leaving times simultaneously. For each arrival time, we increment `current_customers` by 1. For each leaving time, we decrement `current_customers` by 1.
+
+During each iteration, we update `max_customers` as the maximum of `max_customers` and `current_customers`.
+
+Finally, we print the value of `max_customers`.
+
+Here's the implementation in Python:
+
+```python
+n = int(input())
+arrivals = []
+leavings = []
+
+for _ in range(n):
+    a, b = map(int, input().split())
+    arrivals.append(a)
+    leavings.append(b)
+
+arrivals.sort()
+leavings.sort()
+
+max_customers = 0
+current_customers = 0
+i = 0
+j = 0
+
+while i < n and j < n:
+    if arrivals[i] < leavings[j]:
+        current_customers += 1
+        max_customers = max(max_customers, current_customers)
+        i += 1
+    else:
+        current_customers -= 1
+        j += 1
+
+print(max_customers)
+```
+
+This solution has a time complexity of O(n log n) due to the sorting step, where n is the number of customers. The rest of the algorithm runs in O(n), making it an overall efficient solution.

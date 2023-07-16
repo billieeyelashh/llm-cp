@@ -1,0 +1,112 @@
+To solve this problem efficiently, we can use the segment tree data structure. The segment tree allows us to process range queries and updates in logarithmic time complexity.
+
+First, we need to build the segment tree using the given array of values. Each node of the segment tree will represent a range of values, and it will store the maximum prefix sum for that range. To build the segment tree, we can use a recursive function that takes the current node, the left and right indices of its range, and the array of values as parameters.
+
+Here is the implementation of the build function:
+
+```cpp
+const int INF = 1e9; // Infinity value for empty ranges
+
+vector<int> tree; // Segment tree
+
+void build(int node, int start, int end, const vector<int>& values) {
+    if (start == end) {
+        tree[node] = values[start];
+    } else {
+        int mid = (start + end) / 2;
+        build(2 * node, start, mid, values);
+        build(2 * node + 1, mid + 1, end, values);
+        tree[node] = max(tree[2 * node], tree[2 * node + 1]);
+    }
+}
+
+void buildSegmentTree(const vector<int>& values) {
+    int n = values.size();
+    tree.resize(4 * n); // Size of the segment tree
+
+    build(1, 0, n - 1, values);
+}
+```
+
+Next, we need to implement the update function, which will update the value at a given position in the array. The update function will recursively traverse the segment tree and update the corresponding node's value.
+
+Here is the implementation of the update function:
+
+```cpp
+void update(int node, int start, int end, int idx, int newValue) {
+    if (start == end) {
+        tree[node] = newValue;
+    } else {
+        int mid = (start + end) / 2;
+        if (idx <= mid) {
+            update(2 * node, start, mid, idx, newValue);
+        } else {
+            update(2 * node + 1, mid + 1, end, idx, newValue);
+        }
+        tree[node] = max(tree[2 * node], tree[2 * node + 1]);
+    }
+}
+
+void updateValue(int idx, int newValue) {
+    update(1, 0, n - 1, idx, newValue);
+}
+```
+
+Finally, we need to implement the query function, which will return the maximum prefix sum in a given range. The query function will recursively traverse the segment tree and return the maximum prefix sum for the intersecting ranges.
+
+Here is the implementation of the query function:
+
+```cpp
+int query(int node, int start, int end, int left, int right) {
+    if (right < start || left > end) {
+        return -INF; // Return a low value for empty ranges
+    }
+    if (left <= start && right >= end) {
+        return tree[node];
+    }
+    int mid = (start + end) / 2;
+    int leftMax = query(2 * node, start, mid, left, right);
+    int rightMax = query(2 * node + 1, mid + 1, end, left, right);
+    return max(leftMax, rightMax);
+}
+
+int queryRange(int left, int right) {
+    return query(1, 0, n - 1, left - 1, right - 1); // Subtract 1 to convert to 0-based indexing
+}
+```
+
+Now, we can use these functions to solve the problem by iterating over the queries and performing the corresponding operations.
+
+Here is the complete solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+const int INF = 1e9; // Infinity value for empty ranges
+
+vector<int> tree; // Segment tree
+int n; // Number of values
+
+void build(int node, int start, int end, const vector<int>& values) {
+    if (start == end) {
+        tree[node] = values[start];
+    } else {
+        int mid = (start + end) / 2;
+        build(2 * node, start, mid, values);
+        build(2 * node + 1, mid + 1, end, values);
+        tree[node] = max(tree[2 * node], tree[2 * node + 1]);
+    }
+}
+
+void buildSegmentTree(const vector<int>& values) {
+    n = values.size();
+    tree.resize(4 * n); // Size of the segment tree
+
+    build(1, 0, n - 1, values);
+}
+
+void update(int node, int start, int end, int idx, int newValue)

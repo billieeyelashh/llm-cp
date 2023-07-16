@@ -1,0 +1,59 @@
+To efficiently calculate $a^{b^c} \mod 10^9+7$, we can use the property of modular exponentiation. We can reduce the exponent $b^c$ modulo $\phi(10^9+7)$, where $\phi$ is Euler's totient function. Since $10^9+7$ is a prime number, $\phi(10^9+7) = 10^9+6$. 
+
+Let's define a helper function `power_mod` that calculates $a^b \mod m$ efficiently using binary exponentiation:
+
+```cpp
+long long power_mod(long long a, long long b, long long m) {
+    long long res = 1;
+    while (b > 0) {
+        if (b % 2 == 1) {
+            res = (res * a) % m;
+        }
+        a = (a * a) % m;
+        b /= 2;
+    }
+    return res;
+}
+```
+
+Now, for each calculation, we can calculate $a^{b^c} \mod 10^9+7$ using the following steps:
+
+1. Calculate $b^c \mod (10^9+6)$ using `power_mod`.
+2. Calculate $a^{b^c} \mod (10^9+7)$ using `power_mod`.
+
+Here is the final solution in C++:
+
+```cpp
+#include <iostream>
+
+long long power_mod(long long a, long long b, long long m) {
+    long long res = 1;
+    while (b > 0) {
+        if (b % 2 == 1) {
+            res = (res * a) % m;
+        }
+        a = (a * a) % m;
+        b /= 2;
+    }
+    return res;
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+    
+    for (int i = 0; i < n; i++) {
+        long long a, b, c;
+        std::cin >> a >> b >> c;
+        
+        long long bc_mod = power_mod(b, c, 1000000006);
+        long long result = power_mod(a, bc_mod, 1000000007);
+        
+        std::cout << result << "\n";
+    }
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$, where $n$ is the number of calculations.

@@ -1,0 +1,28 @@
+To solve this problem, we can use a nested loop approach. We iterate over all possible pairs of indices (i, j) and for each pair, we iterate over the remaining indices to find two more values that sum up to x.
+
+Here is the Python code for the solution:
+
+```python
+def find_four_values(n, x, arr):
+    for i in range(n):
+        for j in range(i+1, n):
+            remaining_sum = x - (arr[i] + arr[j])
+            visited = set()
+            for k in range(n):
+                if k != i and k != j:
+                    if remaining_sum - arr[k] in visited:
+                        return i+1, j+1, k+1, arr.index(remaining_sum - arr[k])+1
+                    visited.add(arr[k])
+    return "IMPOSSIBLE"
+
+# Read input
+n, x = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# Call the function and print the output
+print(*find_four_values(n, x, arr))
+```
+
+The time complexity of this solution is O(n^3) since we have three nested loops. However, since the constraints are small (n <= 1000), this solution will run efficiently.
+
+Note: The output is 1-indexed, so we add 1 to the indices before printing them.

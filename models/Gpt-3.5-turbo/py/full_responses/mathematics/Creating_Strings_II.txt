@@ -1,0 +1,33 @@
+Solution:
+
+To solve this problem, we need to count the number of unique permutations that can be formed using the characters of the given string. We can calculate this by using the concept of factorial.
+
+First, we count the frequency of each character in the string. We can use a dictionary to store the count of each character. Then, we calculate the factorial of the length of the string.
+
+Next, we divide the factorial by the product of factorials of the counts of each character. This is done to account for duplicate characters in the string. Finally, we take the result modulo $10^9+7$.
+
+Here is the Python code to solve the problem:
+
+```python
+from math import factorial
+
+# Read the input string
+s = input()
+
+# Count the frequency of each character
+freq = {}
+for ch in s:
+    freq[ch] = freq.get(ch, 0) + 1
+
+# Calculate the factorial of the length of the string
+result = factorial(len(s))
+
+# Divide the factorial by the product of factorials of the character counts
+for count in freq.values():
+    result //= factorial(count)
+
+# Print the result modulo 10^9+7
+print(result % (10**9 + 7))
+```
+
+The time complexity of this solution is $O(n)$, where $n$ is the length of the input string.

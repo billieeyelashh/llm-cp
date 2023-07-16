@@ -1,0 +1,31 @@
+To solve this problem optimally, we can use the concept of prefix xor. We will calculate the prefix xor array, where each element represents the xor sum of values up to that index.
+
+Here is the Python code for the solution:
+
+```python
+n, q = map(int, input().split())
+values = list(map(int, input().split()))
+
+# Calculate prefix xor array
+prefix_xor = [0]
+for i in range(n):
+    prefix_xor.append(prefix_xor[i] ^ values[i])
+
+# Process queries
+for _ in range(q):
+    a, b = map(int, input().split())
+    xor_sum = prefix_xor[b] ^ prefix_xor[a-1]
+    print(xor_sum)
+```
+
+Explanation:
+
+1. Read the input values for `n` and `q`.
+2. Read the `n` array values and store them in the `values` list.
+3. Initialize the `prefix_xor` list with a single element 0.
+4. Iterate over the `values` list and calculate the prefix xor by taking the xor of the previous prefix xor value and the current value. Append the result to the `prefix_xor` list.
+5. Process each query by reading the values `a` and `b`.
+6. Calculate the xor sum by taking the xor of `prefix_xor[b]` and `prefix_xor[a-1]`. The xor of `prefix_xor[a-1]` will cancel out the xor of values before index `a`.
+7. Print the xor sum.
+
+The time complexity of this solution is O(n+q), where n is the size of the array and q is the number of queries.

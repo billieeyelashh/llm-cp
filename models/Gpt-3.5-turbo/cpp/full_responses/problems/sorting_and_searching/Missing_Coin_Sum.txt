@@ -1,0 +1,40 @@
+To solve this problem optimally, we can use a greedy algorithm approach.
+
+First, we sort the coins in ascending order. Then, we iterate through the sorted coins and keep track of the smallest sum we cannot create using the coins seen so far.
+
+We initialize the smallest sum as $1$ and update it as we encounter coins larger than the current smallest sum. If the current coin value is less than or equal to the current smallest sum, we update the smallest sum by adding the coin value to it.
+
+Finally, the smallest sum we cannot create will be the final value of the smallest sum variable.
+
+Here is the C++ implementation:
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> coins(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> coins[i];
+    }
+
+    sort(coins.begin(), coins.end());
+
+    int smallestSum = 1;
+    for (int i = 0; i < n && coins[i] <= smallestSum; ++i) {
+        smallestSum += coins[i];
+    }
+
+    cout << smallestSum << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n \log n)$, where $n$ is the number of coins, due to the sorting step.

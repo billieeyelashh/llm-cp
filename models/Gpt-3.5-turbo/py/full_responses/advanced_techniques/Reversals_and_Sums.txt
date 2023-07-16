@@ -1,0 +1,40 @@
+To solve this problem efficiently, we can use the concept of prefix sums. We will precompute the prefix sum array, which stores the sum of values from index 1 to index i for each index i.
+
+Algorithm:
+1. Read the input values n, m, and the array x.
+2. Initialize an empty prefix sum array prefix_sum.
+3. Compute the prefix sum array using the following formula:
+   - For i = 1 to n:
+     - prefix_sum[i] = prefix_sum[i-1] + x[i]
+4. For each operation, do the following:
+   - Read the operation type t, and the indices a and b.
+   - If t = 1, reverse the subarray from index a to index b in the prefix sum array.
+     - Reverse the subarray from index a to index b in the prefix sum array using the following steps:
+       - Swap prefix_sum[a] with prefix_sum[b].
+       - Swap prefix_sum[a+1] with prefix_sum[b-1].
+       - Continue swapping until a >= b.
+   - If t = 2, calculate the sum of values from index a to index b in the prefix sum array.
+     - If a = 1, print prefix_sum[b].
+     - Otherwise, print prefix_sum[b] - prefix_sum[a-1].
+
+Python code:
+
+n, m = map(int, input().split())
+x = list(map(int, input().split()))
+
+prefix_sum = [0] * (n+1)
+for i in range(1, n+1):
+    prefix_sum[i] = prefix_sum[i-1] + x[i-1]
+
+for _ in range(m):
+    t, a, b = map(int, input().split())
+    if t == 1:
+        while a < b:
+            prefix_sum[a], prefix_sum[b] = prefix_sum[b], prefix_sum[a]
+            a += 1
+            b -= 1
+    elif t == 2:
+        if a == 1:
+            print(prefix_sum[b])
+        else:
+            print(prefix_sum[b] - prefix_sum[a-1])

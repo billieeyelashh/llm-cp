@@ -1,0 +1,62 @@
+To solve this problem, we can use the concept of topological sorting. Topological sorting is a linear ordering of the vertices of a directed graph such that for every directed edge (u, v), vertex u comes before vertex v in the ordering.
+
+We can represent the courses and their requirements as a directed graph, where each course is a vertex and each requirement is a directed edge.
+
+The steps to find a valid order for completing the courses using topological sorting are as follows:
+
+1. Read the input values of n and m.
+2. Create an adjacency list to represent the directed graph.
+3. Read the m requirements and add the corresponding edges to the adjacency list.
+4. Initialize a visited array to keep track of visited vertices.
+5. Initialize an empty stack to store the topological order of the courses.
+6. For each course i from 1 to n, if it has not been visited yet, call a depth-first search (DFS) function on it.
+   - In the DFS function, mark the current course as visited.
+   - Recursively call the DFS function on all the adjacent courses of the current course.
+   - Push the current course onto the stack.
+7. After the DFS function calls for all the courses, the stack will contain the topological order of the courses.
+8. If the stack is empty, print "IMPOSSIBLE" since there is no valid order to complete the courses.
+9. Otherwise, pop the courses from the stack and print them in reverse order to get a valid order to complete the courses.
+
+Here is the python code implementing the above approach:
+
+```python
+from collections import defaultdict
+
+# Function to perform depth-first search (DFS)
+def dfs(course, adj_list, visited, stack):
+    visited[course] = True
+    for adj_course in adj_list[course]:
+        if not visited[adj_course]:
+            dfs(adj_course, adj_list, visited, stack)
+    stack.append(course)
+
+# Read the input values of n and m
+n, m = map(int, input().split())
+
+# Create an adjacency list to represent the directed graph
+adj_list = defaultdict(list)
+
+# Read the m requirements and add the corresponding edges to the adjacency list
+for _ in range(m):
+    a, b = map(int, input().split())
+    adj_list[a].append(b)
+
+# Initialize visited array and stack
+visited = [False] * (n + 1)
+stack = []
+
+# Perform depth-first search on each course
+for course in range(1, n + 1):
+    if not visited[course]:
+        dfs(course, adj_list, visited, stack)
+
+# If stack is empty, print "IMPOSSIBLE"
+if not stack:
+    print("IMPOSSIBLE")
+else:
+    # Print the courses in reverse order from the stack
+    while stack:
+        print(stack.pop(), end=' ')
+```
+
+This solution has a time complexity of O(n + m), where n is the number of courses and m is the number of requirements. It uses depth-first search to perform the topological sorting.

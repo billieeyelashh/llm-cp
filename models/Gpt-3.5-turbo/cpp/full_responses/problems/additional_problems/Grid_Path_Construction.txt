@@ -1,0 +1,88 @@
+To solve this problem, we can use a simple depth-first search (DFS) algorithm. We will start from the initial square and explore all possible paths until we reach the target square or visit all squares in the grid.
+
+First, we will define a function `dfs` that takes the current position `(y, x)`, the target position `(ty, tx)`, the visited array `visited`, and the path string `path`. The `visited` array will keep track of the squares we have visited so far.
+
+In the `dfs` function:
+1. If the current position is equal to the target position, print "YES" and the `path` string, then return.
+2. Mark the current position as visited by setting `visited[y][x]` to true.
+3. Try moving one step up, down, left, or right by updating the new position `(ny, nx)` accordingly.
+4. If the new position is within the grid bounds, not visited yet, and not equal to the previous position, recursively call `dfs` with the new position and update the `path` string accordingly.
+5. If no path is found, mark the current position as unvisited by setting `visited[y][x]` to false.
+
+Finally, for each test case, call the `dfs` function with the initial position `(y1, x1)`, the target position `(y2, x2)`, the visited array initialized with all false values, and an empty `path` string.
+
+Here is the C++ code implementation:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool dfs(int y, int x, int ty, int tx, vector<vector<bool>>& visited, string& path) {
+    if (y == ty && x == tx) {
+        cout << "YES\n" << path << "\n";
+        return true;
+    }
+
+    visited[y][x] = true;
+
+    // Try moving up
+    if (y > 1 && !visited[y - 1][x] && !(y - 1 == ty && x == tx)) {
+        path += 'U';
+        if (dfs(y - 1, x, ty, tx, visited, path)) {
+            return true;
+        }
+        path.pop_back();
+    }
+
+    // Try moving down
+    if (y < visited.size() - 1 && !visited[y + 1][x] && !(y + 1 == ty && x == tx)) {
+        path += 'D';
+        if (dfs(y + 1, x, ty, tx, visited, path)) {
+            return true;
+        }
+        path.pop_back();
+    }
+
+    // Try moving left
+    if (x > 1 && !visited[y][x - 1] && !(y == ty && x - 1 == tx)) {
+        path += 'L';
+        if (dfs(y, x - 1, ty, tx, visited, path)) {
+            return true;
+        }
+        path.pop_back();
+    }
+
+    // Try moving right
+    if (x < visited[0].size() - 1 && !visited[y][x + 1] && !(y == ty && x + 1 == tx)) {
+        path += 'R';
+        if (dfs(y, x + 1, ty, tx, visited, path)) {
+            return true;
+        }
+        path.pop_back();
+    }
+
+    visited[y][x] = false;
+    return false;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m, y1, x1, y2, x2;
+        cin >> n >> m >> y1 >> x1 >> y2 >> x2;
+
+        vector<vector<bool>> visited(n + 1, vector<bool>(m + 1, false));
+        string path = "";
+
+        if (!dfs(y1, x1, y2, x2, visited, path)) {
+            cout << "NO\n";
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n * m) since we visit each square in the grid at most once.

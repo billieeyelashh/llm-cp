@@ -1,0 +1,62 @@
+To solve this problem, we can use a two-pointer approach. We will maintain two pointers, `left` and `right`, which represent the boundaries of the current substring we are considering.
+
+We will also maintain two arrays, `count` and `freq`, to track the count of each character in the current substring. The `count` array will store the count of each character in the substring, and the `freq` array will track the frequency of each count.
+
+Initially, both `left` and `right` will be set to 0, and we will increment `right` until we reach the end of the string. For each character encountered at `right`, we will increment its count in the `count` array and update the corresponding frequency in the `freq` array.
+
+At each step, we will check if the current substring is special. A substring is special if every character in the substring has the same count, which means the frequency of that count in the `freq` array should be 1.
+
+If the current substring is special, we can increment the count of special substrings by the length of the substring. Additionally, since any substring that is a proper prefix of a special substring is also special, we can increment the count by 1 for each proper prefix of the current substring.
+
+Finally, we will increment `left` by 1 and update the `count` and `freq` arrays accordingly. We will repeat this process until `left` reaches the end of the string.
+
+Here is the C++ code implementing the above approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int countSpecialSubstrings(string s) {
+    int n = s.length();
+    vector<int> count(26), freq(n + 1);
+    int left = 0, right = 0;
+    int specialCount = 0;
+
+    while (left < n) {
+        while (right < n && (right == left || count[s[right] - 'a'] + 1 == count[s[right - 1] - 'a'])) {
+            count[s[right] - 'a']++;
+            freq[count[s[right] - 'a']]++;
+            right++;
+        }
+
+        specialCount += freq[left + 1];
+
+        int k = 2;
+        while (left + k <= right && count[s[left + k - 1] - 'a'] == count[s[left + k - 2] - 'a']) {
+            specialCount++;
+            k++;
+        }
+
+        count[s[left] - 'a']--;
+        freq[count[s[left] - 'a']]--;
+
+        left++;
+    }
+
+    return specialCount;
+}
+
+int main() {
+    string s;
+    cin >> s;
+
+    int result = countSpecialSubstrings(s);
+    cout << result << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n), where n is the length of the input string.

@@ -1,0 +1,46 @@
+To solve this problem optimally, we can iterate through the array from left to right and keep track of the minimum value we need to make the current element greater than or equal to. 
+
+Here is the C++ code solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int moves = 0;
+    int min_val = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < min_val) {
+            moves += min_val - arr[i];
+        } else {
+            min_val = arr[i];
+        }
+    }
+
+    cout << moves << endl;
+
+    return 0;
+}
+```
+
+Explanation:
+
+- We read the input values and store them in the `arr` vector.
+- We initialize the number of moves to 0 and the minimum value required to make the current element greater than or equal to as the first element `arr[0]`.
+- We then iterate through the array from the second element onwards.
+- If the current element is less than the minimum value, we need to increase it to meet the requirement. We add the difference between the minimum value and the current element to the number of moves.
+- Otherwise, if the current element is greater than or equal to the minimum value, we update the minimum value to the current element.
+- Finally, we print the minimum number of moves required.
+
+This solution has a time complexity of O(n), where n is the size of the array.

@@ -1,0 +1,65 @@
+To solve this problem, we can use dynamic programming. Let's define dp[i][j] as the number of ways to divide the first i coders into j teams such that the sum of penalties is at most x.
+
+The base case is dp[0][0] = 1, because there is one way to divide an empty set into zero teams.
+
+For each coder i from 1 to n, and for each number of teams j from 1 to n, we can consider two cases:
+
+1. Coder i is added to a new team:
+   In this case, the penalty for this team is 0, and we need to find the number of ways to divide the first i-1 coders into j-1 teams such that the sum of penalties is at most x.
+   So, dp[i][j] += dp[i-1][j-1]
+
+2. Coder i is added to an existing team:
+   In this case, we need to find the number of ways to divide the first i-1 coders into j teams such that the sum of penalties is at most x - (max_skill - min_skill), where max_skill and min_skill are the maximum and minimum skill levels in the team.
+   So, for each existing team k from 1 to j, we can update dp[i][j] += dp[i-1][k] if the sum of penalties is at most x - (max_skill - min_skill).
+
+Finally, the answer will be the sum of dp[n][j] for all j from 1 to n.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1000000007;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> t(n);
+    for (int i = 0; i < n; i++) {
+        cin >> t[i];
+    }
+
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1));
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            int max_skill = t[i - 1], min_skill = t[i - 1];
+            for (int k = i - 1; k >= 0; k--) {
+                max_skill = max(max_skill, t[k]);
+                min_skill = min(min_skill, t[k]);
+
+                if (x - (max_skill - min_skill) < 0) {
+                    break;
+                }
+
+                dp[i][j] = (dp[i][j] + dp[k][j - 1]) % MOD;
+            }
+        }
+    }
+
+    int answer = 0;
+    for (int j = 1; j <= n; j++) {
+        answer = (answer + dp[n][j]) % MOD;
+    }
+
+    cout << answer << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n^3), which is efficient for the given constraints.

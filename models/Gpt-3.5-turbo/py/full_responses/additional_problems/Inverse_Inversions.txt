@@ -1,0 +1,26 @@
+To solve this problem, we can follow the following steps:
+
+1. Initialize an array `perm` of size `n` with numbers from 1 to `n`.
+2. Initialize a variable `inv` to keep track of the number of inversions.
+3. Iterate over `i` from `n-1` to `1`:
+   - If `inv + i <= k`, swap `perm[i]` and `perm[i+1]`.
+   - Update `inv` by adding `i` to it.
+4. Print the elements of `perm` separated by a space.
+
+Here is the Python implementation of the above approach:
+
+```python
+n, k = map(int, input().split())
+
+perm = list(range(1, n+1))
+inv = 0
+
+for i in range(n-1, 0, -1):
+    if inv + i <= k:
+        perm[i], perm[i-1] = perm[i-1], perm[i]
+        inv += i
+
+print(*perm)
+```
+
+This solution has a time complexity of O(n) as we are iterating over the elements of the array once.

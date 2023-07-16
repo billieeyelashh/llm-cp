@@ -1,0 +1,70 @@
+To solve this problem, we can use the Union-Find algorithm. We will initialize an array `parent` of size `n`, where `parent[i]` represents the parent of computer `i`. Initially, each computer is its own parent.
+
+For each connection, we will perform a union operation to merge the components that the two computers belong to. To do this, we will find the parent of each computer and make one of them the parent of the other.
+
+After each breakdown, we will decrease the number of connections by one. To find the number of components, we will iterate through the `parent` array and count the number of distinct parents.
+
+Here's the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int find(int x, vector<int>& parent) {
+    if (parent[x] == x) {
+        return x;
+    }
+    return parent[x] = find(parent[x], parent);
+}
+
+void unionSet(int x, int y, vector<int>& parent) {
+    int px = find(x, parent);
+    int py = find(y, parent);
+    if (px != py) {
+        parent[py] = px;
+    }
+}
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<int> parent(n + 1);
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+
+    vector<pair<int, int>> connections(m);
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        connections[i] = {a, b};
+    }
+
+    for (int i = 0; i < k; i++) {
+        int a, b;
+        cin >> a >> b;
+        for (int j = 0; j < m; j++) {
+            if (connections[j].first != a || connections[j].second != b) {
+                unionSet(connections[j].first, connections[j].second, parent);
+            }
+        }
+        int components = 0;
+        for (int j = 1; j <= n; j++) {
+            if (parent[j] == j) {
+                components++;
+            }
+        }
+        cout << components << " ";
+        m--;
+    }
+
+    cout << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n + m * k), where n is the number of computers, m is the number of connections, and k is the number of breakdowns.

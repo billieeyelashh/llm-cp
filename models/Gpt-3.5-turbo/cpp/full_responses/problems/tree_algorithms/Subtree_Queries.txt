@@ -1,0 +1,85 @@
+To solve this problem efficiently, we can use a technique called "Binary Lifting" along with the concept of "Prefix Sum". 
+
+First, we will build an adjacency list to represent the tree structure. Then, we will perform a Depth-First Search (DFS) on the tree to initialize some important data structures.
+
+For each node $v$, we will maintain the following information:
+1. depth[v]: the depth of node $v$ in the tree (the depth of the root is 0).
+2. parent[v]: the parent of node $v$.
+3. subtreeSum[v]: the sum of values in the subtree rooted at node $v$.
+
+We will use these information to answer queries efficiently.
+
+Next, let's define a recursive function dfs(v) that performs the DFS and initializes the above information for each node. The base case is when we reach a leaf node, where we simply set depth[v] = 0 and subtreeSum[v] = value[v].
+
+Inside the dfs(v) function, we will iterate over each child $u$ of node $v$ and call dfs(u). This will ensure that the depth and subtreeSum values for node $v$ are correctly computed based on its children.
+
+After the DFS, we can process the queries efficiently. For each query of type 2 ($s$), we simply print the subtreeSum[$s$].
+
+For each query of type 1 ($s$ $x$), we need to update the value of node $s$ and propagate the changes to its ancestors. We can do this by updating the subtreeSum values of node $s$ and its ancestors. To update the subtreeSum value of node $v$, we subtract the previous value[v] and add the new value[v]. Then, we update value[v] = x.
+
+The time complexity of this approach is O(n log n) for building the tree and O(q) for processing the queries, where n is the number of nodes and q is the number of queries.
+
+Here is the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MAXN = 2e5 + 5;
+
+int n, q;
+int value[MAXN];
+vector<int> adj[MAXN];
+int depth[MAXN], parent[MAXN];
+long long subtreeSum[MAXN];
+
+// Depth-First Search to initialize depth, parent, and subtreeSum
+void dfs(int v, int p, int d) {
+    depth[v] = d;
+    parent[v] = p;
+    subtreeSum[v] = value[v];
+    
+    for (int u : adj[v]) {
+        if (u != p) {
+            dfs(u, v, d + 1);
+            subtreeSum[v] += subtreeSum[u];
+        }
+    }
+}
+
+int main() {
+    cin >> n >> q;
+    for (int i = 1; i <= n; ++i) {
+        cin >> value[i];
+    }
+    for (int i = 1; i < n; ++i) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    
+    dfs(1, -1, 0);
+    
+    while (q--) {
+        int type, s;
+        cin >> type >> s;
+        
+        if (type == 1) {
+            int x;
+            cin >> x;
+            subtreeSum[s] += x - value[s];
+            value[s] = x;
+        } else {
+            cout << subtreeSum[s] << endl;
+        }
+    }
+    
+    return 0;
+}
+```
+
+This solution uses O(n) space to store the adjacency list and the additional arrays depth, parent, and subtreeSum. The overall space complexity is O(n).
+
+Note: The solution assumes that the queries are given in the correct order, i.e., a query of type 2 always follows the corresponding query of type 1 for the same node.

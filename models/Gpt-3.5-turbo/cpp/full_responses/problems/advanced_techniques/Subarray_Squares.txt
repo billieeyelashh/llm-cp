@@ -1,0 +1,52 @@
+To solve this problem, we can use dynamic programming. We will define a state $dp[i][j]$ as the minimum cost to divide the first $i$ elements into $j$ subarrays.
+
+The base case is when $j = 1$, in which case the minimum cost is the square of the sum of all elements from $1$ to $i$.
+
+For each $i$ and $j$, we can split the array into two parts: the last subarray containing the elements from $p$ to $i$, and the previous $(j-1)$ subarrays containing the elements from $1$ to $p-1$. We will try all possible positions $p$ to split the array and update the minimum cost accordingly.
+
+The final answer will be stored in $dp[n][k]$.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> arr(n + 1);
+    for (int i = 1; i <= n; i++) {
+        cin >> arr[i];
+    }
+
+    vector<vector<long long>> dp(n + 1, vector<long long>(k + 1, 0));
+
+    // Base case: j = 1
+    for (int i = 1; i <= n; i++) {
+        dp[i][1] = dp[i - 1][1] + arr[i];
+    }
+
+    for (int j = 2; j <= k; j++) {
+        for (int i = 1; i <= n; i++) {
+            dp[i][j] = 1e18;  // Initialize with a large value
+
+            long long sum = 0;
+            for (int p = i; p >= 1; p--) {
+                sum += arr[p];
+                dp[i][j] = min(dp[i][j], dp[p - 1][j - 1] + sum * sum);
+            }
+        }
+    }
+
+    cout << dp[n][k] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is $O(n^2 \cdot k)$, which is efficient enough to handle the given constraints.

@@ -1,0 +1,41 @@
+To solve this problem, we can use a depth-first search (DFS) algorithm to traverse the tree and keep track of the number of paths containing each node.
+
+First, we will read the input and store the tree as an adjacency list. We will also create an array `paths` to store the number of paths containing each node, initialized to 0.
+
+Then, we will implement the DFS function. We will start the DFS from each path in the input and count the number of paths containing each node along the way. We will use a visited array to keep track of the nodes we have already visited during the DFS.
+
+Finally, we will print the `paths` array as the output.
+
+Here is the Python code to solve the problem:
+
+```python
+# Read input
+n, m = map(int, input().split())
+adj = [[] for _ in range(n+1)]
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    adj[a].append(b)
+    adj[b].append(a)
+
+paths = [0] * (n+1)
+
+def dfs(node, visited):
+    visited[node] = True
+    paths[node] += 1
+    for neighbor in adj[node]:
+        if not visited[neighbor]:
+            dfs(neighbor, visited)
+            paths[node] += paths[neighbor]
+
+# Perform DFS for each path
+for _ in range(m):
+    a, b = map(int, input().split())
+    visited = [False] * (n+1)
+    dfs(a, visited)
+    dfs(b, visited)
+
+# Print output
+print(" ".join(str(paths[i]) for i in range(1, n+1)))
+```
+
+The time complexity of this solution is O(n+m), where n is the number of nodes and m is the number of paths. This is because we perform a DFS for each path, visiting each node once.

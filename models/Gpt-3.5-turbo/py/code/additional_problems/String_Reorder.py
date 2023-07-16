@@ -1,0 +1,36 @@
+
+from collections import Counter
+
+def reorder_string(s):
+    counter = Counter(s)
+    result = []
+
+    # Sort characters based on their frequency in descending order
+    sorted_chars = sorted(counter.keys(), key=lambda x: counter[x], reverse=True)
+
+    # Initialize two pointers to keep track of the previous and current characters
+    prev_char = None
+    curr_char = None
+
+    # Iterate through the sorted characters
+    for char in sorted_chars:
+        if counter[char] > (len(s) + 1) // 2:
+            return -1
+
+        # Add the current character to the result
+        result.append(char)
+
+        # Decrement the count of the current character
+        counter[char] -= 1
+
+        # Swap the previous and current characters if necessary
+        if curr_char:
+            prev_char, curr_char = curr_char, prev_char
+        else:
+            curr_char = char
+
+        # If the count of the previous character is greater than 0, add it back to the counter and sorted characters
+        if prev_char and counter[prev_char] > 0:
+            sorted_chars.append(prev_char)
+
+    return ''.join(result)

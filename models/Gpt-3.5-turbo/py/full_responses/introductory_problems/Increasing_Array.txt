@@ -1,0 +1,19 @@
+To solve this problem, we can iterate through the array and compare each element with the previous one. If the current element is smaller, we need to increase its value to make it at least as large as the previous element. We then update the current element to be equal to or larger than the previous element. The number of moves required is the sum of all the increments made.
+
+Here is the Python solution:
+
+```python
+n = int(input())
+array = list(map(int, input().split()))
+
+moves = 0
+
+for i in range(1, n):
+    if array[i] < array[i-1]:
+        moves += array[i-1] - array[i]
+        array[i] = array[i-1]
+
+print(moves)
+```
+
+This solution has a time complexity of O(n), where n is the size of the array.

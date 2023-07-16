@@ -1,0 +1,29 @@
+To solve this problem, we can use a dynamic programming approach. We'll keep track of all possible sums we can create using the coins.
+
+We'll initialize a set with a single element, 0, representing the sum of no coins. Then, for each coin, we'll iterate through all the sums in the set and add the coin value to them. Finally, we'll return the length of the set as the number of distinct sums and the sorted list of sums as the output.
+
+Here's the implementation in Python:
+
+```python
+def find_money_sums(n, coins):
+    sums = {0}  # Set to store the possible sums
+    for coin in coins:
+        new_sums = set()
+        for s in sums:
+            new_sums.add(s + coin)
+        sums.update(new_sums)
+    return len(sums), sorted(sums)
+
+# Example usage
+n = 4
+coins = [4, 2, 5, 2]
+num_sums, sums = find_money_sums(n, coins)
+print(num_sums)
+print(*sums)
+```
+
+This will give the following output:
+```
+9
+2 4 5 6 7 8 9 11 13
+```

@@ -1,0 +1,80 @@
+To solve this problem, we can use a minimum spanning tree algorithm, such as Kruskal's algorithm.
+
+First, we sort the roads in increasing order based on their reparation cost. Then, we initialize an empty set to store the minimum spanning tree.
+
+Next, we iterate through each road in the sorted order. For each road, we check if adding it to the set will create a cycle. If not, we add the road to the set. We repeat this process until there are $n-1$ roads in the set (since a minimum spanning tree for $n$ cities will have $n-1$ roads).
+
+Finally, we sum up the reparation costs of the roads in the minimum spanning tree and output the total cost. If there is no solution (i.e., the minimum spanning tree cannot be formed), we output "IMPOSSIBLE".
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Road {
+    int city1;
+    int city2;
+    int cost;
+};
+
+bool compareRoads(const Road& r1, const Road& r2) {
+    return r1.cost < r2.cost;
+}
+
+vector<int> parent;
+
+int find(int x) {
+    if (parent[x] == x) return x;
+    return parent[x] = find(parent[x]);
+}
+
+bool unite(int x, int y) {
+    int px = find(x);
+    int py = find(y);
+    if (px == py) return false;
+    parent[px] = py;
+    return true;
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<Road> roads(m);
+    for (int i = 0; i < m; i++) {
+        cin >> roads[i].city1 >> roads[i].city2 >> roads[i].cost;
+    }
+
+    sort(roads.begin(), roads.end(), compareRoads);
+
+    parent.resize(n+1);
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+
+    vector<Road> minimumSpanningTree;
+    int totalCost = 0;
+
+    for (int i = 0; i < m; i++) {
+        if (unite(roads[i].city1, roads[i].city2)) {
+            minimumSpanningTree.push_back(roads[i]);
+            totalCost += roads[i].cost;
+        }
+        if (minimumSpanningTree.size() == n-1) break;
+    }
+
+    if (minimumSpanningTree.size() != n-1) {
+        cout << "IMPOSSIBLE" << endl;
+    } else {
+        cout << totalCost << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(m \log m + m \alpha(n))$, where $m$ is the number of roads and $n$ is the number of cities.

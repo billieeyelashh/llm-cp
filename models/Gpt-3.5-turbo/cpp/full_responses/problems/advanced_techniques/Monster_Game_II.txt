@@ -1,0 +1,47 @@
+To solve this problem, we can use dynamic programming. Let's define a function $dp[i]$ as the minimum total time to reach level $i$.
+
+We can start by initializing $dp[1]$ to be $s_1 \cdot f_1$, as we have to kill the monster on the first level.
+
+Then, for each level $i$ from $2$ to $n$, we have two choices:
+1. Kill the monster on level $i$: In this case, the total time will be $dp[i-1] + s_i \cdot f_i$.
+2. Escape the monster on level $i$: In this case, the total time will be $dp[i-1]$.
+
+We can take the minimum of these two choices and assign it to $dp[i]$.
+
+Finally, the minimum total time to win the game will be $dp[n]$.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> s(n), f(n);
+    for (int i = 0; i < n; i++) {
+        cin >> s[i];
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> f[i];
+    }
+
+    vector<long long> dp(n+1);
+    dp[1] = static_cast<long long>(s[0]) * f[0];
+
+    for (int i = 2; i <= n; i++) {
+        dp[i] = min(dp[i-1] + static_cast<long long>(s[i-1]) * f[i-1], dp[i-1]);
+    }
+
+    cout << dp[n] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is $O(n)$, where $n$ is the number of levels.

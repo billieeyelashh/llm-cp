@@ -1,0 +1,32 @@
+To solve this problem, we can use dynamic programming. Let's define a state $dp[i][j]$ as the number of arrays of length $i$ that end in value $j$.
+
+We can fill in the values of $dp$ iteratively, starting from $dp[1][j]$. If $x_1$ is unknown ($x_1 = 0$), then $dp[1][j]$ is $1$ for all $1 \le j \le m$. Otherwise, $dp[1][x_1]$ is $1$, and all other $dp[1][j]$ values are $0$.
+
+For $i > 1$, we can calculate $dp[i][j]$ based on the previous values of $dp$. If $x_i$ is unknown ($x_i = 0$), then $dp[i][j]$ is the sum of $dp[i-1][j-1]$, $dp[i-1][j]$, and $dp[i-1][j+1]$ (if they are within the valid range). Otherwise, $dp[i][x_i]$ is the sum of $dp[i-1][x_i-1]$, $dp[i-1][x_i]$, and $dp[i-1][x_i+1]$ (if they are within the valid range).
+
+Finally, the answer is the sum of all $dp[n][j]$ values, modulo $10^9+7$.
+
+Here is the Python code implementing this approach:
+
+```python
+MOD = int(1e9) + 7
+
+n, m = map(int, input().split())
+x = list(map(int, input().split()))
+
+dp = [[0] * (m+2) for _ in range(n+1)]
+dp[1][1:m+1] = [1] * m
+
+for i in range(2, n+1):
+    if x[i-1] == 0:
+        for j in range(1, m+1):
+            dp[i][j] = (dp[i-1][j-1] + dp[i-1][j] + dp[i-1][j+1]) % MOD
+    else:
+        j = x[i-1]
+        dp[i][j] = (dp[i-1][j-1] + dp[i-1][j] + dp[i-1][j+1]) % MOD
+
+answer = sum(dp[n]) % MOD
+print(answer)
+```
+
+This solution has a time complexity of $O(n \cdot m)$ and a space complexity of $O(n \cdot m)$, which is efficient enough to handle the given constraints.

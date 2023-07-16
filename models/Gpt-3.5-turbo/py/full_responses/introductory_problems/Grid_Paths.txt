@@ -1,0 +1,34 @@
+To solve this problem, we can use dynamic programming to calculate the number of possible paths at each square in the grid.
+
+Let's define a 2D array `dp` of size `n x n` where `dp[i][j]` represents the number of possible paths to reach the square at coordinates `(i, j)`.
+
+We can initialize `dp[0][0] = 1` since there is only one way to reach the top-left square.
+
+Next, we will iterate through each square in the grid and calculate the number of possible paths based on the previous squares.
+
+For each square `(i, j)`:
+- If `(i, j)` is a trap, we set `dp[i][j] = 0` since we cannot move to a square with a trap.
+- Otherwise, we calculate `dp[i][j]` as the sum of the number of possible paths from the square above `(i-1, j)` and the square to the left `(i, j-1)`. In other words, `dp[i][j] = dp[i-1][j] + dp[i][j-1]`.
+
+Finally, the number of possible paths from the top-left square to the bottom-right square is `dp[n-1][n-1]`.
+
+Here is the Python code implementing the above approach:
+
+```python
+MOD = int(1e9+7)
+
+n, m = map(int, input().split())
+traps = [tuple(map(int, input().split())) for _ in range(m)]
+
+dp = [[0] * n for _ in range(n)]
+dp[0][0] = 1
+
+for i in range(n):
+    for j in range(n):
+        if (i+1, j+1) not in traps:
+            dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % MOD
+
+print(dp[n-1][n-1])
+```
+
+This solution has a time complexity of O(n^2) and a space complexity of O(n^2).

@@ -1,0 +1,66 @@
+We can solve this problem efficiently using a depth-first search (DFS) on the tree hierarchy.
+
+First, we need to construct the tree hierarchy from the given input. We can use an adjacency list to represent the tree, where each employee's index corresponds to their employee number, and the list at that index contains their direct subordinates.
+
+Next, we can perform a DFS starting from the general director (employee 1) to assign each employee a level in the hierarchy. We can use an array `level` to store the level of each employee. The general director will have level 0, and each subordinate's level will be one level higher than their boss.
+
+Once we have assigned levels to all employees, we can answer each query by finding the boss of employee `x` `k` levels higher. We can do this by traversing up the hierarchy `k` levels from employee `x`. If we reach level 0 and still haven't found a boss, it means there is no such boss, and we can print -1.
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> tree;
+vector<int> level;
+
+void dfs(int employee, int boss) {
+    level[employee] = level[boss] + 1;
+
+    for (int subordinate : tree[employee]) {
+        dfs(subordinate, employee);
+    }
+}
+
+int findBoss(int x, int k) {
+    while (k > 0 && x != 1) {
+        x = tree[x][0];
+        k--;
+    }
+
+    if (k == 0) {
+        return x;
+    } else {
+        return -1;
+    }
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    tree.resize(n + 1);
+    level.resize(n + 1);
+
+    for (int i = 2; i <= n; i++) {
+        int boss;
+        cin >> boss;
+        tree[boss].push_back(i);
+    }
+
+    dfs(1, 0);
+
+    while (q--) {
+        int x, k;
+        cin >> x >> k;
+        cout << findBoss(x, k) << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + q), where n is the number of employees and q is the number of queries.

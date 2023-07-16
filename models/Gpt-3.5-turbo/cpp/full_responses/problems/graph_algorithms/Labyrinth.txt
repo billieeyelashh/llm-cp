@@ -1,0 +1,112 @@
+To solve this problem, we can use a modified version of Breadth-First Search (BFS) algorithm.
+
+First, we need to find the coordinates of the start and end positions in the labyrinth. We can store these positions in variables `start` and `end`.
+
+Next, we initialize a queue and a visited array to keep track of the visited positions. We also initialize a parent array to store the previous position of each visited position.
+
+We start the BFS algorithm by enqueueing the start position into the queue and marking it as visited. Then, while the queue is not empty, we dequeue a position and check if it is the end position. If it is, we break out of the loop.
+
+Otherwise, we iterate through the neighboring positions of the current position (up, down, left, right). If a neighboring position is valid (not a wall and not visited), we enqueue it into the queue, mark it as visited, and set its parent as the current position.
+
+After the BFS algorithm finishes, if the end position is marked as visited, it means there is a path from start to end. Otherwise, there is no path.
+
+To find the shortest path, we can backtrack from the end position to the start position using the parent array. We can store the directions (L, R, U, D) in a string as we backtrack.
+
+Here is the final solution in C++:
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+vector<vector<char>> labyrinth;
+vector<vector<bool>> visited;
+vector<vector<pair<int, int>>> parent;
+int n, m;
+pair<int, int> start, end;
+
+bool isValid(int x, int y) {
+    return x >= 0 && x < n && y >= 0 && y < m && labyrinth[x][y] != '#';
+}
+
+string getPath() {
+    string path = "";
+    int x = end.first, y = end.second;
+    while (x != start.first || y != start.second) {
+        int px = parent[x][y].first, py = parent[x][y].second;
+        if (x == px) {
+            if (y < py) path += 'R';
+            else path += 'L';
+        } else {
+            if (x < px) path += 'D';
+            else path += 'U';
+        }
+        x = px;
+        y = py;
+    }
+    reverse(path.begin(), path.end());
+    return path;
+}
+
+void bfs() {
+    queue<pair<int, int>> q;
+    q.push(start);
+    visited[start.first][start.second] = true;
+
+    while (!q.empty()) {
+        pair<int, int> curr = q.front();
+        q.pop();
+
+        if (curr == end) break;
+
+        int x = curr.first, y = curr.second;
+
+        // Check neighboring positions
+        if (isValid(x-1, y) && !visited[x-1][y]) {
+            q.push({x-1, y});
+            visited[x-1][y] = true;
+            parent[x-1][y] = {x, y};
+        }
+        if (isValid(x+1, y) && !visited[x+1][y]) {
+            q.push({x+1, y});
+            visited[x+1][y] = true;
+            parent[x+1][y] = {x, y};
+        }
+        if (isValid(x, y-1) && !visited[x][y-1]) {
+            q.push({x, y-1});
+            visited[x][y-1] = true;
+            parent[x][y-1] = {x, y};
+        }
+        if (isValid(x, y+1) && !visited[x][y+1]) {
+            q.push({x, y+1});
+            visited[x][y+1] = true;
+            parent[x][y+1] = {x, y};
+        }
+    }
+}
+
+int main() {
+    cin >> n >> m;
+    labyrinth.resize(n, vector<char>(m));
+    visited.resize(n, vector<bool>(m, false));
+    parent.resize(n, vector<pair<int, int>>(m));
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> labyrinth[i][j];
+            if (labyrinth[i][j] == 'A') {
+                start = {i, j};
+            } else if (labyrinth[i][j] == 'B') {
+                end = {i, j};
+            }
+        }
+    }
+
+    bfs();
+
+    if (visited[end.first][end.second]) {
+        cout << "YES" << endl;
+        cout << getPath().size() << endl;
+        cout << getPath() << endl;
+    } else {

@@ -1,0 +1,41 @@
+To solve this problem optimally, we can use the following approach:
+
+1. Initialize two variables, `inc` and `dec`, to keep track of the number of moves needed to make the array increasing and decreasing, respectively. Set both variables to 0.
+2. Iterate over the array from the second element to the last element:
+   - If the current element is greater than the previous element, increment `inc` by 1.
+   - If the current element is smaller than the previous element, increment `dec` by 1.
+3. The minimum number of moves needed is the minimum of `inc` and `dec`.
+
+Here is the C++ implementation of the above approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    int inc = 0, dec = 0;
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > arr[i - 1]) {
+            inc++;
+        } else if (arr[i] < arr[i - 1]) {
+            dec++;
+        }
+    }
+    
+    int minMoves = min(inc, dec);
+    cout << minMoves << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the size of the array.

@@ -1,0 +1,57 @@
+To solve this problem, we can use an ordered set or a balanced binary search tree (BST) data structure. In C++, we can use the `multiset` container from the Standard Template Library (STL) to implement an ordered set.
+
+Here is the step-by-step solution in C++:
+
+```cpp
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    multiset<int> salaries;
+    for (int i = 0; i < n; ++i) {
+        int salary;
+        cin >> salary;
+        salaries.insert(salary);
+    }
+
+    for (int i = 0; i < q; ++i) {
+        char op;
+        cin >> op;
+
+        if (op == '!') {
+            int k, x;
+            cin >> k >> x;
+
+            // Remove the old salary of employee k
+            auto it = salaries.find(*(salaries.begin()) + k - 1);
+            salaries.erase(it);
+
+            // Insert the new salary of employee k
+            salaries.insert(x);
+        } else if (op == '?') {
+            int a, b;
+            cin >> a >> b;
+
+            // Count the number of employees whose salary is between a and b
+            cout << salaries.count(b) - salaries.count(a - 1) << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+Explanation:
+1. Read the number of employees `n` and queries `q`.
+2. Create a `multiset` called `salaries` to store the salaries of employees in ascending order.
+3. Read the salaries of the employees and insert them into the `salaries` set.
+4. Process each query:
+   - If the query is of type `!`, read the employee number `k` and the new salary `x`. Remove the old salary of employee `k` from the `salaries` set using the iterator `it` and insert the new salary `x`.
+   - If the query is of type `?`, read the salary range `a` to `b`. Count the number of employees whose salary is between `a` and `b` by subtracting the count of salaries less than `a` from the count of salaries less than or equal to `b`.
+5. Print the answer to each `?` query.
+
+The time complexity of this solution is O(q log n) due to the operations performed on the `multiset`.

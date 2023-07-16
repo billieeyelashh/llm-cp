@@ -1,0 +1,28 @@
+To solve this problem, we need to observe a pattern in the number spiral. 
+
+We can see that the number at row $y$ and column $x$ is determined by the following formula:
+\[ \text{{number}} = \max(y, x)^2 - (\max(y, x) - 1) + \text{{diff}} \]
+where $\text{{diff}}$ is the difference between $\max(y, x)$ and the smaller of $y$ and $x$. 
+
+Now, let's implement this solution in Python:
+
+```python
+# Function to find the number in row y and column x
+def number_in_spiral(y, x):
+    diff = abs(y - x)
+    max_value = max(y, x)
+    return max_value ** 2 - (max_value - 1) + diff
+
+# Read the number of tests
+t = int(input())
+
+# Iterate through each test case
+for _ in range(t):
+    # Read the values of y and x
+    y, x = map(int, input().split())
+    
+    # Print the number in row y and column x
+    print(number_in_spiral(y, x))
+```
+
+This solution has a time complexity of O(1) as we are directly calculating the number in the spiral using a simple formula.

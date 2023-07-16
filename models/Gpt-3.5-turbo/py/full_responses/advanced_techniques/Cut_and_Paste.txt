@@ -1,0 +1,31 @@
+To solve this problem optimally, we can use a deque data structure to represent the string. A deque is a double-ended queue that allows efficient appending and popping from both ends. We can initialize the deque with the given string.
+
+For each cut-paste operation, we can use the `rotate` function of the deque to move the substring from position `a` to position `b` to the end of the deque.
+
+Finally, we can convert the deque back to a string and print the result.
+
+Here is the Python code that implements this solution:
+
+```python
+from collections import deque
+
+# Read input
+n, m = map(int, input().split())
+s = input()
+
+# Initialize deque
+dq = deque(s)
+
+# Process operations
+for _ in range(m):
+    a, b = map(int, input().split())
+    dq.rotate(n - b)  # Move substring from position a to position b to the end
+
+# Convert deque to string
+result = ''.join(dq)
+
+# Print the final string
+print(result)
+```
+
+This solution has a time complexity of O(n + m), where n is the length of the string and m is the number of operations.

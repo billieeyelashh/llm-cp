@@ -1,0 +1,71 @@
+To calculate binomial coefficients modulo $10^9+7$, we can use the concept of modular inverses and the property of modulo arithmetic. 
+
+First, we need to calculate the factorial of each number from 1 to $10^6$ modulo $10^9+7$. We can store these factorials in an array.
+
+Next, for each calculation, we can use the formula for the binomial coefficient:
+${a \choose b} = \frac{a!}{b!(a-b)!}$
+
+To calculate the modular inverse of a factorial, we can use Fermat's little theorem:
+$a^{-1} \equiv a^{p-2} \pmod{p}$, where $p$ is a prime number and $a$ is not divisible by $p$.
+
+Using this property, we can calculate the binomial coefficient modulo $10^9+7$ efficiently.
+
+Here is the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MOD = 1000000007;
+const int MAX = 1000000;
+
+vector<int> factorial(MAX + 1, 1);
+
+int power(int base, int exp) {
+    int res = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1) {
+            res = (res * 1LL * base) % MOD;
+        }
+        base = (base * 1LL * base) % MOD;
+        exp /= 2;
+    }
+    return res;
+}
+
+void precompute_factorials() {
+    for (int i = 2; i <= MAX; i++) {
+        factorial[i] = (factorial[i - 1] * 1LL * i) % MOD;
+    }
+}
+
+int inverse_modulo(int num) {
+    return power(num, MOD - 2);
+}
+
+int binomial_coefficient(int a, int b) {
+    int numerator = factorial[a];
+    int denominator = (factorial[b] * 1LL * factorial[a - b]) % MOD;
+    int inverse_denominator = inverse_modulo(denominator);
+    return (numerator * 1LL * inverse_denominator) % MOD;
+}
+
+int main() {
+    precompute_factorials();
+
+    int n;
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        int a, b;
+        cin >> a >> b;
+        cout << binomial_coefficient(a, b) << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n + \text{MAX})$, where $n$ is the number of calculations and $\text{MAX}$ is the maximum value of $a$ and $b$.

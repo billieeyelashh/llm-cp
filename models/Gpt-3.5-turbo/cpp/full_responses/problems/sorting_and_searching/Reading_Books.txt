@@ -1,0 +1,51 @@
+To find the minimum total time required for both Kotivalo and Justiina to read all the books, we can follow these steps:
+
+1. Read the input values: the number of books (n) and the time required to read each book (t_1, t_2, ..., t_n).
+
+2. Sort the array of book reading times in non-decreasing order.
+
+3. Initialize two variables, total_time = 0 and max_time = 0.
+
+4. Iterate through the sorted array of book reading times, starting from index 0:
+
+   a. Add the current book reading time to total_time.
+   
+   b. Update max_time to the maximum of max_time and total_time.
+   
+5. Finally, print the value of max_time as the minimum total time required.
+
+Here is the C++ code implementing the above steps:
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> times(n);
+    for (int i = 0; i < n; i++) {
+        cin >> times[i];
+    }
+
+    sort(times.begin(), times.end()); // Step 2
+
+    int total_time = 0;
+    int max_time = 0;
+
+    for (int i = 0; i < n; i++) { // Step 4
+        total_time += times[i]; // Step 4a
+        max_time = max(max_time, total_time); // Step 4b
+    }
+
+    cout << max_time << endl; // Step 5
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n log n) due to the sorting step.

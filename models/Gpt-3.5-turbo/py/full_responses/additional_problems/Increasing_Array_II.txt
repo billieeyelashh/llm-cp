@@ -1,0 +1,20 @@
+To solve this problem optimally, we can iterate through the array and keep track of the minimum number of moves required for each element to be greater than its previous element. 
+
+We start by initializing a variable `moves` to 0. Then, for each index `i` from 1 to `n-1`, we check if `x[i]` is smaller than or equal to `x[i-1]`. If it is, we calculate the number of moves required to make `x[i]` greater than `x[i-1]` and add it to `moves`. Finally, we print the value of `moves`.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+moves = 0
+for i in range(1, n):
+    if arr[i] <= arr[i-1]:
+        moves += arr[i-1] - arr[i]
+        arr[i] = arr[i-1]
+
+print(moves)
+```
+
+This solution has a time complexity of O(n) as we iterate through the array once.

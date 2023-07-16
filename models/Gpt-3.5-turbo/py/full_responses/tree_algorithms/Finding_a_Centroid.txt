@@ -1,0 +1,46 @@
+To solve this problem, we can use a recursive approach. We will start by selecting an arbitrary node as the root of the tree and then recursively find the centroid of each subtree.
+
+The idea behind finding the centroid is to remove edges from the tree until we are left with a subtree that has at most $\lfloor n/2 \rfloor$ nodes. We can keep track of the size of each subtree and use it to determine the centroid.
+
+Here is the Python implementation:
+
+```python
+def dfs(u, p, subtree_sizes, n):
+    size = 1
+    is_centroid = True
+
+    for v in graph[u]:
+        if v != p:
+            dfs(v, u, subtree_sizes, n)
+            size += subtree_sizes[v]
+            if subtree_sizes[v] > n // 2:
+                is_centroid = False
+
+    subtree_sizes[u] = size
+
+    if n - size > n // 2:
+        is_centroid = False
+
+    if is_centroid:
+        centroids.append(u)
+
+n = int(input())
+graph = [[] for _ in range(n+1)]
+subtree_sizes = [0] * (n+1)
+centroids = []
+
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+dfs(1, 0, subtree_sizes, n)
+
+print(centroids[0])
+```
+
+In this solution, we use a depth-first search (DFS) to traverse the tree. We keep track of the size of each subtree using the `subtree_sizes` array. We also maintain a list `centroids` to store the centroids found during the traversal.
+
+The `dfs` function takes three arguments: the current node `u`, the parent node `p`, and the `subtree_sizes` array. It recursively visits each child node `v` of `u`, updates the subtree size, and checks if the subtree is a centroid.
+
+Finally, we print the first centroid found in the `centroids` list as the output.

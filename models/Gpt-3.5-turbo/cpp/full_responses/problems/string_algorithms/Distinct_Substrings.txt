@@ -1,0 +1,51 @@
+To solve this problem, we can use the concept of suffix trees. A suffix tree is a tree-like data structure that represents all the suffixes of a given string.
+
+First, we need to construct the suffix tree for the given string. Then, we can count the number of distinct substrings by traversing the suffix tree and counting the number of nodes.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+struct Node {
+    map<char, Node*> children;
+};
+
+Node* createNode() {
+    Node* node = new Node;
+    return node;
+}
+
+void insertSuffix(Node* root, const string& str, int start) {
+    Node* current = root;
+    for (int i = start; i < str.size(); i++) {
+        char ch = str[i];
+        if (current->children.find(ch) == current->children.end()) {
+            current->children[ch] = createNode();
+        }
+        current = current->children[ch];
+    }
+}
+
+int countDistinctSubstrings(const string& str) {
+    Node* root = createNode();
+    for (int i = 0; i < str.size(); i++) {
+        insertSuffix(root, str, i);
+    }
+    return root->children.size();
+}
+
+int main() {
+    string str;
+    cin >> str;
+    int result = countDistinctSubstrings(str);
+    cout << result << endl;
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2), where n is the length of the input string. This is because constructing the suffix tree takes O(n^2) time in the worst case. However, this can be optimized using Ukkonen's algorithm to construct the suffix tree in linear time, resulting in a time complexity of O(n).

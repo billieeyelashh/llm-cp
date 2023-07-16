@@ -1,0 +1,41 @@
+To solve this problem optimally, we can use a simple approach called the "sliding window" technique.
+
+Here is the code in C++:
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string dna;
+    cin >> dna;
+
+    int n = dna.length();
+    int longestRepetition = 1;
+    int currentRepetition = 1;
+
+    for (int i = 1; i < n; i++) {
+        if (dna[i] == dna[i - 1]) {
+            currentRepetition++;
+        } else {
+            longestRepetition = max(longestRepetition, currentRepetition);
+            currentRepetition = 1;
+        }
+    }
+
+    longestRepetition = max(longestRepetition, currentRepetition);
+    cout << longestRepetition << endl;
+
+    return 0;
+}
+```
+
+The idea is to iterate through the DNA sequence and maintain two variables: `longestRepetition` to store the length of the longest repetition found so far, and `currentRepetition` to track the length of the current repetition.
+
+We start by initializing both variables to 1, as the minimum length of a repetition is 1. Then, we iterate through the DNA sequence starting from the second character. If the current character is the same as the previous character, we increment `currentRepetition`. Otherwise, we update `longestRepetition` with the maximum value between `longestRepetition` and `currentRepetition`, and reset `currentRepetition` back to 1.
+
+Finally, after the loop ends, we update `longestRepetition` one last time to account for the last repetition. Finally, we print the value of `longestRepetition`.
+
+This solution has a time complexity of O(n), where n is the length of the DNA sequence, since we iterate through the sequence only once.

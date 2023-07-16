@@ -1,0 +1,106 @@
+To solve this problem optimally, we can use a sweep line algorithm. We will sweep a vertical line from left to right and count the number of horizontal line segments that intersect with the sweep line at each position.
+
+Here is the step-by-step solution in Python:
+
+1. Read the input values:
+
+```python
+n = int(input())
+segments = []
+for _ in range(n):
+    x1, y1, x2, y2 = map(int, input().split())
+    segments.append((x1, y1, x2, y2))
+```
+
+2. Create an empty list to store the y-coordinates of the segment endpoints and intersection points:
+
+```python
+points = []
+```
+
+3. Iterate over all line segments and add their y-coordinates to the `points` list:
+
+```python
+for x1, y1, x2, y2 in segments:
+    points.append(y1)
+    points.append(y2)
+```
+
+4. Sort the `points` list in ascending order:
+
+```python
+points.sort()
+```
+
+5. Create a variable `count` to keep track of the number of intersections and initialize it to 0:
+
+```python
+count = 0
+```
+
+6. Create an empty set `active_segments` to store the line segments that intersect with the current sweep line position:
+
+```python
+active_segments = set()
+```
+
+7. Iterate over all y-coordinates in the `points` list:
+
+```python
+for y in points:
+```
+
+8. Create an empty list `intersections` to store the x-coordinates of the intersections at the current y-coordinate:
+
+```python
+    intersections = []
+```
+
+9. Iterate over all line segments and check if they intersect with the current sweep line position:
+
+```python
+    for x1, y1, x2, y2 in segments:
+        if y1 <= y <= y2:
+            intersections.append(x1 + (x2 - x1) * (y - y1) / (y2 - y1))
+```
+
+10. Sort the `intersections` list in ascending order:
+
+```python
+    intersections.sort()
+```
+
+11. Iterate over all intersections in the `intersections` list:
+
+```python
+    for i in range(len(intersections) - 1):
+```
+
+12. Check if the intersection point is not equal to the endpoint of any line segment:
+
+```python
+        if intersections[i] != segments[i][0] and intersections[i] != segments[i][2]:
+```
+
+13. Increment the `count` variable:
+
+```python
+            count += 1
+```
+
+14. Update the set `active_segments` by adding or removing line segments that intersect with the current sweep line position:
+
+```python
+        if y == segments[i][1]:
+            active_segments.add(i)
+        if y == segments[i][3]:
+            active_segments.remove(i)
+```
+
+15. Print the final count:
+
+```python
+print(count)
+```
+
+And that's our final solution. This algorithm has a time complexity of O(n log n), where n is the number of line segments.

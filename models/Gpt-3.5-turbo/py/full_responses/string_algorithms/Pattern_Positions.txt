@@ -1,0 +1,45 @@
+To solve this problem, we can use the concept of hashing. We will preprocess the string and patterns to create a hash table that stores the starting position of each substring of length $m$ in the string.
+
+Here's the step-by-step solution:
+
+1. Read the input values: the string, the number of patterns ($k$), and the patterns themselves.
+
+2. Initialize an empty hash table called `hash_table`.
+
+3. Create a function called `hash_string` that takes a string and returns its hash value. We can use a simple polynomial hashing technique for this. The hash value for a string $s$ is calculated as follows:
+
+   ```python
+   def hash_string(s):
+       p = 31  # prime number
+       m = 10**9 + 9  # large prime number
+       hash_value = 0
+       p_pow = 1
+
+       for char in s:
+           hash_value = (hash_value + (ord(char) - ord('a') + 1) * p_pow) % m
+           p_pow = (p_pow * p) % m
+
+       return hash_value
+   ```
+
+4. Preprocess the string to create the hash table. Iterate through all possible substrings of length $m$ in the string, where $m$ is the maximum length of the patterns. For each substring, calculate its hash value using the `hash_string` function and store the starting position of the substring in the hash table.
+
+   ```python
+   for i in range(len(string) - m + 1):
+       substring = string[i:i + m]
+       hash_value = hash_string(substring)
+       hash_table[hash_value] = i + 1
+   ```
+
+5. Iterate through each pattern and check if its hash value exists in the hash table. If it does, print the corresponding starting position; otherwise, print -1.
+
+   ```python
+   for pattern in patterns:
+       hash_value = hash_string(pattern)
+       if hash_value in hash_table:
+           print(hash_table[hash_value])
+       else:
+           print(-1)
+   ```
+
+The overall time complexity of this solution is $O(n + k \cdot m)$, where $n$ is the length of the string, $k$ is the number of patterns, and $m$ is the maximum length of the patterns.

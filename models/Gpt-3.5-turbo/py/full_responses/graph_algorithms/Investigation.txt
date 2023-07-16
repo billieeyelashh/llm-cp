@@ -1,0 +1,62 @@
+To find the minimum price, we can use Dijkstra's algorithm. We will maintain a priority queue to store the cities and their minimum costs. Initially, the cost of the source city (Syrjälä) is 0, and the cost of all other cities is infinity. We will process the cities in order of their costs and update the minimum cost for each neighbor city.
+
+To find the number of minimum-price routes, we will also maintain an array to store the number of minimum-cost routes to each city. Initially, the number of routes to the source city is 1, and the number of routes to all other cities is 0. Whenever we find a new minimum cost for a city, we will update the number of routes to that city by adding the number of routes to the previous city.
+
+To find the minimum and maximum number of flights in a minimum-price route, we will maintain two arrays: one to store the minimum number of flights to reach each city with the minimum cost, and the other to store the maximum number of flights to reach each city with the minimum cost. Initially, the minimum and maximum number of flights to the source city is 0. For each neighbor city, we will update the minimum and maximum number of flights based on the minimum and maximum number of flights to the previous city.
+
+Here is the Python solution:
+
+```python
+import heapq
+
+def dijkstra(n, m, flights):
+    # Initialize the data structures
+    costs = [float('inf')] * n
+    routes = [0] * n
+    min_flights = [float('inf')] * n
+    max_flights = [0] * n
+    graph = [[] for _ in range(n)]
+
+    # Build the adjacency list representation of the graph
+    for a, b, c in flights:
+        graph[a-1].append((b-1, c))
+
+    # Dijkstra's algorithm
+    queue = [(0, 0)]  # (cost, city)
+    costs[0] = 0
+    routes[0] = 1
+    min_flights[0] = 0
+    max_flights[0] = 0
+
+    while queue:
+        cost, city = heapq.heappop(queue)
+
+        if cost > costs[city]:
+            continue
+
+        for neighbor, flight_cost in graph[city]:
+            new_cost = cost + flight_cost
+
+            if new_cost < costs[neighbor]:
+                costs[neighbor] = new_cost
+                routes[neighbor] = routes[city]
+                min_flights[neighbor] = min_flights[city] + 1
+                max_flights[neighbor] = max_flights[city] + 1
+                heapq.heappush(queue, (new_cost, neighbor))
+            elif new_cost == costs[neighbor]:
+                routes[neighbor] = (routes[neighbor] + routes[city]) % (10**9 + 7)
+                min_flights[neighbor] = min(min_flights[neighbor], min_flights[city] + 1)
+                max_flights[neighbor] = max(max_flights[neighbor], max_flights[city] + 1)
+
+    return costs[n-1], routes[n-1], min_flights[n-1], max_flights[n-1]
+
+# Read the input
+n, m = map(int, input().split())
+flights = [list(map(int, input().split())) for _ in range(m)]
+
+# Call the dijkstra function and print the results
+min_price, num_routes, min_num_flights, max_num_flights = dijkstra(n, m, flights)
+print(min_price, num_routes, min_num_flights, max_num_flights)
+```
+
+This solution has a time complexity of O((n + m) log n) because Dijkstra's algorithm has a time complexity of O((n + m) log n).

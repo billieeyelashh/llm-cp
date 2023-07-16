@@ -1,0 +1,26 @@
+To calculate the area of a polygon, we can use the Shoelace Formula. The Shoelace Formula states that the area of a polygon with vertices (x1, y1), (x2, y2), ..., (xn, yn) is given by:
+
+Area = 0.5 * |(x1*y2 + x2*y3 + ... + xn*y1) - (y1*x2 + y2*x3 + ... + yn*x1)|
+
+Here is the solution in Python:
+
+```python
+def calculate_area(n, vertices):
+    area = 0
+    for i in range(n):
+        x1, y1 = vertices[i]
+        x2, y2 = vertices[(i + 1) % n]
+        area += x1 * y2 - x2 * y1
+    return abs(area) // 2
+
+n = int(input())
+vertices = []
+for _ in range(n):
+    x, y = map(int, input().split())
+    vertices.append((x, y))
+
+area = calculate_area(n, vertices)
+print(2 * area)
+```
+
+This solution iterates through each pair of adjacent vertices, calculates the cross product of their coordinates, and accumulates the sum. Finally, it returns the absolute value of the accumulated sum divided by 2, which gives us the area of the polygon.

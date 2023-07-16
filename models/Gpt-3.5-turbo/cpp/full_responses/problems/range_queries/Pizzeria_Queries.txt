@@ -1,0 +1,106 @@
+To solve this problem efficiently, we can use a segment tree data structure. 
+
+Let's define a segment tree where each node represents a range of buildings. The root node represents the entire range of buildings, and each leaf node represents a single building. Each node stores the minimum pizza price within its range.
+
+To build the segment tree, we start with the root node representing the range $[1, n]$. We recursively divide the range into two halves and build the left and right child nodes. The minimum pizza price for each node can be calculated by taking the minimum of the minimum pizza prices in its left and right child nodes.
+
+To update a pizza price, we locate the corresponding leaf node in the segment tree and update its value. Then, we propagate the change upwards by updating the parent nodes up to the root node.
+
+To find the minimum pizza price within a given range $[a, b]$, we start at the root node. If the current node's range is completely outside the query range, we return a large value. If the current node's range is completely within the query range, we return its stored minimum pizza price. Otherwise, we recursively search in both child nodes and return the minimum of the results.
+
+Finally, we process each query based on its type:
+
+- For queries of type 1, we update the pizza price in the segment tree and propagate the change upwards.
+- For queries of type 2, we find the minimum pizza price in the range $[k, k]$ using the segment tree and output the result.
+
+Here's the C++ code implementing the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+// Segment tree node structure
+struct Node {
+    int minPrice;
+};
+
+// Build segment tree
+void build(vector<int>& prices, vector<Node>& tree, int node, int start, int end) {
+    if (start == end) {
+        tree[node].minPrice = prices[start];
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    build(prices, tree, 2 * node, start, mid);
+    build(prices, tree, 2 * node + 1, mid + 1, end);
+
+    tree[node].minPrice = min(tree[2 * node].minPrice, tree[2 * node + 1].minPrice);
+}
+
+// Update pizza price in segment tree
+void update(vector<Node>& tree, int node, int start, int end, int idx, int price) {
+    if (start == end) {
+        tree[node].minPrice = price;
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    if (idx <= mid) {
+        update(tree, 2 * node, start, mid, idx, price);
+    } else {
+        update(tree, 2 * node + 1, mid + 1, end, idx, price);
+    }
+
+    tree[node].minPrice = min(tree[2 * node].minPrice, tree[2 * node + 1].minPrice);
+}
+
+// Query minimum pizza price in segment tree
+int query(vector<Node>& tree, int node, int start, int end, int left, int right) {
+    if (start > right || end < left) {
+        return INT_MAX;
+    }
+
+    if (left <= start && end <= right) {
+        return tree[node].minPrice;
+    }
+
+    int mid = (start + end) / 2;
+    int leftPrice = query(tree, 2 * node, start, mid, left, right);
+    int rightPrice = query(tree, 2 * node + 1, mid + 1, end, left, right);
+
+    return min(leftPrice, rightPrice);
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> prices(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> prices[i];
+    }
+
+    vector<Node> tree(4 * n);
+    build(prices, tree, 1, 0, n - 1);
+
+    while (q--) {
+        int type, k, x;
+        cin >> type >> k;
+        
+        if (type == 1) {
+            cin >> x;
+            update(tree, 1, 0, n - 1, k - 1, x);
+        } else {
+            cout << query(tree, 1, 0, n - 1, k - 1, k - 1) << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) for building the segment tree and O(log n) for each query and update operation. Thus, the overall time complexity is

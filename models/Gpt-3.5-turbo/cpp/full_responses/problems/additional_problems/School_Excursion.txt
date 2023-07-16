@@ -1,0 +1,79 @@
+To solve this problem, we can use a union-find data structure to group the children who want to visit the same attraction together. 
+
+First, we initialize an array of size $n$ to represent the parent of each child. We also initialize another array of size $n$ to store the size of each group.
+
+Next, for each pair of children who want to visit the same attraction, we perform a union operation on their groups. This involves finding the parents of both children and updating the parent array and size array accordingly.
+
+After processing all the wishes, we iterate over the parent array to find the root parent of each group. The root parent represents the representative of the group. We update the size array with the size of each group by adding the size of the group to the corresponding index of the root parent.
+
+Finally, we iterate over the size array and construct the bit string based on the values. If the size of a group is greater than 0, we set the corresponding bit to 1; otherwise, we set it to 0.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> parent;
+vector<int> groupSize;
+
+int findParent(int node) {
+    if (parent[node] == node)
+        return node;
+
+    // Path compression
+    return parent[node] = findParent(parent[node]);
+}
+
+void unionGroups(int a, int b) {
+    int parentA = findParent(a);
+    int parentB = findParent(b);
+
+    if (parentA == parentB)
+        return;
+
+    // Union by size
+    if (groupSize[parentA] < groupSize[parentB]) {
+        swap(parentA, parentB);
+    }
+
+    parent[parentB] = parentA;
+    groupSize[parentA] += groupSize[parentB];
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    parent.resize(n + 1);
+    groupSize.resize(n + 1, 1);
+
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        unionGroups(a, b);
+    }
+
+    vector<int> result(n + 1, 0);
+
+    for (int i = 1; i <= n; i++) {
+        int parentI = findParent(i);
+        result[parentI] = groupSize[parentI];
+    }
+
+    for (int i = 1; i <= n; i++) {
+        cout << (result[i] > 0 ? 1 : 0);
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n + m * α(n)), where α is the inverse Ackermann function.

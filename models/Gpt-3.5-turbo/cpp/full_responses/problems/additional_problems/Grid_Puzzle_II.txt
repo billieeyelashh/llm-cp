@@ -1,0 +1,89 @@
+To solve this problem, we can use backtracking. We will try to choose a square in each row and column and keep track of the maximum number of coins we can collect.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MAXN = 50;
+
+int n;
+int rows[MAXN], cols[MAXN];
+int grid[MAXN][MAXN];
+int chosenRows[MAXN], chosenCols[MAXN];
+int maxCoins = -1;
+
+void backtrack(int row, int col, int coins) {
+    if (row == n) {
+        // Reached the end, update the maximum number of coins
+        maxCoins = max(maxCoins, coins);
+        return;
+    }
+
+    // If we have already chosen enough squares in this row and column, move to the next one
+    if (chosenRows[row] == rows[row]) {
+        backtrack(row + 1, col, coins);
+        return;
+    }
+    if (chosenCols[col] == cols[col]) {
+        backtrack(row, col + 1, coins);
+        return;
+    }
+
+    // Try choosing a square in the current row and column
+    chosenRows[row]++;
+    chosenCols[col]++;
+    backtrack(row, col, coins + grid[row][col]);
+    chosenRows[row]--;
+    chosenCols[col]--;
+
+    // Move to the next square
+    backtrack(row, col + 1, coins);
+}
+
+int main() {
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> rows[i];
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> cols[i];
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> grid[i][j];
+        }
+    }
+
+    // Start backtracking from the top-left square
+    backtrack(0, 0, 0);
+
+    if (maxCoins == -1) {
+        cout << -1 << endl;
+    } else {
+        cout << maxCoins << endl;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (chosenRows[i] && chosenCols[j]) {
+                    cout << "X";
+                } else {
+                    cout << ".";
+                }
+            }
+            cout << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+Explanation:
+We use a backtracking function `backtrack` that takes the current row, column, and the number of coins collected so far as parameters. It tries to choose a square in the current row and column and updates the number of coins accordingly. Then, it moves to the next square or the next row/column if necessary.
+
+In the main function, we read the input and call the `backtrack` function from the top-left square. After the backtracking is done, we check if the maximum number of coins is still -1 (indicating that no valid solution was found) and print the result accordingly.
+
+The time complexity of this solution is exponential as there can be up to `2^n` possible choices for each square. However, given the constraints of the problem, it should run efficiently within the time limit.

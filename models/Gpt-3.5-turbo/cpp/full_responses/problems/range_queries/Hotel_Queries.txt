@@ -1,0 +1,42 @@
+To solve this problem, we can use a greedy approach. We iterate through each group and assign them to the first hotel that has enough available rooms. 
+
+Here's the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> hotels(n);
+    for (int i = 0; i < n; i++) {
+        cin >> hotels[i];
+    }
+
+    for (int i = 0; i < m; i++) {
+        int requiredRooms;
+        cin >> requiredRooms;
+
+        int assignedHotel = 0;
+        for (int j = 0; j < n; j++) {
+            if (hotels[j] >= requiredRooms) {
+                assignedHotel = j + 1;
+                hotels[j] -= requiredRooms;
+                break;
+            }
+        }
+
+        cout << assignedHotel << " ";
+    }
+
+    return 0;
+}
+```
+
+The code reads the number of hotels and groups from the input, followed by the number of free rooms in each hotel. It then iterates through each group, checking if there is a hotel with enough available rooms. If a hotel is found, it assigns the group to that hotel and subtracts the required rooms from the available rooms of the hotel. Finally, it prints the assigned hotel for each group.
+
+The time complexity of this solution is O(n * m), where n is the number of hotels and m is the number of groups. This is because for each group, we iterate through the hotels to find an available room.

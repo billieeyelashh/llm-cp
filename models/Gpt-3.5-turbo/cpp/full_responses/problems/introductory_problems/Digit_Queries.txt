@@ -1,0 +1,50 @@
+To solve this problem optimally, we can follow the following steps:
+
+1. Read the value of $q$ from input, which represents the number of queries.
+
+2. For each query, read the value of $k$ from the input.
+
+3. Initialize a variable $n$ to 1, which represents the current number in the infinite string.
+
+4. Initialize a variable $len$ to 1, which represents the length of the current number. This will start at 1 because the first number in the string is a single digit.
+
+5. While $k$ is greater than $len$, subtract $len$ from $k$ and increment $n$ by 1. Update $len$ to the length of the new number $n$.
+
+6. Once $k$ becomes less than or equal to $len$, the desired digit is in the number $n$. Convert $n$ to a string and find the character at position $k$ (using 0-based indexing).
+
+7. Print the character as the output for the current query.
+
+Here is the C++ code that implements the above algorithm:
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int q;
+    cin >> q;
+
+    for (int i = 0; i < q; ++i) {
+        long long k;
+        cin >> k;
+
+        int n = 1;
+        int len = 1;
+
+        while (k > len) {
+            k -= len;
+            ++n;
+            len = to_string(n).size();
+        }
+
+        string num = to_string(n);
+        cout << num[k - 1] << endl;
+    }
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(log k), where k is the maximum value of $k$ among all the queries.

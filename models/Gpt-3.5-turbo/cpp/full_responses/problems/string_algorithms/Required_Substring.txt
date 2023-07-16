@@ -1,0 +1,53 @@
+To solve this problem, we can use dynamic programming. Let's define a 2D array dp[i][j], where dp[i][j] represents the number of strings of length i having the pattern of length j as their substring.
+
+We can iterate over the length of the final string, from 1 to n. For each length, we iterate over all possible characters for the last position of the string.
+
+For each character, we check if it matches with the last character of the pattern. If it does, we add dp[i-1][j-1] to dp[i][j] since we can append this character to the strings of length i-1 having the pattern of length j-1 as their substring.
+
+If it doesn't match, we add dp[i-1][j] to dp[i][j] since we can append this character to the strings of length i-1 having the pattern of length j as their substring.
+
+After iterating through all possible characters, we take the sum of dp[n][j] for all valid j (pattern length) to get the final answer.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1000000007;
+
+int main() {
+    int n, m;
+    cin >> n;
+    string pattern;
+    cin >> pattern;
+    m = pattern.length();
+
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= m; j++) {
+            for (char ch = 'A'; ch <= 'Z'; ch++) {
+                if (j > 0 && ch != pattern[j - 1]) {
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j]) % MOD;
+                } else if (j > 0 && ch == pattern[j - 1]) {
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MOD;
+                }
+            }
+        }
+    }
+
+    int ans = 0;
+    for (int j = 1; j <= m; j++) {
+        ans = (ans + dp[n][j]) % MOD;
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
+```
+
+This code has a time complexity of O(n * m * 26) and a space complexity of O(n * m). It should be able to handle the given constraints efficiently.

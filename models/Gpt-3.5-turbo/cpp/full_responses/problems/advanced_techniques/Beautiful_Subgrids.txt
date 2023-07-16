@@ -1,0 +1,60 @@
+To solve this problem, we can use dynamic programming to count the number of beautiful subgrids.
+
+Let's define a 2D array `dp` of size `(n+1) x (n+1)`, where `dp[i][j]` represents the number of beautiful subgrids that can be formed using the first `i` rows and `j` columns of the grid.
+
+We can fill in the `dp` array iteratively as follows:
+
+```
+for i = 3 to n:
+    for j = 3 to n:
+        if grid[i][j] == 1:
+            dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+```
+
+Here, `grid[i][j]` represents the cell at row `i` and column `j` of the grid.
+
+The idea is that for each cell in the grid, if it is black (`grid[i][j] == 1`), we can extend a beautiful subgrid by including this cell if there is a valid subgrid that ends at the cell above it, the cell to the left of it, and the cell diagonally above and to the left of it.
+
+Finally, we can calculate the total number of beautiful subgrids by summing up all the values in the `dp` array.
+
+Here is the C++ code to solve the problem:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<vector<int>> grid(n+1, vector<int>(n+1, 0));
+    vector<vector<int>> dp(n+1, vector<int>(n+1, 0));
+
+    for (int i = 1; i <= n; i++) {
+        string row;
+        cin >> row;
+        for (int j = 1; j <= n; j++) {
+            grid[i][j] = row[j-1] - '0';
+        }
+    }
+
+    int beautiful_subgrids = 0;
+
+    for (int i = 3; i <= n; i++) {
+        for (int j = 3; j <= n; j++) {
+            if (grid[i][j] == 1) {
+                dp[i][j] = min(dp[i-1][j], min(dp[i][j-1], dp[i-1][j-1])) + 1;
+                beautiful_subgrids += dp[i][j];
+            }
+        }
+    }
+
+    cout << beautiful_subgrids << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^2) and the space complexity is O(n^2), where n is the size of the grid.

@@ -1,0 +1,27 @@
+To efficiently calculate the value $a^{b^c}$ modulo $10^9+7$, we can use the property of modular exponentiation:
+
+$$a^{b^c} \equiv (a^{b})^c \mod (10^9+7)$$
+
+This means that we can first calculate $b^c$ modulo $(10^9+6)$ using modular exponentiation, and then calculate $a^{b^c}$ modulo $(10^9+7)$ also using modular exponentiation.
+
+Here is the Python code to solve the problem:
+
+```python
+def modular_exponentiation(base, power, mod):
+    result = 1
+    while power > 0:
+        if power % 2 == 1:
+            result = (result * base) % mod
+        base = (base * base) % mod
+        power = power // 2
+    return result
+
+n = int(input())
+for _ in range(n):
+    a, b, c = map(int, input().split())
+    power = modular_exponentiation(b, c, 10**9+6)
+    result = modular_exponentiation(a, power, 10**9+7)
+    print(result)
+```
+
+In this solution, the `modular_exponentiation` function calculates the modular exponentiation efficiently using the binary exponentiation algorithm. The main loop in the solution reads the inputs, calculates the modular exponentiation values, and prints the results.

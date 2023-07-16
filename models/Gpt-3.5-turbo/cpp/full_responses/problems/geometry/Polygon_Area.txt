@@ -1,0 +1,42 @@
+To calculate the area of a polygon, we can use the Shoelace formula. The Shoelace formula states that the area of a polygon with vertices (x1, y1), (x2, y2), ..., (xn, yn) is given by:
+
+area = abs((x1*y2 + x2*y3 + ... + xn*y1) - (y1*x2 + y2*x3 + ... + yn*x1)) / 2
+
+We can implement this formula in C++ as follows:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> x(n);
+    vector<int> y(n);
+
+    for (int i = 0; i < n; i++) {
+        cin >> x[i] >> y[i];
+    }
+
+    int area = 0;
+
+    for (int i = 0; i < n; i++) {
+        area += x[i] * y[(i + 1) % n];
+        area -= y[i] * x[(i + 1) % n];
+    }
+
+    cout << abs(area) << endl;
+
+    return 0;
+}
+```
+
+In this solution, we first read the number of vertices, and then we read the coordinates of each vertex. We store the x and y coordinates in two separate vectors.
+
+Next, we iterate over each vertex and calculate the contribution to the area using the Shoelace formula. We add the product of the current x-coordinate and the next y-coordinate, and subtract the product of the current y-coordinate and the next x-coordinate.
+
+Finally, we take the absolute value of the calculated area and print it as the output.

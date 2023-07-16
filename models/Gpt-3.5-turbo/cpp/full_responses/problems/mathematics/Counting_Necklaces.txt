@@ -1,0 +1,59 @@
+To solve this problem, we can use the concept of Burnside's lemma. 
+
+First, let's calculate the number of necklaces if rotation is not considered. For each pearl, there are $m$ possible colors, so the total number of necklaces without considering rotation is $m^n$.
+
+Next, we need to account for the necklaces that look the same after rotation. We can do this by calculating the number of fixed points under each rotation.
+
+A rotation by $k$ positions (where $k$ is a divisor of $n$) leaves exactly $\text{gcd}(n, k)$ pearls fixed. So, the number of necklaces that look the same after a rotation by $k$ positions is $m^{\text{gcd}(n, k)}$.
+
+Finally, we can apply Burnside's lemma to get the total number of different necklaces. The formula is:
+
+$\frac{1}{n}\sum_{k=1}^{n}m^{\text{gcd}(n, k)}$
+
+Let's implement this solution in C++:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+const int MOD = 1000000007;
+
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+int powMod(int base, int exp) {
+    int result = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1)
+            result = (1LL * result * base) % MOD;
+        base = (1LL * base * base) % MOD;
+        exp /= 2;
+    }
+    return result;
+}
+
+int countNecklaces(int n, int m) {
+    int total = 0;
+    for (int k = 1; k <= n; k++) {
+        if (n % k == 0) {
+            int fixedPoints = powMod(m, gcd(n, k));
+            total = (total + fixedPoints) % MOD;
+        }
+    }
+    total = (1LL * total * powMod(n, MOD - 2)) % MOD; // Modular inverse of n
+    return total;
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    int result = countNecklaces(n, m);
+    cout << result << endl;
+    return 0;
+}
+```
+
+This solution calculates the total number of different necklaces modulo $10^9+7$ using Burnside's lemma. It has a time complexity of $O(n \log n)$ due to the calculation of gcd and modular exponentiation.

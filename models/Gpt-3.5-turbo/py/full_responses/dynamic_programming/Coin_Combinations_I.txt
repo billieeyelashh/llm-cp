@@ -1,0 +1,36 @@
+To solve this problem, we can use dynamic programming.
+
+We can define a 2D array dp[i][j], where dp[i][j] represents the number of ways to produce a money sum of j using the first i coins.
+
+The base cases would be dp[0][0] = 1 and dp[0][j] = 0 for j > 0, since we don't have any coins to use.
+
+For each coin value c[i], we can calculate the number of ways to produce a money sum of j using the first i coins as follows:
+
+dp[i][j] = dp[i-1][j] + dp[i][j-c[i]]
+
+The first term represents the number of ways to produce a money sum of j using only the first i-1 coins, and the second term represents the number of ways to produce a money sum of j-c[i] using the first i coins (since we can use the current coin value c[i]).
+
+Finally, the answer will be dp[n][x].
+
+Here is the Python code for the solution:
+
+```python
+MOD = int(1e9) + 7
+
+n, x = map(int, input().split())
+coins = list(map(int, input().split()))
+
+dp = [[0] * (x+1) for _ in range(n+1)]
+dp[0][0] = 1
+
+for i in range(1, n+1):
+    for j in range(x+1):
+        dp[i][j] = dp[i-1][j]
+        if j >= coins[i-1]:
+            dp[i][j] += dp[i][j-coins[i-1]]
+        dp[i][j] %= MOD
+
+print(dp[n][x])
+```
+
+This solution has a time complexity of O(n*x), where n is the number of coins and x is the desired money sum.

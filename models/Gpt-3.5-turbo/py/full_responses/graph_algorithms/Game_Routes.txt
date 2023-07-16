@@ -1,0 +1,27 @@
+To solve this problem, we can use dynamic programming to count the number of ways to reach each level starting from level 1.
+
+First, we create a list of lists, `dp`, with size `n+1`. Each element `dp[i]` represents the number of ways to reach level `i` starting from level 1. Initialize all elements of `dp` to 0, except `dp[1]` which is 1.
+
+Then, for each teleporter (a, b), we update `dp[b]` by adding the current value of `dp[a]`.
+
+Finally, we output the value of `dp[n]` modulo `10^9+7`.
+
+Here's the Python code:
+
+```python
+MOD = int(1e9) + 7
+
+n, m = map(int, input().split())
+
+dp = [0] * (n+1)
+dp[1] = 1
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    dp[b] += dp[a]
+    dp[b] %= MOD
+
+print(dp[n] % MOD)
+```
+
+The time complexity of this solution is O(m), where m is the number of teleporters, and the space complexity is O(n).

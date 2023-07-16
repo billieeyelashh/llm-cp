@@ -1,0 +1,53 @@
+To solve this problem, we can use dynamic programming. We will create a 3D array `dp[n+1][k+1][2]`, where `dp[i][j][0]` represents the minimum path length from node 1 to node i using exactly j edges, and `dp[i][j][1]` represents whether or not we have reached node i using exactly j edges.
+
+We will initialize `dp[1][0][0] = 0` and `dp[i][j][0] = INF` for all other values, where INF is a very large value.
+
+Then, we can iterate over each node from 1 to n and each number of edges from 1 to k. For each iteration, we will update `dp[i][j][0]` and `dp[i][j][1]` based on the minimum path length from its incoming edges.
+
+The final answer will be `dp[n][k][0]`, if `dp[n][k][1]` is true. Otherwise, the answer is -1.
+
+Here is the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <limits>
+
+using namespace std;
+
+const int INF = numeric_limits<int>::max();
+
+int main() {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<vector<pair<int, int>>> adj(n + 1);
+    for (int i = 0; i < m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj[a].push_back({b, c});
+    }
+
+    vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(k + 1, vector<int>(2, INF)));
+    dp[1][0][0] = 0;
+
+    for (int j = 1; j <= k; ++j) {
+        for (int i = 1; i <= n; ++i) {
+            for (auto [next, weight] : adj[i]) {
+                dp[next][j][0] = min(dp[next][j][0], dp[i][j - 1][0] + weight);
+                dp[next][j][1] = true;
+            }
+        }
+    }
+
+    if (dp[n][k][1]) {
+        cout << dp[n][k][0] << endl;
+    } else {
+        cout << -1 << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(nmk) and will work efficiently for the given constraints.

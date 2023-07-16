@@ -1,0 +1,22 @@
+To solve this problem, we can observe that in order to empty both piles, the total number of coins in the two piles must be divisible by 3. Additionally, the number of coins in each pile should not be more than twice the number of coins in the other pile.
+
+Here is the Python solution:
+
+```python
+t = int(input())
+
+for _ in range(t):
+    a, b = map(int, input().split())
+    
+    if (a + b) % 3 == 0 and 2 * min(a, b) >= max(a, b):
+        print("YES")
+    else:
+        print("NO")
+```
+
+Explanation:
+1. Read the number of tests, `t`.
+2. Iterate `t` times.
+3. Read the number of coins in each pile, `a` and `b`.
+4. Check if the total number of coins is divisible by 3 and if the number of coins in each pile meets the condition.
+5. Print "YES" if the condition is satisfied, otherwise print "NO".

@@ -1,0 +1,47 @@
+To solve this problem, we can use dynamic programming. Let's define a 2D array `dp` of size `(n+1) x (n+1)` to store the number of possible paths from the top-left square to each square in the grid.
+
+We will initialize `dp[1][1] = 1` since there is only one way to reach the top-left square.
+
+Next, we will iterate over each square in the grid and update `dp[y][x]` based on the values of its adjacent squares. If there is a trap at square `(y, x)`, we will set `dp[y][x] = 0` since we cannot pass through that square.
+
+The update rule for each square `(y, x)` is:
+`dp[y][x] = (dp[y-1][x] + dp[y][x-1]) % (10^9+7)`
+
+Finally, the answer will be `dp[n][n]`.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1000000007;
+
+int main() {
+    int n, m;
+    std::cin >> n >> m;
+    
+    std::vector<std::vector<int>> dp(n+1, std::vector<int>(n+1, 0));
+    dp[1][1] = 1;
+    
+    for (int i = 0; i < m; ++i) {
+        int y, x;
+        std::cin >> y >> x;
+        dp[y][x] = 0; // mark trap squares as 0
+    }
+    
+    for (int y = 1; y <= n; ++y) {
+        for (int x = 1; x <= n; ++x) {
+            if (dp[y][x] != 0) {
+                dp[y][x] = (dp[y-1][x] + dp[y][x-1]) % MOD;
+            }
+        }
+    }
+    
+    std::cout << dp[n][n] << std::endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n^2) and space complexity of O(n^2).

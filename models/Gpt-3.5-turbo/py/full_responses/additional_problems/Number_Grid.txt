@@ -1,0 +1,10 @@
+To solve this problem optimally, we can observe that the value at square (y, x) is the maximum of y and x.
+
+Here is the Python code for the solution:
+
+```python
+y, x = map(int, input().split())
+print(max(y, x))
+```
+
+This solution has a time complexity of O(1) as it simply calculates the maximum of two integers.

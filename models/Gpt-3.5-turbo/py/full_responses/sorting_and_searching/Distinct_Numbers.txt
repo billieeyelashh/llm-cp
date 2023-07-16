@@ -1,0 +1,15 @@
+To solve this problem, we can use a set data structure. By adding each integer from the list to the set, we can automatically eliminate any duplicates. Finally, we just need to return the size of the set, which represents the number of distinct values.
+
+Here's the Python code to solve the problem:
+
+```python
+n = int(input())
+values = list(map(int, input().split()))
+
+distinct_values = set(values)
+num_distinct = len(distinct_values)
+
+print(num_distinct)
+```
+
+This solution has a time complexity of O(n) since we iterate through the list of values once to add them to the set. The space complexity is also O(n) since the size of the set can be at most n if all values are distinct.

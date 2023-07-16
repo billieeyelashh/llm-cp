@@ -1,0 +1,36 @@
+To solve this problem, we can use dynamic programming.
+
+Let's define a 2D array `dp` where `dp[i][j]` represents the number of ways to remove characters from the substring starting at index `i` and ending at index `j`.
+
+We can fill this array using the following recurrence relation:
+- If `i > j`, then `dp[i][j] = 1` since the empty string can be formed by not removing any characters.
+- If `i == j`, then `dp[i][j] = 1` since the single character can be removed to form the empty string.
+- Otherwise, if `s[i] != s[j]`, then `dp[i][j] = dp[i+1][j] + dp[i][j-1]` since we can either remove `s[i]` and continue removing characters from the substring starting at index `i+1`, or remove `s[j]` and continue removing characters from the substring ending at index `j-1`.
+- Otherwise, if `s[i] == s[j]`, then `dp[i][j] = dp[i+1][j-1] + dp[i+1][j] + dp[i][j-1] + 2` since we can either remove both `s[i]` and `s[j]`, or remove `s[i]` and continue removing characters from the substring starting at index `i+1`, or remove `s[j]` and continue removing characters from the substring ending at index `j-1`, or remove neither `s[i]` nor `s[j]`.
+
+Finally, the answer will be `dp[0][n-1]` which represents the number of ways to remove characters from the entire string.
+
+Here is the Python code implementing this solution:
+
+```python
+MOD = 10**9 + 7
+
+def count_ways(s):
+    n = len(s)
+    dp = [[0] * n for _ in range(n)]
+
+    for i in range(n-1, -1, -1):
+        dp[i][i] = 1
+        for j in range(i+1, n):
+            if s[i] == s[j]:
+                dp[i][j] = (dp[i+1][j-1] + dp[i+1][j] + dp[i][j-1] + 2) % MOD
+            else:
+                dp[i][j] = (dp[i+1][j] + dp[i][j-1] - dp[i+1][j-1]) % MOD
+
+    return dp[0][n-1]
+
+s = input()
+print(count_ways(s))
+```
+
+The time complexity of this solution is O(n^2) and the space complexity is O(n^2), where n is the length of the input string.

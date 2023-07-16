@@ -1,0 +1,65 @@
+To solve this problem optimally, we can use a combination of DFS (Depth First Search) and DP (Dynamic Programming) techniques.
+
+First, let's define two arrays:
+- cnt[i]: the number of nodes in the subtree rooted at node i.
+- ans[i]: the sum of distances from all nodes to node i.
+
+We can initialize both arrays with zeros.
+
+Next, we can use a DFS traversal to calculate the cnt and ans arrays.
+
+During the DFS traversal, for each node i, we can visit its adjacent nodes and perform the following calculations:
+- Increment cnt[i] by 1, as we have encountered node i.
+- Increment ans[i] by ans[node] + cnt[node], where node is the adjacent node of i. This means that when we move from node to i, all the nodes in the subtree rooted at node will be one step closer to i, and all the nodes outside the subtree will be one step farther from i.
+
+Finally, we can print the ans array as the desired output.
+
+Here is the implementation in C++:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 2e5+5;
+
+vector<int> adj[MAXN];
+int cnt[MAXN];
+long long ans[MAXN];
+
+void dfs(int node, int parent) {
+    cnt[node] = 1;
+    ans[node] = 0;
+
+    for (int adjNode : adj[node]) {
+        if (adjNode == parent) continue;
+
+        dfs(adjNode, node);
+
+        cnt[node] += cnt[adjNode];
+        ans[node] += ans[adjNode] + cnt[adjNode];
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    for (int i = 1; i < n; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    dfs(1, 0);
+
+    for (int i = 1; i <= n; i++) {
+        cout << ans[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the number of nodes in the tree.

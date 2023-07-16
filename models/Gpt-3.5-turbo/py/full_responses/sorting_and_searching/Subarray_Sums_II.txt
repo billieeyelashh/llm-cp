@@ -1,0 +1,40 @@
+To count the number of subarrays having a given sum, we can use a prefix sum approach. We will maintain a running sum of the array elements as we iterate through the array. 
+
+Algorithm:
+1. Initialize a variable `count` to 0 to keep track of the number of subarrays.
+2. Initialize a dictionary `prefix_sum` to store the prefix sums and their frequencies. Set `prefix_sum[0]` to 1, as it represents the empty subarray.
+3. Initialize a variable `current_sum` to 0 to keep track of the running sum.
+4. Iterate through each element `num` in the array:
+   a. Add `num` to `current_sum`.
+   b. If `current_sum - x` is found in `prefix_sum`, increment `count` by the frequency of `current_sum - x` in `prefix_sum`.
+   c. Increment the frequency of `current_sum` in `prefix_sum` by 1.
+5. Print the value of `count`.
+
+Python solution:
+
+```python
+def count_subarrays_with_sum(arr, n, x):
+    count = 0
+    prefix_sum = {0: 1}
+    current_sum = 0
+    
+    for num in arr:
+        current_sum += num
+        if current_sum - x in prefix_sum:
+            count += prefix_sum[current_sum - x]
+        prefix_sum[current_sum] = prefix_sum.get(current_sum, 0) + 1
+    
+    return count
+
+# Read input
+n, x = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# Call the function to count subarrays with sum x
+result = count_subarrays_with_sum(arr, n, x)
+
+# Print the result
+print(result)
+```
+
+This solution has a time complexity of O(n) and a space complexity of O(n), where n is the size of the array.

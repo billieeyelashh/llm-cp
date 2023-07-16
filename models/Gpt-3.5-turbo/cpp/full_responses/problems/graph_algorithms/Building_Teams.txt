@@ -1,0 +1,66 @@
+To solve this problem, we can use a graph representation with an adjacency list. We will iterate through each pupil and perform a depth-first search (DFS) to assign them to teams.
+
+First, we will read the input and construct the adjacency list representation of the graph.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<int> team;
+bool possible = true;
+
+void dfs(int v, int t) {
+    if (team[v] != 0) {
+        if (team[v] != t) {
+            possible = false;
+        }
+        return;
+    }
+    
+    team[v] = t;
+    
+    for (int u : adj[v]) {
+        dfs(u, 3 - t);
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    
+    adj.resize(n + 1);
+    team.resize(n + 1, 0);
+    
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+```
+
+Next, we will iterate through each pupil and perform a DFS to assign them to a team. If we find any two friends assigned to the same team, we know it is impossible to divide the pupils into two teams.
+
+```cpp
+    for (int i = 1; i <= n; i++) {
+        if (team[i] == 0) {
+            dfs(i, 1);
+        }
+    }
+    
+    if (!possible) {
+        cout << "IMPOSSIBLE";
+    } else {
+        for (int i = 1; i <= n; i++) {
+            cout << team[i] << " ";
+        }
+    }
+    
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n + m), where n is the number of pupils and m is the number of friendships.

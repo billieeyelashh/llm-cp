@@ -1,0 +1,29 @@
+To solve this problem, we can use a set data structure to keep track of the distinct values in the list. We iterate through each element in the list and insert it into the set. Finally, we output the size of the set, which represents the number of distinct values.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    set<int> distinctValues;
+
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        distinctValues.insert(x);
+    }
+
+    cout << distinctValues.size() << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) due to the insertion and lookup operations in the set data structure.

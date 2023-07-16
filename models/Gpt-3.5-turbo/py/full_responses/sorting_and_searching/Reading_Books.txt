@@ -1,0 +1,32 @@
+To solve this problem optimally, we can use a greedy approach. We want to minimize the total time required, so we should try to balance the reading time between Kotivalo and Justiina as much as possible.
+
+First, we sort the array of reading times in non-decreasing order.
+
+Next, we initialize two variables, `k_time` and `j_time`, to keep track of the total reading time for Kotivalo and Justiina respectively. We also initialize a variable `total_time` to keep track of the minimum total time required.
+
+Then, we iterate through the sorted array of reading times. For each book, we compare `k_time` and `j_time` to determine which person has less total reading time so far. We assign the current book to that person and update their total reading time accordingly. We also update `total_time` to be the maximum of `total_time` and the maximum of `k_time` and `j_time`.
+
+Finally, we print the value of `total_time`, which will be the minimum total time required for both Kotivalo and Justiina to read all the books.
+
+Here is the Python code implementing the above approach:
+
+```python
+n = int(input())
+reading_times = list(map(int, input().split()))
+
+reading_times.sort()
+k_time = 0
+j_time = 0
+total_time = 0
+
+for i in range(n):
+    if k_time <= j_time:
+        k_time += reading_times[i]
+    else:
+        j_time += reading_times[i]
+    total_time = max(total_time, max(k_time, j_time))
+
+print(total_time)
+```
+
+This solution has a time complexity of O(n log n) due to the sorting operation.

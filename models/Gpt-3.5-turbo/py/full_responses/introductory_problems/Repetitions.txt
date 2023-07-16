@@ -1,0 +1,35 @@
+To solve this problem, we can use a simple approach. We will iterate through the given DNA sequence and keep track of the length of the current repetition. Whenever we encounter a different character, we update the maximum repetition length if necessary and reset the current repetition length.
+
+Here is the Python code that implements this approach:
+
+```python
+# Read the input DNA sequence
+sequence = input()
+
+# Initialize variables
+max_repetition = 0
+current_repetition = 0
+prev_char = None
+
+# Iterate through the sequence
+for char in sequence:
+    # If the current character is the same as the previous one
+    if char == prev_char:
+        current_repetition += 1
+    # If the current character is different
+    else:
+        # Update the maximum repetition length if necessary
+        max_repetition = max(max_repetition, current_repetition)
+        # Reset the current repetition length
+        current_repetition = 1
+        # Update the previous character
+        prev_char = char
+
+# Update the maximum repetition length after the last character
+max_repetition = max(max_repetition, current_repetition)
+
+# Print the result
+print(max_repetition)
+```
+
+This solution has a time complexity of O(n), where n is the length of the DNA sequence.

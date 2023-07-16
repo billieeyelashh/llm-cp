@@ -1,0 +1,30 @@
+To calculate the number of trailing zeros in $n!$, we need to count the number of factors of $10$ in the factorial. Since $10 = 2 \times 5$, we can count the number of factors of $5$ instead, as there will always be more factors of $2$ than $5$ in $n!$.
+
+We can use a loop to divide $n$ by powers of $5$, starting from $5$, until the division result becomes zero. The sum of these division results will give us the number of trailing zeros in $n!$.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int zeros = 0;
+    int powerOfFive = 5;
+
+    while (powerOfFive <= n) {
+        zeros += n / powerOfFive;
+        powerOfFive *= 5;
+    }
+
+    cout << zeros << endl;
+
+    return 0;
+}
+```
+
+This solution runs in $O(\log n)$ time complexity.

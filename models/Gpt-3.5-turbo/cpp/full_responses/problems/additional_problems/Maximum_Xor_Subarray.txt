@@ -1,0 +1,75 @@
+To solve this problem optimally, we can use a concept called the Trie data structure.
+
+First, we initialize a variable `result` to store the maximum xor sum, and another variable `prefix` to store the current xor prefix.
+
+Then, we create an empty Trie and insert 0 into it.
+
+Next, we iterate through the array from left to right. For each element `num`, we update the `prefix` by taking the xor with `num`.
+
+Then, we find the maximum xor sum in the Trie by traversing it using the `prefix`. For each bit in the `prefix`, we check if there is a different bit in the Trie at that position. If there is, we take that bit to maximize the xor sum. Otherwise, we take the same bit.
+
+Finally, we update the `result` to be the maximum of the `result` and the `prefix`.
+
+After iterating through the entire array, we print the `result`, which will be the maximum xor sum in a subarray.
+
+Here is the C++ code implementation:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TrieNode {
+    TrieNode* bits[2];
+};
+
+void insert(TrieNode* root, int num) {
+    TrieNode* curr = root;
+    for (int i = 31; i >= 0; i--) {
+        int bit = (num >> i) & 1;
+        if (curr->bits[bit] == nullptr) {
+            curr->bits[bit] = new TrieNode();
+        }
+        curr = curr->bits[bit];
+    }
+}
+
+int findMaxXor(TrieNode* root, int num) {
+    TrieNode* curr = root;
+    int maxXor = 0;
+    for (int i = 31; i >= 0; i--) {
+        int bit = (num >> i) & 1;
+        if (curr->bits[bit ^ 1] != nullptr) {
+            maxXor |= (1 << i);
+            curr = curr->bits[bit ^ 1];
+        } else {
+            curr = curr->bits[bit];
+        }
+    }
+    return maxXor;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    TrieNode* root = new TrieNode();
+    insert(root, 0);
+
+    int result = 0, prefix = 0;
+    for (int i = 0; i < n; i++) {
+        prefix ^= nums[i];
+        result = max(result, findMaxXor(root, prefix));
+        insert(root, prefix);
+    }
+
+    cout << result << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n), where n is the size of the array, since we iterate through each element once and perform constant time operations for each element.

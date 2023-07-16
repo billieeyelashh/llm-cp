@@ -1,0 +1,62 @@
+To solve this problem optimally, we can follow these steps:
+
+1. Read the input values of $n$ and $k$, and create a vector to store the movies.
+
+2. Sort the movies based on their ending times in ascending order. This is important because we want to prioritize watching the movies with earlier ending times.
+
+3. Create a variable `count` to keep track of the number of movies watched.
+
+4. Iterate through each movie in the sorted vector.
+
+5. Check if there are enough club members available to watch the current movie. If not, move to the next movie.
+
+6. If there are enough club members, increment the `count` variable by 1 and subtract 1 from `k` (since one club member will now be occupied watching this movie).
+
+7. Continue this process until all movies have been checked or there are no more club members available.
+
+8. Print the value of `count`, which represents the maximum total number of movies that can be watched entirely.
+
+Here is the C++ code that implements this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Movie {
+    int start;
+    int end;
+};
+
+bool sortByEnd(const Movie& a, const Movie& b) {
+    return a.end < b.end;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<Movie> movies(n);
+    for (int i = 0; i < n; i++) {
+        cin >> movies[i].start >> movies[i].end;
+    }
+
+    sort(movies.begin(), movies.end(), sortByEnd);
+
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (k == 0) break;
+        if (movies[i].start >= movies[i].end) continue;
+        count++;
+        k--;
+    }
+
+    cout << count << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n) due to the sorting step.

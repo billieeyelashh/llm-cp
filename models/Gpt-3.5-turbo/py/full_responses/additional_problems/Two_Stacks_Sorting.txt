@@ -1,0 +1,48 @@
+Solution:
+
+To solve this problem, we can use two stacks and a variable to track the current number in the input list. We will iterate through the input list and perform the following steps for each number:
+
+1. If the current number is equal to the top number in the first stack, we move it from the first stack to the output list and print "1" to indicate that it was moved from the first stack.
+2. If the current number is equal to the top number in the second stack, we move it from the second stack to the output list and print "2" to indicate that it was moved from the second stack.
+3. If the current number is not equal to either of the top numbers in the stacks, we check if the first stack is empty or if the current number is smaller than the top number in the first stack. If either condition is true, we move the current number to the first stack and print "1". Otherwise, we move the current number to the second stack and print "2".
+
+If at any point, we encounter a situation where none of the conditions above are satisfied, it means that it is impossible to create a sorted output list using the given input list and two stacks. In this case, we print "IMPOSSIBLE".
+
+Here is the Python code implementing the above algorithm:
+
+```python
+n = int(input())
+input_list = list(map(int, input().split()))
+
+first_stack = []
+second_stack = []
+output_list = []
+
+current_number = 1
+
+for number in input_list:
+    while (first_stack and first_stack[-1] == current_number):
+        output_list.append(first_stack.pop())
+        print("1", end=" ")
+        current_number += 1
+    
+    while (second_stack and second_stack[-1] == current_number):
+        output_list.append(second_stack.pop())
+        print("2", end=" ")
+        current_number += 1
+    
+    if (first_stack and first_stack[-1] < number):
+        print("IMPOSSIBLE")
+        exit()
+    elif (first_stack and first_stack[-1] == number):
+        output_list.append(first_stack.pop())
+        print("1", end=" ")
+        current_number += 1
+    else:
+        second_stack.append(number)
+        print("2", end=" ")
+
+print()
+```
+
+This solution has a time complexity of O(n), where n is the number of elements in the input list.

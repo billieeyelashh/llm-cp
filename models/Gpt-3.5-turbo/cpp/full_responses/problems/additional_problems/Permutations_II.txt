@@ -1,0 +1,47 @@
+To solve this problem, we can use dynamic programming to count the number of beautiful permutations for each prefix of length $i$.
+
+Let's define $dp[i]$ as the number of beautiful permutations for a prefix of length $i$. We can initialize $dp[0] = 1$ since there is only one way to arrange an empty prefix.
+
+For each $i$ from $1$ to $n$, we can calculate $dp[i]$ based on the previous values of $dp$. We have two cases to consider:
+
+1. If the last two elements of the prefix are consecutive (i.e., $i$ and $i-1$), then we cannot add $i$ to the prefix since it would violate the beautiful permutation condition. Therefore, $dp[i] = dp[i-1]$.
+
+2. If the last two elements of the prefix are not consecutive, we have two options:
+   a) We can append $i$ to the prefix. In this case, $dp[i]$ is incremented by $dp[i-1]$ since $i-1$ can be followed by $i$.
+   b) We can insert $i$ at any position in the prefix except for the last position. In this case, $dp[i]$ is incremented by $dp[i-2]$ since $i-2$ can be followed by $i$.
+
+Finally, the answer to the problem is $dp[n]$.
+
+Here is the code in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+const int MOD = 1e9 + 7;
+
+int countBeautifulPermutations(int n) {
+    std::vector<int> dp(n + 1);
+    dp[0] = 1;
+
+    for (int i = 1; i <= n; ++i) {
+        if (i >= 2) {
+            dp[i] = (dp[i] + dp[i - 2]) % MOD;
+        }
+        dp[i] = (dp[i] + dp[i - 1]) % MOD;
+    }
+
+    return dp[n];
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    std::cout << countBeautifulPermutations(n) << std::endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$ and a space complexity of $O(n)$, which is efficient enough to handle the given constraints.

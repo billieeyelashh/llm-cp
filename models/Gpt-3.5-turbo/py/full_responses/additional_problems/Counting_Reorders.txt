@@ -1,0 +1,41 @@
+To solve this problem, we can use dynamic programming to calculate the number of ways to reorder the characters of the string.
+
+Let's define a 2D array, dp, where dp[i][j] represents the number of ways to reorder the first i characters of the string such that the last character is j.
+
+We can initialize dp[1][j] = 1 for each character j in the string. This is because there is only one way to reorder a single character.
+
+Then, for i = 2 to n, and for each character j in the string, we can calculate dp[i][j] as the sum of dp[i-1][k] for all characters k in the string, except for j. This is because we can append j to any valid string ending with k, as long as j and k are different.
+
+Finally, the total number of ways to reorder the entire string is the sum of dp[n][j] for all characters j in the string.
+
+Here's the Python implementation:
+
+```python
+MOD = 10**9 + 7
+
+def count_ways(s):
+    n = len(s)
+    dp = [[0] * 26 for _ in range(n+1)]
+
+    # Initialize dp[1][j] = 1 for each character j
+    for j in range(26):
+        dp[1][j] = 1
+
+    for i in range(2, n+1):
+        for j in range(26):
+            for k in range(26):
+                if j != k:
+                    dp[i][j] = (dp[i][j] + dp[i-1][k]) % MOD
+
+    total_ways = 0
+    for j in range(26):
+        total_ways = (total_ways + dp[n][j]) % MOD
+
+    return total_ways
+
+# Test the solution with the provided example
+s = 'aabc'
+print(count_ways(s))
+```
+
+The time complexity of this solution is O(n^2) and the space complexity is O(n).

@@ -1,0 +1,56 @@
+To solve this problem, we can use a depth-first search (DFS) traversal on the given tree. 
+
+We will maintain a count of the number of matched pairs encountered during the traversal. For each node, we will keep track of two counts: one for the number of matched pairs that include the current node, and another for the number of matched pairs that exclude the current node. 
+
+During the DFS traversal, for each child of the current node, we will recursively compute the counts for that child and update the counts for the current node accordingly. 
+
+Finally, we will return the maximum of the counts for the root node, which represents the maximum number of pairs in the matching.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<int>> adj;
+vector<int> includeCount, excludeCount;
+
+void dfs(int node, int parent) {
+    includeCount[node] = 0;
+    excludeCount[node] = 0;
+
+    for (int child : adj[node]) {
+        if (child == parent) {
+            continue;
+        }
+        dfs(child, node);
+        includeCount[node] += excludeCount[child];
+        excludeCount[node] += max(includeCount[child], excludeCount[child]);
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    adj.resize(n + 1);
+    includeCount.resize(n + 1);
+    excludeCount.resize(n + 1);
+
+    for (int i = 0; i < n - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    dfs(1, 0);
+
+    cout << max(includeCount[1], excludeCount[1]) << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n), where n is the number of nodes in the tree.

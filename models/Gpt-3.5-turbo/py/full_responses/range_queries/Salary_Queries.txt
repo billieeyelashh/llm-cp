@@ -1,0 +1,94 @@
+To solve this problem efficiently, we can use a segment tree data structure. A segment tree is a binary tree where each node represents an interval of the array. The root node represents the entire array, and each leaf node represents a single element of the array. 
+
+Each internal node of the segment tree represents the union of its children's intervals. For example, the left child of a node represents the left half of the parent's interval, and the right child represents the right half.
+
+In our case, each node of the segment tree will store the count of employees within that interval whose salaries fall between the minimum and maximum salaries in that interval.
+
+To implement the segment tree, we can use an array to represent the tree. The array size will be a power of 2 that is greater than or equal to 2 times the number of employees. Each element of the array will represent a node in the segment tree.
+
+Algorithm:
+
+1. Initialize a segment tree with size 2*n, where n is the number of employees. Set all elements of the tree to zero.
+2. Build the segment tree using the given employee salaries. Each leaf node of the tree will represent an employee's salary, and each internal node will represent the count of employees within that interval.
+3. Process each query:
+   a. If the query is of the form ! k x, update the salary of employee k to x. Update the corresponding leaf node in the segment tree accordingly.
+   b. If the query is of the form ? a b, find the count of employees whose salaries fall between a and b. Traverse the segment tree from the root to the leaves, updating the count based on the intervals that intersect with the query interval.
+4. Print the answer to each ? query.
+
+Python code:
+
+```python
+from math import ceil, log2
+
+# Function to build the segment tree
+def build_tree(salaries, tree, node, start, end):
+    # Leaf node
+    if start == end:
+        tree[node] = 1
+        return
+    
+    mid = (start + end) // 2
+    
+    # Build left subtree
+    build_tree(salaries, tree, 2*node, start, mid)
+    
+    # Build right subtree
+    build_tree(salaries, tree, 2*node + 1, mid+1, end)
+    
+    # Update the count for current node
+    tree[node] = tree[2*node] + tree[2*node + 1]
+
+# Function to update the salary of an employee
+def update_salary(salaries, tree, node, start, end, idx, new_salary):
+    # Leaf node
+    if start == end:
+        salaries[idx] = new_salary
+        return
+    
+    mid = (start + end) // 2
+    
+    # Update in the left subtree
+    if idx <= mid:
+        update_salary(salaries, tree, 2*node, start, mid, idx, new_salary)
+    # Update in the right subtree
+    else:
+        update_salary(salaries, tree, 2*node + 1, mid+1, end, idx, new_salary)
+    
+    # Update the count for current node
+    tree[node] = tree[2*node] + tree[2*node + 1]
+
+# Function to count employees within a given salary range
+def count_employees(tree, node, start, end, left, right):
+    # No overlap
+    if start > right or end < left:
+        return 0
+    
+    # Complete overlap
+    if left <= start and end <= right:
+        return tree[node]
+    
+    mid = (start + end) // 2
+    
+    # Partial overlap - traverse both subtrees
+    return count_employees(tree, 2*node, start, mid, left, right) + count_employees(tree, 2*node + 1, mid+1, end, left, right)
+
+# Main function to process queries
+def process_queries(n, q, salaries, queries):
+    # Build the segment tree
+    tree_size = 2 * int(2**ceil(log2(n)))
+    tree = [0] * tree_size
+    build_tree(salaries, tree, 1, 0, n-1)
+    
+    # Process each query
+    for query in queries:
+        query_type = query[0]
+        
+        if query_type == '?':
+            left = query[1]
+            right = query[2]
+            count = count_employees(tree, 1, 0, n-1, left-1, right-1)
+            print(count)
+        elif query_type == '!':
+            idx = query[1]
+            new_salary = query[2]
+            update_salary(salaries, tree, 1, 0, n-1

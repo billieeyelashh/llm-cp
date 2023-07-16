@@ -1,0 +1,78 @@
+To solve this problem, we can use a Binary Search-based approach combined with the Rabin-Karp algorithm.
+
+First, we define a function `check` that takes a string `s`, a substring length `len`, and a prime number `p` as parameters. This function will check if there is a repeating substring of length `len` in the string. We will use the Rabin-Karp algorithm to efficiently check if two substrings of length `len` have the same hash value.
+
+Next, we use binary search to find the longest repeating substring. We initialize the lower bound `low` as 1 and the upper bound `high` as the length of the string.
+
+In each iteration of the binary search, we check if there is a repeating substring of length `mid`, where `mid` is the midpoint of `low` and `high`. If such a substring exists, we update `low` to `mid + 1`. Otherwise, we update `high` to `mid - 1`.
+
+Finally, we return the substring of length `low - 1` from the input string.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <unordered_set>
+
+using namespace std;
+
+const int p = 31;
+const int m = 1e9 + 9;
+
+bool check(string& s, int len) {
+    unordered_set<int> hashes;
+    long long curr_hash = 0;
+    long long power = 1;
+
+    for (int i = 0; i < len; i++) {
+        curr_hash = (curr_hash * p + (s[i] - 'a' + 1)) % m;
+        power = (power * p) % m;
+    }
+    hashes.insert(curr_hash);
+
+    for (int i = len; i < s.length(); i++) {
+        curr_hash = (curr_hash * p - (s[i - len] - 'a' + 1) * power + (s[i] - 'a' + 1) + m) % m;
+        if (hashes.find(curr_hash) != hashes.end()) {
+            return true;
+        }
+        hashes.insert(curr_hash);
+    }
+
+    return false;
+}
+
+string longestRepeatingSubstring(string& s) {
+    int low = 1;
+    int high = s.length();
+    string ans = "";
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (check(s, mid)) {
+            ans = s.substr(0, mid);
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    return ans;
+}
+
+int main() {
+    string s;
+    cin >> s;
+
+    string result = longestRepeatingSubstring(s);
+    if (result.empty()) {
+        cout << -1 << endl;
+    } else {
+        cout << result << endl;
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n log n), where n is the length of the input string, due to the binary search. The Rabin-Karp algorithm itself has a linear time complexity of O(n).

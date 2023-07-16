@@ -1,0 +1,77 @@
+To solve this problem, we can use a sliding window approach combined with a min-heap and a max-heap to efficiently calculate the medians.
+
+Algorithm:
+1. Create two heaps: a max-heap to store the smaller half of the elements and a min-heap to store the larger half of the elements.
+2. Initialize the heaps as empty.
+3. Iterate through the array from left to right.
+4. For each element, add it to the appropriate heap based on the current size of the heaps.
+5. If the total number of elements is odd, maintain a balance such that the max-heap has one more element than the min-heap.
+6. If the total number of elements is even, maintain a balance such that both heaps have the same number of elements.
+7. If the current window size is equal to $k$, calculate the median:
+   - If the total number of elements is odd, the median is the top element of the max-heap.
+   - If the total number of elements is even, the median is the average of the top elements of the max-heap and min-heap.
+8. If the current window size is greater than $k$, remove the first element of the window from the heaps.
+9. Repeat steps 4-8 until all windows have been processed.
+
+Python Solution:
+
+```python
+import heapq
+
+def get_medians(arr, k):
+    n = len(arr)
+    result = []
+    max_heap = []
+    min_heap = []
+
+    for i in range(n):
+        # Add element to the heaps
+        if i >= k:
+            # Remove the first element of the window from the heaps
+            if arr[i - k] <= -max_heap[0]:
+                # Remove from max-heap
+                max_heap.remove(-arr[i - k])
+                heapq.heapify(max_heap)
+            else:
+                # Remove from min-heap
+                min_heap.remove(arr[i - k])
+                heapq.heapify(min_heap)
+
+        if not max_heap or arr[i] <= -max_heap[0]:
+            # Add to max-heap
+            heapq.heappush(max_heap, -arr[i])
+        else:
+            # Add to min-heap
+            heapq.heappush(min_heap, arr[i])
+
+        # Balance the heaps
+        if i >= k - 1:
+            if len(max_heap) > len(min_heap) + 1:
+                # Move the top element of max-heap to min-heap
+                heapq.heappush(min_heap, -heapq.heappop(max_heap))
+            elif len(min_heap) > len(max_heap):
+                # Move the top element of min-heap to max-heap
+                heapq.heappush(max_heap, -heapq.heappop(min_heap))
+
+            # Calculate the median
+            if k % 2 == 0:
+                median = (-max_heap[0] + min_heap[0]) / 2
+            else:
+                median = -max_heap[0]
+
+            result.append(int(median))
+
+    return result
+
+# Read input
+n, k = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# Get medians
+medians = get_medians(arr, k)
+
+# Print medians
+print(*medians)
+```
+
+Time Complexity: $O(n \log k)$

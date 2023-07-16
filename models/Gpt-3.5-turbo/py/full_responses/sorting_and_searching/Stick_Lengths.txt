@@ -1,0 +1,31 @@
+To solve this problem optimally, we need to find the length that all sticks should be modified to. The optimal length is the median length of all the sticks.
+
+Here's the step-by-step solution in Python:
+
+1. Read the input values:
+```python
+n = int(input())
+sticks = list(map(int, input().split()))
+```
+
+2. Sort the sticks in non-decreasing order:
+```python
+sticks.sort()
+```
+
+3. Calculate the median length:
+```python
+median = sticks[n // 2]
+```
+
+4. Calculate the total cost by summing the absolute differences between each stick length and the median length:
+```python
+total_cost = sum(abs(stick - median) for stick in sticks)
+```
+
+5. Print the total cost:
+```python
+print(total_cost)
+```
+
+The overall time complexity of this solution is O(n log n) due to the sorting operation.

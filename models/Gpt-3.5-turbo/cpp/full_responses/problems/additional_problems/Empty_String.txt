@@ -1,0 +1,48 @@
+To solve this problem, we can use dynamic programming to count the number of ways to empty the string.
+
+Let's define a 2D array dp[i][j] where i and j represent the starting and ending indices respectively. dp[i][j] will store the number of ways to empty the substring s[i..j].
+
+We can fill the dp array using the following recurrence relation:
+
+dp[i][j] = dp[i][k] * dp[k+1][j] (if s[i] == s[k+1] for some k between i and j-1)
+
+dp[i][j] = dp[i][j-1] + dp[i+1][j] (if s[i] != s[j])
+
+The base case is dp[i][i] = 1 for all i.
+
+Finally, the answer will be stored in dp[0][n-1], where n is the length of the string.
+
+Here is the C++ code:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+int main() {
+    string s;
+    cin >> s;
+    int n = s.length();
+
+    vector<vector<int>> dp(n, vector<int>(n, 0));
+
+    for (int i = n - 1; i >= 0; i--) {
+        dp[i][i] = 1;
+        for (int j = i + 1; j < n; j++) {
+            if (s[i] == s[j]) {
+                dp[i][j] = dp[i][j - 1] + dp[i + 1][j];
+            } else {
+                dp[i][j] = (dp[i][j - 1] + dp[i + 1][j] - dp[i + 1][j - 1] + MOD) % MOD;
+            }
+        }
+    }
+
+    cout << dp[0][n - 1] << endl;
+
+    return 0;
+}
+```
+
+The time complexity of this solution is O(n^3), where n is the length of the string.

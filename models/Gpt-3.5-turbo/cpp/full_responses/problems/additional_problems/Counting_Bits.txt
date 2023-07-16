@@ -1,0 +1,39 @@
+To solve this problem optimally, we can use a bit manipulation technique called the "Brian Kernighan's Algorithm". This algorithm allows us to count the number of set bits (one bits) in a binary number in logarithmic time complexity.
+
+Here's the C++ implementation:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int countOneBits(long long n) {
+    int count = 0;
+    while (n > 0) {
+        n = n & (n - 1);
+        count++;
+    }
+    return count;
+}
+
+int main() {
+    long long n;
+    cin >> n;
+
+    long long totalBits = 0;
+    for (long long i = 1; i <= n; i++) {
+        totalBits += countOneBits(i);
+    }
+
+    cout << totalBits << endl;
+
+    return 0;
+}
+```
+
+Explanation:
+- The `countOneBits` function takes a number `n` as input and uses the Brian Kernighan's Algorithm to count the number of one bits in `n`.
+- In the main function, we iterate from `1` to `n` and call the `countOneBits` function for each number. We accumulate the total number of one bits in the `totalBits` variable.
+- Finally, we print the `totalBits` as the output.
+
+The overall time complexity of this solution is logarithmic in terms of `n`, as the `countOneBits` function runs in logarithmic time.

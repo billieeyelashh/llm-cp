@@ -1,0 +1,40 @@
+To solve this problem, we can use a dynamic programming approach. We will create a 2D table, where each cell represents the minimum difference that can be obtained using apples up to index $i$ and considering a total weight of $j$ in one group.
+
+Let's define our table as $dp[i][j]$, where $i$ ranges from $0$ to $n$ and $j$ ranges from $0$ to the sum of all apple weights divided by $2$. The sum of all apple weights divided by $2$ is the maximum possible weight for one group, as we want to divide the apples into two groups with minimal difference in their weights.
+
+The base case is $dp[0][0] = 0$, as there are no apples and the weight in each group is $0$. For the other cells, we initialize them with a large value, such as infinity.
+
+Then, we can iterate through each apple and each possible weight, updating the table values based on two possibilities:
+
+1. If we include the current apple in the group with weight $j$, we update $dp[i][j]$ with $dp[i-1][j-p[i]]$.
+2. If we exclude the current apple from the group with weight $j$, we update $dp[i][j]$ with $dp[i-1][j]$.
+
+At the end, the minimum difference between the weights of the groups will be given by $dp[n][\text{sum of all apple weights divided by 2}]$.
+
+Here is the Python code for the solution:
+
+```python
+n = int(input())
+p = list(map(int, input().split()))
+
+total_weight = sum(p)
+half_weight = total_weight // 2
+
+# Initialize the table
+dp = [[float('inf')] * (half_weight + 1) for _ in range(n + 1)]
+dp[0][0] = 0
+
+for i in range(1, n + 1):
+    for j in range(half_weight + 1):
+        # Include the current apple
+        if j >= p[i - 1]:
+            dp[i][j] = min(dp[i][j], dp[i - 1][j - p[i - 1]])
+        # Exclude the current apple
+        dp[i][j] = min(dp[i][j], dp[i - 1][j])
+
+# Minimum difference between the weights of the groups
+min_diff = total_weight - 2 * dp[n][half_weight]
+print(min_diff)
+```
+
+The time complexity of this solution is $O(n \cdot \text{sum of all apple weights})$, which is efficient given the constraints of the problem.

@@ -1,0 +1,54 @@
+To find the minimum number of roads required to connect all cities, we can use a simple approach:
+
+1. First, initialize a boolean array of size $n+1$ to keep track of the cities that have been visited. Set all values to false initially.
+
+2. Start from any city (let's say city 1) and mark it as visited.
+
+3. Traverse all the roads and for each road, if the first city is already visited and the second city is not visited, mark the second city as visited and increment a counter variable to keep track of the number of required roads.
+
+4. Print the counter variable as the minimum number of roads required.
+
+5. Traverse all the roads again and for each road, if the first city is visited and the second city is not visited, print the road.
+
+Here's the C++ implementation of this algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> roads(m, vector<int>(2));
+    vector<bool> visited(n + 1, false);
+
+    for (int i = 0; i < m; i++) {
+        cin >> roads[i][0] >> roads[i][1];
+    }
+
+    int requiredRoads = 0;
+    cout << n - 1 << endl;
+
+    visited[1] = true;
+
+    for (int i = 0; i < m; i++) {
+        if (visited[roads[i][0]] && !visited[roads[i][1]]) {
+            visited[roads[i][1]] = true;
+            requiredRoads++;
+        }
+    }
+
+    for (int i = 0; i < m; i++) {
+        if (visited[roads[i][0]] && !visited[roads[i][1]]) {
+            cout << roads[i][0] << " " << roads[i][1] << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+This solution has a time complexity of O(m), where m is the number of roads.

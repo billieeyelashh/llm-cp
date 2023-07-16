@@ -1,0 +1,103 @@
+To solve this problem optimally, we can use a segment tree data structure. 
+
+First, we need to create a custom data structure to represent a range. Each range will have its starting and ending points, as well as two additional properties: count_in and count_out. The count_in property represents the number of other ranges that contain the current range, while the count_out property represents the number of other ranges that the current range contains.
+
+Next, we will construct a segment tree using the given ranges. At each node of the segment tree, we will store the combined count_in and count_out properties of its child nodes. The leaf nodes of the segment tree will represent the individual ranges.
+
+To build the segment tree, we will sort the given ranges based on their starting points. Then, we will initialize the leaf nodes of the segment tree with the corresponding ranges and set their count_in and count_out properties to zero.
+
+After building the segment tree, we will perform two traversals of the tree to update the count_in and count_out properties of each range.
+
+In the first traversal, we will start from the leaf nodes and move up towards the root. For each node, we will update its count_in property by summing the count_in properties of its child nodes. We will also update the count_out property of each child node by incrementing it by the count_in property of the current node.
+
+In the second traversal, we will start from the root and move down towards the leaf nodes. For each node, we will update its count_out property by summing the count_out properties of its child nodes. We will also update the count_in property of each child node by incrementing it by the count_out property of the current node.
+
+Finally, we can print the count_in and count_out properties of each range in the input order to obtain the desired output.
+
+Here is the final solution in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Range {
+    int start, end, count_in, count_out;
+};
+
+void build_segment_tree(vector<Range>& tree, const vector<Range>& ranges, int node, int start, int end) {
+    if (start == end) {
+        tree[node] = ranges[start];
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    build_segment_tree(tree, ranges, 2*node+1, start, mid);
+    build_segment_tree(tree, ranges, 2*node+2, mid+1, end);
+
+    tree[node].count_in = 0;
+    tree[node].count_out = 0;
+}
+
+void update_count_in(vector<Range>& tree, int node) {
+    tree[node].count_in = tree[2*node+1].count_in + tree[2*node+2].count_in;
+}
+
+void update_count_out(vector<Range>& tree, int node) {
+    tree[node].count_out = tree[2*node+1].count_out + tree[2*node+2].count_out;
+}
+
+void update_segment_tree(vector<Range>& tree, int node, int start, int end, int index) {
+    if (start == end) {
+        return;
+    }
+
+    int mid = (start + end) / 2;
+    if (index <= mid) {
+        update_segment_tree(tree, 2*node+1, start, mid, index);
+    } else {
+        update_segment_tree(tree, 2*node+2, mid+1, end, index);
+    }
+
+    update_count_in(tree, node);
+    update_count_out(tree, node);
+}
+
+void solve() {
+    int n;
+    cin >> n;
+
+    vector<Range> ranges(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> ranges[i].start >> ranges[i].end;
+        ranges[i].count_in = 0;
+        ranges[i].count_out = 0;
+    }
+
+    sort(ranges.begin(), ranges.end(), [](const Range& a, const Range& b) {
+        return a.start < b.start;
+    });
+
+    vector<Range> tree(4*n);
+    build_segment_tree(tree, ranges, 0, 0, n-1);
+
+    for (int i = n-1; i >= 0; --i) {
+        update_segment_tree(tree, 0, 0, n-1, i);
+    }
+
+    for (int i = 0; i < n; ++i) {
+        cout << tree[i].count_in << " ";
+    }
+    cout << endl;
+
+    for (int i = 0; i < n; ++i) {
+        cout << tree[i].count_out << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    solve();
+    return 0

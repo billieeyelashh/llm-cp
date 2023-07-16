@@ -1,0 +1,35 @@
+To solve this problem, we can use a combination of sorting and prefix tree (trie) data structure.
+
+First, we need to generate all distinct substrings of the given string. We can do this by iterating through all possible substring lengths from 1 to n, and for each length, iterating through all possible starting positions. We can store these substrings in a set to ensure uniqueness.
+
+Next, we need to sort the distinct substrings lexicographically. We can do this by converting the set into a list and sorting it using the default Python sorting algorithm.
+
+Finally, we can return the kth smallest distinct substring from the sorted list.
+
+Here is the Python code that implements this approach:
+
+```python
+def kth_smallest_substring(s, k):
+    n = len(s)
+    substrings = set()
+    
+    # Generate all distinct substrings
+    for length in range(1, n+1):
+        for start in range(n-length+1):
+            substrings.add(s[start:start+length])
+    
+    # Sort the distinct substrings lexicographically
+    sorted_substrings = sorted(substrings)
+    
+    # Return the kth smallest distinct substring
+    return sorted_substrings[k-1]
+
+# Read the input
+s = input().strip()
+k = int(input())
+
+# Call the function and print the result
+print(kth_smallest_substring(s, k))
+```
+
+This solution has a time complexity of O(n^3 log n), where n is the length of the input string.

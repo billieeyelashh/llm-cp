@@ -1,0 +1,42 @@
+To solve this problem optimally, we can follow the following steps:
+
+1. Read the input values for the number of movies and queries.
+2. Read the starting and ending times for each movie and store them in a list of tuples.
+3. Sort the list of movies based on their ending times in increasing order.
+4. Preprocess the movies list to calculate the maximum number of movies that can be watched until each movie.
+   - Initialize an empty list, max_movies, with length n, where n is the number of movies.
+   - Iterate over the sorted movies list from the last movie to the first movie.
+     - Calculate the maximum number of movies that can be watched until the current movie by considering:
+       - If the current movie is the last movie, set max_movies[i] = 1 (as only this movie can be watched).
+       - Otherwise, max_movies[i] = max(max_movies[i+1], max_movies[j] + 1), where j is the index of the first movie after the current movie that starts after the current movie ends.
+5. For each query, find the index of the first movie that starts after the arrival time using binary search and print the corresponding maximum number of movies from the max_movies list.
+
+Here is the Python code implementing the above steps:
+
+```python
+from bisect import bisect_left
+
+n, q = map(int, input().split())
+movies = []
+for _ in range(n):
+    a, b = map(int, input().split())
+    movies.append((b, a))  # Sorting based on ending time, reverse the order of (a, b)
+
+movies.sort()
+max_movies = [0] * n
+
+# Preprocess max_movies
+for i in range(n - 1, -1, -1):
+    if i == n - 1:
+        max_movies[i] = 1
+    else:
+        max_movies[i] = max(max_movies[i + 1], max_movies[bisect_left(movies, (movies[i][0],)) + 1] + 1)
+
+# Process queries
+for _ in range(q):
+    a, b = map(int, input().split())
+    j = bisect_left(movies, (b,))  # Find the index of the first movie that starts after arrival time
+    print(max_movies[j] if j < n else 0)
+```
+
+The time complexity of this solution is O(nlogn + qlogn) due to the sorting and binary search operations.

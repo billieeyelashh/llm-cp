@@ -1,0 +1,71 @@
+To solve this problem, we can use the Z-algorithm and the KMP algorithm, both of which can be implemented efficiently in linear time.
+
+First, let's define an array `z` to store the values of the function $z(i)$, and an array `pi` to store the values of the function $\pi(i)$. Initialize both arrays with zeros.
+
+To calculate the values of `z`, we will use the Z-algorithm. The Z-algorithm calculates the length of the longest common prefix between each suffix of the string and the entire string. We can iterate over the characters of the string from left to right, and at each position `i`, we will calculate the length of the longest common prefix starting at position `i`. We can keep two pointers `l` and `r` to represent the current interval where the longest common prefix is valid. If `r` is greater than `i`, we can use the previously calculated values to fill in `z[i]`. Otherwise, we need to compare characters starting from position `i` with characters starting from position `r+1` until we find a mismatch or reach the end of the string. The length of the longest common prefix starting at position `i` is then `r - l + 1`, and we update `l` and `r` accordingly. Finally, we update `z[i]` with the length of the longest common prefix starting at position `i`.
+
+To calculate the values of `pi`, we will use the KMP algorithm. The KMP algorithm calculates the length of the longest proper suffix of each prefix of the string. We can iterate over the characters of the string from left to right, and at each position `i`, we will calculate the length of the longest proper suffix ending at position `i`. We can keep a pointer `j` to represent the maximum length of a proper suffix ending at position `i-1`. If the current character at position `i` is equal to the character at position `j+1`, we can increment `j` and update `pi[i]` accordingly. Otherwise, we need to backtrack by updating `j` with the value of `pi[j]` until we find a match or reach the beginning of the string. Finally, we update `pi[i]` with the length of the longest proper suffix ending at position `i`.
+
+Here's the implementation in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+vector<int> z_algorithm(const string& s) {
+    int n = s.length();
+    vector<int> z(n);
+    int l = 0, r = 0;
+    for (int i = 1; i < n; ++i) {
+        if (i <= r) {
+            z[i] = min(r - i + 1, z[i - l]);
+        }
+        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
+            ++z[i];
+        }
+        if (i + z[i] - 1 > r) {
+            l = i;
+            r = i + z[i] - 1;
+        }
+    }
+    return z;
+}
+
+vector<int> kmp_algorithm(const string& s) {
+    int n = s.length();
+    vector<int> pi(n);
+    int j = 0;
+    for (int i = 1; i < n; ++i) {
+        while (j > 0 && s[i] != s[j]) {
+            j = pi[j - 1];
+        }
+        if (s[i] == s[j]) {
+            ++j;
+        }
+        pi[i] = j;
+    }
+    return pi;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    int n = s.length();
+    vector<int> z = z_algorithm(s);
+    vector<int> pi = kmp_algorithm(s);
+    for (int i = 0; i < n; ++i) {
+        cout << z[i] << ' ';
+    }
+    cout << '\n';
+    for (int i = 0; i < n; ++i) {
+        cout << pi[i] << ' ';
+    }
+    cout << '\n';
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n) and a space complexity of O(n), where n is the length of the string. Thus, it should be able to handle the given constraints efficiently.

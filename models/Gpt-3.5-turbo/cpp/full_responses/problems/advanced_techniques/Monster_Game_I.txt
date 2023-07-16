@@ -1,0 +1,45 @@
+To solve this problem optimally, we can use dynamic programming. We will define a state dp[i] as the minimum total time to win the game starting from level i. We will calculate dp[i] for all levels in reverse order.
+
+First, we initialize dp[n] as the time to kill the final monster, which is sf[n].
+
+Then, for each level i from n-1 to 1, we have two options:
+1. Kill the monster: We add sf[i] to the time and set dp[i] as the minimum of dp[i+1] and sf[i] multiplied by f[i].
+2. Escape the monster: We set dp[i] as dp[i+1].
+
+Finally, the minimum total time to win the game is dp[1].
+
+Here is the C++ code implementing this solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+    
+    vector<int> s(n+1);
+    vector<int> f(n+1);
+    for (int i = 1; i <= n; i++) {
+        cin >> s[i];
+    }
+    for (int i = 1; i <= n; i++) {
+        cin >> f[i];
+    }
+    
+    vector<long long> dp(n+1);
+    dp[n] = static_cast<long long>(s[n]) * x;
+    
+    for (int i = n-1; i >= 1; i--) {
+        dp[i] = min(dp[i+1], static_cast<long long>(s[i]) * f[i] + dp[i+1]);
+    }
+    
+    cout << dp[1] << endl;
+    
+    return 0;
+}
+```
+
+This solution has a time complexity of O(n) as we iterate through all levels once.

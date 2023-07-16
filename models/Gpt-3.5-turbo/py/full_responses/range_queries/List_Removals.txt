@@ -1,0 +1,18 @@
+To solve this problem, we can iterate through the positions to be removed, remove the elements at those positions from the list, and store the removed elements in a separate list.
+
+Here's the Python code to solve the problem:
+
+```python
+n = int(input())
+list_contents = list(map(int, input().split()))
+positions = list(map(int, input().split()))
+
+removed_elements = []
+for i in range(n):
+    removed_elements.append(list_contents[positions[i] - 1])
+    del list_contents[positions[i] - 1]
+
+print(*removed_elements)
+```
+
+The time complexity of this solution is O(n^2) because removing an element from the list takes O(n) time.

@@ -1,0 +1,33 @@
+We can solve this problem by keeping track of the longest passage without traffic lights after each addition. 
+
+First, we initialize the longest passage as the entire length of the street, which is initially $x$. 
+
+Then, for each set of traffic lights, we calculate the length of the passage without traffic lights between the previous set of traffic lights and the current set. If this length is greater than the current longest passage, we update the longest passage.
+
+Finally, we print the longest passage after each addition.
+
+Here is the Python solution:
+
+```python
+def calculate_longest_passage(x, n, positions):
+    longest_passage = x
+    previous_position = 0
+    
+    for position in positions:
+        passage_length = position - previous_position - 1
+        longest_passage = max(longest_passage, passage_length)
+        previous_position = position
+    
+        print(longest_passage, end=' ')
+
+    print()
+```
+
+To use this function, you can call it with the input parameters:
+
+```python
+x, n = map(int, input().split())
+positions = list(map(int, input().split()))
+
+calculate_longest_passage(x, n, positions)
+```

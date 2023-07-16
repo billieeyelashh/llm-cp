@@ -1,0 +1,74 @@
+To solve this problem, we can use a topological sorting algorithm. Topological sorting is an algorithm that orders the nodes of a directed graph such that for every edge (u, v), node u appears before node v in the ordering.
+
+In this problem, we want to choose a direction for each edge such that the resulting directed graph is acyclic. This means that there should be no cycles in the graph after assigning directions to the edges.
+
+Here's the step-by-step solution:
+
+1. Read the input values: the number of nodes n and the number of edges m.
+2. Create an adjacency list to represent the undirected graph.
+3. Initialize an empty list, visited[], to keep track of visited nodes during the topological sorting process.
+4. Implement a depth-first search (DFS) function that performs a modified DFS traversal to find a topological ordering of the nodes. The DFS function takes a node as input and recursively explores its neighbors.
+   - Mark the current node as visited.
+   - For each neighbor of the current node that has not been visited, call the DFS function recursively.
+   - Add the current node to the beginning of the topological ordering list.
+5. Iterate through all the nodes in the graph and call the DFS function on each unvisited node.
+6. Reverse the order of the topological ordering list.
+7. Initialize an empty list, directions[], to store the directions of the edges.
+8. Iterate through each node in the reversed topological ordering list.
+   - For each neighbor of the current node in the original undirected graph, add the directed edge from the current node to its neighbor to the directions[] list.
+9. Print the directions[] list.
+
+Here's the Python implementation:
+
+```python
+from collections import defaultdict
+
+def dfs(node, graph, visited, ordering):
+    visited[node] = True
+    
+    for neighbor in graph[node]:
+        if not visited[neighbor]:
+            dfs(neighbor, graph, visited, ordering)
+            
+    ordering.insert(0, node)
+
+def solve(n, m, edges):
+    graph = defaultdict(list)
+    
+    for a, b in edges:
+        graph[a].append(b)
+        
+    visited = [False] * (n+1)
+    ordering = []
+    
+    for node in range(1, n+1):
+        if not visited[node]:
+            dfs(node, graph, visited, ordering)
+            
+    ordering.reverse()
+    
+    directions = []
+    
+    for node in ordering:
+        for neighbor in graph[node]:
+            directions.append((node, neighbor))
+    
+    return directions
+
+# Read input
+n, m = map(int, input().split())
+
+edges = []
+for _ in range(m):
+    a, b = map(int, input().split())
+    edges.append((a, b))
+
+# Solve the problem
+directions = solve(n, m, edges)
+
+# Print the directions
+for a, b in directions:
+    print(a, b)
+```
+
+This solution has a time complexity of O(n + m) because we perform a DFS traversal on all nodes and iterate through all edges once.

@@ -1,0 +1,50 @@
+To solve this problem efficiently, we can use the concept of Depth First Search (DFS) to traverse the graph and determine if there is a path between two given nodes.
+
+First, we need to represent the directed graph using an adjacency list. We can create a dictionary where each key represents a node, and the corresponding value is a list of all the nodes that can be reached from the key node.
+
+Next, we implement a DFS function that takes in the starting node and the target node as parameters. The function uses a stack to keep track of the nodes to visit. We start with the starting node and iterate until the stack is empty or we reach the target node. In each iteration, we pop a node from the stack, mark it as visited, and add all its unvisited neighbors to the stack.
+
+If we reach the target node during the DFS traversal, we return "YES" indicating that there is a path between the two nodes. Otherwise, we return "NO".
+
+Here is the Python code to solve the problem:
+
+```python
+# Read input values
+n, m, q = map(int, input().split())
+
+# Create an empty adjacency list
+adj_list = {}
+
+# Read the edges and populate the adjacency list
+for _ in range(m):
+    a, b = map(int, input().split())
+    if a in adj_list:
+        adj_list[a].append(b)
+    else:
+        adj_list[a] = [b]
+
+# Define the DFS function
+def dfs(start, target):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+
+        if node == target:
+            return "YES"
+
+        if node not in visited:
+            visited.add(node)
+            if node in adj_list:
+                stack.extend(adj_list[node])
+
+    return "NO"
+
+# Process the queries
+for _ in range(q):
+    a, b = map(int, input().split())
+    print(dfs(a, b))
+```
+
+This solution has a time complexity of O(m + q), where m is the number of edges and q is the number of queries. The adjacency list allows for efficient access to neighbors, and the DFS traversal ensures that we only visit each node once.

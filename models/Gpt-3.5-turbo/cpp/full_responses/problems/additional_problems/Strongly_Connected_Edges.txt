@@ -1,0 +1,97 @@
+To solve this problem, we can use the concept of strongly connected components (SCCs) in a graph.
+
+First, we need to find the SCCs in the given undirected graph. We can do this using Tarjan's algorithm for finding SCCs.
+
+Next, we check if there is more than one SCC. If there is only one SCC, it means that the graph is already strongly connected and we can print any valid solution.
+
+If there are multiple SCCs, we can choose one node from each SCC and direct all edges towards these chosen nodes. This way, we ensure that every node in each SCC is reachable from any other node.
+
+Here is the C++ code implementing this approach:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
+
+using namespace std;
+
+const int MAXN = 100005;
+
+vector<int> adj[MAXN];
+int disc[MAXN], low[MAXN];
+bool inStack[MAXN];
+stack<int> st;
+vector<vector<int>> sccs;
+int timer = 0;
+
+void dfs(int node) {
+    disc[node] = low[node] = ++timer;
+    st.push(node);
+    inStack[node] = true;
+
+    for (int neighbor : adj[node]) {
+        if (disc[neighbor] == 0) {
+            dfs(neighbor);
+            low[node] = min(low[node], low[neighbor]);
+        } else if (inStack[neighbor]) {
+            low[node] = min(low[node], disc[neighbor]);
+        }
+    }
+
+    if (low[node] == disc[node]) {
+        vector<int> scc;
+        while (true) {
+            int curr = st.top();
+            st.pop();
+            inStack[curr] = false;
+            scc.push_back(curr);
+            if (curr == node) break;
+        }
+        sccs.push_back(scc);
+    }
+}
+
+void findSCCs(int n) {
+    for (int i = 1; i <= n; ++i) {
+        if (disc[i] == 0) {
+            dfs(i);
+        }
+    }
+}
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    findSCCs(n);
+
+    if (sccs.size() == 1) {
+        cout << "IMPOSSIBLE" << endl;
+        return;
+    }
+
+    for (const vector<int>& scc : sccs) {
+        for (int node : scc) {
+            cout << node << " " << scc[0] << endl;
+        }
+    }
+}
+
+int main() {
+    solve();
+
+    return 0;
+}
+```
+
+This code finds the SCCs in the given graph using Tarjan's algorithm and then prints the edges in a way that makes the resulting directed graph strongly connected. If there is only one SCC, it prints "IMPOSSIBLE".
+
+The time complexity of this solution is O(n + m), where n is the number of nodes and m is the number of edges.

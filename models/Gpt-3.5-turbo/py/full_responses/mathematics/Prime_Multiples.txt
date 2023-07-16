@@ -1,0 +1,37 @@
+To solve this problem efficiently, we can use the principle of inclusion-exclusion.
+
+First, we need to find the number of positive integers that are divisible by each prime number individually. Let's denote this count as `divisible_by_prime`.
+
+Next, we need to find the number of positive integers that are divisible by the product of any two distinct prime numbers. Let's denote this count as `divisible_by_two_primes`.
+
+We continue this process, finding the count of positive integers divisible by the product of any three distinct primes, four distinct primes, and so on, up to `k` distinct primes.
+
+Finally, we sum up all these counts and subtract from `n` to get the answer.
+
+Here is the Python code to implement this approach:
+
+```python
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return (a * b) // gcd(a, b)
+
+n, k = map(int, input().split())
+primes = list(map(int, input().split()))
+
+divisible_by_prime = [n // prime for prime in primes]
+
+divisible_by_two_primes = 0
+for i in range(k):
+    for j in range(i + 1, k):
+        divisible_by_two_primes += n // lcm(primes[i], primes[j])
+
+answer = sum(divisible_by_prime) - divisible_by_two_primes
+
+print(answer)
+```
+
+The time complexity of this solution is O(k^2), which is efficient enough to handle the given constraints.

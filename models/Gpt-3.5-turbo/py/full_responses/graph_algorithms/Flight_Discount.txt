@@ -1,0 +1,70 @@
+To solve this problem, we can use Dijkstra's algorithm to find the shortest path from Syrjälä to Metsälä. However, we need to modify the algorithm to handle the discount coupon.
+
+Here is a step-by-step solution:
+
+1. Read the input values $n$ and $m$.
+2. Create an adjacency list to represent the flight connections.
+3. Initialize a distance array of size $n$ with infinity values, except for the first element which is set to 0.
+4. Create a priority queue to store the cities and their distances.
+5. Push the first city (Syrjälä) into the priority queue with a distance of 0.
+6. While the priority queue is not empty:
+   - Pop the city with the smallest distance from the priority queue.
+   - If the popped city is Metsälä, break the loop.
+   - For each flight connection from the popped city:
+     - Calculate the new distance if the flight is taken without using the coupon.
+     - Calculate the new distance if the flight is taken using the coupon.
+     - If the new distances are smaller than the current distances, update the distances and push the cities into the priority queue.
+7. Print the distance of the Metsälä city.
+
+Here is the Python implementation:
+
+```python
+import heapq
+
+def dijkstra(n, m, flights):
+    adj_list = [[] for _ in range(n)]
+    for a, b, c in flights:
+        adj_list[a-1].append((b-1, c))
+    
+    distance = [float('inf')] * n
+    distance[0] = 0
+    
+    pq = [(0, 0)]  # (distance, city)
+    while pq:
+        dist, city = heapq.heappop(pq)
+        
+        if city == n-1:
+            break
+        
+        if dist > distance[city]:
+            continue
+        
+        for neighbor, price in adj_list[city]:
+            new_dist = dist + price
+            new_dist_half = dist + (price // 2)
+            
+            if new_dist < distance[neighbor]:
+                distance[neighbor] = new_dist
+                heapq.heappush(pq, (new_dist, neighbor))
+            
+            if new_dist_half < distance[neighbor]:
+                distance[neighbor] = new_dist_half
+                heapq.heappush(pq, (new_dist_half, neighbor))
+    
+    return distance[n-1]
+
+# Read input
+n, m = map(int, input().split())
+flights = []
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    flights.append((a, b, c))
+
+# Run Dijkstra's algorithm
+result = dijkstra(n, m, flights)
+
+# Print the result
+print(result)
+```
+
+This solution has a time complexity of O((n + m) log n), where n is the number of cities and m is the number of flights.

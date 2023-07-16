@@ -1,0 +1,33 @@
+To solve this problem, we can use the concept of binary representation. 
+
+If we observe carefully, for every distinct subsequence, there will be a unique binary string formed. The length of this binary string will be equal to the length of the longest subsequence present in it.
+
+So, to find the minimum length bit string that has exactly n distinct subsequences, we need to find the length of the longest subsequence possible using n distinct subsequences.
+
+Let's find the length of the longest subsequence using n distinct subsequences:
+- Take the binary representation of n.
+- Count the number of bits in the binary representation.
+- The length of the longest subsequence will be equal to the number of bits.
+
+Finally, we can construct the required bit string by starting with '1' followed by '0's for the remaining length - 1.
+
+Here is the Python solution:
+
+```python
+def solve(n):
+    # Find the length of the longest subsequence
+    length = len(bin(n)) - 2
+
+    # Construct the bit string
+    ans = '1' + '0' * (length - 1)
+
+    return ans
+
+# Read the input
+n = int(input())
+
+# Call the solve function and print the result
+print(solve(n))
+```
+
+This solution has a time complexity of O(log n) as we are finding the number of bits in the binary representation of n.

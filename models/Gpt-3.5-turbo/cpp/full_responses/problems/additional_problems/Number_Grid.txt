@@ -1,0 +1,20 @@
+To solve this problem optimally, we can observe the pattern in the grid.
+
+We can see that the value in square $(y,x)$ is equal to the maximum of $y$ and $x$. In other words, the value at square $(y,x)$ is the larger of the two coordinates.
+
+Therefore, our final solution in C++ would be:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int y, x;
+    cin >> y >> x;
+
+    int result = max(y, x);
+    cout << result << endl;
+
+    return 0;
+}
+```

@@ -1,0 +1,41 @@
+To solve this problem optimally, we can use binary search to find the minimum time needed to make $t$ products. 
+
+First, we define the binary search range. The minimum time needed to make $t$ products is at least the minimum time needed among all machines, and at most the maximum time needed among all machines multiplied by $t$.
+
+We perform binary search within this range. For each mid-time, we calculate the total number of products that can be made using the machines in that time. If the total number of products is greater than or equal to $t$, then we update the answer and continue searching for a smaller time. Otherwise, we continue searching for a larger time.
+
+Here is the Python code for the solution:
+
+```python
+def can_make_products(time, machines, t):
+    products_made = 0
+    for machine in machines:
+        products_made += time // machine
+        if products_made >= t:
+            return True
+    return False
+
+def minimum_time(n, t, machines):
+    # Binary search range
+    left = min(machines)
+    right = max(machines) * t
+
+    # Binary search
+    while left < right:
+        mid = (left + right) // 2
+        if can_make_products(mid, machines, t):
+            right = mid
+        else:
+            left = mid + 1
+
+    return left
+
+# Read input
+n, t = map(int, input().split())
+machines = list(map(int, input().split()))
+
+# Call the function and print the result
+print(minimum_time(n, t, machines))
+```
+
+This solution has a time complexity of $O(n \log m)$, where $n$ is the number of machines and $m$ is the maximum time needed among all machines.

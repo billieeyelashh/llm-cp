@@ -1,0 +1,64 @@
+To solve this problem, we can use depth-first search (DFS) to traverse the tree structure formed by the cities and roads.
+
+First, we need to construct an adjacency list to represent the tree. The adjacency list will store the connections between cities.
+
+Next, we can start a DFS from any city. During the DFS traversal, we will keep track of the maximum distance from the current city to any office that has been placed so far. If the maximum distance is less than $d$, we can place an office in the current city.
+
+To implement this solution in C++, we can use the following code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> adj;
+vector<bool> visited;
+vector<int> maxDist;
+
+void dfs(int u, int prev, int dist) {
+    visited[u] = true;
+    maxDist[u] = dist;
+
+    for (int v : adj[u]) {
+        if (!visited[v]) {
+            dfs(v, u, dist + 1);
+        }
+    }
+}
+
+int main() {
+    int n, d;
+    cin >> n >> d;
+
+    adj.resize(n + 1);
+    visited.resize(n + 1, false);
+    maxDist.resize(n + 1, 0);
+
+    for (int i = 0; i < n - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    dfs(1, -1, 0);
+
+    vector<int> offices;
+    for (int i = 1; i <= n; i++) {
+        if (maxDist[i] >= d) {
+            offices.push_back(i);
+        }
+    }
+
+    cout << offices.size() << endl;
+    for (int office : offices) {
+        cout << office << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+This solution has a time complexity of $O(n)$, where $n$ is the number of cities.

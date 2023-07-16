@@ -1,0 +1,59 @@
+To solve this problem, we can use the following approach:
+
+1. Create an empty directed graph with $n$ nodes.
+2. Traverse each edge in the input and add it to the directed graph as an outgoing edge from node $a$ to node $b$.
+3. For each node in the graph, check its outdegree:
+   - If the outdegree is even, we do not need to make any changes.
+   - If the outdegree is odd, we need to add an additional edge to make it even.
+     - To add an additional edge, we can choose any node in the graph with an odd outdegree and add an edge from it to the current node.
+4. If there is no valid solution (i.e., there is a node with an odd outdegree that does not have any other node with an odd outdegree), print "IMPOSSIBLE".
+5. Otherwise, print the directed graph.
+
+Here is the Python code to implement this solution:
+
+```python
+from collections import defaultdict
+
+def solve(n, m, edges):
+    graph = defaultdict(list)
+    
+    # Step 1: Create an empty directed graph
+    for a, b in edges:
+        graph[a].append(b)
+    
+    # Step 3: Check and modify outdegree
+    outdegree = {node: len(neighbors) for node, neighbors in graph.items()}
+    for node, degree in outdegree.items():
+        if degree % 2 == 1:
+            # Find another node with odd outdegree
+            for other_node, other_degree in outdegree.items():
+                if other_degree % 2 == 1 and other_node != node:
+                    # Add an additional edge
+                    graph[other_node].append(node)
+                    outdegree[other_node] += 1
+                    outdegree[node] += 1
+                    break
+            else:
+                # No valid solution
+                return "IMPOSSIBLE"
+    
+    # Step 5: Print the directed graph
+    directed_edges = [(a, b) for a, neighbors in graph.items() for b in neighbors]
+    return directed_edges
+
+# Read input
+n, m = map(int, input().split())
+edges = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Solve the problem
+result = solve(n, m, edges)
+
+# Print the result
+if result == "IMPOSSIBLE":
+    print("IMPOSSIBLE")
+else:
+    for a, b in result:
+        print(a, b)
+```
+
+The time complexity of this solution is $O(n + m)$, where $n$ is the number of nodes and $m$ is the number of edges.

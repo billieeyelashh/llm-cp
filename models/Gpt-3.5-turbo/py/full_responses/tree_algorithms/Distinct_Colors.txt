@@ -1,0 +1,49 @@
+To solve this problem efficiently, we can use a depth-first search (DFS) algorithm.
+
+First, we create an adjacency list to represent the tree structure. We can use a dictionary to store the adjacency list, where the keys are the node numbers and the values are lists of adjacent nodes.
+
+Next, we initialize a list `colors` of size `n` to store the color of each node. We can directly read the colors from the input.
+
+Then, we define a recursive function `dfs(v, parent)` that performs the DFS traversal starting from node `v`, with `parent` as the parent node of `v`. Inside the function, we maintain a set `distinct_colors` to keep track of the distinct colors encountered in the subtree of node `v`.
+
+For each child node `u` of `v`, if `u` is not equal to `parent`, we recursively call `dfs(u, v)`. This will traverse the subtree rooted at `u` and update the `distinct_colors` set.
+
+Finally, after processing all the children nodes, we add the color of node `v` to the `distinct_colors` set. The size of the set represents the number of distinct colors in the subtree of node `v`.
+
+Here is the Python code:
+
+```python
+def dfs(v, parent):
+    distinct_colors = set()
+
+    for u in adj_list[v]:
+        if u != parent:
+            dfs(u, v)
+            distinct_colors.update(distinct_colors_subtree[u])
+
+    distinct_colors.add(colors[v])
+    distinct_colors_subtree[v] = distinct_colors
+
+# Read input
+n = int(input())
+colors = list(map(int, input().split()))
+
+# Create adjacency list
+adj_list = {i: [] for i in range(1, n+1)}
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    adj_list[a].append(b)
+    adj_list[b].append(a)
+
+# Initialize distinct_colors_subtree list
+distinct_colors_subtree = [set() for _ in range(n+1)]
+
+# Perform DFS from the root node
+dfs(1, 0)
+
+# Print the number of distinct colors for each node
+for i in range(1, n+1):
+    print(len(distinct_colors_subtree[i]), end=" ")
+```
+
+The time complexity of this solution is O(n), where n is the number of nodes in the tree. This is because we visit each node and each edge exactly once during the DFS traversal.

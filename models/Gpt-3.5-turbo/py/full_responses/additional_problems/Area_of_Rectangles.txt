@@ -1,0 +1,46 @@
+To solve this problem, we can follow the following steps:
+
+1. Read the input values: number of rectangles, and the coordinates of each rectangle.
+2. Create two lists, `x` and `y`, to store the x-coordinates and y-coordinates of the rectangles, respectively.
+3. Sort the `x` list and `y` list in ascending order.
+4. Initialize `total_area` as 0.
+5. Iterate over the sorted `x` list, and for each x-coordinate:
+   - Initialize `current_height` as 0 and `previous_y` as the first y-coordinate in the `y` list.
+   - Iterate over the sorted `y` list, and for each y-coordinate:
+     - If `current_height` is greater than 0, add the difference between the current y-coordinate and `previous_y` to `total_area`.
+     - Update `previous_y` to the current y-coordinate.
+     - If the current y-coordinate is in the range of any rectangles with the current x-coordinate, update `current_height` to the maximum height among those rectangles.
+   - If `current_height` is greater than 0, add the difference between the last y-coordinate and `previous_y` to `total_area`.
+6. Print `total_area`.
+
+Here is the Python code that implements the above algorithm:
+
+```python
+n = int(input())
+rectangles = []
+for _ in range(n):
+    x1, y1, x2, y2 = map(int, input().split())
+    rectangles.append((x1, y1, x2, y2))
+
+x = sorted(set(x1 for (x1, _, x2, _) in rectangles) | set(x2 for (_, _, x2, _) in rectangles))
+y = sorted(set(y1 for (_, y1, _, _) in rectangles) | set(y2 for (_, _, _, y2) in rectangles))
+
+total_area = 0
+for i in range(len(x) - 1):
+    current_height = 0
+    previous_y = y[0]
+    for j in range(len(y) - 1):
+        if current_height > 0:
+            total_area += (y[j + 1] - previous_y)
+        previous_y = y[j + 1]
+        for (x1, y1, x2, y2) in rectangles:
+            if x1 <= x[i] and x[i + 1] <= x2 and y1 <= y[j] and y[j + 1] <= y2:
+                current_height = max(current_height, y2 - y1)
+                break
+    if current_height > 0:
+        total_area += (y[-1] - previous_y)
+
+print(total_area)
+```
+
+The time complexity of this solution is O(n^2), where n is the number of rectangles.

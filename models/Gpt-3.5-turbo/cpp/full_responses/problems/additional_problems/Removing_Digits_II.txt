@@ -1,0 +1,58 @@
+To solve this problem optimally, we can use a recursive approach with memoization.
+
+We define a function `minSteps` that takes an integer `n` as input and returns the minimum number of steps required to make `n` equal to 0.
+
+In the `minSteps` function, we check if `n` is already 0. If it is, we return 0 as no steps are required.
+
+Next, we check if we have already computed the minimum number of steps for `n`. If we have, we return the stored result from the memoization array.
+
+Otherwise, we iterate through each digit in `n` and recursively call the `minSteps` function on `n` minus the current digit. We keep track of the minimum number of steps required among all possible subproblems.
+
+Finally, we store the result in the memoization array and return it.
+
+Here is the C++ code for the solution:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> memo;
+
+int minSteps(int n) {
+    if (n == 0)
+        return 0;
+
+    if (memo[n] != -1)
+        return memo[n];
+
+    int minStepsRequired = 1e9; // Initialize with a large value
+
+    string num = to_string(n);
+    for (char c : num) {
+        int digit = c - '0';
+        if (digit != 0)
+            minStepsRequired = min(minStepsRequired, minSteps(n - digit));
+    }
+
+    memo[n] = minStepsRequired + 1;
+    return memo[n];
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    memo.resize(n + 1, -1);
+
+    int minStepsRequired = minSteps(n);
+    cout << minStepsRequired << endl;
+
+    return 0;
+}
+```
+
+The code uses a memoization array `memo` to store the minimum number of steps required for each `n` from 0 to the input value. By doing this, we avoid redundant computations and improve the efficiency of our solution.
+
+The time complexity of this solution is O(n * log(n)), where n is the input value. This is because there are O(log(n)) digits in the number, and for each digit, we iterate through 9 possible values (from 1 to 9).

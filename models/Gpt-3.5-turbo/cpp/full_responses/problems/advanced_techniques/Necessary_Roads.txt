@@ -1,0 +1,82 @@
+We can solve this problem using Tarjan's algorithm for finding strongly connected components (SCCs) in a directed graph.
+
+First, we represent the cities and roads as a directed graph. Each city represents a node, and each road represents a directed edge. We will use an adjacency list to represent the graph.
+
+To find the necessary roads, we need to find the SCCs in the graph. An SCC is a group of nodes in a directed graph where there is a path between every pair of nodes in the group.
+
+Tarjan's algorithm is a popular algorithm for finding SCCs in a directed graph efficiently. The algorithm works by performing a depth-first search (DFS) traversal of the graph and maintaining certain data structures to keep track of the SCCs.
+
+Here is the implementation of the algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
+using namespace std;
+
+const int MAXN = 100000;
+vector<int> adj[MAXN+1];
+int disc[MAXN+1], low[MAXN+1];
+bool inStack[MAXN+1];
+stack<int> st;
+int timer = 0;
+vector<pair<int, int>> necessaryRoads;
+
+void dfs(int u) {
+    disc[u] = low[u] = ++timer;
+    st.push(u);
+    inStack[u] = true;
+
+    for (int v : adj[u]) {
+        if (disc[v] == 0) {
+            dfs(v);
+            low[u] = min(low[u], low[v]);
+        } else if (inStack[v]) {
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+
+    if (disc[u] == low[u]) {
+        int v;
+        do {
+            v = st.top();
+            st.pop();
+            inStack[v] = false;
+            if (u != v) {
+                necessaryRoads.push_back({u, v});
+            }
+        } while (u != v);
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (disc[i] == 0) {
+            dfs(i);
+        }
+    }
+
+    cout << necessaryRoads.size() << endl;
+    for (auto road : necessaryRoads) {
+        cout << road.first << " " << road.second << endl;
+    }
+
+    return 0;
+}
+```
+
+The algorithm has a time complexity of $O(n+m)$, where $n$ is the number of cities and $m$ is the number of roads. This is because we perform a DFS traversal of the graph and each edge is visited exactly once.
+
+The output will be the number of necessary roads followed by the necessary roads themselves. The order of the roads doesn't matter.
+
+This solution will find all the necessary roads in the most optimal way possible.

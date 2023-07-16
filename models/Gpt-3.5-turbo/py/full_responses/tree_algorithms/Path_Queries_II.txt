@@ -1,0 +1,96 @@
+To solve this problem efficiently, we can use the concept of Lowest Common Ancestor (LCA) and the segment tree data structure.
+
+First, we will build the tree using the given edges. We can use an adjacency list to represent the tree structure.
+
+Next, we will preprocess the tree to calculate the depth of each node and its parent in the tree. This can be done using a depth-first search (DFS) algorithm.
+
+Then, we will build a segment tree to store the maximum value on the path between any two nodes in the tree. The segment tree will be built using the depth of the nodes as the key.
+
+For each query of type 1, we will update the value of the node and update the segment tree accordingly.
+
+For each query of type 2, we will find the LCA of nodes a and b. Then, we will query the segment tree to find the maximum value between nodes a and b. The LCA ensures that we consider the entire path between the two nodes.
+
+Here is the Python code to solve the problem:
+
+```python
+import sys
+
+# Function to build the tree using the given edges
+def build_tree(n, edges):
+    tree = [[] for _ in range(n+1)]
+    for a, b in edges:
+        tree[a].append(b)
+        tree[b].append(a)
+    return tree
+
+# Function for depth-first search to calculate the depth and parent of each node
+def dfs(node, parent, depth, parent_list, depth_list, tree):
+    parent_list[node] = parent
+    depth_list[node] = depth
+    for child in tree[node]:
+        if child != parent:
+            dfs(child, node, depth+1, parent_list, depth_list, tree)
+
+# Function to build the segment tree
+def build_segment_tree(tree, values, depth_list, seg_tree, node, start, end):
+    if start == end:
+        seg_tree[node] = values[start]
+    else:
+        mid = (start + end) // 2
+        build_segment_tree(tree, values, depth_list, seg_tree, 2*node+1, start, mid)
+        build_segment_tree(tree, values, depth_list, seg_tree, 2*node+2, mid+1, end)
+        left_child = seg_tree[2*node+1]
+        right_child = seg_tree[2*node+2]
+        if depth_list[left_child] < depth_list[right_child]:
+            seg_tree[node] = left_child
+        else:
+            seg_tree[node] = right_child
+
+# Function to update the value of a node and update the segment tree
+def update_node(node, value, values, seg_tree, depth_list):
+    values[node] = value
+    seg_tree_node = len(values) - 1 + node
+    seg_tree[seg_tree_node] = value
+    while seg_tree_node > 0:
+        seg_tree_node = (seg_tree_node - 1) // 2
+        left_child = seg_tree[2*seg_tree_node+1]
+        right_child = seg_tree[2*seg_tree_node+2]
+        if depth_list[left_child] < depth_list[right_child]:
+            seg_tree[seg_tree_node] = left_child
+        else:
+            seg_tree[seg_tree_node] = right_child
+
+# Function to query the segment tree and find the maximum value between two nodes
+def query_segment_tree(seg_tree, depth_list, start, end, node, left, right):
+    if left <= start and end <= right:
+        return seg_tree[node]
+    if end < left or start > right:
+        return -1
+    mid = (start + end) // 2
+    left_child = query_segment_tree(seg_tree, depth_list, start, mid, 2*node+1, left, right)
+    right_child = query_segment_tree(seg_tree, depth_list, mid+1, end, 2*node+2, left, right)
+    if left_child == -1:
+        return right_child
+    if right_child == -1:
+        return left_child
+    if depth_list[left_child] < depth_list[right_child]:
+        return left_child
+    else:
+        return right_child
+
+# Function to find the Lowest Common Ancestor (LCA) of two nodes
+def find_lca(a, b, depth_list, parent_list):
+    while depth_list[a] != depth_list[b]:
+        if depth_list[a] > depth_list[b]:
+            a = parent_list[a]
+        else:
+            b = parent_list[b]
+    while a != b:
+        a = parent_list[a]
+        b = parent_list[b]
+    return a
+
+# Main function to solve the problem
+def solve(n, q, values, edges, queries):
+    tree = build_tree(n, edges)
+    parent_list = [0
